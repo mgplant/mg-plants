@@ -1015,11 +1015,83 @@
 
 
   <!-- ===================================== -->
+  <!-- AUTOMATED AI CHATBOT (RIGHT SIDE)     -->
+  <!-- ===================================== -->
+  <div id="ai-bot-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
+    
+    <!-- AI Chat Window -->
+    <div id="ai-bot-window" class="hidden w-80 sm:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-200 transition-all duration-300 transform origin-bottom-right flex flex-col h-[480px]">
+      
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-brand-900 to-brand-800 p-4 flex items-center justify-between text-white shadow-md shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-brand-700/80 border border-brand-500/40 flex items-center justify-center text-brand-300 shadow">
+            <i class="fa-solid fa-robot text-lg"></i>
+          </div>
+          <div>
+            <h4 class="font-extrabold text-sm tracking-tight flex items-center gap-1.5">
+              MG Botanical AI <span class="bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase">Live</span>
+            </h4>
+            <p class="text-brand-200 text-[10px]">Smart Automated Plant Assistant</p>
+          </div>
+        </div>
+        <button onclick="toggleAiBot()" class="w-8 h-8 rounded-full hover:bg-brand-700/50 flex items-center justify-center text-brand-200 hover:text-white transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Messages Area -->
+      <div id="ai-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
+        <div class="flex items-start gap-2">
+          <div class="w-7 h-7 rounded-full bg-brand-800 text-brand-300 flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-brand-100 shadow-sm text-slate-700 space-y-2 max-w-[85%]">
+            <p><strong>Namaste! 🌱</strong> I am the MG Plants AI Assistant.</p>
+            <p>Ask me about plant care, prices, shipping, or recommendations for your home!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="px-3 py-2 bg-white border-t border-slate-100 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
+        <button onclick="sendQuickQuery('Recommend best indoor plants')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
+          🪴 Best Indoor Plants
+        </button>
+        <button onclick="sendQuickQuery('How to care for Snake Plant')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
+          🐍 Snake Plant Care
+        </button>
+        <button onclick="sendQuickQuery('What are your delivery charges?')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
+          🚚 Shipping Details
+        </button>
+      </div>
+
+      <!-- Input Bar -->
+      <form onsubmit="handleAiSubmit(event)" class="p-3 bg-white border-t border-slate-100 flex items-center gap-2 shrink-0">
+        <input type="text" id="ai-input" placeholder="Ask AI anything about plants..." required class="flex-grow px-3.5 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand-500">
+        <button type="submit" class="w-9 h-9 bg-brand-800 hover:bg-brand-700 text-white rounded-xl flex items-center justify-center shrink-0 transition shadow">
+          <i class="fa-solid fa-paper-plane text-xs"></i>
+        </button>
+      </form>
+    </div>
+
+    <!-- Floating AI Button -->
+    <button onclick="toggleAiBot()" class="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-brand-800 to-brand-900 text-white rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border border-brand-500/30 focus:outline-none">
+      <div class="relative flex items-center justify-center">
+        <i class="fa-solid fa-robot text-xl text-brand-300"></i>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full badge-pulse border border-brand-900"></span>
+      </div>
+      <span class="font-bold text-xs pr-1">AI Assistant</span>
+    </button>
+  </div>
+
+
+  <!-- ===================================== -->
   <!-- JAVASCRIPT APP STATE & ENGINE         -->
   <!-- ===================================== -->
   <script>
     // -------------------------------------------------------------
-    // 1. UPDATED PRODUCT DATABASE WITH 25 UNIQUE IMAGES
+    // 1. PRODUCT DATABASE WITH 25 UNIQUE IMAGES
     // -------------------------------------------------------------
     const productsDB = [
       {
@@ -1807,486 +1879,10 @@
 
       window.open(`https://wa.me/916289954986?text=${encodeURIComponent(formatted)}`, '_blank');
     }
-  </script>
-  <!-- ===================================== -->
-  <!-- FLOATING WHATSAPP CHAT WIDGET         -->
-  <!-- ===================================== -->
-  <div id="wa-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-    
-    <!-- Chat Window (Hidden by default) -->
-    <div id="wa-chat-window" class="hidden w-72 sm:w-80 bg-white rounded-2xl shadow-2xl overflow-hidden mb-4 border border-brand-100 transition-all duration-300 transform origin-bottom-right">
-      
-      <!-- Header -->
-      <div class="bg-brand-800 p-4 flex items-center gap-3 relative">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-700 shadow-sm shrink-0">
-          <i class="fa-solid fa-seedling text-lg"></i>
-        </div>
-        <div>
-          <h4 class="text-white font-bold text-sm">MG Plants Support</h4>
-          <p class="text-brand-200 text-[10px] flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 badge-pulse"></span> Typically replies instantly
-          </p>
-        </div>
-        <button onclick="toggleWaChat()" class="absolute top-4 right-4 text-brand-200 hover:text-white transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-      
-      <!-- Chat Body -->
-      <div class="p-5 bg-brand-50 min-h-[120px] space-y-3" style="background-image: radial-gradient(#b7e4c7 1px, transparent 1px); background-size: 10px 10px;">
-        <div class="flex gap-2">
-          <div class="w-6 h-6 rounded-full bg-brand-200 flex items-center justify-center text-brand-700 shrink-0 mt-1 shadow-sm">
-            <i class="fa-solid fa-leaf text-[10px]"></i>
-          </div>
-          <div class="bg-white p-3.5 rounded-2xl rounded-tl-sm shadow-sm text-xs text-slate-700 leading-relaxed border border-brand-100">
-            <strong>Hi plant lover! 👋</strong> <br><br>Have a question about a plant or need help with your order? Start a chat with us directly on WhatsApp!
-          </div>
-        </div>
-      </div>
 
-      <!-- Footer / Input Area -->
-      <div class="p-4 bg-white border-t border-brand-100">
-        <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants!%20I%20need%20some%20help." target="_blank" onclick="toggleWaChat()" class="w-full py-3 bg-emerald-600 text-white font-bold text-sm rounded-xl hover:bg-emerald-500 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 shadow-md">
-          <i class="fa-brands fa-whatsapp text-xl"></i> Start Chat
-        </a>
-      </div>
-    </div>
-
-    <!-- Floating Trigger Button -->
-    <button onclick="toggleWaChat()" id="wa-trigger-btn" class="w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-500 hover:scale-110 transition-all duration-300 relative focus:outline-none">
-      <i id="wa-icon-chat" class="fa-brands fa-whatsapp text-3xl transition-transform duration-300"></i>
-      <i id="wa-icon-close" class="fa-solid fa-xmark text-2xl hidden transition-transform duration-300"></i>
-      <!-- Unread Notification Badge -->
-      <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-rose-500 border-2 border-white rounded-full"></span>
-    </button>
-  </div>
-
-  <script>
-    // Logic to open/close the chat widget
-    function toggleWaChat() {
-      const window = document.getElementById('wa-chat-window');
-      const iconChat = document.getElementById('wa-icon-chat');
-      const iconClose = document.getElementById('wa-icon-close');
-      
-      window.classList.toggle('hidden');
-      
-      if (window.classList.contains('hidden')) {
-        iconChat.classList.remove('hidden');
-        iconClose.classList.add('hidden');
-      } else {
-        iconChat.classList.add('hidden');
-        iconClose.classList.remove('hidden');
-      }
-    }
-    
-    // Optional: Automatically pop open the chat window after 10 seconds to get attention
-    setTimeout(() => {
-      const window = document.getElementById('wa-chat-window');
-      if (window.classList.contains('hidden')) {
-        toggleWaChat();
-      }
-    }, 10000);
-  </script>
-  <!-- ===================================== -->
-  <!-- BUILT-IN MG BOTANICAL AI CHATBOT      -->
-  <!-- ===================================== -->
-  <div id="ai-bot-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
-    
-    <!-- AI Chat Window -->
-    <div id="ai-bot-window" class="hidden w-80 sm:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-200 transition-all duration-300 transform origin-bottom-right flex flex-col h-[500px]">
-      
-      <!-- Header -->
-      <div class="bg-gradient-to-r from-brand-900 to-brand-800 p-4 flex items-center justify-between text-white shadow-md shrink-0">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-brand-700/80 border border-brand-500/40 flex items-center justify-center text-brand-300 shadow">
-            <i class="fa-solid fa-robot text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-sm tracking-tight flex items-center gap-1.5">
-              MG Botanical AI <span class="bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase">Live</span>
-            </h4>
-            <p class="text-brand-200 text-[10px]">Smart Plant Assistant & Guide</p>
-          </div>
-        </div>
-        <button onclick="toggleAiBot()" class="w-8 h-8 rounded-full hover:bg-brand-700/50 flex items-center justify-center text-brand-200 hover:text-white transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- Messages Area -->
-      <div id="ai-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
-        <!-- Initial Bot Greeting -->
-        <div class="flex items-start gap-2">
-          <div class="w-7 h-7 rounded-full bg-brand-800 text-brand-300 flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
-            <i class="fa-solid fa-seedling"></i>
-          </div>
-          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-brand-100 shadow-sm text-slate-700 space-y-2 max-w-[85%]">
-            <p><strong>Namaste! 🌱</strong> I am the MG Plants AI Assistant.</p>
-            <p>Ask me about plant care, prices, shipping, or recommendations for your home!</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Suggestion Chips -->
-      <div class="px-3 py-2 bg-white border-t border-slate-100 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
-        <button onclick="sendQuickQuery('Recommend best indoor plants')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🪴 Best Indoor Plants
-        </button>
-        <button onclick="sendQuickQuery('How to care for Snake Plant')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🐍 Snake Plant Care
-        </button>
-        <button onclick="sendQuickQuery('What are your delivery charges?')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🚚 Shipping Details
-        </button>
-        <button onclick="sendQuickQuery('Contact Mrinal Gayen')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          📞 Founder Contact
-        </button>
-      </div>
-
-      <!-- Input Bar -->
-      <form onsubmit="handleAiSubmit(event)" class="p-3 bg-white border-t border-slate-100 flex items-center gap-2 shrink-0">
-        <input type="text" id="ai-input" placeholder="Ask AI anything about plants..." required class="flex-grow px-3.5 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand-500">
-        <button type="submit" class="w-9 h-9 bg-brand-800 hover:bg-brand-700 text-white rounded-xl flex items-center justify-center shrink-0 transition shadow">
-          <i class="fa-solid fa-paper-plane text-xs"></i>
-        </button>
-      </form>
-    </div>
-
-    <!-- Floating Trigger Button -->
-    <button onclick="toggleAiBot()" class="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-brand-800 to-brand-900 text-white rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border border-brand-500/30 focus:outline-none">
-      <div class="relative flex items-center justify-center">
-        <i class="fa-solid fa-robot text-xl text-brand-300"></i>
-        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full badge-pulse border border-brand-900"></span>
-      </div>
-      <span class="font-bold text-xs pr-1">AI Assistant</span>
-    </button>
-  </div>
-
-  <script>
-    // Toggle AI Chat Window
-    function toggleAiBot() {
-      const win = document.getElementById('ai-bot-window');
-      win.classList.toggle('hidden');
-      if (!win.classList.contains('hidden')) {
-        document.getElementById('ai-input').focus();
-      }
-    }
-
-    function sendQuickQuery(query) {
-      document.getElementById('ai-input').value = query;
-      handleAiSubmit(new Event('submit'));
-    }
-
-    function handleAiSubmit(e) {
-      e.preventDefault();
-      const inputEl = document.getElementById('ai-input');
-      const query = inputEl.value.trim();
-      if (!query) return;
-
-      // Append User Message
-      appendUserMessage(query);
-      inputEl.value = '';
-
-      // Append Typing Indicator
-      const typingId = appendTypingIndicator();
-
-      // Process AI Answer with lightweight delay to feel natural
-      setTimeout(() => {
-        removeTypingIndicator(typingId);
-        const responseHTML = processAiQuery(query);
-        appendBotMessage(responseHTML);
-      }, 600);
-    }
-
-    function appendUserMessage(text) {
-      const container = document.getElementById('ai-messages');
-      const msgDiv = document.createElement('div');
-      msgDiv.className = 'flex justify-end';
-      msgDiv.innerHTML = `
-        <div class="bg-brand-800 text-white p-3 rounded-2xl rounded-tr-none max-w-[85%] text-xs shadow-sm">
-          ${escapeHTML(text)}
-        </div>
-      `;
-      container.appendChild(msgDiv);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function appendBotMessage(htmlContent) {
-      const container = document.getElementById('ai-messages');
-      const msgDiv = document.createElement('div');
-      msgDiv.className = 'flex items-start gap-2';
-      msgDiv.innerHTML = `
-        <div class="w-7 h-7 rounded-full bg-brand-800 text-brand-300 flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
-          <i class="fa-solid fa-bot"></i>
-        </div>
-        <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-brand-100 shadow-sm text-slate-700 space-y-2 max-w-[85%] leading-relaxed">
-          ${htmlContent}
-        </div>
-      `;
-      container.appendChild(msgDiv);
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function appendTypingIndicator() {
-      const container = document.getElementById('ai-messages');
-      const id = 'typing-' + Date.now();
-      const msgDiv = document.createElement('div');
-      msgDiv.id = id;
-      msgDiv.className = 'flex items-start gap-2';
-      msgDiv.innerHTML = `
-        <div class="w-7 h-7 rounded-full bg-brand-800 text-brand-300 flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
-          <i class="fa-solid fa-seedling"></i>
-        </div>
-        <div class="bg-white px-3 py-2 rounded-2xl rounded-tl-none border border-brand-100 shadow-sm text-slate-400 text-xs italic flex items-center gap-1">
-          <span>AI is thinking</span>
-          <span class="animate-pulse">...</span>
-        </div>
-      `;
-      container.appendChild(msgDiv);
-      container.scrollTop = container.scrollHeight;
-      return id;
-    }
-
-    function removeTypingIndicator(id) {
-      const el = document.getElementById(id);
-      if (el) el.remove();
-    }
-
-    function escapeHTML(str) {
-      return str.replace(/[&<>'"]/g, 
-        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-      );
-    }
-
-    // AI Intent & Knowledge Processing Engine
-    function processAiQuery(q) {
-      const query = q.toLowerCase();
-
-      // Intent 1: Check Specific Plant Match in Database
-      const matchedPlant = productsDB.find(p => query.includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(query));
-      if (matchedPlant) {
-        return `
-          <div>
-            <p class="font-bold text-brand-900 text-sm">${matchedPlant.name}</p>
-            <p class="text-xs text-brand-700 font-extrabold mt-0.5">₹${matchedPlant.price} <span class="text-slate-400 line-through text-[10px]">₹${matchedPlant.origPrice}</span></p>
-            <p class="text-[11px] text-slate-600 mt-1">${matchedPlant.desc}</p>
-            <div class="mt-2 pt-2 border-t border-slate-100 text-[10px] space-y-1 font-medium text-slate-700">
-              <div>☀️ <strong>Light:</strong> ${matchedPlant.light}</div>
-              <div>💧 <strong>Water:</strong> ${matchedPlant.water}</div>
-              <div>📏 <strong>Size:</strong> ${matchedPlant.size}</div>
-            </div>
-            <button onclick="openProductModal('${matchedPlant.id}')" class="mt-2.5 w-full py-1.5 bg-brand-800 text-white font-bold rounded-lg text-[11px] hover:bg-brand-700 transition">
-              View Product Details
-            </button>
-          </div>
-        `;
-      }
-
-      // Intent 2: Category Recommendations
-      if (query.includes('indoor') || query.includes('room') || query.includes('bedroom')) {
-        const indoorPlants = productsDB.filter(p => p.category === 'Indoor Plants').slice(0, 3);
-        let listHTML = indoorPlants.map(p => `• <strong>${p.name}</strong> (₹${p.price})`).join('<br>');
-        return `
-          <p>Here are our top recommended <strong>Indoor Plants</strong>:</p>
-          <div class="py-1 text-xs text-slate-800">${listHTML}</div>
-          <p class="text-[11px]">These thrive in indirect sunlight and are easy to maintain!</p>
-          <button onclick="switchTab('shop'); filterCategory('Indoor Plants');" class="mt-2 w-full py-1.5 bg-brand-800 text-white font-bold rounded-lg text-[11px]">
-            Explore All Indoor Plants
-          </button>
-        `;
-      }
-
-      if (query.includes('fruit') || query.includes('mango') || query.includes('lemon') || query.includes('guava')) {
-        const fruitPlants = productsDB.filter(p => p.category === 'Fruit Plants' || p.category === 'Fruit & Utility').slice(0, 4);
-        let listHTML = fruitPlants.map(p => `• <strong>${p.name}</strong> (₹${p.price})`).join('<br>');
-        return `
-          <p>Looking for <strong>Fruit Plants</strong>? Here are popular choices:</p>
-          <div class="py-1 text-xs text-slate-800">${listHTML}</div>
-          <p class="text-[11px]">Grafted for fast growth in Indian climate!</p>
-          <button onclick="switchTab('shop'); filterCategory('Fruit Plants');" class="mt-2 w-full py-1.5 bg-brand-800 text-white font-bold rounded-lg text-[11px]">
-            Browse Fruit Plants
-          </button>
-        `;
-      }
-
-      if (query.includes('flower') || query.includes('rose') || query.includes('jasmine') || query.includes('mogra')) {
-        const flow = productsDB.filter(p => p.category === 'Flowering Plants').slice(0, 4);
-        let listHTML = flow.map(p => `• <strong>${p.name}</strong> (₹${p.price})`).join('<br>');
-        return `
-          <p>Our top <strong>Flowering Plants</strong>:</p>
-          <div class="py-1 text-xs text-slate-800">${listHTML}</div>
-          <button onclick="switchTab('shop'); filterCategory('Flowering Plants');" class="mt-2 w-full py-1.5 bg-brand-800 text-white font-bold rounded-lg text-[11px]">
-            View Flowering Plants
-          </button>
-        `;
-      }
-
-      // Intent 3: Shipping & Delivery Charges
-      if (query.includes('shipping') || query.includes('delivery') || query.includes('charge') || query.includes('cost') || query.includes('west bengal')) {
-        return `
-          <p><strong>🚚 Shipping Information:</strong></p>
-          <p>• <strong>Free Delivery:</strong> On all orders above ₹699!</p>
-          <p>• <strong>Standard Delivery:</strong> ₹49 for orders under ₹699.</p>
-          <p>We deliver across West Bengal and all major cities in India with protective eco-friendly packaging.</p>
-        `;
-      }
-
-      // Intent 4: Care Guidance
-      if (query.includes('water') || query.includes('sunlight') || query.includes('care') || query.includes('fertilizer') || query.includes('soil')) {
-        return `
-          <p><strong>🌱 General Plant Care Rules:</strong></p>
-          <p>1. <strong>Watering:</strong> Always check top 1-2 inches of soil before watering. Don't overwater!</p>
-          <p>2. <strong>Light:</strong> Most indoor plants need bright, indirect sunlight.</p>
-          <p>3. <strong>Soil:</strong> Use a well-draining mix of soil, coco peat, and organic compost.</p>
-          <button onclick="switchTab('care')" class="mt-2 w-full py-1.5 bg-brand-800 text-white font-bold rounded-lg text-[11px]">
-            Read Full Plant Care Guide
-          </button>
-        `;
-      }
-
-      // Intent 5: Contact Founder & Business Details
-      if (query.includes('founder') || query.includes('mrinal') || query.includes('contact') || query.includes('phone') || query.includes('number') || query.includes('whatsapp') || query.includes('owner')) {
-        return `
-          <p><strong>MG Plants Contact Details:</strong></p>
-          <p>👤 <strong>Founder:</strong> Mrinal Gayen</p>
-          <p>📞 <strong>Phone:</strong> 8017990849</p>
-          <p>💬 <strong>WhatsApp:</strong> 6289954986</p>
-          <p>✉️ <strong>Email:</strong> mgplants@zohomail.in</p>
-          <p>📍 <strong>Location:</strong> West Bengal, India</p>
-          <a href="https://wa.me/916289954986" target="_blank" class="mt-2 block text-center py-1.5 bg-emerald-600 text-white font-bold rounded-lg text-[11px]">
-            Chat on WhatsApp
-          </a>
-        Loaded successfully!`;
-      }
-
-      // Default Fallback Response
-      return `
-        <p>I am here to help! You can ask me about:</p>
-        <p>• Plant prices & catalog (e.g. <em>Money Plant, Snake Plant, Mango</em>)</p>
-        <p>• Plant categories (e.g. <em>Indoor, Fruit, Flowering, Succulents</em>)</p>
-        <p>• Shipping fees & location details</p>
-        <p>• Direct contact with founder Mrinal Gayen</p>
-        <p class="text-[11px] text-slate-500 mt-1">Or click 'Shop' in the navigation bar to browse all 25 plants!</p>
-      `;
-    }
-  </script>
-  <!-- ===================================== -->
-  <!-- 1. WHATSAPP SUPPORT WIDGET (LEFT SIDE) -->
-  <!-- ===================================== -->
-  <div id="wa-widget" class="fixed bottom-6 left-6 z-50 flex flex-col items-start font-sans">
-    
-    <!-- WhatsApp Chat Window -->
-    <div id="wa-chat-window" class="hidden w-72 sm:w-80 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-100 transition-all duration-300 transform origin-bottom-left">
-      <div class="bg-brand-800 p-4 flex items-center gap-3 relative">
-        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-700 shadow-sm shrink-0">
-          <i class="fa-solid fa-seedling text-lg"></i>
-        </div>
-        <div>
-          <h4 class="text-white font-bold text-sm">MG Plants Support</h4>
-          <p class="text-brand-200 text-[10px] flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 badge-pulse"></span> Replies on WhatsApp
-          </p>
-        </div>
-        <button onclick="toggleWaChat()" class="absolute top-4 right-4 text-brand-200 hover:text-white transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-      
-      <div class="p-4 bg-brand-50 min-h-[100px] space-y-2 text-xs text-slate-700">
-        <p><strong>Need direct human help? 👋</strong></p>
-        <p>Chat directly with founder Mrinal Gayen on WhatsApp for custom orders or instant assistance!</p>
-      </div>
-
-      <div class="p-3 bg-white border-t border-brand-100">
-        <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants!%20I%20need%20some%20help." target="_blank" onclick="toggleWaChat()" class="w-full py-2.5 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-500 transition flex items-center justify-center gap-2 shadow">
-          <i class="fa-brands fa-whatsapp text-lg"></i> Open WhatsApp Chat
-        </a>
-      </div>
-    </div>
-
-    <!-- Floating WhatsApp Button -->
-    <button onclick="toggleWaChat()" class="w-13 h-13 p-3.5 bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-emerald-500 hover:scale-105 transition-all duration-300 focus:outline-none">
-      <i class="fa-brands fa-whatsapp text-2xl"></i>
-    </button>
-  </div>
-
-  <!-- ===================================== -->
-  <!-- 2. AI ASSISTANT CHATBOT (RIGHT SIDE)  -->
-  <!-- ===================================== -->
-  <div id="ai-bot-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
-    
-    <!-- AI Chat Window -->
-    <div id="ai-bot-window" class="hidden w-80 sm:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-200 transition-all duration-300 transform origin-bottom-right flex flex-col h-[480px]">
-      
-      <!-- Header -->
-      <div class="bg-gradient-to-r from-brand-900 to-brand-800 p-4 flex items-center justify-between text-white shadow-md shrink-0">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-brand-700/80 border border-brand-500/40 flex items-center justify-center text-brand-300 shadow">
-            <i class="fa-solid fa-robot text-lg"></i>
-          </div>
-          <div>
-            <h4 class="font-extrabold text-sm tracking-tight flex items-center gap-1.5">
-              MG Botanical AI <span class="bg-emerald-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase">Live</span>
-            </h4>
-            <p class="text-brand-200 text-[10px]">Smart Automated Plant Assistant</p>
-          </div>
-        </div>
-        <button onclick="toggleAiBot()" class="w-8 h-8 rounded-full hover:bg-brand-700/50 flex items-center justify-center text-brand-200 hover:text-white transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- Messages Area -->
-      <div id="ai-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
-        <div class="flex items-start gap-2">
-          <div class="w-7 h-7 rounded-full bg-brand-800 text-brand-300 flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
-            <i class="fa-solid fa-seedling"></i>
-          </div>
-          <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-brand-100 shadow-sm text-slate-700 space-y-2 max-w-[85%]">
-            <p><strong>Namaste! 🌱</strong> I am the MG Plants AI Assistant.</p>
-            <p>Ask me about plant care, prices, shipping, or recommendations for your home!</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Suggestion Chips -->
-      <div class="px-3 py-2 bg-white border-t border-slate-100 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
-        <button onclick="sendQuickQuery('Recommend best indoor plants')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🪴 Best Indoor Plants
-        </button>
-        <button onclick="sendQuickQuery('How to care for Snake Plant')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🐍 Snake Plant Care
-        </button>
-        <button onclick="sendQuickQuery('What are your delivery charges?')" class="px-2.5 py-1 bg-brand-50 hover:bg-brand-100 text-brand-800 font-semibold text-[11px] rounded-full whitespace-nowrap border border-brand-200 transition">
-          🚚 Shipping Details
-        </button>
-      </div>
-
-      <!-- Input Bar -->
-      <form onsubmit="handleAiSubmit(event)" class="p-3 bg-white border-t border-slate-100 flex items-center gap-2 shrink-0">
-        <input type="text" id="ai-input" placeholder="Ask AI anything about plants..." required class="flex-grow px-3.5 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand-500">
-        <button type="submit" class="w-9 h-9 bg-brand-800 hover:bg-brand-700 text-white rounded-xl flex items-center justify-center shrink-0 transition shadow">
-          <i class="fa-solid fa-paper-plane text-xs"></i>
-        </button>
-      </form>
-    </div>
-
-    <!-- Floating AI Button -->
-    <button onclick="toggleAiBot()" class="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-brand-800 to-brand-900 text-white rounded-full shadow-2xl hover:scale-105 transition-all duration-300 border border-brand-500/30 focus:outline-none">
-      <div class="relative flex items-center justify-center">
-        <i class="fa-solid fa-robot text-xl text-brand-300"></i>
-        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full badge-pulse border border-brand-900"></span>
-      </div>
-      <span class="font-bold text-xs pr-1">AI Assistant</span>
-    </button>
-  </div>
-
-  <!-- SCRIPT LOGIC FOR BOTH BUTTONS -->
-  <script>
-    function toggleWaChat() {
-      document.getElementById('wa-chat-window').classList.toggle('hidden');
-    }
-
+    // -------------------------------------------------------------
+    // 9. AUTOMATED AI CHATBOT LOGIC
+    // -------------------------------------------------------------
     function toggleAiBot() {
       const win = document.getElementById('ai-bot-window');
       win.classList.toggle('hidden');
