@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MG Plants | Buy Healthy Indoor & Outdoor Plants Online in India</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Buy healthy indoor plants, air-purifying plants, succulents, bonsai, and gardening accessories online at MG Plants. Fast delivery across West Bengal & India. Founder: Mrinal Gayen.">
+  <meta name="keywords" content="Buy plants online India, Indoor plants online, Buy plants online West Bengal, Online plant nursery, Air purifying plants, Low maintenance plants, Best indoor plants, MG Plants">
+  <meta name="author" content="Mrinal Gayen">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MG Plants - Growing Green, Delivering Happiness">
+  <meta property="og:description" content="Healthy, beautiful plants delivered to your doorstep across India. Order directly on WhatsApp!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=1200&q=80">
+
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              900: '#081c15',
+              800: '#1b4332',
+              700: '#2d6a4f',
+              600: '#40916c',
+              500: '#52b788',
+              400: '#74c69d',
+              300: '#95d5b2',
+              200: '#b7e4c7',
+              100: '#d8f3dc',
+              50:  '#f4f9f5'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Structured Data / JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GardenStore",
+    "name": "MG Plants",
+    "image": "https://images.unsplash.com/photo-1463936575829-25148e1db1b8",
+    "@id": "https://mgplants.in",
+    "url": "https://mgplants.in",
+    "telephone": "+918017990849",
+    "email": "mgplants@zohomail.in",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "West Bengal",
+      "addressCountry": "IN"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Mrinal Gayen"
+    },
+    "description": "Premium online plant business offering healthy indoor, outdoor, air-purifying plants, and succulents with nationwide delivery.",
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .badge-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+  </style>
+</head>
+<body class="bg-brand-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white flex flex-col min-h-screen">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-brand-900 text-brand-100 text-xs md:text-sm py-2 text-center font-medium flex justify-between items-center px-6">
+    <span class="hidden md:inline"><i class="fa-solid fa-leaf text-brand-400 mr-2"></i>Welcome to MG Plants - Free Delivery on Orders Above ₹699!</span>
+    <span class="mx-auto md:mx-0">🚚 Shipping Across West Bengal & India | Order on WhatsApp: <strong>6289954986</strong></span>
+    <div class="hidden lg:flex items-center space-x-4">
+      <a href="tel:8017990849" class="hover:text-white transition"><i class="fa-solid fa-phone mr-1"></i>8017990849</a>
+      <a href="https://instagram.com/mgplants" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://facebook.com" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-brand-100 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" onclick="switchTab('home')" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-full bg-brand-800 flex items-center justify-center text-white shadow-md group-hover:bg-brand-700 transition">
+          <i class="fa-solid fa-seedling text-xl text-brand-300"></i>
+        </div>
+        <div>
+          <span class="text-2xl font-extrabold text-brand-900 tracking-tight block leading-none">MG Plants</span>
+          <span class="text-[10px] uppercase font-bold text-brand-600 tracking-wider">Growing Green</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 font-semibold text-slate-700 text-sm">
+        <a href="#" id="nav-home" onclick="switchTab('home')" class="nav-item text-brand-700 font-bold hover:text-brand-700 transition">Home</a>
+        <a href="#" id="nav-shop" onclick="switchTab('shop')" class="nav-item hover:text-brand-700 transition">Shop</a>
+        <a href="#" id="nav-categories" onclick="switchTab('shop'); filterCategory('all');" class="nav-item hover:text-brand-700 transition">Categories</a>
+        <a href="#" id="nav-care" onclick="switchTab('care')" class="nav-item hover:text-brand-700 transition">Plant Care</a>
+        <a href="#" id="nav-about" onclick="switchTab('about')" class="nav-item hover:text-brand-700 transition">About Us</a>
+        <a href="#" id="nav-contact" onclick="switchTab('contact')" class="nav-item hover:text-brand-700 transition">Contact</a>
+      </nav>
+
+      <!-- Action Icons -->
+      <div class="flex items-center space-x-4">
+        <!-- Search Trigger -->
+        <button onclick="switchTab('shop'); focusSearch();" class="p-2 text-slate-600 hover:text-brand-700 transition rounded-full hover:bg-brand-100/50" title="Search Plants">
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </button>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCartDrawer()" class="relative p-2 text-slate-600 hover:text-brand-700 transition rounded-full hover:bg-brand-100/50" title="Shopping Cart">
+          <i class="fa-solid fa-basket-shopping text-xl"></i>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+        </button>
+
+        <!-- CTA Button -->
+        <button onclick="switchTab('shop')" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 bg-brand-800 text-white font-semibold text-sm rounded-full shadow-lg hover:bg-brand-700 transition transform hover:-translate-y-0.5">
+          Shop Now
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700 focus:outline-none">
+          <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-brand-100 bg-white px-4 pt-2 pb-6 space-y-3 shadow-xl">
+      <a href="#" onclick="switchTab('home'); toggleMobileMenu();" class="block py-2 font-medium text-slate-700 hover:text-brand-700">Home</a>
+      <a href="#" onclick="switchTab('shop'); toggleMobileMenu();" class="block py-2 font-medium text-slate-700 hover:text-brand-700">Shop All Plants</a>
+      <a href="#" onclick="switchTab('care'); toggleMobileMenu();" class="block py-2 font-medium text-slate-700 hover:text-brand-700">Plant Care Guide</a>
+      <a href="#" onclick="switchTab('about'); toggleMobileMenu();" class="block py-2 font-medium text-slate-700 hover:text-brand-700">About MG Plants</a>
+      <a href="#" onclick="switchTab('contact'); toggleMobileMenu();" class="block py-2 font-medium text-slate-700 hover:text-brand-700">Contact & Support</a>
+      <div class="pt-2">
+        <a href="https://wa.me/916289954986" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 text-white font-bold rounded-xl shadow">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Quick WhatsApp Order
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- DYNAMIC VIEW WRAPPER -->
+  <main class="flex-grow">
+
+    <!-- ===================================== -->
+    <!-- 1. HOMEPAGE VIEW                      -->
+    <!-- ===================================== -->
+    <div id="view-home" class="page-view space-y-16 lg:space-y-24 pb-16">
+      
+      <!-- HERO SECTION -->
+      <section class="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden py-16 lg:py-24">
+        <div class="absolute -right-12 -top-12 opacity-10 text-white text-[250px] pointer-events-none">
+          <i class="fa-solid fa-leaf"></i>
+        </div>
+        <div class="absolute -left-12 -bottom-12 opacity-10 text-white text-[200px] pointer-events-none">
+          <i class="fa-solid fa-seedling"></i>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-700/60 border border-brand-500/30 text-brand-200 text-xs sm:text-sm font-semibold">
+              <span class="w-2 h-2 rounded-full bg-brand-400 badge-pulse"></span>
+              Based in West Bengal | Nationwide Delivery
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-white">
+              Bring Nature <br><span class="text-brand-300">Into Your Home</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-brand-100 max-w-2xl font-light leading-relaxed mx-auto lg:mx-0">
+              Healthy, beautiful plants delivered directly to your doorstep. Carefully grown, safely packaged, and supported with expert guidance.
+            </p>
+
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <button onclick="switchTab('shop')" class="w-full sm:w-auto px-8 py-4 bg-brand-400 text-brand-900 font-bold rounded-2xl shadow-xl hover:bg-brand-300 transition transform hover:-translate-y-1 text-center">
+                <i class="fa-solid fa-store mr-2"></i> Shop Plants
+              </button>
+              <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants!%20I%20would%20like%20to%20know%20more%20about%20your%20available%20plants." target="_blank" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-xl hover:bg-emerald-500 transition transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-xl"></i> Order on WhatsApp
+              </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="pt-8 grid grid-cols-3 gap-4 border-t border-brand-700/50 text-brand-200 text-xs sm:text-sm">
+              <div class="flex items-center justify-center lg:justify-start gap-2">
+                <i class="fa-solid fa-shield-heart text-brand-400 text-base"></i> 100% Healthy
+              </div>
+              <div class="flex items-center justify-center lg:justify-start gap-2">
+                <i class="fa-solid fa-box text-brand-400 text-base"></i> Damage-Free Box
+              </div>
+              <div class="flex items-center justify-center lg:justify-start gap-2">
+                <i class="fa-solid fa-headset text-brand-400 text-base"></i> Founder Support
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image Banner -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <div class="absolute -inset-2 bg-gradient-to-r from-brand-400 to-brand-600 rounded-3xl blur-lg opacity-30"></div>
+              <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=800&q=80" alt="Beautiful Indoor Plants Collection - MG Plants" class="relative rounded-3xl shadow-2xl object-cover w-full h-[400px] lg:h-[480px] border-4 border-brand-700/30">
+              
+              <!-- Floating Card -->
+              <div class="absolute -bottom-6 -left-6 bg-white text-slate-800 p-4 rounded-2xl shadow-xl border border-brand-100 hidden sm:flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold">
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-sm">4.9 Star Rating</p>
+                  <p class="text-xs text-slate-500">From 500+ Happy Plant Parents</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED CATEGORIES -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+          <div>
+            <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Curated Selection</span>
+            <h2 class="text-3xl font-extrabold text-brand-900 mt-1">Explore Categories</h2>
+          </div>
+          <a href="#" onclick="switchTab('shop')" class="text-brand-700 font-bold hover:text-brand-900 text-sm flex items-center gap-1 mt-2 md:mt-0">
+            View All Categories <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div onclick="filterCategory('Indoor Plants')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-house-chimney-window text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Indoor Plants</h3>
+            <p class="text-xs text-slate-500 mt-1">Low light friendly</p>
+          </div>
+
+          <div onclick="filterCategory('Flowering Plants')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-florin-sign text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Flowering Plants</h3>
+            <p class="text-xs text-slate-500 mt-1">Vibrant seasonal blooms</p>
+          </div>
+
+          <div onclick="filterCategory('Fruit Plants')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-apple-whole text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Fruit Plants</h3>
+            <p class="text-xs text-slate-500 mt-1">Homegrown fruits</p>
+          </div>
+
+          <div onclick="filterCategory('Succulents')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-spa text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Succulents</h3>
+            <p class="text-xs text-slate-500 mt-1">Easy & low water</p>
+          </div>
+
+          <div onclick="filterCategory('Medicinal')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-notes-medical text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Medicinal</h3>
+            <p class="text-xs text-slate-500 mt-1">Herbal wellness</p>
+          </div>
+
+          <div onclick="filterCategory('Air-Purifying Plants')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-wind text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Air-Purifying</h3>
+            <p class="text-xs text-slate-500 mt-1">Clean indoor air</p>
+          </div>
+
+          <div onclick="filterCategory('Pots & Planters')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-whiskey-glass text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Pots & Planters</h3>
+            <p class="text-xs text-slate-500 mt-1">Ceramic & terracotta</p>
+          </div>
+
+          <div onclick="filterCategory('Gardening Accessories')" class="group cursor-pointer bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-brand-100 transition transform hover:-translate-y-1 text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-brand-100 flex items-center justify-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">
+              <i class="fa-solid fa-faucet-drip text-2xl"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 mt-3 text-base">Gardening Essentials</h3>
+            <p class="text-xs text-slate-500 mt-1">Soils & fertilizers</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BEST SELLERS SECTION -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Customer Favorites</span>
+          <h2 class="text-3xl font-extrabold text-brand-900 mt-1">Best Selling Plants</h2>
+          <p class="text-slate-600 text-sm mt-2">Handpicked healthy plants loved by plant enthusiasts across India.</p>
+        </div>
+
+        <div id="bestsellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </section>
+
+      <!-- WHY CHOOSE MG PLANTS? -->
+      <section class="bg-brand-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-xl mx-auto mb-12">
+            <span class="text-brand-300 font-bold uppercase tracking-wider text-xs">Our Commitment</span>
+            <h2 class="text-3xl font-extrabold mt-1">Why Choose MG Plants?</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-brand-900/50 p-6 rounded-2xl border border-brand-700 text-center space-y-3">
+              <div class="text-4xl">🌱</div>
+              <h3 class="text-lg font-bold text-brand-200">Healthy Plants Guaranteed</h3>
+              <p class="text-sm text-brand-100/80 font-light">Nurtured with organic fertilizers and inspected before dispatch to ensure vibrant health.</p>
+            </div>
+
+            <div class="bg-brand-900/50 p-6 rounded-2xl border border-brand-700 text-center space-y-3">
+              <div class="text-4xl">📦</div>
+              <h3 class="text-lg font-bold text-brand-200">Safe Packaging</h3>
+              <p class="text-sm text-brand-100/80 font-light">Custom breathable eco-friendly boxes engineered to keep plants secure during transit.</p>
+            </div>
+
+            <div class="bg-brand-900/50 p-6 rounded-2xl border border-brand-700 text-center space-y-3">
+              <div class="text-4xl">🚚</div>
+              <h3 class="text-lg font-bold text-brand-200">Reliable Shipping</h3>
+              <p class="text-sm text-brand-100/80 font-light">Prompt order processing with express doorstep delivery throughout West Bengal and India.</p>
+            </div>
+
+            <div class="bg-brand-900/50 p-6 rounded-2xl border border-brand-700 text-center space-y-3">
+              <div class="text-4xl">💚</div>
+              <h3 class="text-lg font-bold text-brand-200">Direct Founder Support</h3>
+              <p class="text-sm text-brand-100/80 font-light">Get lifetime plant care advice directly from Mrinal Gayen & the MG Plants team via WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PLANT CARE SECTION SUMMARY -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-brand-100 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-5">
+            <img src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&w=800&q=80" alt="Plant Care Guide MG Plants" class="rounded-2xl w-full h-80 object-cover shadow-md">
+          </div>
+          <div class="lg:col-span-7 space-y-4">
+            <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Botanical Knowledge</span>
+            <h2 class="text-3xl font-extrabold text-brand-900">Keep Your Plants Happy</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Every plant has unique needs. From understanding indirect sunlight to proper drainage, we help you become a confident plant parent.
+            </p>
+            <div class="grid grid-cols-2 gap-4 py-2 text-xs font-semibold text-slate-700">
+              <div class="flex items-center gap-2"><i class="fa-solid fa-droplet text-blue-500"></i> Balanced Watering</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-sun text-amber-500"></i> Sunlight Requirements</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-mound text-amber-700"></i> Well-draining Soil</div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-seedling text-emerald-600"></i> Organic Fertilizing</div>
+            </div>
+            <div class="pt-2">
+              <button onclick="switchTab('care')" class="px-6 py-3 bg-brand-800 text-white font-bold text-sm rounded-xl hover:bg-brand-700 transition">
+                Read Full Plant Care Guide <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT MG PLANTS SNIPPET -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-3xl mx-auto space-y-4 bg-brand-100/50 p-8 sm:p-12 rounded-3xl border border-brand-200">
+          <span class="text-brand-700 font-bold uppercase tracking-wider text-xs">About Our Business</span>
+          <h2 class="text-3xl font-extrabold text-brand-900">Rooted in West Bengal</h2>
+          <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+            Founded by <strong>Mrinal Gayen</strong>, MG Plants is an online nursery based in West Bengal dedicated to bringing affordable, high-quality plants and gardening supplies into Indian homes. We believe green spaces create peaceful, healthy environments.
+          </p>
+          <button onclick="switchTab('about')" class="inline-block pt-2 text-brand-700 font-bold underline hover:text-brand-900 text-sm">
+            Discover Our Full Story & Vision &rarr;
+          </button>
+        </div>
+      </section>
+
+      <!-- CUSTOMER REVIEWS -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Customer Reviews</span>
+          <h2 class="text-3xl font-extrabold text-brand-900">Loved by Plant Lovers</h2>
+          <p class="text-xs text-amber-600 mt-1 font-semibold">[Sample placeholder reviews from early buyers]</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 space-y-3">
+            <div class="text-amber-400 text-sm">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm italic">"Ordered a Money Plant and ZZ Plant. Both arrived fresh and perfectly packed in Kolkata. The WhatsApp ordering process was super fast!"</p>
+            <div>
+              <p class="font-bold text-slate-800 text-sm">Ananya Roy</p>
+              <p class="text-xs text-slate-400">Kolkata, West Bengal</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 space-y-3">
+            <div class="text-amber-400 text-sm">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm italic">"Mrinal Ji personally guided me on how to care for my Snake plant via WhatsApp. Great customer service and healthy plants!"</p>
+            <div>
+              <p class="font-bold text-slate-800 text-sm">Subhashis Das</p>
+              <p class="text-xs text-slate-400">Siliguri, West Bengal</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-brand-100 space-y-3">
+            <div class="text-amber-400 text-sm">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-slate-600 text-sm italic">"Very reasonable prices compared to local nurseries. Quality is top-notch. Will definitely purchase again."</p>
+            <div>
+              <p class="font-bold text-slate-800 text-sm">Priyanka Mukherjee</p>
+              <p class="text-xs text-slate-400">Asansol, West Bengal</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPECIAL OFFER BANNER -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-emerald-800 to-brand-900 rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+          <div class="space-y-2 text-center md:text-left z-10">
+            <span class="bg-emerald-500/30 text-emerald-200 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">Limited Time Offer</span>
+            <h2 class="text-3xl sm:text-4xl font-black">Bring Home More Green</h2>
+            <p class="text-brand-100 text-sm sm:text-base max-w-lg">Get special discounts on selected indoor plants and combo packages this season.</p>
+          </div>
+          <button onclick="switchTab('shop')" class="z-10 px-8 py-4 bg-white text-brand-900 font-extrabold rounded-2xl shadow-lg hover:bg-brand-100 transition whitespace-nowrap">
+            Explore Offers &rarr;
+          </button>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER / WHATSAPP CONNECT -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="bg-white p-8 sm:p-12 rounded-3xl border border-brand-100 shadow-sm max-w-3xl mx-auto space-y-6">
+          <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 mx-auto text-xl">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-900">Join the MG Plants Community</h2>
+          <p class="text-slate-600 text-sm">Get notified about new plant arrivals, seasonal offers, and expert plant care tips.</p>
+          
+          <form onsubmit="event.preventDefault(); alert('Thank you for subscribing to MG Plants updates!');" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input type="email" placeholder="Enter your email address" required class="flex-grow px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+            <button type="submit" class="px-6 py-3 bg-brand-800 text-white font-bold text-sm rounded-xl hover:bg-brand-700 transition">Subscribe</button>
+          </form>
+
+          <div class="pt-2 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
+            <span>Or chat directly on WhatsApp:</span>
+            <a href="https://wa.me/916289954986" target="_blank" class="text-emerald-600 hover:underline flex items-center gap-1">
+              <i class="fa-brands fa-whatsapp text-sm"></i> 6289954986
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- 2. SHOP PAGE VIEW                     -->
+    <!-- ===================================== -->
+    <div id="view-shop" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <!-- Breadcrumb & Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-brand-200 pb-6 gap-4">
+        <div>
+          <h1 class="text-3xl font-black text-brand-900">Plant Catalog</h1>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Explore our range of 25+ healthy, handpicked indoor, outdoor, flowering, fruit & medicinal plants.</p>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="relative w-full md:w-80">
+          <input type="text" id="shop-search" oninput="renderShopCatalog()" placeholder="Search plants by name..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500 shadow-sm">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+        </div>
+      </div>
+
+      <!-- Filters & Sorting Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-brand-100 shadow-sm">
+        
+        <!-- Category Pill Filters -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs font-semibold">
+          <button onclick="filterCategory('all')" id="cat-all" class="cat-pill bg-brand-800 text-white px-4 py-2 rounded-xl whitespace-nowrap">All Plants</button>
+          <button onclick="filterCategory('Indoor Plants')" id="cat-Indoor Plants" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Indoor</button>
+          <button onclick="filterCategory('Flowering Plants')" id="cat-Flowering Plants" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Flowering</button>
+          <button onclick="filterCategory('Fruit Plants')" id="cat-Fruit Plants" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Fruit Plants</button>
+          <button onclick="filterCategory('Fruit & Utility')" id="cat-Fruit & Utility" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Fruit & Utility</button>
+          <button onclick="filterCategory('Medicinal')" id="cat-Medicinal" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Medicinal</button>
+          <button onclick="filterCategory('Succulents')" id="cat-Succulents" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Succulents</button>
+          <button onclick="filterCategory('Air-Purifying Plants')" id="cat-Air-Purifying Plants" class="cat-pill bg-slate-100 text-slate-700 px-4 py-2 rounded-xl whitespace-nowrap hover:bg-brand-100">Air-Purifying</button>
+        </div>
+
+        <!-- Sort dropdown -->
+        <div class="flex items-center gap-2 text-xs font-semibold text-slate-600">
+          <label for="shop-sort">Sort by:</label>
+          <select id="shop-sort" onchange="renderShopCatalog()" class="bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none text-slate-800">
+            <option value="popular">Popularity</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="newest">Newest First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Catalog Product Grid -->
+      <div id="shop-catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- 3. PLANT CARE PAGE VIEW               -->
+    <!-- ===================================== -->
+    <div id="view-care" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Botanical Knowledge Base</span>
+        <h1 class="text-4xl font-extrabold text-brand-900 mt-1">Keep Your Plants Happy</h1>
+        <p class="text-slate-600 text-sm mt-2">Simple, essential guidelines to help your plants grow green and thrive in Indian weather conditions.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">1. Watering Wisely</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Overwatering is the #1 cause of plant death. Always test the top 1–2 inches of soil with your finger before watering. If dry, water thoroughly until it drains out from the bottom.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-sun"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">2. Sunlight Needs</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Most indoor plants prefer bright, indirect sunlight near a window. Avoid harsh afternoon Indian summer sun directly on delicate leaves to prevent scorching.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-mound"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">3. Well-Draining Soil</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Use a light, airy soil mix containing garden soil, coco peat, and perlite or vermicompost. Ensure pot drainage holes are clear of obstructions.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">4. Organic Fertilizing</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Feed your plants once every 3–4 weeks during the growing season (Spring & Summer) using organic compost or liquid seaweed fertilizer.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">5. Repotting Tips</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Repot when roots begin growing out of bottom drainage holes, usually every 12 to 18 months. Choose a pot 1–2 inches larger than the current one.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-bug"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800">6. Pest Protection</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Wipe leaves regularly with a damp soft cloth to prevent dust buildup. Spray diluted Neem oil once a month to keep natural pests away safely.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- 4. ABOUT US PAGE VIEW                 -->
+    <!-- ===================================== -->
+    <div id="view-about" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-6 space-y-4">
+          <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Our Journey</span>
+          <h1 class="text-4xl font-black text-brand-900 leading-tight">Welcome to MG Plants</h1>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            MG Plants started with a simple belief: everyone deserves access to healthy, beautiful, and affordable plants that bring life and joy into their homes.
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Based in <strong>West Bengal, India</strong>, founder <strong>Mrinal Gayen</strong> launched MG Plants to simplify the experience of buying healthy plants online. We take full care from selecting healthy specimens to carefully packing them so they reach you fresh.
+          </p>
+          <div class="p-4 bg-brand-100 rounded-2xl border-l-4 border-brand-700 text-brand-900 text-sm italic font-medium">
+            “Growing Green, Delivering Happiness – that’s not just our motto, it’s our personal promise to every plant parent.”
+            <p class="text-xs font-bold not-italic text-brand-700 mt-2">— Mrinal Gayen, Founder</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80" alt="MG Plants Nursery West Bengal" class="rounded-3xl shadow-xl w-full h-[400px] object-cover">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-2">
+          <div class="text-brand-700 text-2xl font-extrabold">🎯 Our Mission</div>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">To make plant parenting accessible, joyful, and hassle-free for households across West Bengal and nationwide.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-2">
+          <div class="text-brand-700 text-2xl font-extrabold">👁️ Our Vision</div>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">To become India's most trusted online botanical brand recognized for quality plants, zero transit damage, and personal support.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl border border-brand-100 shadow-sm space-y-2">
+          <div class="text-brand-700 text-2xl font-extrabold">⭐ Quality Guarantee</div>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">Every plant undergoes thorough quality inspection and organic nourishment prior to eco-friendly transit packaging.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================================== -->
+    <!-- 5. CONTACT PAGE VIEW                  -->
+    <!-- ===================================== -->
+    <div id="view-contact" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+      <div class="text-center max-w-xl mx-auto">
+        <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Get In Touch</span>
+        <h1 class="text-4xl font-extrabold text-brand-900 mt-1">We’re Here to Help</h1>
+        <p class="text-slate-600 text-sm mt-2">Have questions about an order or need plant advice? Contact us directly.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5 bg-brand-900 text-white p-8 rounded-3xl space-y-6 shadow-xl">
+          <h2 class="text-2xl font-bold text-brand-200">Contact Details</h2>
+          <p class="text-sm text-brand-100 font-light">Founder: <strong>Mrinal Gayen</strong></p>
+
+          <div class="space-y-4 text-sm">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-800 flex items-center justify-center text-brand-300 shrink-0">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <p class="text-xs text-brand-300 uppercase font-semibold">Phone Call</p>
+                <a href="tel:8017990849" class="font-bold text-white hover:underline">8017990849</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-800 flex items-center justify-center text-emerald-400 shrink-0">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+              </div>
+              <div>
+                <p class="text-xs text-brand-300 uppercase font-semibold">WhatsApp Support</p>
+                <a href="https://wa.me/916289954986" target="_blank" class="font-bold text-white hover:underline">6289954986</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-800 flex items-center justify-center text-brand-300 shrink-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <p class="text-xs text-brand-300 uppercase font-semibold">Email Us</p>
+                <a href="mailto:mgplants@zohomail.in" class="font-bold text-white hover:underline">mgplants@zohomail.in</a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-800 flex items-center justify-center text-brand-300 shrink-0">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <p class="text-xs text-brand-300 uppercase font-semibold">Location</p>
+                <p class="font-bold text-white">West Bengal, India</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-brand-800 flex items-center gap-4">
+            <span class="text-xs text-brand-300">Socials:</span>
+            <a href="https://instagram.com/mgplants" target="_blank" class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center text-white hover:bg-brand-700 transition">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center text-white hover:bg-brand-700 transition">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-brand-100 shadow-sm space-y-6">
+          <h2 class="text-2xl font-bold text-brand-900">Send Us a Message</h2>
+          
+          <form onsubmit="handleContactFormSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Your Name *</label>
+                <input type="text" id="contact-name" required placeholder="Mrinal Gayen" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp Number *</label>
+                <input type="tel" id="contact-phone" required placeholder="9876543210" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+              <input type="email" id="contact-email" placeholder="you@example.com" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Message / Plant Inquiry *</label>
+              <textarea id="contact-msg" rows="4" required placeholder="Hi, I would like to inquire about..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-brand-800 text-white font-bold rounded-xl hover:bg-brand-700 transition shadow">
+              Send Message
+            </button>
+          </form>
+
+          <div class="pt-4">
+            <p class="text-xs font-bold text-slate-500 mb-2">Location Map Placeholder (West Bengal, India)</p>
+            <div class="w-full h-48 bg-slate-100 rounded-2xl border border-slate-200 flex flex-col items-center justify-center text-slate-400 text-xs">
+              <i class="fa-solid fa-map-location-dot text-3xl mb-2 text-brand-600"></i>
+              <span>Google Maps Integration Placeholder</span>
+              <span class="text-[10px] text-slate-400 mt-1">West Bengal, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ===================================== -->
+  <!-- MODAL: PRODUCT DETAIL QUICK VIEW      -->
+  <!-- ===================================== -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden relative my-8 my-auto">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="bg-brand-50 p-6 flex items-center justify-center relative">
+          <img id="modal-img" src="" alt="Plant Image" class="rounded-2xl max-h-80 object-cover shadow-md">
+          <span id="modal-discount" class="absolute top-4 left-4 bg-emerald-600 text-white font-bold text-xs px-2.5 py-1 rounded-full"></span>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-4 flex flex-col justify-between">
+          <div>
+            <span id="modal-category" class="text-xs font-bold text-brand-600 uppercase tracking-wider"></span>
+            <h2 id="modal-title" class="text-2xl font-black text-brand-900 mt-1"></h2>
+
+            <div class="flex items-center gap-3 mt-2">
+              <span id="modal-price" class="text-2xl font-extrabold text-brand-800"></span>
+              <span id="modal-orig-price" class="text-slate-400 line-through text-sm"></span>
+            </div>
+
+            <p id="modal-desc" class="text-xs text-slate-600 leading-relaxed mt-3"></p>
+
+            <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-slate-100 text-[11px] font-semibold text-slate-700">
+              <div class="bg-slate-50 p-2 rounded-lg flex items-center gap-2"><i class="fa-solid fa-sun text-amber-500"></i> <span id="modal-light"></span></div>
+              <div class="bg-slate-50 p-2 rounded-lg flex items-center gap-2"><i class="fa-solid fa-droplet text-blue-500"></i> <span id="modal-water"></span></div>
+              <div class="bg-slate-50 p-2 rounded-lg flex items-center gap-2"><i class="fa-solid fa-ruler-vertical text-emerald-600"></i> <span id="modal-size"></span></div>
+              <div class="bg-slate-50 p-2 rounded-lg flex items-center gap-2"><i class="fa-solid fa-gauge text-purple-600"></i> <span id="modal-diff"></span></div>
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+              <span>Quantity:</span>
+              <div class="flex items-center border border-slate-200 rounded-lg">
+                <button onclick="changeModalQty(-1)" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700">-</button>
+                <span id="modal-qty" class="px-4 py-1">1</span>
+                <button onclick="changeModalQty(1)" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700">+</button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <button id="modal-add-btn" class="w-full py-3 bg-brand-800 text-white font-bold text-xs sm:text-sm rounded-xl hover:bg-brand-700 transition">
+                <i class="fa-solid fa-cart-plus mr-1"></i> Add to Cart
+              </button>
+              <button id="modal-wa-btn" class="w-full py-3 bg-emerald-600 text-white font-bold text-xs sm:text-sm rounded-xl hover:bg-emerald-500 transition flex items-center justify-center gap-1">
+                <i class="fa-brands fa-whatsapp text-base"></i> Buy on WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- MODAL: CHECKOUT & ADDRESS FORM        -->
+  <!-- ===================================== -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden relative my-8 my-auto p-6 sm:p-8 space-y-6">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+
+      <div class="border-b border-slate-100 pb-4">
+        <h2 class="text-2xl font-black text-brand-900">Complete Your Order</h2>
+        <p class="text-xs text-slate-500">Provide shipping details to place your WhatsApp order directly with MG Plants.</p>
+      </div>
+
+      <form onsubmit="processCheckoutOrder(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+          <input type="text" id="chk-name" required placeholder="Mrinal Gayen" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+            <input type="tel" id="chk-phone" required placeholder="8017990849" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">WhatsApp Number *</label>
+            <input type="tel" id="chk-wa" required placeholder="6289954986" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+          <input type="email" id="chk-email" placeholder="mgplants@zohomail.in" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Full Shipping Address *</label>
+          <input type="text" id="chk-address" required placeholder="House No, Street Name, Landmark" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">City *</label>
+            <input type="text" id="chk-city" required placeholder="Kolkata" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">State *</label>
+            <input type="text" id="chk-state" required value="West Bengal" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">PIN Code *</label>
+            <input type="text" id="chk-pin" required placeholder="700001" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Order Notes (Optional)</label>
+          <input type="text" id="chk-notes" placeholder="Special delivery instructions..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500">
+        </div>
+
+        <div class="bg-brand-50 p-3 rounded-xl border border-brand-200 text-xs text-slate-700 space-y-1">
+          <p class="font-bold text-brand-900">Payment Option:</p>
+          <div class="flex items-center gap-2">
+            <input type="radio" checked id="pay-cod" name="payment" class="text-brand-600">
+            <label for="pay-cod">Cash on Delivery / WhatsApp Order Confirmation</label>
+          </div>
+          <p class="text-[10px] text-slate-500">Online UPI/Card gateway architecture ready for future integration.</p>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-500 transition shadow-lg flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Send Order to WhatsApp (6289954986)
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- SLIDE-OVER SHOPPING CART DRAWER       -->
+  <!-- ===================================== -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden transition-opacity"></div>
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+    <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-basket-shopping text-brand-700 text-xl"></i>
+        <h2 class="text-xl font-bold text-brand-900">Your Cart</h2>
+      </div>
+      <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-600">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+    </div>
+
+    <div id="cart-items-container" class="flex-grow p-6 overflow-y-auto space-y-4 divide-y divide-slate-100">
+      <!-- Dynamic cart contents -->
+    </div>
+
+    <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+      <div class="space-y-1.5 text-xs font-semibold text-slate-600">
+        <div class="flex justify-between"><span>Subtotal</span> <span id="cart-subtotal" class="font-bold text-slate-800">₹0</span></div>
+        <div class="flex justify-between"><span>Estimated Delivery</span> <span id="cart-shipping" class="font-bold text-emerald-600">₹49</span></div>
+        <div class="flex justify-between text-base font-extrabold text-brand-900 pt-2 border-t border-slate-200"><span>Total</span> <span id="cart-total">₹0</span></div>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-brand-800 text-white font-bold rounded-xl hover:bg-brand-700 transition shadow">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- FOOTER                                -->
+  <!-- ===================================== -->
+  <footer class="bg-brand-900 text-white pt-16 pb-8 border-t border-brand-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-sm">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-brand-700 flex items-center justify-center text-brand-300">
+              <i class="fa-solid fa-seedling text-lg"></i>
+            </div>
+            <span class="text-2xl font-black tracking-tight text-white">MG Plants</span>
+          </div>
+          <p class="text-brand-200 text-xs leading-relaxed max-w-sm">
+            “Growing Green, Delivering Happiness” — Your trusted online plant nursery delivering healthy indoor, outdoor, and air-purifying plants across West Bengal & India.
+          </p>
+          <p class="text-xs text-brand-300">Founder: <strong>Mrinal Gayen</strong></p>
+        </div>
+
+        <div class="space-y-3">
+          <p class="font-bold text-white text-base">Quick Links</p>
+          <ul class="space-y-2 text-xs text-brand-200">
+            <li><a href="#" onclick="switchTab('home')" class="hover:text-brand-400">Home</a></li>
+            <li><a href="#" onclick="switchTab('shop')" class="hover:text-brand-400">Shop Catalog</a></li>
+            <li><a href="#" onclick="switchTab('care')" class="hover:text-brand-400">Plant Care Guide</a></li>
+            <li><a href="#" onclick="switchTab('about')" class="hover:text-brand-400">About Us</a></li>
+            <li><a href="#" onclick="switchTab('contact')" class="hover:text-brand-400">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <p class="font-bold text-white text-base">Policies</p>
+          <ul class="space-y-2 text-xs text-brand-200">
+            <li><a href="#" onclick="alert('Privacy Policy: MG Plants protects your personal contact details.')" class="hover:text-brand-400">Privacy Policy</a></li>
+            <li><a href="#" onclick="alert('Terms & Conditions: Orders are fulfilled via direct WhatsApp confirmation.')" class="hover:text-brand-400">Terms & Conditions</a></li>
+            <li><a href="#" onclick="alert('Shipping Policy: Eco-friendly fast packaging across West Bengal & India.')" class="hover:text-brand-400">Shipping Policy</a></li>
+            <li><a href="#" onclick="alert('Return Policy: 7-day plant replacement guarantee if damaged in transit.')" class="hover:text-brand-400">Return & Refund</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <p class="font-bold text-white text-base">Contact Us</p>
+          <ul class="space-y-2 text-xs text-brand-200">
+            <li><i class="fa-solid fa-phone mr-1.5 text-brand-400"></i> 8017990849</li>
+            <li><i class="fa-brands fa-whatsapp mr-1.5 text-emerald-400"></i> 6289954986</li>
+            <li><i class="fa-solid fa-envelope mr-1.5 text-brand-400"></i> mgplants@zohomail.in</li>
+            <li><i class="fa-solid fa-location-dot mr-1.5 text-brand-400"></i> West Bengal, India</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-between text-xs text-brand-300 gap-4">
+        <p>© 2026 MG Plants. All rights reserved. Founded by Mrinal Gayen.</p>
+        <div class="flex items-center space-x-4 text-base">
+          <a href="https://instagram.com/mgplants" target="_blank" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://facebook.com" target="_blank" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://wa.me/916289954986" target="_blank" class="hover:text-emerald-400"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ===================================== -->
+  <!-- JAVASCRIPT APP STATE & ENGINE         -->
+  <!-- ===================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // 1. UPDATED PRODUCT DATABASE WITH 25 UNIQUE IMAGES
+    // -------------------------------------------------------------
+    const productsDB = [
+      {
+        id: 'p1',
+        name: 'Money Plant',
+        category: 'Indoor Plants',
+        price: 149,
+        origPrice: 199,
+        rating: 4.8,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1604762524889-3e2fcc145683?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Low-maintenance vine that thrives in low light and water.',
+        desc: 'Golden Pothos vine known to purify air and bring green energy into your living space.',
+        light: 'Indirect Sunlight',
+        water: 'Every 5-7 days',
+        size: '8 - 12 inches',
+        diff: 'Very Easy'
+      },
+      {
+        id: 'p2',
+        name: 'Snake Plant',
+        category: 'Indoor Plants',
+        price: 199,
+        origPrice: 279,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1593482892290-f54927ae1bf6?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Ultra-hardy air cleanser that produces night-time oxygen.',
+        desc: 'Perfect for bedrooms and offices. Converts CO2 into oxygen overnight with minimal care needed.',
+        light: 'Low to Bright Light',
+        water: 'Every 10-14 days',
+        size: '10 - 14 inches',
+        diff: 'Beginner Friendly'
+      },
+      {
+        id: 'p3',
+        name: 'Peace Lily',
+        category: 'Indoor Plants',
+        price: 249,
+        origPrice: 349,
+        rating: 4.7,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e7355?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Elegant dark leaves topped with delicate white floral blooms.',
+        desc: 'Filters indoor air toxins while blooming beautiful white spathes throughout the year.',
+        light: 'Medium Indirect Light',
+        water: 'Twice a week',
+        size: '12 - 16 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p4',
+        name: 'Spider Plant',
+        category: 'Indoor Plants',
+        price: 149,
+        origPrice: 199,
+        rating: 4.6,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1615897587877-c9998273b4eb?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Arching green foliage with baby plantlets; great for hanging pots.',
+        desc: 'Resilient and fast-growing indoor plant that actively cleans household air.',
+        light: 'Bright Indirect Light',
+        water: 'Every 5 days',
+        size: '8 - 10 inches',
+        diff: 'Very Easy'
+      },
+      {
+        id: 'p5',
+        name: 'ZZ Plant',
+        category: 'Indoor Plants',
+        price: 299,
+        origPrice: 399,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1632207691143-653e23255380?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Glossy dark green leaves that withstand dark corners and neglect.',
+        desc: 'Stores water in underground rhizomes. Can go weeks without watering.',
+        light: 'Low to Bright Light',
+        water: 'Every 2 weeks',
+        size: '10 - 14 inches',
+        diff: 'Super Easy'
+      },
+      {
+        id: 'p6',
+        name: 'Syngonium (Arrowhead Plant)',
+        category: 'Indoor Plants',
+        price: 149,
+        origPrice: 199,
+        rating: 4.7,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1611082260846-95f7c32d94a8?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Arrow-shaped foliage that brightens study and office tables.',
+        desc: 'Compact tropical plant that adapts easily to indoor room conditions.',
+        light: 'Medium Indirect Light',
+        water: 'Every 5-7 days',
+        size: '6 - 10 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p7',
+        name: 'Areca Palm',
+        category: 'Indoor Plants',
+        price: 299,
+        origPrice: 399,
+        rating: 4.8,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1623862270929-7b3b9b466184?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Feathery tropical fronds that naturally humidify room air.',
+        desc: 'Adds a tropical feel to living rooms while serving as a natural indoor air humidifier.',
+        light: 'Bright Indirect Light',
+        water: 'Twice a week',
+        size: '18 - 24 inches',
+        diff: 'Moderate'
+      },
+      {
+        id: 'p8',
+        name: 'Jade Plant',
+        category: 'Succulents',
+        price: 199,
+        origPrice: 269,
+        rating: 4.8,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Plump emerald succulent leaves associated with good fortune.',
+        desc: 'Classic succulent tree with woody stems and fleshy green leaves.',
+        light: 'Bright Light / Partial Sun',
+        water: 'Once a week',
+        size: '6 - 8 inches',
+        diff: 'Beginner Friendly'
+      },
+      {
+        id: 'p9',
+        name: 'Aloe Vera',
+        category: 'Medicinal',
+        price: 129,
+        origPrice: 179,
+        rating: 4.6,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1555037015-1498966bcd7c?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Medicinal succulent with natural skin-soothing leaf gel.',
+        desc: 'Essential home-garden medicinal plant requiring minimal watering.',
+        light: 'Direct or Bright Sun',
+        water: 'Every 7-10 days',
+        size: '6 - 10 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p10',
+        name: 'Echeveria Succulent',
+        category: 'Succulents',
+        price: 149,
+        origPrice: 199,
+        rating: 4.7,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1512345158229-7da761b046a3?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Rose-shaped compact succulent perfect for small ceramic pots.',
+        desc: 'Beautiful geometric rosette succulent that thrives in sunny windowsills.',
+        light: 'Direct Sunlight',
+        water: 'Every 10-12 days',
+        size: '4 - 6 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p11',
+        name: 'Rose Plant',
+        category: 'Flowering Plants',
+        price: 199,
+        origPrice: 269,
+        rating: 4.8,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1496062031456-07b8f162a322?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Classic fragrant garden bloomer available in bright hues.',
+        desc: 'Loves full morning sunlight and organic compost for continuous flowering cycles.',
+        light: 'Full Sun (5+ hours)',
+        water: 'Daily in Summer',
+        size: '12 - 18 inches',
+        diff: 'Moderate'
+      },
+      {
+        id: 'p12',
+        name: 'Hibiscus',
+        category: 'Flowering Plants',
+        price: 179,
+        origPrice: 249,
+        rating: 4.7,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Vibrant tropical blooms popular in Indian home gardens.',
+        desc: 'Sun-loving flowering shrub producing large colorful blossoms.',
+        light: 'Full Sun',
+        water: 'Regularly',
+        size: '14 - 20 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p13',
+        name: 'Jasmine (Chameli)',
+        category: 'Flowering Plants',
+        price: 199,
+        origPrice: 279,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1592323067885-30ee6d0f6244?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Sweetly scented white flowers that bloom in warm months.',
+        desc: 'Fills outdoor gardens and balconies with a naturally sweet aroma.',
+        light: 'Full to Partial Sun',
+        water: 'Every 2 days',
+        size: '12 - 16 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p14',
+        name: 'Bougainvillea',
+        category: 'Flowering Plants',
+        price: 249,
+        origPrice: 329,
+        rating: 4.8,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Drought-tolerant climber covered in intense papery blossoms.',
+        desc: 'Thrives under Indian summer heat with minimal water demands once rooted.',
+        light: 'Direct Full Sun',
+        water: 'Low Water',
+        size: '16 - 24 inches',
+        diff: 'Beginner Friendly'
+      },
+      {
+        id: 'p15',
+        name: 'Marigold (Genda)',
+        category: 'Flowering Plants',
+        price: 99,
+        origPrice: 149,
+        rating: 4.5,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1574044557997-7c70c1822be8?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Bright yellow and orange festive garden blossoms.',
+        desc: 'Easy seasonal bloomer that naturally wards off garden pests.',
+        light: 'Full Sun',
+        water: 'Alternate Days',
+        size: '8 - 12 inches',
+        diff: 'Very Easy'
+      },
+      {
+        id: 'p16',
+        name: 'Aparajita (Blue Pea)',
+        category: 'Flowering Plants',
+        price: 149,
+        origPrice: 199,
+        rating: 4.8,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1596704179354-97216694600d?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Vivid royal-blue flowers used for herbal teas and pooja.',
+        desc: 'Fast-growing climber bearing medicinal blue flowers.',
+        light: 'Full Sunlight',
+        water: 'Regular Water',
+        size: '12 - 18 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p17',
+        name: 'Mogra (Arabian Jasmine)',
+        category: 'Flowering Plants',
+        price: 199,
+        origPrice: 269,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1595166415516-eb34d385fce3?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Intensely fragrant white flowers prized for home aroma.',
+        desc: 'Delights balconies and verandahs with fragrant summer blooms.',
+        light: 'Direct Sun',
+        water: 'Every 2 days',
+        size: '10 - 14 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p18',
+        name: 'Curry Leaf Plant (Kadi Patta)',
+        category: 'Fruit & Utility',
+        price: 149,
+        origPrice: 199,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1628157745778-00d9841f2371?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Aromatic kitchen herb essential for authentic Indian cooking.',
+        desc: 'Fresh culinary leaves right from your balcony garden.',
+        light: 'Full to Partial Sun',
+        water: 'Regular Water',
+        size: '10 - 15 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p19',
+        name: 'Lemon Plant (Pati Lebu)',
+        category: 'Fruit Plants',
+        price: 249,
+        origPrice: 349,
+        rating: 4.7,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1587848937989-13e64848d2fc?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Grafted citrus plant producing juicy home-grown lemons.',
+        desc: 'Thrives in large pots or terrace gardens with good drainage.',
+        light: 'Direct Sun (6+ hours)',
+        water: 'When top soil dries',
+        size: '18 - 24 inches',
+        diff: 'Moderate'
+      },
+      {
+        id: 'p20',
+        name: 'Guava Plant (Grafted)',
+        category: 'Fruit Plants',
+        price: 249,
+        origPrice: 349,
+        rating: 4.6,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1616858273612-42171ecba5ce?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Fast-bearing grafted guava sapling suited for home yards.',
+        desc: 'Produces sweet, vitamin C-rich guavas within a few seasons.',
+        light: 'Full Sunlight',
+        water: 'Moderate',
+        size: '20 - 28 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p21',
+        name: 'Mango Plant (Grafted Variety)',
+        category: 'Fruit Plants',
+        price: 299,
+        origPrice: 429,
+        rating: 4.9,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'King of fruits sapling suitable for gardens and large planters.',
+        desc: 'Premium grafted mango variety cultivated for early fruiting.',
+        light: 'Full Sun',
+        water: 'Deep watering weekly',
+        size: '24 - 32 inches',
+        diff: 'Moderate'
+      },
+      {
+        id: 'p22',
+        name: 'Papaya Plant',
+        category: 'Fruit Plants',
+        price: 149,
+        origPrice: 199,
+        rating: 4.5,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1588665780287-32c027376043?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Fast-growing fruit sapling yielding sweet papayas.',
+        desc: 'Rapid growth cycle delivering healthy fruits in a short time.',
+        light: 'Full Sun',
+        water: 'Regularly without waterlogging',
+        size: '18 - 24 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p23',
+        name: 'Pomegranate Plant (Dalim)',
+        category: 'Fruit Plants',
+        price: 299,
+        origPrice: 399,
+        rating: 4.8,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1541818224536-11f81648a3ba?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Dwarf fruiting shrub bearing nutrient-packed pomegranates.',
+        desc: 'Attractive shrub with bright red flowers preceding sweet fruits.',
+        light: 'Full Sun',
+        water: 'Moderate',
+        size: '18 - 24 inches',
+        diff: 'Moderate'
+      },
+      {
+        id: 'p24',
+        name: 'Coconut Plant (Dwarf Hybrid)',
+        category: 'Fruit Plants',
+        price: 299,
+        origPrice: 449,
+        rating: 4.9,
+        bestSeller: false,
+        image: 'https://images.unsplash.com/photo-1500332854930-b5e0c5e632cb?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'High-yield hybrid coconut palm sapling.',
+        desc: 'Ideal for tropical outdoor garden spaces across West Bengal.',
+        light: 'Full Sunlight',
+        water: 'Abundant Water',
+        size: '24 - 36 inches',
+        diff: 'Easy'
+      },
+      {
+        id: 'p25',
+        name: 'Lucky Bamboo (2-Tier)',
+        category: 'Indoor Plants',
+        price: 199,
+        origPrice: 279,
+        rating: 4.7,
+        bestSeller: true,
+        image: 'https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=600&q=80',
+        shortDesc: 'Feng Shui tabletop plant growing directly in water.',
+        desc: 'Brings positive energy, good luck, and fortune to home desks.',
+        light: 'Indoor Ambient Light',
+        water: 'Change water weekly',
+        size: '6 - 8 inches',
+        diff: 'Very Easy'
+      }
+    ];
+
+    // -------------------------------------------------------------
+    // 2. GLOBAL APPLICATION STATE
+    // -------------------------------------------------------------
+    let cart = [];
+    let selectedCategory = 'all';
+    let currentModalProduct = null;
+    let modalQuantity = 1;
+
+    // Initialize on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderBestsellers();
+      renderShopCatalog();
+      updateCartUI();
+    });
+
+    // -------------------------------------------------------------
+    // 3. PAGE NAVIGATION ROUTER
+    // -------------------------------------------------------------
+    function switchTab(tabId) {
+      document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('text-brand-700', 'font-bold'));
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) activeNav.classList.add('text-brand-700', 'font-bold');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    function focusSearch() {
+      setTimeout(() => {
+        const input = document.getElementById('shop-search');
+        if (input) input.focus();
+      }, 100);
+    }
+
+    // -------------------------------------------------------------
+    // 4. RENDER BESTSELLERS (HOMEPAGE)
+    // -------------------------------------------------------------
+    function renderBestsellers() {
+      const container = document.getElementById('bestsellers-grid');
+      if (!container) return;
+
+      const items = productsDB.filter(p => p.bestSeller).slice(0, 8);
+      container.innerHTML = items.map(p => createProductCardHTML(p)).join('');
+    }
+
+    // -------------------------------------------------------------
+    // 5. RENDER SHOP CATALOG (SHOP PAGE WITH SEARCH & FILTER)
+    // -------------------------------------------------------------
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.classList.remove('bg-brand-800', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      const activeBtn = document.getElementById(`cat-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('bg-brand-800', 'text-white');
+      }
+
+      renderShopCatalog();
+    }
+
+    function renderShopCatalog() {
+      const container = document.getElementById('shop-catalog-grid');
+      if (!container) return;
+
+      const searchVal = (document.getElementById('shop-search')?.value || '').toLowerCase();
+      const sortVal = document.getElementById('shop-sort')?.value || 'popular';
+
+      let filtered = productsDB.filter(p => {
+        const matchCat = (selectedCategory === 'all') || (p.category === selectedCategory);
+        const matchSearch = p.name.toLowerCase().includes(searchVal) || p.shortDesc.toLowerCase().includes(searchVal);
+        return matchCat && matchSearch;
+      });
+
+      if (sortVal === 'price-low') filtered.sort((a,b) => a.price - b.price);
+      else if (sortVal === 'price-high') filtered.sort((a,b) => b.price - a.price);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 bg-white rounded-3xl border border-brand-100">
+            <i class="fa-solid fa-seedling text-4xl text-slate-300 mb-2"></i>
+            <p class="font-bold text-slate-700">No plants found</p>
+            <p class="text-xs text-slate-400 mt-1">Try searching for something else or reset your filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+    }
+
+    function createProductCardHTML(p) {
+      const discount = Math.round(((p.origPrice - p.price) / p.origPrice) * 100);
+      return `
+        <div class="group bg-white rounded-2xl border border-brand-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
+          <span class="absolute top-3 left-3 z-10 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow">
+            ${discount}% OFF
+          </span>
+
+          <div onclick="openProductModal('${p.id}')" class="relative overflow-hidden cursor-pointer h-52 bg-brand-50">
+            <img src="${p.image}" alt="${p.name} - MG Plants" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+
+          <div class="p-5 flex flex-col flex-grow justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span>${p.category}</span>
+                <span class="text-amber-500 font-bold"><i class="fa-solid fa-star text-[10px]"></i> ${p.rating}</span>
+              </div>
+              <h3 onclick="openProductModal('${p.id}')" class="font-bold text-slate-900 text-base cursor-pointer hover:text-brand-700 transition line-clamp-1">${p.name}</h3>
+              <p class="text-xs text-slate-500 line-clamp-2 mt-1 font-light">${p.shortDesc}</p>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 space-y-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-xl font-extrabold text-brand-900">₹${p.price}</span>
+                <span class="text-xs text-slate-400 line-through">₹${p.origPrice}</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="addToCart('${p.id}')" class="w-full py-2 bg-brand-100 text-brand-900 font-bold text-xs rounded-xl hover:bg-brand-200 transition">
+                  <i class="fa-solid fa-cart-plus mr-1"></i> Add
+                </button>
+                <button onclick="quickWhatsAppOrder('${p.id}')" class="w-full py-2 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-500 transition flex items-center justify-center gap-1">
+                  <i class="fa-brands fa-whatsapp"></i> Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------
+    // 6. PRODUCT MODAL & QUICK VIEW
+    // -------------------------------------------------------------
+    function openProductModal(productId) {
+      const p = productsDB.find(item => item.id === productId);
+      if (!p) return;
+
+      currentModalProduct = p;
+      modalQuantity = 1;
+
+      document.getElementById('modal-img').src = p.image;
+      document.getElementById('modal-title').innerText = p.name;
+      document.getElementById('modal-category').innerText = p.category;
+      document.getElementById('modal-price').innerText = `₹${p.price}`;
+      document.getElementById('modal-orig-price').innerText = `₹${p.origPrice}`;
+      document.getElementById('modal-desc').innerText = p.desc;
+      document.getElementById('modal-light').innerText = p.light;
+      document.getElementById('modal-water').innerText = p.water;
+      document.getElementById('modal-size').innerText = p.size;
+      document.getElementById('modal-diff').innerText = p.diff;
+      document.getElementById('modal-qty').innerText = modalQuantity;
+
+      const discount = Math.round(((p.origPrice - p.price) / p.origPrice) * 100);
+      document.getElementById('modal-discount').innerText = `${discount}% OFF`;
+
+      document.getElementById('modal-add-btn').onclick = () => {
+        addToCart(p.id, modalQuantity);
+        closeProductModal();
+      };
+      document.getElementById('modal-wa-btn').onclick = () => {
+        quickWhatsAppOrder(p.id, modalQuantity);
+      };
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function changeModalQty(delta) {
+      modalQuantity = Math.max(1, modalQuantity + delta);
+      document.getElementById('modal-qty').innerText = modalQuantity;
+    }
+
+    // -------------------------------------------------------------
+    // 7. SHOPPING CART STATE ENGINE
+    // -------------------------------------------------------------
+    function addToCart(productId, qty = 1) {
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        const prod = productsDB.find(p => p.id === productId);
+        if (prod) {
+          cart.push({ ...prod, qty });
+        }
+      }
+      updateCartUI();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cart-badge');
+      const container = document.getElementById('cart-items-container');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const shippingEl = document.getElementById('cart-shipping');
+      const totalEl = document.getElementById('cart-total');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      if (badge) badge.innerText = totalItems;
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = subtotal > 699 || subtotal === 0 ? 0 : 49;
+      const grandTotal = subtotal + shipping;
+
+      if (subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+      if (shippingEl) shippingEl.innerText = shipping === 0 ? 'FREE' : `₹${shipping}`;
+      if (totalEl) totalEl.innerText = `₹${grandTotal}`;
+
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 space-y-3">
+            <i class="fa-solid fa-basket-shopping text-4xl text-slate-200"></i>
+            <p class="font-bold text-slate-600">Your cart is empty</p>
+            <button onclick="toggleCartDrawer(); switchTab('shop');" class="px-5 py-2 bg-brand-800 text-white font-bold text-xs rounded-xl">
+              Browse Plants
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="flex items-center gap-4 pt-3">
+          <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover bg-brand-50">
+          <div class="flex-grow">
+            <h4 class="font-bold text-slate-800 text-sm leading-tight">${item.name}</h4>
+            <p class="text-xs text-brand-700 font-extrabold mt-0.5">₹${item.price}</p>
+            <div class="flex items-center gap-3 mt-2">
+              <div class="flex items-center border border-slate-200 rounded-md text-xs">
+                <button onclick="updateCartQty('${item.id}', -1)" class="px-2 py-0.5 bg-slate-50 text-slate-600">-</button>
+                <span class="px-2 font-bold text-slate-800">${item.qty}</span>
+                <button onclick="updateCartQty('${item.id}', 1)" class="px-2 py-0.5 bg-slate-50 text-slate-600">+</button>
+              </div>
+              <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-rose-500 text-xs">
+                <i class="fa-solid fa-trash-can"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      if (open === true) {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else if (open === false) {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('hidden');
+      } else {
+        drawer.classList.toggle('translate-x-full');
+        backdrop.classList.toggle('hidden');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 8. CHECKOUT & DYNAMIC WHATSAPP ORDER PAYLOAD GENERATOR
+    // Target WhatsApp Number: 6289954986
+    // -------------------------------------------------------------
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert('Your cart is empty. Please add plants before checking out.');
+        return;
+      }
+      toggleCartDrawer(false);
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function quickWhatsAppOrder(productId, qty = 1) {
+      const p = productsDB.find(item => item.id === productId);
+      if (!p) return;
+
+      const msg = `🌿 *DIRECT PLANT ORDER - MG PLANTS*\n\n` +
+                  `*Product:* ${p.name}\n` +
+                  `*Quantity:* ${qty}\n` +
+                  `*Price:* ₹${p.price * qty}\n\n` +
+                  `Hi Mrinal Gayen, I want to order this plant directly. Please share payment and delivery details!`;
+
+      const url = `https://wa.me/916289954986?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    function processCheckoutOrder(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('chk-name').value;
+      const phone = document.getElementById('chk-phone').value;
+      const wa = document.getElementById('chk-wa').value;
+      const email = document.getElementById('chk-email').value;
+      const address = document.getElementById('chk-address').value;
+      const city = document.getElementById('chk-city').value;
+      const state = document.getElementById('chk-state').value;
+      const pin = document.getElementById('chk-pin').value;
+      const notes = document.getElementById('chk-notes').value;
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = subtotal > 699 ? 0 : 49;
+      const grandTotal = subtotal + shipping;
+
+      let msg = `🌿 *NEW ONLINE ORDER - MG PLANTS*\n`;
+      msg += `------------------------------------\n`;
+      msg += `👤 *Customer:* ${name}\n`;
+      msg += `📞 *Phone:* ${phone}\n`;
+      msg += `💬 *WhatsApp:* ${wa}\n`;
+      if (email) msg += `📧 *Email:* ${email}\n`;
+      msg += `📍 *Address:* ${address}, ${city}, ${state} - ${pin}\n`;
+      if (notes) msg += `📝 *Order Notes:* ${notes}\n`;
+      msg += `------------------------------------\n`;
+      msg += `📦 *ORDER ITEMS:*\n`;
+
+      cart.forEach((item, idx) => {
+        msg += `${idx + 1}. ${item.name} (x${item.qty}) - ₹${item.price * item.qty}\n`;
+      });
+
+      msg += `------------------------------------\n`;
+      msg += `💵 *Subtotal:* ₹${subtotal}\n`;
+      msg += `🚚 *Delivery Fee:* ${shipping === 0 ? 'FREE' : '₹' + shipping}\n`;
+      msg += `💰 *TOTAL AMOUNT:* ₹${grandTotal}\n`;
+      msg += `💳 *Payment Method:* Cash on Delivery / WhatsApp Confirmation\n\n`;
+      msg += `Thank you for growing green with MG Plants! 🌱`;
+
+      const waURL = `https://wa.me/916289954986?text=${encodeURIComponent(msg)}`;
+      
+      cart = [];
+      updateCartUI();
+      closeCheckoutModal();
+
+      window.open(waURL, '_blank');
+    }
+
+    function handleContactFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const phone = document.getElementById('contact-phone').value;
+      const msgText = document.getElementById('contact-msg').value;
+
+      const formatted = `🌱 *INQUIRY FROM WEBSITE - MG PLANTS*\n\n` +
+                        `*Name:* ${name}\n` +
+                        `*Phone:* ${phone}\n` +
+                        `*Message:* ${msgText}`;
+
+      window.open(`https://wa.me/916289954986?text=${encodeURIComponent(formatted)}`, '_blank');
+    }
+  </script>
+</body>
+</html>
