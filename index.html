@@ -68,7 +68,7 @@
         </div>
       </a>
 
-      <!-- Desktop Nav Links (Updated with Track Order) -->
+      <!-- Desktop Nav Links -->
       <nav class="hidden md:flex items-center space-x-8 font-semibold text-slate-700 text-sm">
         <a href="#" id="nav-home" onclick="switchTab('home')" class="nav-item text-brand-700 font-bold hover:text-brand-700 transition">Home</a>
         <a href="#" id="nav-shop" onclick="switchTab('shop')" class="nav-item hover:text-brand-700 transition">Shop</a>
@@ -119,9 +119,7 @@
   <!-- DYNAMIC VIEW WRAPPER -->
   <main class="flex-grow">
 
-    <!-- ===================================== -->
-    <!-- 1. HOMEPAGE VIEW                      -->
-    <!-- ===================================== -->
+    <!-- 1. HOMEPAGE VIEW -->
     <div id="view-home" class="page-view space-y-16 lg:space-y-24 pb-16">
       
       <section class="relative bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 text-white overflow-hidden py-16 lg:py-24">
@@ -255,9 +253,7 @@
       </section>
     </div>
 
-    <!-- ===================================== -->
-    <!-- 2. SHOP PAGE VIEW                     -->
-    <!-- ===================================== -->
+    <!-- 2. SHOP PAGE VIEW -->
     <div id="view-shop" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-brand-200 pb-6 gap-4">
         <div>
@@ -289,9 +285,7 @@
       <div id="shop-catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
 
-    <!-- ===================================== -->
-    <!-- 3. PLANT CARE PAGE VIEW               -->
-    <!-- ===================================== -->
+    <!-- 3. PLANT CARE PAGE VIEW -->
     <div id="view-care" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
       <div class="text-center max-w-2xl mx-auto">
         <h1 class="text-4xl font-extrabold text-brand-900 mt-1">Keep Your Plants Happy</h1>
@@ -306,9 +300,7 @@
       </div>
     </div>
 
-    <!-- ===================================== -->
-    <!-- 4. ABOUT PAGE VIEW                    -->
-    <!-- ===================================== -->
+    <!-- 4. ABOUT PAGE VIEW -->
     <div id="view-about" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       <div class="text-center max-w-3xl mx-auto space-y-4">
         <h1 class="text-4xl font-black text-brand-900">About MG Plants</h1>
@@ -317,9 +309,7 @@
       </div>
     </div>
 
-    <!-- ===================================== -->
-    <!-- 5. CONTACT PAGE VIEW                  -->
-    <!-- ===================================== -->
+    <!-- 5. CONTACT PAGE VIEW -->
     <div id="view-contact" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       <div class="text-center"><h1 class="text-4xl font-extrabold text-brand-900">Get In Touch</h1></div>
       <div class="bg-brand-900 text-white p-8 rounded-3xl max-w-xl mx-auto text-center space-y-4 shadow-xl">
@@ -332,9 +322,7 @@
       </div>
     </div>
 
-    <!-- ===================================== -->
-    <!-- 6. TRACK ORDER PAGE VIEW              -->
-    <!-- ===================================== -->
+    <!-- 6. TRACK ORDER PAGE VIEW -->
     <div id="view-track" class="page-view hidden max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 min-h-[65vh]">
       <div class="text-center space-y-2">
         <span class="text-brand-600 font-bold uppercase tracking-wider text-xs">Delivery Status</span>
@@ -402,7 +390,6 @@
       </button>
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="bg-brand-50 p-6 flex items-center justify-center relative">
-          <!-- Fallback onerror integrated -->
           <img id="modal-img" src="" alt="Plant Image" class="rounded-2xl max-h-80 w-full object-cover shadow-md" onerror="this.onerror=null;this.src='https://tse2.mm.bing.net/th?q=indoor+plants+beautiful+home+decor&w=600&h=600&c=7&rs=1&p=0';">
           <span id="modal-discount" class="absolute top-4 left-4 bg-emerald-600 text-white font-bold text-xs px-2.5 py-1 rounded-full"></span>
         </div>
@@ -461,20 +448,40 @@
     </div>
   </div>
 
-  <!-- CART DRAWER -->
-  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
-  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
-    <div class="p-6 border-b flex justify-between"><h2 class="text-xl font-bold">Your Cart</h2><button onclick="toggleCartDrawer()"><i class="fa-solid fa-xmark text-xl"></i></button></div>
-    <div id="cart-items-container" class="flex-grow p-6 overflow-y-auto space-y-4 divide-y divide-slate-100"></div>
-    <div class="p-6 border-t bg-slate-50 space-y-4">
-      <div class="flex justify-between font-extrabold text-brand-900 text-lg"><span>Total:</span> <span id="cart-total">₹0</span></div>
-      <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-brand-800 text-white font-bold rounded-xl">Checkout</button>
+  <!-- CART DRAWER (z-[60] FIX FOR OVERLAY OVER FLOATING BUTTONS) -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer()" class="fixed inset-0 z-[60] bg-black/50 hidden"></div>
+  <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 z-[60] w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+    <div class="p-6 border-b flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-basket-shopping text-brand-700 text-xl"></i>
+        <h2 class="text-xl font-bold text-brand-900">Your Cart</h2>
+      </div>
+      <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-600">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+    </div>
+    
+    <div id="cart-items-container" class="flex-grow p-6 overflow-y-auto space-y-4 divide-y divide-slate-100">
+      <!-- Dynamic cart contents rendered here -->
+    </div>
+
+    <!-- RESTORED HTML BREAKDOWN FOR SUBTOTAL, SHIPPING, AND TOTAL -->
+    <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+      <div class="space-y-1.5 text-xs font-semibold text-slate-600">
+        <div class="flex justify-between"><span>Subtotal</span> <span id="cart-subtotal" class="font-bold text-slate-800">₹0</span></div>
+        <div class="flex justify-between"><span>Estimated Delivery</span> <span id="cart-shipping" class="font-bold text-emerald-600">₹0</span></div>
+        <div class="flex justify-between text-base font-extrabold text-brand-900 pt-2 border-t border-slate-200"><span>Total</span> <span id="cart-total">₹0</span></div>
+      </div>
+
+      <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-brand-800 text-white font-bold rounded-xl hover:bg-brand-700 transition shadow">
+        Proceed to Checkout
+      </button>
     </div>
   </div>
 
   <!-- FLOATING WIDGETS -->
   <!-- 1. WHATSAPP SUPPORT (LEFT SIDE) -->
-  <div id="wa-widget" class="fixed bottom-6 left-6 z-50 flex flex-col items-start font-sans">
+  <div id="wa-widget" class="fixed bottom-6 left-6 z-40 flex flex-col items-start font-sans">
     <div id="wa-chat-window" class="hidden w-72 sm:w-80 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-100 transition-all duration-300 transform origin-bottom-left">
       <div class="bg-brand-800 p-4 flex items-center gap-3 relative">
         <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-700 shadow-sm shrink-0"><i class="fa-solid fa-seedling text-lg"></i></div>
@@ -492,7 +499,7 @@
   </div>
 
   <!-- 2. AI ASSISTANT CHATBOT (RIGHT SIDE) -->
-  <div id="ai-bot-wrapper" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
+  <div id="ai-bot-wrapper" class="fixed bottom-6 right-6 z-40 flex flex-col items-end font-sans">
     <div id="ai-bot-window" class="hidden w-80 sm:w-96 bg-white rounded-3xl shadow-2xl overflow-hidden mb-4 border border-brand-200 transition-all duration-300 transform origin-bottom-right flex flex-col h-[480px]">
       <div class="bg-gradient-to-r from-brand-900 to-brand-800 p-4 flex items-center justify-between text-white shadow-md shrink-0">
         <div class="flex items-center gap-3">
@@ -526,84 +533,82 @@
   <!-- JAVASCRIPT APP STATE & ENGINE         -->
   <!-- ===================================== -->
   <script>
-    // -------------------------------------------------------------
-    // 1. DATABASE (BING PROXY IMAGES FOR LIVE RELIABILITY)
-    // -------------------------------------------------------------
+    // DATABASE
     const productsDB = [
       { id: 'p1', name: 'Money Plant', category: 'Indoor Plants', price: 149, origPrice: 199, rating: 4.8, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Golden+Pothos+Money+Plant+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Golden+Pothos+Money+Plant+trailing+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Low-maintenance vine that thrives in low light.', desc: 'Golden Pothos vine known to purify air.', light: 'Indirect Light', water: 'Every 5-7 days', size: '8-12 inches', diff: 'Very Easy' },
       { id: 'p2', name: 'Snake Plant', category: 'Indoor Plants', price: 199, origPrice: 279, rating: 4.9, bestSeller: true,
-        image: 'https://tse2.mm.bing.net/th?q=Snake+Plant+Sansevieria+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Snake+Plant+Sansevieria+tall+leaves+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Ultra-hardy air cleanser.', desc: 'Converts CO2 into oxygen overnight.', light: 'Low to Bright', water: 'Every 14 days', size: '10-14 inches', diff: 'Beginner' },
       { id: 'p3', name: 'Peace Lily', category: 'Indoor Plants', price: 249, origPrice: 349, rating: 4.7, bestSeller: true,
-        image: 'https://tse3.mm.bing.net/th?q=Peace+Lily+Spathiphyllum+flower+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Peace+Lily+Spathiphyllum+white+flower+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Dark leaves topped with white blooms.', desc: 'Filters indoor air toxins.', light: 'Medium Indirect', water: 'Twice a week', size: '12-16 inches', diff: 'Easy' },
       { id: 'p4', name: 'Spider Plant', category: 'Indoor Plants', price: 149, origPrice: 199, rating: 4.6, bestSeller: false,
-        image: 'https://tse4.mm.bing.net/th?q=Spider+Plant+indoor+hanging+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Spider+Plant+Chlorophytum+indoor+hanging+basket&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Arching green foliage with baby plantlets.', desc: 'Resilient fast-growing indoor plant.', light: 'Bright Indirect', water: 'Every 5 days', size: '8-10 inches', diff: 'Easy' },
       { id: 'p5', name: 'ZZ Plant', category: 'Indoor Plants', price: 299, origPrice: 399, rating: 4.9, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=ZZ+Plant+Zamioculcas+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=ZZ+Plant+Zamioculcas+dark+green+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Glossy dark green leaves.', desc: 'Stores water in rhizomes. Withstands neglect.', light: 'Low to Bright', water: 'Every 2 weeks', size: '10-14 inches', diff: 'Super Easy' },
       { id: 'p6', name: 'Syngonium', category: 'Indoor Plants', price: 149, origPrice: 199, rating: 4.7, bestSeller: false,
-        image: 'https://tse2.mm.bing.net/th?q=Syngonium+Arrowhead+Plant+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Syngonium+Arrowhead+Plant+pink+green+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Arrow-shaped foliage.', desc: 'Compact tropical plant.', light: 'Medium Indirect', water: 'Every 5-7 days', size: '6-10 inches', diff: 'Easy' },
       { id: 'p7', name: 'Areca Palm', category: 'Indoor Plants', price: 299, origPrice: 399, rating: 4.8, bestSeller: true,
-        image: 'https://tse3.mm.bing.net/th?q=Areca+Palm+indoor+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Areca+Palm+large+indoor+living+room+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Feathery tropical fronds.', desc: 'Natural indoor air humidifier.', light: 'Bright Indirect', water: 'Twice a week', size: '18-24 inches', diff: 'Moderate' },
       { id: 'p8', name: 'Jade Plant', category: 'Succulents', price: 199, origPrice: 269, rating: 4.8, bestSeller: true,
-        image: 'https://tse4.mm.bing.net/th?q=Jade+Plant+Crassula+succulent+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Jade+Plant+Crassula+ovata+succulent+tree+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Plump emerald succulent leaves.', desc: 'Classic succulent associated with good fortune.', light: 'Bright Light', water: 'Once a week', size: '6-8 inches', diff: 'Easy' },
       { id: 'p9', name: 'Aloe Vera', category: 'Medicinal', price: 129, origPrice: 179, rating: 4.6, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Aloe+Vera+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Aloe+Vera+medicinal+plant+ceramic+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Medicinal succulent with natural leaf gel.', desc: 'Essential home-garden medicinal plant.', light: 'Direct Sun', water: 'Every 10 days', size: '6-10 inches', diff: 'Easy' },
       { id: 'p10', name: 'Echeveria', category: 'Succulents', price: 149, origPrice: 199, rating: 4.7, bestSeller: false,
-        image: 'https://tse2.mm.bing.net/th?q=Echeveria+Succulent+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Echeveria+Succulent+rosette+colorful+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Rose-shaped compact succulent.', desc: 'Geometric rosette succulent.', light: 'Direct Sun', water: 'Every 10 days', size: '4-6 inches', diff: 'Easy' },
       { id: 'p11', name: 'Rose Plant', category: 'Flowering Plants', price: 199, origPrice: 269, rating: 4.8, bestSeller: true,
-        image: 'https://tse3.mm.bing.net/th?q=Red+Rose+Plant+in+pot+blooming&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Red+Rose+Plant+bush+in+pot+blooming+garden&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Classic fragrant garden bloomer.', desc: 'Loves full morning sunlight.', light: 'Full Sun', water: 'Daily', size: '12-18 inches', diff: 'Moderate' },
       { id: 'p12', name: 'Hibiscus', category: 'Flowering Plants', price: 179, origPrice: 249, rating: 4.7, bestSeller: false,
-        image: 'https://tse4.mm.bing.net/th?q=Red+Hibiscus+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Yellow+Hibiscus+flower+plant+outdoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Vibrant tropical blooms.', desc: 'Sun-loving flowering shrub.', light: 'Full Sun', water: 'Regularly', size: '14-20 inches', diff: 'Easy' },
       { id: 'p13', name: 'Jasmine', category: 'Flowering Plants', price: 199, origPrice: 279, rating: 4.9, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Jasmine+Chameli+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Star+Jasmine+vine+blooming+white+flowers+outdoor+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Sweetly scented white flowers.', desc: 'Fills outdoor gardens with aroma.', light: 'Full to Partial Sun', water: 'Every 2 days', size: '12-16 inches', diff: 'Easy' },
       { id: 'p14', name: 'Bougainvillea', category: 'Flowering Plants', price: 249, origPrice: 329, rating: 4.8, bestSeller: false,
-        image: 'https://tse2.mm.bing.net/th?q=Bougainvillea+pink+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Bougainvillea+magenta+pink+flower+plant+terracotta+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Drought-tolerant climber.', desc: 'Covered in intense papery blossoms.', light: 'Direct Full Sun', water: 'Low Water', size: '16-24 inches', diff: 'Easy' },
       { id: 'p15', name: 'Marigold', category: 'Flowering Plants', price: 99, origPrice: 149, rating: 4.5, bestSeller: true,
-        image: 'https://tse3.mm.bing.net/th?q=Marigold+Genda+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Marigold+Genda+orange+flower+plant+nursery+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Bright yellow festive blossoms.', desc: 'Easy seasonal bloomer.', light: 'Full Sun', water: 'Alternate Days', size: '8-12 inches', diff: 'Very Easy' },
       { id: 'p16', name: 'Aparajita', category: 'Flowering Plants', price: 149, origPrice: 199, rating: 4.8, bestSeller: false,
-        image: 'https://tse4.mm.bing.net/th?q=Aparajita+Blue+Pea+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Aparajita+Blue+Pea+vine+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Vivid royal-blue flowers.', desc: 'Fast-growing climber.', light: 'Full Sun', water: 'Regular Water', size: '12-18 inches', diff: 'Easy' },
       { id: 'p17', name: 'Mogra', category: 'Flowering Plants', price: 199, origPrice: 269, rating: 4.9, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Mogra+Arabian+Jasmine+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Mogra+Arabian+Jasmine+thick+double+flower+plant+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Intensely fragrant white flowers.', desc: 'Delights balconies with aroma.', light: 'Direct Sun', water: 'Every 2 days', size: '10-14 inches', diff: 'Easy' },
       { id: 'p18', name: 'Curry Leaf', category: 'Fruit & Utility', price: 149, origPrice: 199, rating: 4.9, bestSeller: true,
-        image: 'https://tse2.mm.bing.net/th?q=Curry+Leaf+Plant+Kadi+Patta+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Curry+Leaf+Plant+Kadi+Patta+healthy+leaves+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Aromatic kitchen herb.', desc: 'Essential for Indian cooking.', light: 'Partial Sun', water: 'Regular Water', size: '10-15 inches', diff: 'Easy' },
       { id: 'p19', name: 'Lemon Plant', category: 'Fruit Plants', price: 249, origPrice: 349, rating: 4.7, bestSeller: false,
-        image: 'https://tse3.mm.bing.net/th?q=Lemon+Tree+Plant+in+pot+with+lemons&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Lemon+Tree+Plant+grafted+with+yellow+lemons+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Grafted citrus plant.', desc: 'Produces juicy home-grown lemons.', light: 'Direct Sun', water: 'When dry', size: '18-24 inches', diff: 'Moderate' },
       { id: 'p20', name: 'Guava Plant', category: 'Fruit Plants', price: 249, origPrice: 349, rating: 4.6, bestSeller: false,
-        image: 'https://tse4.mm.bing.net/th?q=Guava+Plant+in+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Guava+Plant+sapling+grafted+in+black+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Fast-bearing grafted guava.', desc: 'Produces sweet guavas.', light: 'Full Sun', water: 'Moderate', size: '20-28 inches', diff: 'Easy' },
       { id: 'p21', name: 'Mango Plant', category: 'Fruit Plants', price: 299, origPrice: 429, rating: 4.9, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Mango+Tree+Plant+grafted+in+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Mango+Tree+Plant+sapling+grafted+nursery+bag&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'King of fruits sapling.', desc: 'Premium grafted mango variety.', light: 'Full Sun', water: 'Weekly', size: '24-32 inches', diff: 'Moderate' },
       { id: 'p22', name: 'Papaya Plant', category: 'Fruit Plants', price: 149, origPrice: 199, rating: 4.5, bestSeller: false,
-        image: 'https://tse2.mm.bing.net/th?q=Papaya+Plant+sapling+in+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse2.mm.bing.net/th?q=Papaya+Plant+sapling+healthy+leaves+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Fast-growing fruit sapling.', desc: 'Yielding sweet papayas.', light: 'Full Sun', water: 'Regularly', size: '18-24 inches', diff: 'Easy' },
       { id: 'p23', name: 'Pomegranate', category: 'Fruit Plants', price: 299, origPrice: 399, rating: 4.8, bestSeller: false,
-        image: 'https://tse3.mm.bing.net/th?q=Pomegranate+Plant+Dalim+in+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse3.mm.bing.net/th?q=Pomegranate+Plant+Dalim+with+fruit+in+pot&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Dwarf fruiting shrub.', desc: 'Nutrient-packed pomegranates.', light: 'Full Sun', water: 'Moderate', size: '18-24 inches', diff: 'Moderate' },
       { id: 'p24', name: 'Coconut Plant', category: 'Fruit Plants', price: 299, origPrice: 449, rating: 4.9, bestSeller: false,
-        image: 'https://tse4.mm.bing.net/th?q=Coconut+Palm+Plant+sapling+in+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse4.mm.bing.net/th?q=Dwarf+Coconut+Palm+Plant+sapling+in+grow+bag&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Hybrid coconut sapling.', desc: 'Ideal for tropical spaces.', light: 'Full Sun', water: 'Abundant', size: '24-36 inches', diff: 'Easy' },
       { id: 'p25', name: 'Lucky Bamboo', category: 'Indoor Plants', price: 199, origPrice: 279, rating: 4.7, bestSeller: true,
-        image: 'https://tse1.mm.bing.net/th?q=Lucky+Bamboo+Plant+indoor+glass+pot&w=600&h=600&c=7&rs=1&p=0',
+        image: 'https://tse1.mm.bing.net/th?q=Lucky+Bamboo+Plant+2+tier+indoor+glass+bowl&w=600&h=600&c=7&rs=1&p=0',
         shortDesc: 'Feng Shui tabletop plant.', desc: 'Grows directly in water.', light: 'Ambient Light', water: 'Weekly change', size: '6-8 inches', diff: 'Very Easy' }
     ];
 
@@ -623,7 +628,8 @@
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       document.getElementById(`view-${tabId}`).classList.remove('hidden');
       document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('text-brand-700', 'font-bold'));
-      document.getElementById(`nav-${tabId}`).classList.add('text-brand-700', 'font-bold');
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeNav) activeNav.classList.add('text-brand-700', 'font-bold');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -643,8 +649,11 @@
         btn.classList.remove('bg-brand-800', 'text-white');
         btn.classList.add('bg-slate-100', 'text-slate-700');
       });
-      document.getElementById(`cat-${cat}`).classList.replace('bg-slate-100', 'bg-brand-800');
-      document.getElementById(`cat-${cat}`).classList.replace('text-slate-700', 'text-white');
+      const activeBtn = document.getElementById(`cat-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.replace('bg-slate-100', 'bg-brand-800');
+        activeBtn.classList.replace('text-slate-700', 'text-white');
+      }
       renderShopCatalog();
     }
 
@@ -671,12 +680,11 @@
 
     function createProductCardHTML(p) {
       const discount = Math.round(((p.origPrice - p.price) / p.origPrice) * 100);
-      // Safe fallback image included inline
       return `
         <div class="group bg-white rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden relative">
           <span class="absolute top-3 left-3 z-10 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow">${discount}% OFF</span>
           <div onclick="openProductModal('${p.id}')" class="relative overflow-hidden cursor-pointer h-52 bg-brand-50">
-            <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='https://tse2.mm.bing.net/th?q=beautiful+indoor+plant+pot&w=600&h=600&c=7&rs=1&p=0';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='https://tse2.mm.bing.net/th?q=indoor+plants+beautiful+home+decor&w=600&h=600&c=7&rs=1&p=0';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
           </div>
           <div class="p-5 flex flex-col flex-grow justify-between space-y-3">
             <div>
@@ -725,7 +733,7 @@
     function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
     function changeModalQty(delta) { modalQuantity = Math.max(1, modalQuantity + delta); document.getElementById('modal-qty').innerText = modalQuantity; }
 
-    // CART LOGIC
+    // CART ENGINE WITH FIXED UNCAUGHT NULL CHECKS
     function addToCart(productId, qty = 1) {
       const existing = cart.find(item => item.id === productId);
       if (existing) existing.qty += qty;
@@ -745,28 +753,49 @@
     function removeFromCart(productId) { cart = cart.filter(i => i.id !== productId); updateCartUI(); }
 
     function updateCartUI() {
-      const badge = document.getElementById('cart-badge'), container = document.getElementById('cart-items-container');
+      const badge = document.getElementById('cart-badge');
+      const container = document.getElementById('cart-items-container');
       const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
       if (badge) badge.innerText = totalItems;
 
-      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0), shipping = subtotal > 699 || subtotal === 0 ? 0 : 49;
-      document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
-      document.getElementById('cart-shipping').innerText = shipping === 0 ? 'FREE' : `₹${shipping}`;
-      document.getElementById('cart-total').innerText = `₹${subtotal + shipping}`;
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const shipping = subtotal > 699 || subtotal === 0 ? 0 : 49;
+      
+      // SAFE ELEMENT SETTERS
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const shippingEl = document.getElementById('cart-shipping');
+      const totalEl = document.getElementById('cart-total');
+
+      if (subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+      if (shippingEl) shippingEl.innerText = shipping === 0 ? 'FREE' : `₹${shipping}`;
+      if (totalEl) totalEl.innerText = `₹${subtotal + shipping}`;
+
+      if (!container) return;
 
       if (cart.length === 0) {
-        container.innerHTML = `<div class="text-center py-16 space-y-3"><i class="fa-solid fa-basket-shopping text-4xl text-slate-200"></i><p class="font-bold text-slate-600">Your cart is empty</p><button onclick="toggleCartDrawer(); switchTab('shop');" class="px-5 py-2 bg-brand-800 text-white font-bold text-xs rounded-xl">Browse Plants</button></div>`;
+        container.innerHTML = `
+          <div class="text-center py-16 space-y-3">
+            <i class="fa-solid fa-basket-shopping text-4xl text-slate-200"></i>
+            <p class="font-bold text-slate-600">Your cart is empty</p>
+            <button onclick="toggleCartDrawer(); switchTab('shop');" class="px-5 py-2 bg-brand-800 text-white font-bold text-xs rounded-xl">
+              Browse Plants
+            </button>
+          </div>
+        `;
         return;
       }
+
       container.innerHTML = cart.map(item => `
         <div class="flex items-center gap-4 pt-3">
-          <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover bg-brand-50" onerror="this.onerror=null;this.src='https://tse2.mm.bing.net/th?q=beautiful+indoor+plant+pot&w=600&h=600&c=7&rs=1&p=0';">
+          <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover bg-brand-50" onerror="this.onerror=null;this.src='https://tse2.mm.bing.net/th?q=indoor+plants+beautiful+home+decor&w=600&h=600&c=7&rs=1&p=0';">
           <div class="flex-grow">
-            <h4 class="font-bold text-slate-800 text-sm">${item.name}</h4>
+            <h4 class="font-bold text-slate-800 text-sm leading-tight">${item.name}</h4>
             <p class="text-xs text-brand-700 font-extrabold mt-0.5">₹${item.price}</p>
             <div class="flex items-center gap-3 mt-2">
               <div class="flex items-center border rounded-md text-xs">
-                <button onclick="updateCartQty('${item.id}', -1)" class="px-2 py-0.5 bg-slate-50">-</button><span class="px-2 font-bold">${item.qty}</span><button onclick="updateCartQty('${item.id}', 1)" class="px-2 py-0.5 bg-slate-50">+</button>
+                <button onclick="updateCartQty('${item.id}', -1)" class="px-2 py-0.5 bg-slate-50 text-slate-600">-</button>
+                <span class="px-2 font-bold text-slate-800">${item.qty}</span>
+                <button onclick="updateCartQty('${item.id}', 1)" class="px-2 py-0.5 bg-slate-50 text-slate-600">+</button>
               </div>
               <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-rose-500 text-xs"><i class="fa-solid fa-trash-can"></i> Remove</button>
             </div>
@@ -809,7 +838,7 @@
       window.open(`https://wa.me/916289954986?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // TRACKING SYSTEM LOGIC
+    // TRACKING SYSTEM
     function handleOrderTracking(e) {
       e.preventDefault();
       const trackId = document.getElementById('track-id').value.trim().toUpperCase();
@@ -828,11 +857,9 @@
       timestamps[0].innerText = new Date(today.setDate(today.getDate() - 2)).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
       timestamps[1].innerText = new Date(today.setDate(today.getDate() + 1)).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
 
-      // Reset classes
       iconShipped.className = "flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-slate-200 text-slate-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors";
       iconDelivered.className = "flex items-center justify-center w-8 h-8 rounded-full border-4 border-white bg-slate-200 text-slate-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors";
       
-      // Update logic based on 'S' (Shipped) or 'D' (Delivered)
       if (trackId.endsWith('D')) {
         iconShipped.classList.replace('bg-slate-200', 'bg-emerald-500'); iconShipped.classList.replace('text-slate-400', 'text-white');
         iconDelivered.classList.replace('bg-slate-200', 'bg-emerald-500'); iconDelivered.classList.replace('text-slate-400', 'text-white');
@@ -843,7 +870,7 @@
       resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // DUAL CHATBOT LOGIC
+    // CHATBOTS LOGIC
     function toggleWaChat() { document.getElementById('wa-chat-window').classList.toggle('hidden'); }
     function toggleAiBot() {
       const win = document.getElementById('ai-bot-window'); win.classList.toggle('hidden');
