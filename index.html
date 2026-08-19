@@ -3,142 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MG Plants | Premium Plants & Garden Nursery</title>
+  <title>MG Plants | Premium Nursery & Seeds</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e',
-              600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d',
-            }
-          }
-        }
-      }
+      theme: { extend: { colors: { brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' } } } }
     }
   </script>
-  
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } .hide-scrollbar::-webkit-scrollbar { display: none; } </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
 
-  <!-- TOP PROMO BANNER -->
-  <div class="bg-brand-900 text-white text-xs font-semibold py-2 px-4 text-center tracking-wide">
-    🌿 Free Nursery-Grade Plant Care Guide with Every Order | Fast & Safe Delivery
-  </div>
-
-  <!-- NAVIGATION HEADER -->
+  <!-- HEADER NAVIGATION -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-18 py-3 gap-4">
-        
-        <!-- Brand Logo -->
-        <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-600/30">
-            <i class="fa-solid fa-seedling text-lg"></i>
-          </div>
-          <div>
-            <span class="text-xl font-extrabold text-gray-900 tracking-tight flex items-center gap-1">
-              MG Plants <span class="w-2 h-2 rounded-full bg-brand-500"></span>
-            </span>
-            <p class="text-[10px] text-gray-500 font-medium tracking-wider uppercase">Nursery & Botanicals</p>
-          </div>
-        </a>
-
-        <!-- Search Bar -->
-        <div class="flex-1 max-w-lg hidden md:block">
-          <div class="relative">
-            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search indoor plants, succulents, fruit saplings..." class="w-full pl-10 pr-4 py-2.5 bg-gray-100/80 focus:bg-white border border-transparent focus:border-brand-500 rounded-full text-sm outline-none transition-all shadow-inner" />
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
-          </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 py-3 gap-4">
+      
+      <!-- Logo -->
+      <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md">
+          <i class="fa-solid fa-leaf text-lg"></i>
         </div>
-
-        <!-- Navigation & Auth/Cart -->
-        <div class="flex items-center gap-2 sm:gap-4">
-          <nav class="hidden lg:flex items-center gap-1 text-sm font-medium">
-            <button onclick="switchTab('home')" id="nav-home" class="nav-item px-3 py-2 rounded-lg text-brand-700 font-bold transition">Home</button>
-            <button onclick="switchTab('shop')" id="nav-shop" class="nav-item px-3 py-2 rounded-lg text-gray-600 hover:text-brand-600 transition">Catalog</button>
-          </nav>
-
-          <!-- Account Button -->
-          <button onclick="switchTab('login')" id="nav-login" class="nav-item p-2.5 text-gray-600 hover:text-brand-600 transition flex items-center gap-2 cursor-pointer">
-            <i class="fa-regular fa-circle-user text-xl"></i>
-            <span class="font-bold text-sm hidden sm:inline">Sign In</span>
-          </button>
-
-          <!-- Cart Button -->
-          <button onclick="toggleCartDrawer(true)" class="relative p-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-xl transition flex items-center gap-2">
-            <i class="fa-solid fa-bag-shopping text-lg"></i>
-            <span class="font-bold text-sm hidden sm:inline">Cart</span>
-            <span id="cartCountBadge" class="w-5 h-5 bg-brand-600 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">0</span>
-          </button>
+        <div>
+          <span class="text-xl font-extrabold text-gray-900 tracking-tight">MG Plants <span class="w-1.5 h-1.5 rounded-full bg-brand-500 inline-block"></span></span>
         </div>
+      </a>
 
+      <!-- Primary Nav (Based on Blueprint) -->
+      <nav class="hidden lg:flex items-center gap-2 text-sm font-bold">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-item px-3 py-2 text-brand-700 transition">Home</button>
+        <button onclick="switchTab('shop')" id="nav-shop" class="nav-item px-3 py-2 text-gray-600 hover:text-brand-600 transition">All Categories</button>
+        <button onclick="switchTab('shop')" class="px-3 py-2 text-gray-600 hover:text-brand-600 transition">Today's Deals</button>
+        <button onclick="switchTab('shop')" class="px-3 py-2 text-gray-600 hover:text-brand-600 transition">New Releases</button>
+      </nav>
+
+      <!-- Account & Cart -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <button onclick="handleAccountClick()" id="nav-login" class="nav-item p-2.5 text-gray-600 hover:text-brand-600 transition flex items-center gap-2 cursor-pointer">
+          <i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>
+        </button>
+        <button onclick="toggleCartDrawer(true)" class="relative p-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-xl transition flex items-center gap-2">
+          <i class="fa-solid fa-cart-shopping text-lg"></i>
+          <span id="cartCountBadge" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow border-2 border-white">0</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN VIEWS -->
   <main class="flex-1">
-
+    
     <!-- HOME TAB -->
     <div id="view-home" class="page-view">
-      <section class="relative bg-gradient-to-br from-brand-900 via-brand-800 to-gray-900 text-white py-16 sm:py-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="max-w-2xl space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-200 text-xs font-semibold uppercase tracking-wider">
-              🌱 Direct From Verified Nurseries
-            </div>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Bring Fresh Nature to Your Living Room & Garden.</h1>
-            <p class="text-base sm:text-lg text-emerald-100 font-light leading-relaxed">Explore healthy, acclimatized indoor plants, vibrant flowering shrubs, and grafted fruit saplings ready for your home.</p>
-            <div class="flex flex-wrap gap-3 pt-2">
-              <button onclick="switchTab('shop')" class="px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg transition transform hover:-translate-y-0.5">Explore Full Catalog <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></button>
-            </div>
-          </div>
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex items-end justify-between mb-6">
+          <h2 class="text-2xl font-extrabold text-gray-900"><i class="fa-solid fa-fire text-brand-600 mr-2"></i>Best Sellers</h2>
+          <button onclick="switchTab('shop')" class="text-brand-700 font-bold text-sm">View All <i class="fa-solid fa-arrow-right"></i></button>
         </div>
-      </section>
-
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex items-end justify-between mb-8">
-          <div>
-            <div class="flex items-center gap-2 text-brand-700 font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-fire"></i> Customer Favorites</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">Bestselling Plants</h2>
-          </div>
-        </div>
-        <div id="bestsellersGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          <!-- Loading skeleton -->
-          <div class="col-span-full py-12 text-center text-gray-400">
-            <i class="fa-solid fa-circle-notch fa-spin text-3xl text-brand-600 mb-3"></i>
-            <p class="text-sm font-medium">Connecting to live cloud inventory...</p>
-          </div>
-        </div>
+        <div id="bestsellersGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </section>
     </div>
 
-    <!-- SHOP CATALOG TAB -->
+    <!-- SHOPPING TAB -->
     <div id="view-shop" class="page-view hidden">
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex items-center gap-2 overflow-x-auto pb-4 hide-scrollbar">
-          <button onclick="filterCategory('all')" class="cat-pill active px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-brand-700 text-white shadow-sm transition">All Plants</button>
-          <button onclick="filterCategory('Indoor Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Indoor Plants</button>
-          <button onclick="filterCategory('Succulents')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Succulents</button>
-          <button onclick="filterCategory('Flowering Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Flowering</button>
-          <button onclick="filterCategory('Fruit Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Fruit Saplings</button>
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Search & Filter Bar -->
+        <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
+          <div class="relative w-full md:w-96">
+            <input type="text" id="searchInput" placeholder="Search products, seeds, plants..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
+            <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
+          </div>
+          
+          <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar">
+            <button onclick="filterCategory('all')" class="cat-pill active px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white">All Products</button>
+            <button onclick="filterCategory('Indoor Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Indoor Plants</button>
+            <button onclick="filterCategory('Fruit Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Saplings</button>
+            <button onclick="filterCategory('Seeds')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Seeds</button>
+          </div>
         </div>
-        <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-6"></div>
+
+        <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
       </section>
     </div>
 
@@ -146,45 +92,53 @@
     <div id="view-login" class="page-view hidden">
       <section class="max-w-md mx-auto px-4 py-16">
         <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-          
-          <!-- Toggle Buttons -->
           <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
-            <button id="tabSignIn" onclick="toggleAuthMode('signin')" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition">Sign In</button>
-            <button id="tabSignUp" onclick="toggleAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition">Create Account</button>
+            <button id="tabSignIn" onclick="toggleAuthMode('signin')" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm">Sign In</button>
+            <button id="tabSignUp" onclick="toggleAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-md text-gray-500">Create Account</button>
           </div>
-
-          <!-- Sign In Form -->
           <div id="formSignIn" class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-              <input type="email" id="loginEmail" placeholder="you@example.com" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            <input type="email" id="loginEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <button onclick="attemptLogin()" class="w-full py-3 bg-brand-700 text-white font-bold rounded-xl shadow-lg">Secure Sign In</button>
+          </div>
+          <div id="formSignUp" class="space-y-4 hidden">
+            <input type="text" id="regName" placeholder="Full Name" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="password" id="regPassword" placeholder="Create Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <button onclick="attemptRegister()" class="w-full py-3 bg-gray-900 text-white font-bold rounded-xl shadow-lg">Create Account</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ACCOUNT DASHBOARD TAB -->
+    <div id="view-account" class="page-view hidden">
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+          
+          <!-- Account Sidebar -->
+          <div class="w-full md:w-64 space-y-2">
+            <div class="p-4 bg-white border border-gray-200 rounded-2xl mb-4 text-center">
+              <div id="accAvatar" class="w-16 h-16 mx-auto bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-2xl font-bold mb-2">U</div>
+              <h3 id="accName" class="font-bold text-gray-900">User Name</h3>
+              <p id="accEmail" class="text-xs text-gray-500">user@email.com</p>
             </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
-              <input type="password" id="loginPassword" placeholder="••••••••" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
-            </div>
-            <button onclick="attemptLogin()" class="w-full py-3 mt-2 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition">
-              Secure Sign In <i class="fa-solid fa-lock ml-1 text-xs"></i>
-            </button>
+            
+            <button class="w-full text-left px-4 py-3 bg-brand-50 text-brand-700 font-bold rounded-xl"><i class="fa-solid fa-box w-6"></i> My Orders</button>
+            <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-location-dot w-6"></i> Addresses</button>
+            <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-heart w-6"></i> Wishlist</button>
+            <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-ticket w-6"></i> Coupons</button>
+            <button onclick="logoutUser()" class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50 font-bold rounded-xl mt-4 transition"><i class="fa-solid fa-right-from-bracket w-6"></i> Sign Out</button>
           </div>
 
-          <!-- Sign Up Form (Hidden by default) -->
-          <div id="formSignUp" class="space-y-4 hidden">
-            <div>
-              <label class="block text-xs font-bold text-gray-700 mb-1">Full Name</label>
-              <input type="text" id="regName" placeholder="Your Name" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+          <!-- Account Content Area -->
+          <div class="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-gray-900 mb-4">Recent Orders</h3>
+            <div class="text-center py-12 border-2 border-dashed border-gray-200 rounded-xl">
+              <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
+              <p class="text-gray-500 font-medium text-sm">You haven't placed any orders yet.</p>
+              <button onclick="switchTab('shop')" class="mt-4 px-5 py-2 bg-brand-600 text-white font-bold rounded-lg text-sm">Start Shopping</button>
             </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-              <input type="email" id="regEmail" placeholder="you@example.com" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
-              <input type="password" id="regPassword" placeholder="Create a password" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
-            </div>
-            <button onclick="attemptRegister()" class="w-full py-3 mt-2 bg-gray-900 hover:bg-black text-white font-bold rounded-xl shadow-lg transition">
-              Create Account
-            </button>
           </div>
 
         </div>
@@ -193,49 +147,41 @@
 
   </main>
 
-  <!-- QUICK VIEW PRODUCT MODAL -->
-  <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
-      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
-      <div class="overflow-y-auto p-6 space-y-5">
-        <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-100">
-          <img id="modalImg" src="" class="w-full h-full object-cover" />
-        </div>
-        <div>
-          <h3 id="modalTitle" class="text-2xl font-extrabold text-gray-900 mt-0.5">Plant Name</h3>
-          <div class="flex items-baseline gap-3 mt-2">
-            <span id="modalPrice" class="text-2xl font-extrabold text-gray-900">₹0</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-3 pt-2">
-          <button onclick="addModalItemToCart()" class="flex-1 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
-            <i class="fa-solid fa-bag-shopping"></i> Add to Cart
-          </button>
-        </div>
-      </div>
+  <!-- CART DRAWER WITH CHECKOUT FORM -->
+  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
+  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+    <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+      <h3 class="font-extrabold text-lg text-gray-900 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-brand-600"></i> Shopping Cart</h3>
+      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-gray-900 shadow-sm"><i class="fa-solid fa-xmark"></i></button>
     </div>
-  </div>
-
-  <!-- SLIDE-OVER CART DRAWER -->
-  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden transition-opacity"></div>
-  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
-    <div class="p-5 border-b border-gray-200 flex items-center justify-between">
-      <h3 class="font-extrabold text-gray-900 text-lg">Your Cart</h3>
-      <button onclick="toggleCartDrawer(false)" class="p-2 text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-lg"></i></button>
-    </div>
+    
     <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
-    <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
-      <div class="flex justify-between text-base font-extrabold text-gray-900">
-        <span>Total Amount</span>
+    
+    <div class="p-5 border-t border-gray-200 bg-white shadow-[0_-10px_30px_rgba(0,0,0,0.05)] space-y-4 relative z-10">
+      <div class="flex justify-between text-lg font-extrabold text-gray-900 border-b border-gray-100 pb-3">
+        <span>Subtotal</span>
         <span id="cartTotal" class="text-brand-700">₹0</span>
       </div>
+      
+      <!-- Address & Buy Form -->
+      <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
+        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required />
+        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required />
+        <textarea id="custAddress" placeholder="Delivery Address (E.g., Khandagiri, BBSR, 751030) *" rows="2" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required></textarea>
+        <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition text-base">
+          Place Secure Order <i class="fa-solid fa-lock ml-1 text-sm"></i>
+        </button>
+      </div>
+
+      <button id="proceedCheckoutBtn" onclick="openCheckoutForm()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-base">
+        Proceed to Checkout <i class="fa-solid fa-arrow-right text-sm"></i>
+      </button>
     </div>
   </div>
 
-  <!-- SCRIPT LOGIC (Dynamic Backend Connected) -->
   <script>
     const API_BASE_URL = 'https://mgplant-mg-plants-backend.onrender.com';
-    let productsDB = []; let cart = []; let selectedCategory = 'all'; let currentModalProduct = null;
+    let productsDB = []; let cart = []; let selectedCategory = 'all';
     let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -243,148 +189,60 @@
       await fetchLiveCatalog();
     });
 
-    // Authentication Logic
-    function updateAuthUI() {
-        const loginBtn = document.getElementById('nav-login');
-        if (currentUser) {
-            loginBtn.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm shadow-sm">
-                    ${currentUser.name.charAt(0).toUpperCase()}
-                </div>
-                <span class="font-bold text-sm hidden sm:inline text-brand-800">${currentUser.name.split(' ')[0]}</span>
-            `;
-            loginBtn.onclick = logoutUser;
-        } else {
-            loginBtn.innerHTML = `
-                <i class="fa-regular fa-circle-user text-xl"></i>
-                <span class="font-bold text-sm hidden sm:inline">Sign In</span>
-            `;
-            loginBtn.onclick = () => switchTab('login');
-        }
-    }
-
-    function logoutUser() {
-        if(confirm("Are you sure you want to log out?")) {
-            localStorage.removeItem('mgPlantsUser');
-            currentUser = null;
-            updateAuthUI();
-            switchTab('home');
-        }
-    }
-
-    async function attemptRegister() {
-        const name = document.getElementById('regName').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        const password = document.getElementById('regPassword').value;
-
-        if (!name || !email || !password) return alert("Please fill in all fields.");
-
-        try {
-            const res = await fetch(`${API_BASE_URL}/api/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
-            const data = await res.json();
-            if (data.success) {
-                alert("Account created! You are now logged in.");
-                currentUser = data.user;
-                localStorage.setItem('mgPlantsUser', JSON.stringify(data.user));
-                updateAuthUI();
-                switchTab('home');
-            } else alert(data.message);
-        } catch (err) { alert("Server error. Please try again."); }
-    }
-
-    async function attemptLogin() {
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value;
-
-        if (!email || !password) return alert("Please enter your email and password.");
-
-        try {
-            const res = await fetch(`${API_BASE_URL}/api/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            const data = await res.json();
-            if (data.success) {
-                currentUser = data.user;
-                localStorage.setItem('mgPlantsUser', JSON.stringify(data.user));
-                updateAuthUI();
-                switchTab('home');
-            } else alert(data.message);
-        } catch (err) { alert("Server error. Please try again."); }
-    }
-
-    function toggleAuthMode(mode) {
-      document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin');
-      document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
-      document.getElementById('tabSignIn').className = mode === 'signin' ? "flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition" : "flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition";
-      document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition" : "flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition";
-    }
-
-    // Catalog Logic
-    async function fetchLiveCatalog() {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/products`);
-        productsDB = await response.json();
-        renderBestsellers();
-        renderShopCatalog();
-      } catch (err) { console.warn("Backend offline"); }
-    }
-
-    function renderBestsellers() {
-      const container = document.getElementById('bestsellersGrid');
-      const bestsellers = productsDB.filter(p => p.bestSeller).slice(0, 8);
-      container.innerHTML = bestsellers.map(p => createProductCardHTML(p)).join('');
-    }
-
-    function renderShopCatalog() {
-      const container = document.getElementById('catalogGrid');
-      let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
-      container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
-    }
-
+    // --- PRODUCT CARDS ---
     function createProductCardHTML(product) {
       return `
-        <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-md transition-all flex flex-col">
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3 cursor-pointer" onclick="openProductModal('${product.id}')">
-            <img src="${product.image}" class="w-full h-full object-cover" />
+        <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative group">
+          ${product.bestSeller ? '<span class="absolute top-4 left-4 z-10 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-extrabold px-2 py-1 rounded shadow-md">POPULAR</span>' : ''}
+          <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3">
+            <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
           </div>
-          <div class="flex-1 cursor-pointer" onclick="openProductModal('${product.id}')">
-            <h4 class="font-bold text-gray-900 text-sm">${product.name}</h4>
+          <div class="flex-1">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">${product.category}</span>
+            <h4 class="font-bold text-gray-900 text-sm leading-snug mt-1">${product.name}</h4>
           </div>
-          <div class="flex items-center justify-between mt-3">
-            <span class="text-base font-extrabold text-gray-900">₹${product.price}</span>
-            <button onclick="addToCart('${product.id}')" class="p-2.5 bg-brand-50 text-brand-700 rounded-xl"><i class="fa-solid fa-plus"></i></button>
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+            <div>
+              <span class="text-lg font-extrabold text-gray-900">₹${product.price}</span>
+              ${product.origPrice ? `<span class="text-xs text-gray-400 line-through ml-1 block sm:inline">₹${product.origPrice}</span>` : ''}
+            </div>
+            <button onclick="addToCart('${product.id}')" class="w-10 h-10 rounded-xl bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white flex items-center justify-center transition shadow-sm">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
         </div>`;
     }
 
-    // Modal & Cart Logic
-    function openProductModal(id) {
-      currentModalProduct = productsDB.find(p => p.id === id);
-      document.getElementById('modalImg').src = currentModalProduct.image;
-      document.getElementById('modalTitle').innerText = currentModalProduct.name;
-      document.getElementById('modalPrice').innerText = `₹${currentModalProduct.price}`;
-      document.getElementById('productModal').classList.remove('hidden');
-      document.getElementById('productModal').classList.add('flex');
+    async function fetchLiveCatalog() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/products`);
+        productsDB = await response.json();
+        renderBestsellers(); renderShopCatalog();
+      } catch (err) { console.warn("Backend offline"); }
     }
-    function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); document.getElementById('productModal').classList.remove('flex'); }
-    
-    function addModalItemToCart() {
-      if(currentModalProduct) { addToCart(currentModalProduct.id); closeProductModal(); toggleCartDrawer(true); }
+    function renderBestsellers() {
+      document.getElementById('bestsellersGrid').innerHTML = productsDB.filter(p => p.bestSeller).slice(0, 8).map(createProductCardHTML).join('');
+    }
+    function renderShopCatalog() {
+      let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
+      document.getElementById('catalogGrid').innerHTML = filtered.map(createProductCardHTML).join('');
     }
 
+    // --- CART LOGIC ---
     function addToCart(id) {
       const product = productsDB.find(p => p.id === id);
       const existing = cart.find(i => i.id === id);
       if(existing) existing.qty += 1; else cart.push({ ...product, qty: 1 });
       updateCartUI();
+      toggleCartDrawer(true);
     }
-
+    function updateQuantity(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
     function updateCartUI() {
       const count = cart.reduce((s, i) => s + i.qty, 0);
       const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
@@ -392,24 +250,121 @@
       document.getElementById('cartTotal').innerText = `₹${total}`;
       
       const container = document.getElementById('cartDrawerItems');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16">
+            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-basket-shopping text-3xl text-gray-300"></i></div>
+            <p class="text-gray-500 font-medium text-sm">Your cart is empty.</p>
+          </div>`;
+        document.getElementById('checkoutFormSection').classList.add('hidden');
+        document.getElementById('proceedCheckoutBtn').classList.remove('hidden');
+        return;
+      }
       container.innerHTML = cart.map(item => `
-        <div class="flex gap-3 p-3 bg-gray-50 rounded-xl border">
-          <img src="${item.image}" class="w-14 h-14 object-cover rounded-lg" />
-          <div class="flex-1"><h5 class="font-bold text-xs">${item.name}</h5><span class="text-xs font-extrabold text-brand-700">₹${item.price}</span></div>
-          <div class="text-xs font-bold mt-2">Qty: ${item.qty}</div>
+        <div class="flex gap-4 p-3 bg-white rounded-xl border border-gray-100 items-center shadow-sm">
+          <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border border-gray-50" />
+          <div class="flex-1">
+            <h5 class="font-bold text-sm text-gray-900 leading-tight">${item.name}</h5>
+            <span class="text-sm font-extrabold text-brand-700 mt-1 inline-block">₹${item.price}</span>
+          </div>
+          <div class="flex items-center gap-2 bg-gray-50 px-2 py-1.5 rounded-lg border border-gray-200">
+            <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 rounded flex items-center justify-center text-gray-500 font-bold hover:bg-white hover:text-red-500 shadow-sm transition">-</button>
+            <span class="text-xs font-bold text-gray-900 w-4 text-center">${item.qty}</span>
+            <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded flex items-center justify-center text-gray-500 font-bold hover:bg-white hover:text-brand-600 shadow-sm transition">+</button>
+          </div>
         </div>`).join('');
     }
-
     function toggleCartDrawer(open) {
       document.getElementById('cartDrawerBackdrop').classList.toggle('hidden', !open);
       document.getElementById('cartDrawer').classList.toggle('translate-x-full', !open);
     }
+    function openCheckoutForm() {
+      if (cart.length === 0) return alert("Cart is empty!");
+      document.getElementById('checkoutFormSection').classList.remove('hidden');
+      document.getElementById('proceedCheckoutBtn').classList.add('hidden');
+      if (currentUser) {
+        document.getElementById('custName').value = currentUser.name;
+        document.getElementById('custPhone').value = ""; 
+      }
+    }
+    async function submitOrderToBackend() {
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const address = document.getElementById('custAddress').value;
+      if (!name || !phone || !address) return alert("Please fill all address fields!");
+      
+      alert(`🌿 Secure Order Received for ${name}!\nWe will contact ${phone} for delivery.`);
+      cart = []; updateCartUI(); toggleCartDrawer(false);
+    }
 
-    function filterCategory(cat) { selectedCategory = cat; switchTab('shop'); renderShopCatalog(); }
+    // --- AUTHENTICATION & DASHBOARD LOGIC ---
+    function updateAuthUI() {
+        const loginBtn = document.getElementById('nav-login');
+        if (currentUser) {
+            loginBtn.innerHTML = `<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm shadow-sm border border-brand-200">${currentUser.name.charAt(0).toUpperCase()}</div><span class="font-bold text-sm hidden sm:inline text-gray-800">Account</span>`;
+            
+            // Populate Account Dashboard Data
+            document.getElementById('accName').innerText = currentUser.name;
+            document.getElementById('accEmail').innerText = currentUser.email;
+            document.getElementById('accAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
+        } else {
+            loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`;
+        }
+    }
+    function handleAccountClick() {
+        if (currentUser) { switchTab('account'); } 
+        else { switchTab('login'); }
+    }
+    function logoutUser() {
+        if(confirm("Sign out of your account?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); }
+    }
+    async function attemptRegister() {
+        const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
+        if (!name || !email || !password) return alert("Fill all fields.");
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/register`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name, email, password}) });
+            const data = await res.json();
+            if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); }
+            else alert(data.message);
+        } catch(err) { alert("Server error."); }
+    }
+    async function attemptLogin() {
+        const email = document.getElementById('loginEmail').value, password = document.getElementById('loginPassword').value;
+        if (!email || !password) return alert("Enter email and password.");
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}) });
+            const data = await res.json();
+            if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); }
+            else alert(data.message);
+        } catch(err) { alert("Server error."); }
+    }
+    function toggleAuthMode(mode) {
+      document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin');
+      document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
+      document.getElementById('tabSignIn').className = mode === 'signin' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
+      document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
+    }
+
+    // --- NAVIGATION ---
+    function filterCategory(cat) { 
+      selectedCategory = cat; 
+      
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.innerText === cat || (cat === 'all' && btn.innerText === 'All Products')) {
+          btn.className = "cat-pill active px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition";
+        } else {
+          btn.className = "cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition";
+        }
+      });
+      renderShopCatalog(); 
+    }
     function switchTab(tabId) {
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
-      const active = document.getElementById(`view-${tabId}`);
-      if (active) active.classList.remove('hidden');
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      
+      document.querySelectorAll('.nav-item').forEach(el => el.className = "nav-item px-3 py-2 text-gray-600 hover:text-brand-600 transition font-bold");
+      if (document.getElementById(`nav-${tabId}`)) document.getElementById(`nav-${tabId}`).className = "nav-item px-3 py-2 text-brand-700 transition font-bold";
+      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
