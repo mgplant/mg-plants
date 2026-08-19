@@ -13,13 +13,8 @@
         extend: {
           colors: {
             brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
+              50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e',
+              600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d',
             }
           }
         }
@@ -29,7 +24,6 @@
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -42,7 +36,7 @@
 
   <!-- TOP PROMO BANNER -->
   <div class="bg-brand-900 text-white text-xs font-semibold py-2 px-4 text-center tracking-wide">
-    🌿 Free Nursery-Grade Plant Care Guide with Every Order | Fast & Safe Delivery Across India
+    🌿 Free Nursery-Grade Plant Care Guide with Every Order | Fast & Safe Delivery
   </div>
 
   <!-- NAVIGATION HEADER -->
@@ -63,28 +57,26 @@
           </div>
         </a>
 
-        <!-- Search Bar (Amazon Style) -->
+        <!-- Search Bar -->
         <div class="flex-1 max-w-lg hidden md:block">
           <div class="relative">
-            <input 
-              type="text" 
-              id="searchInput" 
-              oninput="handleSearch()"
-              placeholder="Search indoor plants, succulents, fruit saplings..." 
-              class="w-full pl-10 pr-4 py-2.5 bg-gray-100/80 focus:bg-white border border-transparent focus:border-brand-500 rounded-full text-sm outline-none transition-all shadow-inner"
-            />
+            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search indoor plants, succulents, fruit saplings..." class="w-full pl-10 pr-4 py-2.5 bg-gray-100/80 focus:bg-white border border-transparent focus:border-brand-500 rounded-full text-sm outline-none transition-all shadow-inner" />
             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
           </div>
         </div>
 
-        <!-- Navigation & Cart -->
+        <!-- Navigation & Auth/Cart -->
         <div class="flex items-center gap-2 sm:gap-4">
           <nav class="hidden lg:flex items-center gap-1 text-sm font-medium">
             <button onclick="switchTab('home')" id="nav-home" class="nav-item px-3 py-2 rounded-lg text-brand-700 font-bold transition">Home</button>
             <button onclick="switchTab('shop')" id="nav-shop" class="nav-item px-3 py-2 rounded-lg text-gray-600 hover:text-brand-600 transition">Catalog</button>
-            <button onclick="switchTab('about')" id="nav-about" class="nav-item px-3 py-2 rounded-lg text-gray-600 hover:text-brand-600 transition">About</button>
-            <button onclick="switchTab('contact')" id="nav-contact" class="nav-item px-3 py-2 rounded-lg text-gray-600 hover:text-brand-600 transition">Contact</button>
           </nav>
+
+          <!-- Account Button -->
+          <button onclick="switchTab('login')" id="nav-login" class="nav-item p-2.5 text-gray-600 hover:text-brand-600 transition flex items-center gap-2 cursor-pointer">
+            <i class="fa-regular fa-circle-user text-xl"></i>
+            <span class="font-bold text-sm hidden sm:inline">Sign In</span>
+          </button>
 
           <!-- Cart Button -->
           <button onclick="toggleCartDrawer(true)" class="relative p-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-xl transition flex items-center gap-2">
@@ -95,20 +87,6 @@
         </div>
 
       </div>
-
-      <!-- Mobile Search Bar -->
-      <div class="pb-3 md:hidden">
-        <div class="relative">
-          <input 
-            type="text" 
-            id="mobileSearchInput" 
-            oninput="handleMobileSearch()"
-            placeholder="Search all plants..." 
-            class="w-full pl-10 pr-4 py-2 bg-gray-100 border border-transparent focus:border-brand-500 rounded-full text-sm outline-none"
-          />
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-gray-400 text-sm"></i>
-        </div>
-      </div>
     </div>
   </header>
 
@@ -117,8 +95,6 @@
 
     <!-- HOME TAB -->
     <div id="view-home" class="page-view">
-      
-      <!-- HERO BANNER -->
       <section class="relative bg-gradient-to-br from-brand-900 via-brand-800 to-gray-900 text-white py-16 sm:py-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -126,39 +102,22 @@
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-200 text-xs font-semibold uppercase tracking-wider">
               🌱 Direct From Verified Nurseries
             </div>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-              Bring Fresh Nature to Your Living Room & Garden.
-            </h1>
-            <p class="text-base sm:text-lg text-emerald-100 font-light leading-relaxed">
-              Explore healthy, acclimatized indoor plants, vibrant flowering shrubs, and grafted fruit saplings ready for your home.
-            </p>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">Bring Fresh Nature to Your Living Room & Garden.</h1>
+            <p class="text-base sm:text-lg text-emerald-100 font-light leading-relaxed">Explore healthy, acclimatized indoor plants, vibrant flowering shrubs, and grafted fruit saplings ready for your home.</p>
             <div class="flex flex-wrap gap-3 pt-2">
-              <button onclick="switchTab('shop')" class="px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg shadow-brand-500/30 transition transform hover:-translate-y-0.5">
-                Explore Full Catalog <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
-              </button>
-              <button onclick="filterCategory('Indoor Plants')" class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 backdrop-blur transition">
-                Indoor Air Purifiers
-              </button>
+              <button onclick="switchTab('shop')" class="px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-lg transition transform hover:-translate-y-0.5">Explore Full Catalog <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BESTSELLERS SECTION -->
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="flex items-end justify-between mb-8">
           <div>
-            <div class="flex items-center gap-2 text-brand-700 font-bold text-xs uppercase tracking-widest">
-              <i class="fa-solid fa-fire"></i> Customer Favorites
-            </div>
+            <div class="flex items-center gap-2 text-brand-700 font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-fire"></i> Customer Favorites</div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">Bestselling Plants</h2>
           </div>
-          <button onclick="switchTab('shop')" class="text-brand-700 hover:text-brand-800 text-sm font-bold flex items-center gap-1 group">
-            View All <i class="fa-solid fa-chevron-right text-xs transition transform group-hover:translate-x-1"></i>
-          </button>
         </div>
-
-        <!-- Dynamic Bestsellers Grid -->
         <div id="bestsellersGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           <!-- Loading skeleton -->
           <div class="col-span-full py-12 text-center text-gray-400">
@@ -167,93 +126,67 @@
           </div>
         </div>
       </section>
-
     </div>
 
     <!-- SHOP CATALOG TAB -->
     <div id="view-shop" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- Category Filter Chips -->
         <div class="flex items-center gap-2 overflow-x-auto pb-4 hide-scrollbar">
           <button onclick="filterCategory('all')" class="cat-pill active px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-brand-700 text-white shadow-sm transition">All Plants</button>
-          <button onclick="filterCategory('Indoor Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition">Indoor Plants</button>
-          <button onclick="filterCategory('Succulents')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition">Succulents</button>
-          <button onclick="filterCategory('Flowering Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition">Flowering</button>
-          <button onclick="filterCategory('Fruit Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition">Fruit Saplings</button>
-          <button onclick="filterCategory('Medicinal')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition">Medicinal & Herbs</button>
+          <button onclick="filterCategory('Indoor Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Indoor Plants</button>
+          <button onclick="filterCategory('Succulents')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Succulents</button>
+          <button onclick="filterCategory('Flowering Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Flowering</button>
+          <button onclick="filterCategory('Fruit Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 transition">Fruit Saplings</button>
         </div>
-
-        <div class="flex items-center justify-between my-6">
-          <h2 id="catalogHeaderTitle" class="text-xl font-extrabold text-gray-900">All Varieties</h2>
-          <span id="catalogCountText" class="text-xs font-semibold text-gray-500">Loading catalog...</span>
-        </div>
-
-        <!-- Full Catalog Grid -->
-        <div id="catalogGrid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          <!-- Dynamic products populate here -->
-        </div>
-
+        <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-6"></div>
       </section>
     </div>
 
-    <!-- ABOUT TAB -->
-    <div id="view-about" class="page-view hidden">
-      <section class="max-w-4xl mx-auto px-4 py-16">
-        <div class="bg-white rounded-2xl border border-gray-200 p-8 sm:p-12 shadow-sm space-y-6">
-          <div class="inline-block p-3 rounded-xl bg-brand-50 text-brand-700 text-2xl">
-            <i class="fa-solid fa-leaf"></i>
-          </div>
-          <h2 class="text-3xl font-extrabold text-gray-900">About MG Plants</h2>
-          <p class="text-gray-600 leading-relaxed">
-            MG Plants is committed to bringing garden-fresh, healthy plants right to your doorstep. We specialize in acclimatized indoor varieties, natural air-purifiers, seasonal flowers, and high-yielding fruit saplings.
-          </p>
-          <div class="grid sm:grid-cols-3 gap-6 pt-4 border-t border-gray-100">
-            <div>
-              <h4 class="font-bold text-gray-900 text-sm">Secure Packaging</h4>
-              <p class="text-xs text-gray-500 mt-1">Multi-layer vented packaging designed to keep root balls intact during transit.</p>
-            </div>
-            <div>
-              <h4 class="font-bold text-gray-900 text-sm">Healthy Guarantee</h4>
-              <p class="text-xs text-gray-500 mt-1">Every sapling is inspected for root strength and foliage health before packing.</p>
-            </div>
-            <div>
-              <h4 class="font-bold text-gray-900 text-sm">Care Support</h4>
-              <p class="text-xs text-gray-500 mt-1">Direct WhatsApp care guidance for sunlight, watering, and repotting.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- CONTACT TAB -->
-    <div id="view-contact" class="page-view hidden">
-      <section class="max-w-3xl mx-auto px-4 py-16">
-        <div class="bg-white rounded-2xl border border-gray-200 p-8 sm:p-10 shadow-sm space-y-6">
-          <h2 class="text-2xl font-extrabold text-gray-900">Get in Touch</h2>
-          <p class="text-sm text-gray-600">Have questions about bulk orders, plant health, or custom landscaping?</p>
+    <!-- LOGIN / REGISTER TAB -->
+    <div id="view-login" class="page-view hidden">
+      <section class="max-w-md mx-auto px-4 py-16">
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
           
-          <div class="space-y-4 pt-2">
-            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-              <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-lg">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 font-semibold">Email Support</p>
-                <p class="text-sm font-bold text-gray-900">support@mgplants.in</p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-              <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-lg">
-                <i class="fa-brands fa-whatsapp"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 font-semibold">WhatsApp Care</p>
-                <p class="text-sm font-bold text-gray-900">Available 9 AM – 7 PM</p>
-              </div>
-            </div>
+          <!-- Toggle Buttons -->
+          <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
+            <button id="tabSignIn" onclick="toggleAuthMode('signin')" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition">Sign In</button>
+            <button id="tabSignUp" onclick="toggleAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition">Create Account</button>
           </div>
+
+          <!-- Sign In Form -->
+          <div id="formSignIn" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
+              <input type="email" id="loginEmail" placeholder="you@example.com" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+              <input type="password" id="loginPassword" placeholder="••••••••" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            </div>
+            <button onclick="attemptLogin()" class="w-full py-3 mt-2 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition">
+              Secure Sign In <i class="fa-solid fa-lock ml-1 text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Sign Up Form (Hidden by default) -->
+          <div id="formSignUp" class="space-y-4 hidden">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Full Name</label>
+              <input type="text" id="regName" placeholder="Your Name" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
+              <input type="email" id="regEmail" placeholder="you@example.com" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+              <input type="password" id="regPassword" placeholder="Create a password" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500 focus:bg-white transition" />
+            </div>
+            <button onclick="attemptRegister()" class="w-full py-3 mt-2 bg-gray-900 hover:bg-black text-white font-bold rounded-xl shadow-lg transition">
+              Create Account
+            </button>
+          </div>
+
         </div>
       </section>
     </div>
@@ -262,48 +195,18 @@
 
   <!-- QUICK VIEW PRODUCT MODAL -->
   <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl animate-fade-in relative max-h-[90vh] flex flex-col">
-      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center transition">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
+    <div class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
       <div class="overflow-y-auto p-6 space-y-5">
         <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-100">
-          <img id="modalImg" src="" alt="Plant" class="w-full h-full object-cover" />
+          <img id="modalImg" src="" class="w-full h-full object-cover" />
         </div>
-
         <div>
-          <span id="modalCategory" class="text-xs font-bold text-brand-700 uppercase tracking-wider">Indoor Plants</span>
           <h3 id="modalTitle" class="text-2xl font-extrabold text-gray-900 mt-0.5">Plant Name</h3>
           <div class="flex items-baseline gap-3 mt-2">
-            <span id="modalPrice" class="text-2xl font-extrabold text-gray-900">₹149</span>
-            <span id="modalOrigPrice" class="text-sm font-semibold text-gray-400 line-through">₹199</span>
-            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded">In Stock</span>
+            <span id="modalPrice" class="text-2xl font-extrabold text-gray-900">₹0</span>
           </div>
         </div>
-
-        <p id="modalDesc" class="text-sm text-gray-600 leading-relaxed"></p>
-
-        <!-- Plant Care Specs -->
-        <div class="grid grid-cols-2 gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100 text-xs">
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-sun text-amber-500 text-sm"></i>
-            <div><span class="text-gray-400 block text-[10px]">LIGHT</span><strong id="modalLight" class="text-gray-800">-</strong></div>
-          </div>
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-droplet text-blue-500 text-sm"></i>
-            <div><span class="text-gray-400 block text-[10px]">WATER</span><strong id="modalWater" class="text-gray-800">-</strong></div>
-          </div>
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-ruler-vertical text-emerald-600 text-sm"></i>
-            <div><span class="text-gray-400 block text-[10px]">SIZE</span><strong id="modalSize" class="text-gray-800">-</strong></div>
-          </div>
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-shield-heart text-purple-500 text-sm"></i>
-            <div><span class="text-gray-400 block text-[10px]">DIFFICULTY</span><strong id="modalDiff" class="text-gray-800">-</strong></div>
-          </div>
-        </div>
-
         <div class="flex items-center gap-3 pt-2">
           <button onclick="addModalItemToCart()" class="flex-1 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
             <i class="fa-solid fa-bag-shopping"></i> Add to Cart
@@ -316,396 +219,197 @@
   <!-- SLIDE-OVER CART DRAWER -->
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden transition-opacity"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out">
-    
-    <!-- Drawer Header -->
     <div class="p-5 border-b border-gray-200 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-bag-shopping text-brand-700 text-lg"></i>
-        <h3 class="font-extrabold text-gray-900 text-lg">Your Cart (<span id="drawerCartCount">0</span>)</h3>
-      </div>
-      <button onclick="toggleCartDrawer(false)" class="p-2 text-gray-400 hover:text-gray-700">
-        <i class="fa-solid fa-xmark text-lg"></i>
-      </button>
+      <h3 class="font-extrabold text-gray-900 text-lg">Your Cart</h3>
+      <button onclick="toggleCartDrawer(false)" class="p-2 text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark text-lg"></i></button>
     </div>
-
-    <!-- Items List -->
-    <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4">
-      <!-- Items render here -->
-    </div>
-
-    <!-- Checkout Footer -->
+    <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
     <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
-      <div class="space-y-1.5 text-sm">
-        <div class="flex justify-between text-gray-500">
-          <span>Subtotal</span>
-          <span id="cartSubtotal" class="font-semibold text-gray-800">₹0</span>
-        </div>
-        <div class="flex justify-between text-gray-500">
-          <span>Delivery</span>
-          <span class="text-brand-700 font-bold">FREE</span>
-        </div>
-        <div class="flex justify-between text-base font-extrabold text-gray-900 pt-2 border-t border-gray-200">
-          <span>Total Amount</span>
-          <span id="cartTotal" class="text-brand-700">₹0</span>
-        </div>
+      <div class="flex justify-between text-base font-extrabold text-gray-900">
+        <span>Total Amount</span>
+        <span id="cartTotal" class="text-brand-700">₹0</span>
       </div>
-
-      <!-- Checkout Accordion Form -->
-      <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
-        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500" required />
-        <input type="tel" id="custPhone" placeholder="Mobile Number (WhatsApp) *" class="w-full p-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500" required />
-        <textarea id="custAddress" placeholder="Delivery Address with PIN code *" rows="2" class="w-full p-2.5 bg-white border border-gray-300 rounded-lg text-sm outline-none focus:border-brand-500" required></textarea>
-        <button onclick="submitOrderToBackend()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition">
-          Confirm & Place Order <i class="fa-solid fa-check ml-1"></i>
-        </button>
-      </div>
-
-      <button id="proceedCheckoutBtn" onclick="openCheckoutForm()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-        Proceed to Checkout <i class="fa-solid fa-arrow-right text-xs"></i>
-      </button>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-900 text-gray-400 text-sm py-12 border-t border-gray-800 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="space-y-3">
-        <span class="text-xl font-extrabold text-white tracking-tight flex items-center gap-1">
-          MG Plants <span class="w-2 h-2 rounded-full bg-brand-500"></span>
-        </span>
-        <p class="text-xs text-gray-400">Delivering premium indoor flora, exotic succulents, and grafted garden saplings with guaranteed live arrival.</p>
-      </div>
-      <div>
-        <h5 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Quick Navigation</h5>
-        <ul class="space-y-2 text-xs">
-          <li><a href="#" onclick="switchTab('shop')" class="hover:text-white transition">All Plants</a></li>
-          <li><a href="#" onclick="filterCategory('Indoor Plants')" class="hover:text-white transition">Indoor Collection</a></li>
-          <li><a href="#" onclick="switchTab('about')" class="hover:text-white transition">About Us</a></li>
-          <li><a href="#" onclick="switchTab('contact')" class="hover:text-white transition">Contact Support</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 class="text-white font-bold text-xs uppercase tracking-wider mb-3">MG Plants Verified</h5>
-        <p class="text-xs text-gray-400">Domain: <strong class="text-white">mgplants.in</strong></p>
-        <p class="text-xs text-gray-400 mt-1">Cloud Engine: MongoDB Atlas & Render</p>
-      </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
-      &copy; 2026 MG Plants. All rights reserved.
-    </div>
-  </footer>
 
   <!-- SCRIPT LOGIC (Dynamic Backend Connected) -->
   <script>
     const API_BASE_URL = 'https://mgplant-mg-plants-backend.onrender.com';
-    
-    let productsDB = [];
-    let cart = [];
-    let selectedCategory = 'all';
-    let currentModalProduct = null;
+    let productsDB = []; let cart = []; let selectedCategory = 'all'; let currentModalProduct = null;
+    let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
 
-    // Load initial products from Render / MongoDB
     document.addEventListener('DOMContentLoaded', async () => {
+      updateAuthUI();
       await fetchLiveCatalog();
     });
 
+    // Authentication Logic
+    function updateAuthUI() {
+        const loginBtn = document.getElementById('nav-login');
+        if (currentUser) {
+            loginBtn.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm shadow-sm">
+                    ${currentUser.name.charAt(0).toUpperCase()}
+                </div>
+                <span class="font-bold text-sm hidden sm:inline text-brand-800">${currentUser.name.split(' ')[0]}</span>
+            `;
+            loginBtn.onclick = logoutUser;
+        } else {
+            loginBtn.innerHTML = `
+                <i class="fa-regular fa-circle-user text-xl"></i>
+                <span class="font-bold text-sm hidden sm:inline">Sign In</span>
+            `;
+            loginBtn.onclick = () => switchTab('login');
+        }
+    }
+
+    function logoutUser() {
+        if(confirm("Are you sure you want to log out?")) {
+            localStorage.removeItem('mgPlantsUser');
+            currentUser = null;
+            updateAuthUI();
+            switchTab('home');
+        }
+    }
+
+    async function attemptRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+
+        if (!name || !email || !password) return alert("Please fill in all fields.");
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert("Account created! You are now logged in.");
+                currentUser = data.user;
+                localStorage.setItem('mgPlantsUser', JSON.stringify(data.user));
+                updateAuthUI();
+                switchTab('home');
+            } else alert(data.message);
+        } catch (err) { alert("Server error. Please try again."); }
+    }
+
+    async function attemptLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        if (!email || !password) return alert("Please enter your email and password.");
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                currentUser = data.user;
+                localStorage.setItem('mgPlantsUser', JSON.stringify(data.user));
+                updateAuthUI();
+                switchTab('home');
+            } else alert(data.message);
+        } catch (err) { alert("Server error. Please try again."); }
+    }
+
+    function toggleAuthMode(mode) {
+      document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin');
+      document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
+      document.getElementById('tabSignIn').className = mode === 'signin' ? "flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition" : "flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition";
+      document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm transition" : "flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition";
+    }
+
+    // Catalog Logic
     async function fetchLiveCatalog() {
       try {
         const response = await fetch(`${API_BASE_URL}/api/products`);
-        if (!response.ok) throw new Error("Backend offline");
         productsDB = await response.json();
         renderBestsellers();
         renderShopCatalog();
-      } catch (err) {
-        console.warn("Render backend is spinning up or unreachable. Waiting...", err);
-        document.getElementById('bestsellersGrid').innerHTML = `
-          <div class="col-span-full py-8 text-center bg-brand-50/50 rounded-2xl border border-brand-100 p-6">
-            <i class="fa-solid fa-leaf text-brand-600 text-3xl mb-2 animate-bounce"></i>
-            <h4 class="font-bold text-gray-800 text-sm">Waking up cloud server...</h4>
-            <p class="text-xs text-gray-500 mt-1">Render's free tier starts up in ~30 seconds on the first load.</p>
-            <button onclick="fetchLiveCatalog()" class="mt-4 px-4 py-1.5 bg-brand-600 text-white rounded-lg text-xs font-bold hover:bg-brand-700">Retry Now</button>
-          </div>
-        `;
-      }
+      } catch (err) { console.warn("Backend offline"); }
     }
 
-    // Render Bestsellers
     function renderBestsellers() {
       const container = document.getElementById('bestsellersGrid');
       const bestsellers = productsDB.filter(p => p.bestSeller).slice(0, 8);
-
-      if (bestsellers.length === 0) {
-        container.innerHTML = `<p class="col-span-full text-center text-gray-400 text-sm">No products found.</p>`;
-        return;
-      }
-
-      container.innerHTML = bestsellers.map(product => createProductCardHTML(product)).join('');
+      container.innerHTML = bestsellers.map(p => createProductCardHTML(p)).join('');
     }
 
-    // Render Full Catalog
     function renderShopCatalog() {
       const container = document.getElementById('catalogGrid');
-      let filtered = productsDB;
-
-      if (selectedCategory !== 'all') {
-        filtered = filtered.filter(p => p.category === selectedCategory);
-      }
-
-      document.getElementById('catalogCountText').innerText = `Showing ${filtered.length} varieties`;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<p class="col-span-full text-center py-12 text-gray-400 text-sm">No plants found in this category.</p>`;
-        return;
-      }
-
-      container.innerHTML = filtered.map(product => createProductCardHTML(product)).join('');
+      let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
+      container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
     }
 
-    // Product Card Template
     function createProductCardHTML(product) {
       return `
-        <div class="bg-white rounded-2xl border border-gray-200/80 hover:border-brand-500/40 p-3 sm:p-4 shadow-sm hover:shadow-md transition-all flex flex-col group">
+        <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-md transition-all flex flex-col">
           <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3 cursor-pointer" onclick="openProductModal('${product.id}')">
-            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" />
-            ${product.bestSeller ? '<span class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow">POPULAR</span>' : ''}
+            <img src="${product.image}" class="w-full h-full object-cover" />
           </div>
-
-          <div class="flex-1 flex flex-col cursor-pointer" onclick="openProductModal('${product.id}')">
-            <span class="text-[10px] font-bold text-brand-700 uppercase">${product.category}</span>
-            <h4 class="font-bold text-gray-900 text-sm sm:text-base leading-snug hover:text-brand-700 transition mt-0.5">${product.name}</h4>
-            <p class="text-xs text-gray-500 line-clamp-1 mt-1">${product.shortDesc || ''}</p>
+          <div class="flex-1 cursor-pointer" onclick="openProductModal('${product.id}')">
+            <h4 class="font-bold text-gray-900 text-sm">${product.name}</h4>
           </div>
-
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-            <div>
-              <span class="text-base sm:text-lg font-extrabold text-gray-900">₹${product.price}</span>
-              <span class="text-xs text-gray-400 line-through ml-1">₹${product.origPrice}</span>
-            </div>
-            <button onclick="addToCart('${product.id}')" class="p-2.5 bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white rounded-xl transition text-sm flex items-center justify-center">
-              <i class="fa-solid fa-plus"></i>
-            </button>
+          <div class="flex items-center justify-between mt-3">
+            <span class="text-base font-extrabold text-gray-900">₹${product.price}</span>
+            <button onclick="addToCart('${product.id}')" class="p-2.5 bg-brand-50 text-brand-700 rounded-xl"><i class="fa-solid fa-plus"></i></button>
           </div>
-        </div>
-      `;
+        </div>`;
     }
 
-    // Modal Details
-    function openProductModal(productId) {
-      const product = productsDB.find(p => p.id === productId);
-      if (!product) return;
-
-      currentModalProduct = product;
-      document.getElementById('modalImg').src = product.image;
-      document.getElementById('modalCategory').innerText = product.category;
-      document.getElementById('modalTitle').innerText = product.name;
-      document.getElementById('modalPrice').innerText = `₹${product.price}`;
-      document.getElementById('modalOrigPrice').innerText = `₹${product.origPrice}`;
-      document.getElementById('modalDesc').innerText = product.desc || product.shortDesc;
-      document.getElementById('modalLight').innerText = product.light || 'Indirect Light';
-      document.getElementById('modalWater').innerText = product.water || 'Every 5-7 days';
-      document.getElementById('modalSize').innerText = product.size || '10-14 inches';
-      document.getElementById('modalDiff').innerText = product.diff || 'Easy';
-
-      const modal = document.getElementById('productModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+    // Modal & Cart Logic
+    function openProductModal(id) {
+      currentModalProduct = productsDB.find(p => p.id === id);
+      document.getElementById('modalImg').src = currentModalProduct.image;
+      document.getElementById('modalTitle').innerText = currentModalProduct.name;
+      document.getElementById('modalPrice').innerText = `₹${currentModalProduct.price}`;
+      document.getElementById('productModal').classList.remove('hidden');
+      document.getElementById('productModal').classList.add('flex');
     }
-
-    function closeProductModal() {
-      const modal = document.getElementById('productModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
+    function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); document.getElementById('productModal').classList.remove('flex'); }
+    
     function addModalItemToCart() {
-      if (currentModalProduct) {
-        addToCart(currentModalProduct.id);
-        closeProductModal();
-        toggleCartDrawer(true);
-      }
+      if(currentModalProduct) { addToCart(currentModalProduct.id); closeProductModal(); toggleCartDrawer(true); }
     }
 
-    // Cart Operations
-    function addToCart(productId) {
-      const product = productsDB.find(p => p.id === productId);
-      if (!product) return;
-
-      const existing = cart.find(item => item.id === productId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({ ...product, qty: 1 });
-      }
-
-      updateCartUI();
-    }
-
-    function updateQuantity(productId, delta) {
-      const item = cart.find(i => i.id === productId);
-      if (!item) return;
-
-      item.qty += delta;
-      if (item.qty <= 0) {
-        cart = cart.filter(i => i.id !== productId);
-      }
+    function addToCart(id) {
+      const product = productsDB.find(p => p.id === id);
+      const existing = cart.find(i => i.id === id);
+      if(existing) existing.qty += 1; else cart.push({ ...product, qty: 1 });
       updateCartUI();
     }
 
     function updateCartUI() {
-      const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
+      const count = cart.reduce((s, i) => s + i.qty, 0);
+      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
       document.getElementById('cartCountBadge').innerText = count;
-      document.getElementById('drawerCartCount').innerText = count;
-      document.getElementById('cartSubtotal').innerText = `₹${total}`;
       document.getElementById('cartTotal').innerText = `₹${total}`;
-
-      const itemsContainer = document.getElementById('cartDrawerItems');
-
-      if (cart.length === 0) {
-        itemsContainer.innerHTML = `
-          <div class="text-center py-16 text-gray-400">
-            <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-gray-300"></i>
-            <p class="text-sm font-semibold">Your cart is empty.</p>
-            <button onclick="toggleCartDrawer(false); switchTab('shop')" class="mt-4 px-4 py-2 bg-brand-600 text-white rounded-lg text-xs font-bold">Shop Plants</button>
-          </div>
-        `;
-        return;
-      }
-
-      itemsContainer.innerHTML = cart.map(item => `
-        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-          <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg" />
-          <div class="flex-1">
-            <h5 class="font-bold text-gray-900 text-xs">${item.name}</h5>
-            <span class="text-xs font-extrabold text-brand-700">₹${item.price}</span>
-          </div>
-          <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border border-gray-200">
-            <button onclick="updateQuantity('${item.id}', -1)" class="text-xs text-gray-500 hover:text-red-500 font-bold px-1">-</button>
-            <span class="text-xs font-bold text-gray-800">${item.qty}</span>
-            <button onclick="updateQuantity('${item.id}', 1)" class="text-xs text-gray-500 hover:text-brand-600 font-bold px-1">+</button>
-          </div>
-        </div>
-      `).join('');
+      
+      const container = document.getElementById('cartDrawerItems');
+      container.innerHTML = cart.map(item => `
+        <div class="flex gap-3 p-3 bg-gray-50 rounded-xl border">
+          <img src="${item.image}" class="w-14 h-14 object-cover rounded-lg" />
+          <div class="flex-1"><h5 class="font-bold text-xs">${item.name}</h5><span class="text-xs font-extrabold text-brand-700">₹${item.price}</span></div>
+          <div class="text-xs font-bold mt-2">Qty: ${item.qty}</div>
+        </div>`).join('');
     }
 
     function toggleCartDrawer(open) {
-      const drawer = document.getElementById('cartDrawer');
-      const backdrop = document.getElementById('cartDrawerBackdrop');
-      if (open) {
-        backdrop.classList.remove('hidden');
-        drawer.classList.remove('translate-x-full');
-      } else {
-        backdrop.classList.add('hidden');
-        drawer.classList.add('translate-x-full');
-      }
+      document.getElementById('cartDrawerBackdrop').classList.toggle('hidden', !open);
+      document.getElementById('cartDrawer').classList.toggle('translate-x-full', !open);
     }
 
-    function openCheckoutForm() {
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-      document.getElementById('checkoutFormSection').classList.remove('hidden');
-      document.getElementById('proceedCheckoutBtn').classList.add('hidden');
-    }
-
-    // Submit Order to Node.js Backend
-    async function submitOrderToBackend() {
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const address = document.getElementById('custAddress').value.trim();
-      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-      if (!name || !phone || !address) {
-        alert("Please fill in your name, mobile number, and delivery address.");
-        return;
-      }
-
-      try {
-        const orderPayload = {
-          name,
-          phone,
-          address,
-          items: cart,
-          total
-        };
-
-        const res = await fetch(`${API_BASE_URL}/api/checkout`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderPayload)
-        });
-
-        if (res.ok) {
-          alert(`🌿 Order received for ${name}! We will contact you at ${phone} to confirm dispatch.`);
-          cart = [];
-          updateCartUI();
-          toggleCartDrawer(false);
-          document.getElementById('checkoutFormSection').classList.add('hidden');
-          document.getElementById('proceedCheckoutBtn').classList.remove('hidden');
-        }
-      } catch (err) {
-        console.error("Order processing failed:", err);
-        alert("Could not reach server. Please try again in a few seconds.");
-      }
-    }
-
-    // Category Filter Handler
-    function filterCategory(cat) {
-      selectedCategory = cat;
-      switchTab('shop');
-      document.getElementById('catalogHeaderTitle').innerText = cat === 'all' ? 'All Varieties' : cat;
-
-      document.querySelectorAll('.cat-pill').forEach(btn => {
-        if (btn.innerText.toLowerCase().includes(cat.toLowerCase()) || (cat === 'all' && btn.innerText.includes('All'))) {
-          btn.className = "cat-pill active px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-brand-700 text-white shadow-sm transition";
-        } else {
-          btn.className = "cat-pill px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 transition";
-        }
-      });
-
-      renderShopCatalog();
-    }
-
-    // Search Handlers
-    function handleSearch() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      performSearch(q);
-    }
-
-    function handleMobileSearch() {
-      const q = document.getElementById('mobileSearchInput').value.toLowerCase();
-      performSearch(q);
-    }
-
-    function performSearch(query) {
-      switchTab('shop');
-      const filtered = productsDB.filter(p => 
-        p.name.toLowerCase().includes(query) || 
-        p.category.toLowerCase().includes(query) ||
-        (p.shortDesc && p.shortDesc.toLowerCase().includes(query))
-      );
-
-      const container = document.getElementById('catalogGrid');
-      document.getElementById('catalogCountText').innerText = `Found ${filtered.length} matches`;
-      if (filtered.length === 0) {
-        container.innerHTML = `<p class="col-span-full text-center py-12 text-gray-400 text-sm">No plants match "${query}".</p>`;
-        return;
-      }
-      container.innerHTML = filtered.map(product => createProductCardHTML(product)).join('');
-    }
-
-    // Tab Navigation
+    function filterCategory(cat) { selectedCategory = cat; switchTab('shop'); renderShopCatalog(); }
     function switchTab(tabId) {
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       const active = document.getElementById(`view-${tabId}`);
       if (active) active.classList.remove('hidden');
-
-      document.querySelectorAll('.nav-item').forEach(el => el.className = "nav-item px-3 py-2 rounded-lg text-gray-600 hover:text-brand-600 transition");
-      const activeNav = document.getElementById(`nav-${tabId}`);
-      if (activeNav) activeNav.className = "nav-item px-3 py-2 rounded-lg text-brand-700 font-bold transition";
-
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
