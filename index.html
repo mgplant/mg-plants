@@ -31,7 +31,7 @@
         </div>
       </a>
 
-      <!-- Primary Nav (Based on Blueprint) -->
+      <!-- Primary Nav -->
       <nav class="hidden lg:flex items-center gap-2 text-sm font-bold">
         <button onclick="switchTab('home')" id="nav-home" class="nav-item px-3 py-2 text-brand-700 transition">Home</button>
         <button onclick="switchTab('shop')" id="nav-shop" class="nav-item px-3 py-2 text-gray-600 hover:text-brand-600 transition">All Categories</button>
@@ -72,7 +72,7 @@
         <!-- Search & Filter Bar -->
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
           <div class="relative w-full md:w-96">
-            <input type="text" id="searchInput" placeholder="Search products, seeds, plants..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
+            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search products, seeds, plants..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
             <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
           </div>
           
@@ -111,12 +111,11 @@
       </section>
     </div>
 
-    <!-- ACCOUNT DASHBOARD TAB -->
+    <!-- ACCOUNT DASHBOARD TAB (With Orders & 4-Hour Cancellation) -->
     <div id="view-account" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
           
-          <!-- Account Sidebar -->
           <div class="w-full md:w-64 space-y-2">
             <div class="p-4 bg-white border border-gray-200 rounded-2xl mb-4 text-center">
               <div id="accAvatar" class="w-16 h-16 mx-auto bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-2xl font-bold mb-2">U</div>
@@ -127,17 +126,13 @@
             <button class="w-full text-left px-4 py-3 bg-brand-50 text-brand-700 font-bold rounded-xl"><i class="fa-solid fa-box w-6"></i> My Orders</button>
             <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-location-dot w-6"></i> Addresses</button>
             <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-heart w-6"></i> Wishlist</button>
-            <button class="w-full text-left px-4 py-3 text-gray-600 hover:bg-gray-100 font-bold rounded-xl transition"><i class="fa-solid fa-ticket w-6"></i> Coupons</button>
             <button onclick="logoutUser()" class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50 font-bold rounded-xl mt-4 transition"><i class="fa-solid fa-right-from-bracket w-6"></i> Sign Out</button>
           </div>
 
-          <!-- Account Content Area -->
           <div class="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-gray-900 mb-4">Recent Orders</h3>
-            <div class="text-center py-12 border-2 border-dashed border-gray-200 rounded-xl">
-              <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
-              <p class="text-gray-500 font-medium text-sm">You haven't placed any orders yet.</p>
-              <button onclick="switchTab('shop')" class="mt-4 px-5 py-2 bg-brand-600 text-white font-bold rounded-lg text-sm">Start Shopping</button>
+            <h3 class="text-xl font-extrabold text-gray-900 mb-4">My Orders & Recent Purchases</h3>
+            <div id="customerOrdersList" class="space-y-4">
+              <p class="text-gray-400 text-sm">Loading your orders...</p>
             </div>
           </div>
 
@@ -167,7 +162,7 @@
       <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
         <input type="text" id="custName" placeholder="Full Name *" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required />
         <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required />
-        <textarea id="custAddress" placeholder="Delivery Address (E.g., Khandagiri, BBSR, 751030) *" rows="2" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required></textarea>
+        <textarea id="custAddress" placeholder="Delivery Address & PIN *" rows="2" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white" required></textarea>
         <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition text-base">
           Place Secure Order <i class="fa-solid fa-lock ml-1 text-sm"></i>
         </button>
@@ -189,7 +184,6 @@
       await fetchLiveCatalog();
     });
 
-    // --- PRODUCT CARDS ---
     function createProductCardHTML(product) {
       return `
         <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col relative group">
@@ -227,8 +221,12 @@
       let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
       document.getElementById('catalogGrid').innerHTML = filtered.map(createProductCardHTML).join('');
     }
+    function handleSearch(query) {
+      const q = query.toLowerCase();
+      const filtered = productsDB.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+      document.getElementById('catalogGrid').innerHTML = filtered.map(createProductCardHTML).join('');
+    }
 
-    // --- CART LOGIC ---
     function addToCart(id) {
       const product = productsDB.find(p => p.id === id);
       const existing = cart.find(i => i.id === id);
@@ -251,26 +249,22 @@
       
       const container = document.getElementById('cartDrawerItems');
       if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-16">
-            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-basket-shopping text-3xl text-gray-300"></i></div>
-            <p class="text-gray-500 font-medium text-sm">Your cart is empty.</p>
-          </div>`;
+        container.innerHTML = `<div class="text-center py-16"><p class="text-gray-500 font-medium text-sm">Your cart is empty.</p></div>`;
         document.getElementById('checkoutFormSection').classList.add('hidden');
         document.getElementById('proceedCheckoutBtn').classList.remove('hidden');
         return;
       }
       container.innerHTML = cart.map(item => `
         <div class="flex gap-4 p-3 bg-white rounded-xl border border-gray-100 items-center shadow-sm">
-          <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border border-gray-50" />
+          <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border" />
           <div class="flex-1">
-            <h5 class="font-bold text-sm text-gray-900 leading-tight">${item.name}</h5>
-            <span class="text-sm font-extrabold text-brand-700 mt-1 inline-block">₹${item.price}</span>
+            <h5 class="font-bold text-sm text-gray-900">${item.name}</h5>
+            <span class="text-sm font-extrabold text-brand-700">₹${item.price}</span>
           </div>
-          <div class="flex items-center gap-2 bg-gray-50 px-2 py-1.5 rounded-lg border border-gray-200">
-            <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 rounded flex items-center justify-center text-gray-500 font-bold hover:bg-white hover:text-red-500 shadow-sm transition">-</button>
+          <div class="flex items-center gap-2 bg-gray-50 px-2 py-1.5 rounded-lg border">
+            <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 rounded flex items-center justify-center font-bold hover:bg-white text-red-500">-</button>
             <span class="text-xs font-bold text-gray-900 w-4 text-center">${item.qty}</span>
-            <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded flex items-center justify-center text-gray-500 font-bold hover:bg-white hover:text-brand-600 shadow-sm transition">+</button>
+            <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded flex items-center justify-center font-bold hover:bg-white text-brand-600">+</button>
           </div>
         </div>`).join('');
     }
@@ -284,39 +278,91 @@
       document.getElementById('proceedCheckoutBtn').classList.add('hidden');
       if (currentUser) {
         document.getElementById('custName').value = currentUser.name;
-        document.getElementById('custPhone').value = ""; 
       }
     }
+
     async function submitOrderToBackend() {
       const name = document.getElementById('custName').value;
       const phone = document.getElementById('custPhone').value;
       const address = document.getElementById('custAddress').value;
-      if (!name || !phone || !address) return alert("Please fill all address fields!");
+      if (!name || !phone || !address) return alert("Please fill all address and mobile fields!");
       
-      alert(`🌿 Secure Order Received for ${name}!\nWe will contact ${phone} for delivery.`);
-      cart = []; updateCartUI(); toggleCartDrawer(false);
+      const totalAmount = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customerName: name, phone, address, items: cart, totalAmount })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`🌿 Order received! We will contact ${phone} for delivery.`);
+          cart = []; updateCartUI(); toggleCartDrawer(false);
+        } else { alert("Error saving order."); }
+      } catch (err) { alert("Server error connecting to database."); }
     }
 
-    // --- AUTHENTICATION & DASHBOARD LOGIC ---
+    async function loadCustomerOrders() {
+      if (!currentUser) return;
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/orders`);
+        const orders = await res.json();
+        const myOrders = orders.filter(o => o.customerName.toLowerCase() === currentUser.name.toLowerCase());
+        const container = document.getElementById('customerOrdersList');
+        
+        if (myOrders.length === 0) {
+          container.innerHTML = `<p class="text-gray-500 text-sm">You haven't placed any orders yet.</p>`;
+          return;
+        }
+
+        container.innerHTML = myOrders.map(o => {
+          const hoursElapsed = (Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60);
+          const canCancel = hoursElapsed <= 4 && o.status !== 'Cancelled';
+
+          return `
+            <div class="p-4 border rounded-xl bg-gray-50 space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-gray-500">Order ID: ${o._id}</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${o.status === 'Cancelled' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700'}">${o.status}</span>
+              </div>
+              <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
+              <div class="text-xs text-gray-600">Address: ${o.address}</div>
+              ${canCancel ? `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1 bg-red-600 text-white font-bold text-xs rounded-lg hover:bg-red-700">Cancel Order (Within 4 Hours)</button>` : ''}
+            </div>
+          `;
+        }).join('');
+      } catch (err) { console.error("Error loading customer orders"); }
+    }
+
+    async function cancelOrder(orderId) {
+      if (!confirm("Are you sure you want to cancel this order?")) return;
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/orders/cancel/${orderId}`, { method: 'POST' });
+        const data = await res.json();
+        alert(data.message);
+        loadCustomerOrders();
+      } catch (err) { alert("Error cancelling order."); }
+    }
+
     function updateAuthUI() {
         const loginBtn = document.getElementById('nav-login');
         if (currentUser) {
             loginBtn.innerHTML = `<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm shadow-sm border border-brand-200">${currentUser.name.charAt(0).toUpperCase()}</div><span class="font-bold text-sm hidden sm:inline text-gray-800">Account</span>`;
-            
-            // Populate Account Dashboard Data
             document.getElementById('accName').innerText = currentUser.name;
             document.getElementById('accEmail').innerText = currentUser.email;
             document.getElementById('accAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
+            loadCustomerOrders();
         } else {
             loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`;
         }
     }
     function handleAccountClick() {
-        if (currentUser) { switchTab('account'); } 
+        if (currentUser) { switchTab('account'); loadCustomerOrders(); } 
         else { switchTab('login'); }
     }
     function logoutUser() {
-        if(confirm("Sign out of your account?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); }
+        if(confirm("Sign out?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); }
     }
     async function attemptRegister() {
         const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
@@ -345,10 +391,8 @@
       document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
     }
 
-    // --- NAVIGATION ---
     function filterCategory(cat) { 
       selectedCategory = cat; 
-      
       document.querySelectorAll('.cat-pill').forEach(btn => {
         if (btn.innerText === cat || (cat === 'all' && btn.innerText === 'All Products')) {
           btn.className = "cat-pill active px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition";
@@ -361,10 +405,6 @@
     function switchTab(tabId) {
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       document.getElementById(`view-${tabId}`).classList.remove('hidden');
-      
-      document.querySelectorAll('.nav-item').forEach(el => el.className = "nav-item px-3 py-2 text-gray-600 hover:text-brand-600 transition font-bold");
-      if (document.getElementById(`nav-${tabId}`)) document.getElementById(`nav-${tabId}`).className = "nav-item px-3 py-2 text-brand-700 transition font-bold";
-      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
