@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,7 +16,7 @@
 </head>
 <body class="bg-gray-100 text-gray-800 antialiased h-screen overflow-hidden">
 
-  <!-- PASSWORD GATE (Clean & Hidden Hint) -->
+  <!-- PASSWORD GATE -->
   <div id="passwordGate" class="flex items-center justify-center h-full w-full bg-gray-900 absolute inset-0 z-50">
     <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
       <div class="w-12 h-12 bg-brand-50 text-brand-700 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
@@ -73,7 +73,8 @@
   </div>
 
   <script>
-    const API_BASE_URL = 'https://mgplant-mg-plants-backend.onrender.com';
+    // UPDATED WITH YOUR LIVE RENDER BACKEND URL
+    const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
 
     function checkPassword() {
       const pass = document.getElementById('adminPass').value;
@@ -117,7 +118,7 @@
           </div>
         `).join('');
       } catch (err) {
-        console.error("Failed to load orders");
+        console.error("Failed to load orders", err);
       }
     }
 
