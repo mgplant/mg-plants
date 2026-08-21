@@ -120,25 +120,27 @@
               <span class="inline-block text-[11px] font-extrabold text-brand-800 bg-brand-100 px-2 py-0.5 rounded border border-brand-300">📦 ${o.trackingId || 'N/A'}</span>
             </div>
             <div class="text-xs text-gray-600">${o.address}</div>
-            <div>${o.items.map(i => `<span class="block text-xs font-medium text-gray-700">• ${i.name} (x${i.qty})</span>`).join('')}</div>
+            <div>
+                ${o.items.map(i => `<span class="block text-xs font-medium text-gray-700">• ${i.name} (x${i.qty})</span>`).join('')}
+                ${o.returnReason ? `<div class="mt-2 p-2 bg-red-50 border border-red-200 rounded text-red-800 text-[10px]"><strong>Return Issue:</strong> ${o.returnReason}<br><a href="${o.returnImage}" target="_blank" class="underline font-bold text-red-600">View Photo</a></div>` : ''}
+            </div>
             <div class="space-y-2">
               <span class="font-extrabold text-gray-900 block">₹${o.totalAmount}</span>
               
-              <!-- Payment Status Selector -->
               <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
                 <option value="Payment Pending" ${o.paymentStatus === 'Payment Pending' ? 'selected' : ''}>⏳ Payment Pending</option>
                 <option value="Payment Pending (COD)" ${o.paymentStatus === 'Payment Pending (COD)' ? 'selected' : ''}>💵 Pending (COD)</option>
                 <option value="Paid" ${o.paymentStatus === 'Paid' ? 'selected' : ''}>✅ Paid / Confirmed</option>
               </select>
 
-              <!-- Delivery Status Selector WITH ARTO & REFUND OPTIONS -->
               <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
                 <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Status: Pending</option>
                 <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Status: Processing</option>
                 <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Status: Shipped</option>
                 <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Status: Delivered</option>
                 <option value="ARTO Request" ${o.status === 'ARTO Request' ? 'selected' : ''}>🔄 Status: ARTO Request</option>
-                <option value="Refund Processed" ${o.status === 'Refund Processed' ? 'selected' : ''}>💸 Status: Refund Processed (48h)</option>
+                <option value="Refund Processing" ${o.status === 'Refund Processing' ? 'selected' : ''}>💸 Status: Refund Processing</option>
+                <option value="Refund Processed" ${o.status === 'Refund Processed' ? 'selected' : ''}>✅ Status: Refund Processed (48h)</option>
                 <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Status: Cancelled</option>
               </select>
             </div>
@@ -221,4 +223,3 @@
   </script>
 </body>
 </html>
-                
