@@ -1,161 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MG Plants - Online Nursery & Store</title>
-    <style>
-        :root {
-            --primary-green: #15803d;
-            --light-green: #f0fdf4;
-            --border-color: #cbd5e1;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-        }
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--text-dark); background-color: #f8faf9; margin: 0; padding: 0; }
-        header { background: var(--primary-green); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-        header h2 { margin: 0; font-size: 20px; }
-        .main-wrapper { max-width: 800px; margin: 30px auto; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .product-grid { display: flex; gap: 30px; flex-wrap: wrap; border-bottom: 1px solid var(--border-color); padding-bottom: 30px; }
-        .product-img { flex: 1; min-width: 280px; background: #f1f5f9; border-radius: 8px; display: flex; align-items: center; justify-content: center; height: 300px; font-weight: bold; color: var(--text-muted); border: 1px solid #e2e8f0; }
-        .product-details { flex: 1.5; min-width: 280px; }
-        h1 { font-size: 24px; margin-top: 0; color: var(--text-dark); }
-        .price { font-size: 20px; font-weight: bold; color: var(--primary-green); margin-bottom: 15px; }
-        .description { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
-        
-        .delivery-notice { background-color: var(--light-green); border-left: 4px solid var(--primary-green); padding: 12px; font-size: 13px; color: #166534; border-radius: 4px; margin-bottom: 20px; }
-
-        .checkout-box { background: #f8fafc; border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; margin-top: 20px; }
-        .fee-breakdown { background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin: 12px 0; font-size: 13px; }
-        .fee-row { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--text-muted); }
-        .fee-row.total { font-weight: bold; color: var(--text-dark); border-top: 1px solid #e2e8f0; padding-top: 8px; margin-top: 8px; font-size: 15px; }
-
-        select, input, textarea { width: 100%; padding: 9px; margin-top: 5px; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 5px; font-size: 13px; box-sizing: border-box; }
-        .btn-order { background-color: var(--primary-green); color: white; border: none; padding: 12px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
-        .btn-order:hover { background-color: #16a34a; }
-
-        .reviews-section { margin-top: 35px; }
-        .review-card { border-bottom: 1px solid #e2e8f0; padding: 12px 0; }
-        .review-header { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; }
-        .stars { color: #f59e0b; }
-        
-        #order-result { display: none; margin-top: 20px; padding: 15px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MG Plants | Premium Nursery & Seeds</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' } } } } }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } .hide-scrollbar::-webkit-scrollbar { display: none; } </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen relative">
 
-<header>
-    <h2>MG PLANTS</h2>
-    <span style="font-size: 13px;">West Bengal's Trusted Nursery</span>
-</header>
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 py-3 gap-4">
+      <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md"><i class="fa-solid fa-leaf text-lg"></i></div>
+        <div><span class="text-xl font-extrabold text-gray-900 tracking-tight">MG Plants <span class="w-1.5 h-1.5 rounded-full bg-brand-500 inline-block"></span></span></div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-2 text-sm font-bold">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-item px-3 py-2 text-brand-700 transition">Home</button>
+        <button onclick="switchTab('shop')" id="nav-shop" class="nav-item px-3 py-2 text-gray-600 hover:text-brand-600 transition">All Categories</button>
+      </nav>
+      <div class="flex items-center gap-2 sm:gap-4">
+        <button onclick="handleAccountClick()" id="nav-login" class="nav-item p-2.5 text-gray-600 hover:text-brand-600 transition flex items-center gap-2 cursor-pointer">
+          <i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>
+        </button>
+        <button onclick="toggleCartDrawer(true)" class="relative p-2.5 bg-brand-50 hover:bg-brand-100 text-brand-700 rounded-xl transition flex items-center gap-2">
+          <i class="fa-solid fa-cart-shopping text-lg"></i><span id="cartCountBadge" class="absolute -top-1 -right-1 w-5 h-5 bg-brand-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow border-2 border-white">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<div class="main-wrapper">
-    <div class="product-grid">
-        <div class="product-img">🌿 Money Plant (Indoor)</div>
-        <div class="product-details">
-            <h1>Money Plant (Indoor)</h1>
-            <div class="price">₹149</div>
-            <p class="description">A gorgeous, low-maintenance indoor plant known for bringing prosperity and purifying air. Perfect for home desks and living rooms.</p>
-            
-            <div class="delivery-notice">
-                🚚 <strong>Delivery Time:</strong> 3 to 4 days all over West Bengal.<br>
-                🔄 <strong>Return Policy:</strong> Easy 3-day return policy (Refunds processed within 48 hours).
+  <main class="flex-1">
+    
+    <div id="view-home" class="page-view">
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex items-end justify-between mb-6">
+          <h2 class="text-2xl font-extrabold text-gray-900"><i class="fa-solid fa-fire text-brand-600 mr-2"></i>Best Sellers</h2>
+          <button onclick="switchTab('shop')" class="text-brand-700 font-bold text-sm">View All <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div id="bestsellersGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+      </section>
+    </div>
+
+    <div id="view-shop" class="page-view hidden">
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
+          <div class="relative w-full md:w-96">
+            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search 130+ products..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
+            <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
+          </div>
+          <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2" id="categoryFilters">
+            <button onclick="filterCategory('all')" class="cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white">All Products</button>
+            <button onclick="filterCategory('Indoor Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Indoor</button>
+            <button onclick="filterCategory('Outdoor Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Outdoor</button>
+            <button onclick="filterCategory('Flowering Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Flowers</button>
+            <button onclick="filterCategory('Fruit Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Trees</button>
+            <button onclick="filterCategory('Vegetable Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Veg Seeds</button>
+            <button onclick="filterCategory('Flower Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Flower Seeds</button>
+            <button onclick="filterCategory('Fruit Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Seeds</button>
+          </div>
+        </div>
+        <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+      </section>
+    </div>
+
+    <div id="view-login" class="page-view hidden">
+      <section class="max-w-md mx-auto px-4 py-16">
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
+          <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
+            <button id="tabSignIn" onclick="toggleAuthMode('signin')" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm">Sign In</button>
+            <button id="tabSignUp" onclick="toggleAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-md text-gray-500">Create Account</button>
+          </div>
+          <div id="formSignIn" class="space-y-4">
+            <input type="email" id="loginEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <button onclick="attemptLogin()" class="w-full py-3 bg-brand-700 text-white font-bold rounded-xl shadow-lg">Secure Sign In</button>
+          </div>
+          <div id="formSignUp" class="space-y-4 hidden">
+            <input type="text" id="regName" placeholder="Full Name" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <input type="password" id="regPassword" placeholder="Create Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
+            <button onclick="attemptRegister()" class="w-full py-3 bg-gray-900 text-white font-bold rounded-xl shadow-lg">Create Account</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-account" class="page-view hidden">
+      <section class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="w-full md:w-64 space-y-2">
+            <div class="p-4 bg-white border border-gray-200 rounded-2xl mb-4 text-center">
+              <div id="accAvatar" class="w-16 h-16 mx-auto bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-2xl font-bold mb-2">U</div>
+              <h3 id="accName" class="font-bold text-gray-900">User Name</h3>
+              <p id="accEmail" class="text-xs text-gray-500">user@email.com</p>
             </div>
+            <button class="w-full text-left px-4 py-3 bg-brand-50 text-brand-700 font-bold rounded-xl"><i class="fa-solid fa-box w-6"></i> Track Orders & History</button>
+            <button onclick="logoutUser()" class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50 font-bold rounded-xl mt-4 transition"><i class="fa-solid fa-right-from-bracket w-6"></i> Sign Out</button>
+          </div>
+          <div class="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
+            <h3 class="text-xl font-extrabold text-gray-900 mb-4">My Orders & Live Tracking</h3>
+            <div id="customerOrdersList" class="space-y-4"><p class="text-gray-400 text-sm">Loading your orders...</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
-            <!-- CHECKOUT WITH DETAILED FEE STRUCTURE -->
-            <div class="checkout-box">
-                <h3 style="margin-top:0; font-size:15px;">Secure Checkout & Fee Structure</h3>
-                
-                <label style="font-size:12px; font-weight:bold;">Select Payment Method:</label>
-                <select id="paymentMethod">
-                    <option value="Online">Online / UPI (Paid - Instant Digital Invoice Download)</option>
-                    <option value="COD">Cash on Delivery (COD - Bill Enclosed Inside Box)</option>
-                </select>
+  <!-- CUSTOMER SUPPORT WIDGET -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants%20Support,%20I%20need%20help%20with%20my%20order." target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110 text-2xl cursor-pointer">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
 
-                <div class="fee-breakdown">
-                    <div class="fee-row"><span>Item Price (1x)</span><span>₹149</span></div>
-                    <div class="fee-row"><span>Delivery Fee</span><span>₹99</span></div>
-                    <div class="fee-row"><span>Platform Fee</span><span>₹5</span></div>
-                    <div class="fee-row total"><span>Total Amount</span><span>₹253</span></div>
+  <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500 space-y-2">
+    <p>© 2026 MG Plants. All rights reserved.</p>
+    <p>Need help? Email us at <a href="mailto:support@mgplants.in" class="text-brand-700 font-bold hover:underline">support@mgplants.in</a> or message us on WhatsApp!</p>
+  </footer>
+
+  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
+  <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+    <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+      <h3 class="font-extrabold text-lg text-gray-900 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-brand-600"></i> Shopping Cart</h3>
+      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-white border flex items-center justify-center text-gray-500 shadow-sm"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+    
+    <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[65vh]">
+      <div class="flex justify-between text-lg font-extrabold border-b pb-3"><span>Subtotal</span><span id="cartTotal" class="text-brand-700">₹0</span></div>
+      
+      <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Payment Method</label>
+        <div class="flex gap-2 mb-2">
+          <label class="flex-1 border-2 border-brand-500 bg-brand-50 p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative">
+            <input type="radio" name="payMethod" value="COD" checked class="accent-brand-600 w-4 h-4" onchange="togglePaymentUI()"> 
+            <span class="text-sm font-bold text-brand-800">Cash on Delivery</span>
+          </label>
+          <label class="flex-1 border-2 border-gray-200 bg-white p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative">
+            <input type="radio" name="payMethod" value="Online" class="accent-brand-600 w-4 h-4" onchange="togglePaymentUI()"> 
+            <span class="text-sm font-bold text-gray-600">UPI / QR Code</span>
+          </label>
+        </div>
+
+        <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
+          <p class="font-bold text-gray-900 mb-3 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
+          
+          <a id="upiDeepLink" href="#" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-md mb-4 flex items-center justify-center gap-2 transition">
+            <i class="fa-solid fa-mobile-screen-button"></i> Tap here to Pay via App
+          </a>
+
+          <div class="flex items-center gap-2 w-full mb-4">
+            <hr class="flex-1 border-gray-300"><span class="text-xs text-gray-400 font-bold uppercase">OR SCAN QR</span><hr class="flex-1 border-gray-300">
+          </div>
+
+          <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
+          <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-44 h-44 flex items-center justify-center">
+            <img src="https://i.ibb.co/Z08gKGB/IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" />
+          </div>
+          
+          <!-- 🆕 TEXT UPDATED TO REMOVE WHATSAPP REQUIREMENT -->
+          <p class="text-[11px] text-gray-500 font-medium">Once you have successfully transferred the amount via the App or QR code, click the Confirm button below to finalize your order.</p>
+        </div>
+
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping & Delivery Address</label>
+        
+        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="custHouse" placeholder="House / Flat No. *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custArea" placeholder="Area / Street / Landmark *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <input type="text" id="custCity" placeholder="City *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custState" placeholder="State *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custPin" placeholder="PIN Code *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        </div>
+
+        <label class="flex items-center gap-2 cursor-pointer mt-1">
+          <input type="checkbox" id="saveAddressCheck" class="w-4 h-4 accent-brand-600" checked>
+          <span class="text-xs font-medium text-gray-600">Save address & phone for next time</span>
+        </label>
+
+        <!-- 🆕 BUTTON ICON UPDATED -->
+        <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg mt-3 flex items-center justify-center gap-2 text-base transition">
+          Confirm & Place Order <i class="fa-solid fa-check text-lg ml-1"></i>
+        </button>
+      </div>
+
+      <button id="proceedCheckoutBtn" onclick="openCheckoutForm()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg flex justify-center gap-2 transition">Proceed to Checkout <i class="fa-solid fa-arrow-right text-sm"></i></button>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
+    let productsDB = []; let cart = []; let selectedCategory = 'all';
+    let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
+
+    document.addEventListener('DOMContentLoaded', async () => { updateAuthUI(); await fetchLiveCatalog(); });
+
+    function createProductCardHTML(product) {
+      return `
+        <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col relative group">
+          ${product.bestSeller ? '<span class="absolute top-4 left-4 z-10 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-extrabold px-2 py-1 rounded shadow-md">POPULAR</span>' : ''}
+          <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3"><img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400?text=Plant'"/></div>
+          <div class="flex-1"><span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">${product.category}</span><h4 class="font-bold text-gray-900 text-sm leading-snug mt-1">${product.name}</h4></div>
+          <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+            <div><span class="text-lg font-extrabold text-gray-900">₹${product.price}</span>${product.origPrice ? `<span class="text-xs text-gray-400 line-through ml-1 block sm:inline">₹${product.origPrice}</span>` : ''}</div>
+            <button onclick="addToCart('${product.id}')" class="w-10 h-10 rounded-xl bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+          </div>
+        </div>`;
+    }
+
+    async function fetchLiveCatalog() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/products`);
+        productsDB = await response.json();
+        renderBestsellers(); renderShopCatalog();
+      } catch (err) { console.warn("Backend loading..."); }
+    }
+    
+    function renderBestsellers() { document.getElementById('bestsellersGrid').innerHTML = productsDB.filter(p => p.bestSeller).slice(0, 8).map(createProductCardHTML).join(''); }
+    function renderShopCatalog() {
+      let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
+      document.getElementById('catalogGrid').innerHTML = filtered.map(createProductCardHTML).join('');
+    }
+    function handleSearch(query) {
+      const q = query.toLowerCase();
+      document.getElementById('catalogGrid').innerHTML = productsDB.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).map(createProductCardHTML).join('');
+    }
+
+    function addToCart(id) {
+      const product = productsDB.find(p => p.id === id);
+      const existing = cart.find(i => i.id === id);
+      if(existing) existing.qty += 1; else cart.push({ ...product, qty: 1 });
+      updateCartUI(); toggleCartDrawer(true);
+    }
+    function updateQuantity(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
+    
+    function updateCartUI() {
+      const count = cart.reduce((s, i) => s + i.qty, 0);
+      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      document.getElementById('cartCountBadge').innerText = count; document.getElementById('cartTotal').innerText = `₹${total}`;
+      
+      const container = document.getElementById('cartDrawerItems');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 flex flex-col items-center justify-center">
+            <div class="w-16 h-16 bg-gray-100 text-gray-300 rounded-full flex items-center justify-center text-3xl mb-4"><i class="fa-solid fa-basket-shopping"></i></div>
+            <p class="text-gray-500 font-medium text-sm mb-6">Your cart is empty.</p>
+            <button onclick="handleAccountClick(); toggleCartDrawer(false);" class="px-6 py-2 border border-brand-200 text-brand-700 font-bold text-sm rounded-full hover:bg-brand-50 transition"><i class="fa-solid fa-box-open mr-2"></i> Track Previous Orders</button>
+          </div>`;
+        document.getElementById('checkoutFormSection').classList.add('hidden'); document.getElementById('proceedCheckoutBtn').classList.remove('hidden'); return;
+      }
+      container.innerHTML = cart.map(item => `
+        <div class="flex gap-4 p-3 bg-white rounded-xl border items-center shadow-sm">
+          <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg border" onerror="this.src='https://via.placeholder.com/100'"/>
+          <div class="flex-1"><h5 class="font-bold text-sm text-gray-900 leading-tight">${item.name}</h5><span class="text-sm font-extrabold text-brand-700 block mt-1">₹${item.price}</span></div>
+          <div class="flex items-center gap-2 bg-gray-50 px-2 py-1.5 rounded-lg border">
+            <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 rounded flex items-center justify-center font-bold text-red-500">-</button>
+            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+            <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded flex items-center justify-center font-bold text-brand-600">+</button>
+          </div>
+        </div>`).join('');
+    }
+    
+    function toggleCartDrawer(open) {
+      document.getElementById('cartDrawerBackdrop').classList.toggle('hidden', !open);
+      document.getElementById('cartDrawer').classList.toggle('translate-x-full', !open);
+    }
+    
+    function togglePaymentUI() {
+      const isOnline = document.querySelector('input[name="payMethod"]:checked').value === 'Online';
+      document.getElementById('onlinePaymentNotice').classList.toggle('hidden', !isOnline);
+      
+      if(isOnline) {
+        const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+        const upiID = "mgplants@nsdl";
+        const payeeName = "MG Plants";
+        const txRef = "MG-" + Math.floor(Math.random() * 1000000);
+        const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&tr=${txRef}&am=${total}&cu=INR`;
+        
+        const deepLinkBtn = document.getElementById('upiDeepLink');
+        deepLinkBtn.href = upiLink;
+        deepLinkBtn.innerHTML = `<i class="fa-solid fa-mobile-screen-button"></i> Tap here to Pay ₹${total} via App`;
+      }
+
+      const labels = document.querySelectorAll('input[name="payMethod"]');
+      labels[0].parentElement.className = labels[0].checked ? "flex-1 border-2 border-brand-500 bg-brand-50 p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative" : "flex-1 border-2 border-gray-200 bg-white p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative";
+      labels[1].parentElement.className = labels[1].checked ? "flex-1 border-2 border-brand-500 bg-brand-50 p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative" : "flex-1 border-2 border-gray-200 bg-white p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative";
+    }
+
+    function openCheckoutForm() {
+      if (cart.length === 0) return alert("Cart is empty!");
+      if (!currentUser) {
+        toggleCartDrawer(false);
+        switchTab('login');
+        return alert("⚠️ Please sign in or create an account to place an order!");
+      }
+      document.getElementById('checkoutFormSection').classList.remove('hidden'); document.getElementById('proceedCheckoutBtn').classList.add('hidden');
+      
+      document.getElementById('custName').value = currentUser.name;
+      
+      const savedHouse = localStorage.getItem('mgHouse');
+      const savedArea = localStorage.getItem('mgArea');
+      const savedCity = localStorage.getItem('mgCity');
+      const savedState = localStorage.getItem('mgState');
+      const savedPin = localStorage.getItem('mgPin');
+      const savedPhone = localStorage.getItem('mgSavedPhone');
+
+      if (savedPhone) document.getElementById('custPhone').value = savedPhone;
+      if (savedHouse) document.getElementById('custHouse').value = savedHouse;
+      if (savedArea) document.getElementById('custArea').value = savedArea;
+      if (savedCity) document.getElementById('custCity').value = savedCity;
+      if (savedState) document.getElementById('custState').value = savedState;
+      if (savedPin) document.getElementById('custPin').value = savedPin;
+    }
+
+    // 🚀 UPGRADED: PURE TRUST SYSTEM - NO WHATSAPP REDIRECT
+    async function submitOrderToBackend() {
+      if (!currentUser) { toggleCartDrawer(false); switchTab('login'); return alert("Please sign in first!"); }
+
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const house = document.getElementById('custHouse').value;
+      const area = document.getElementById('custArea').value;
+      const city = document.getElementById('custCity').value;
+      const state = document.getElementById('custState').value;
+      const pin = document.getElementById('custPin').value;
+      
+      const payMethod = document.querySelector('input[name="payMethod"]:checked').value;
+      
+      if (!name || !phone || !house || !area || !city || !state || !pin) {
+        return alert("Please fill out all address and contact fields completely!");
+      }
+
+      const fullAddress = `${house}, ${area}, ${city}, ${state} - ${pin}`;
+      
+      if(document.getElementById('saveAddressCheck').checked) {
+        localStorage.setItem('mgSavedPhone', phone);
+        localStorage.setItem('mgHouse', house);
+        localStorage.setItem('mgArea', area);
+        localStorage.setItem('mgCity', city);
+        localStorage.setItem('mgState', state);
+        localStorage.setItem('mgPin', pin);
+      }
+      
+      const totalAmount = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/orders`, { 
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify({ customerName: name, phone, address: `[${payMethod}] ` + fullAddress, items: cart, totalAmount }) 
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          cart = []; updateCartUI(); toggleCartDrawer(false);
+          loadCustomerOrders();
+          
+          // INSTANT SUCCESS ALERT (No WhatsApp)
+          alert(`🎉 Order Successfully Placed!\n\n📦 Tracking ID: ${data.trackingId}\n\nYour order is currently processing. You can check the payment and delivery status directly in your Account Dashboard!`);
+          
+        } else { alert("Error saving order."); }
+      } catch (err) { alert("Server connection error."); }
+    }
+
+    async function loadCustomerOrders() {
+      if (!currentUser) return;
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/orders`);
+        const orders = await res.json();
+        const myOrders = orders.filter(o => o.customerName.toLowerCase() === currentUser.name.toLowerCase());
+        const container = document.getElementById('customerOrdersList');
+        if (myOrders.length === 0) return container.innerHTML = `<p class="text-gray-400 text-sm">You haven't placed any orders yet.</p>`;
+
+        container.innerHTML = myOrders.map(o => {
+          const hoursElapsed = (Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60);
+          const canCancel = hoursElapsed <= 4 && o.status !== 'Cancelled';
+          
+          let statusBadgeClass = "bg-yellow-100 text-yellow-800";
+          if(o.status === 'Processing') statusBadgeClass = "bg-blue-100 text-blue-800";
+          if(o.status === 'Shipped') statusBadgeClass = "bg-purple-100 text-purple-800";
+          if(o.status === 'Delivered') statusBadgeClass = "bg-green-100 text-green-800";
+          if(o.status === 'Cancelled') statusBadgeClass = "bg-red-100 text-red-800";
+
+          let payBadgeClass = "bg-amber-100 text-amber-800";
+          if(o.paymentStatus === 'Paid') payBadgeClass = "bg-emerald-100 text-emerald-800";
+
+          return `
+            <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 space-y-2 shadow-sm">
+              <div class="flex flex-wrap justify-between items-center gap-2">
+                <span class="text-xs font-extrabold text-brand-800 bg-brand-100 px-2.5 py-1 rounded-md border border-brand-300"><i class="fa-solid fa-truck-fast mr-1"></i> ID: ${o.trackingId || 'Pending'}</span>
+                <div class="flex gap-1.5">
+                  <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${payBadgeClass}">${o.paymentStatus || 'Payment Pending'}</span>
+                  <span class="px-2 py-0.5 rounded-full text-[11px] font-extrabold ${statusBadgeClass}">${o.status}</span>
                 </div>
-
-                <button class="btn-order" onclick="submitOrder()">Confirm & Place Order (₹253)</button>
-            </div>
-
-            <div id="order-result"></div>
-        </div>
-    </div>
-
-    <!-- CUSTOMER REVIEW SECTION -->
-    <div class="reviews-section">
-        <h3>Customer Reviews & Ratings</h3>
-        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;">
-            <strong>Overall Rating:</strong> <span class="stars">★★★★★</span> 4.8 / 5 (Based on verified West Bengal buyers)
-        </div>
-
-        <div id="reviewsList">
-            <div class="review-card">
-                <div class="review-header"><span>Subrata M. (Kolkata)</span><span class="stars">★★★★★</span></div>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 5px 0 0 0;">Received in fresh condition within 3 days. Excellent packaging!</p>
-            </div>
-        </div>
-
-        <div style="margin-top: 25px; background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
-            <h4 style="margin-top:0; font-size:14px;">Leave a Review</h4>
-            <input type="text" id="reviewerName" placeholder="Your Name">
-            <select id="reviewRating">
-                <option value="5">5 Stars - Excellent</option>
-                <option value="4">4 Stars - Good</option>
-            </select>
-            <textarea id="reviewComment" rows="2" placeholder="Write your feedback here..."></textarea>
-            <button class="btn-order" style="padding: 8px; font-size: 13px; margin-top:5px;" onclick="addReview()">Submit Review</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function submitOrder() {
-        const paymentMethod = document.getElementById('paymentMethod').value;
-        const trackingId = 'MG-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-        const resultDiv = document.getElementById('order-result');
-        resultDiv.style.display = 'block';
-        
-        if(paymentMethod === 'Online') {
-            resultDiv.innerHTML = `<strong>Order Placed Successfully!</strong><br>Default Tracking ID: <strong>${trackingId}</strong><br>Payment confirmed online.<br><button style="background:#2563eb; color:white; border:none; padding:5px 10px; margin-top:8px; border-radius:4px; cursor:pointer;" onclick="alert('Downloading Tax Invoice PDF...')">📥 Download Digital Invoice</button>`;
-        } else {
-            resultDiv.innerHTML = `<strong>Order Placed Successfully!</strong><br>Default Tracking ID: <strong>${trackingId}</strong><br>COD Order confirmed. Your physical printed bill will be safely enclosed <strong>inside the delivery box</strong>.`;
-        }
+              </div>
+              <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
+              <div class="text-xs text-gray-600">Address: ${o.address}</div>
+              ${canCancel ? `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-600 text-white font-bold text-xs rounded-lg hover:bg-red-700 mt-2 transition">Cancel Order</button>` : ''}
+            </div>`;
+        }).join('');
+      } catch (err) { console.error("Error loading orders"); }
     }
 
-    function addReview() {
-        const user = document.getElementById('reviewerName').value;
-        const rating = document.getElementById('reviewRating').value;
-        const comment = document.getElementById('reviewComment').value;
-        
-        if(!user || !comment) {
-            alert('Please fill in both your name and comment.');
-            return;
-        }
-
-        const starsStr = '★'.repeat(rating);
-        const list = document.getElementById('reviewsList');
-        
-        const newCard = document.createElement('div');
-        newCard.className = 'review-card';
-        newCard.innerHTML = `
-            <div class="review-header">
-                <span>${user}</span>
-                <span class="stars">${starsStr}</span>
-            </div>
-            <p style="font-size: 13px; color: var(--text-muted); margin: 5px 0 0 0;">${comment}</p>
-        `;
-        
-        list.prepend(newCard);
-        document.getElementById('reviewerName').value = '';
-        document.getElementById('reviewComment').value = '';
-        alert('Thank you! Your review has been added.');
+    async function cancelOrder(orderId) {
+      if (!confirm("Are you sure you want to cancel this order?")) return;
+      try { const res = await fetch(`${API_BASE_URL}/api/orders/cancel/${orderId}`, { method: 'POST' }); const data = await res.json(); alert(data.message); loadCustomerOrders(); } catch (err) { alert("Error cancelling order."); }
     }
-</script>
 
+    function updateAuthUI() {
+        const loginBtn = document.getElementById('nav-login');
+        if (currentUser) {
+            loginBtn.innerHTML = `<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm border border-brand-200">${currentUser.name.charAt(0).toUpperCase()}</div><span class="font-bold text-sm hidden sm:inline text-gray-800">Account</span>`;
+            document.getElementById('accName').innerText = currentUser.name; document.getElementById('accEmail').innerText = currentUser.email; document.getElementById('accAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
+            loadCustomerOrders();
+        } else { loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`; }
+    }
+    
+    function handleAccountClick() { if (currentUser) { switchTab('account'); loadCustomerOrders(); } else { switchTab('login'); } }
+    function logoutUser() { if(confirm("Sign out?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); } }
+    
+    async function attemptRegister() {
+        const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
+        if (!name || !email || !password) return alert("Fill all fields.");
+        try { const res = await fetch(`${API_BASE_URL}/api/register`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name, email, password}) });
+            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Account created successfully!"); } else alert(data.message);
+        } catch(err) { alert("Server error."); }
+    }
+    
+    async function attemptLogin() {
+        const email = document.getElementById('loginEmail').value, password = document.getElementById('loginPassword').value;
+        if (!email || !password) return alert("Enter email and password.");
+        try { const res = await fetch(`${API_BASE_URL}/api/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}) });
+            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Signed in successfully!"); } else alert(data.message);
+        } catch(err) { alert("Server error."); }
+    }
+    
+    function toggleAuthMode(mode) {
+      document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin'); document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
+      document.getElementById('tabSignIn').className = mode === 'signin' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
+      document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
+    }
+
+    function filterCategory(cat) { 
+      selectedCategory = cat; 
+      const filterMappings = { 'all': 'All Products', 'Indoor Plants': 'Indoor', 'Outdoor Plants': 'Outdoor', 'Flowering Plants': 'Flowers', 'Fruit Plants': 'Fruit Trees', 'Vegetable Seeds': 'Veg Seeds', 'Flower Seeds': 'Flower Seeds', 'Fruit Seeds': 'Fruit Seeds' };
+      document.querySelectorAll('#categoryFilters .cat-pill').forEach(btn => { btn.className = (btn.innerText === filterMappings[cat]) ? "cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition" : "cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition"; });
+      renderShopCatalog(); 
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
