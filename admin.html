@@ -131,12 +131,14 @@
                 <option value="Paid" ${o.paymentStatus === 'Paid' ? 'selected' : ''}>✅ Paid / Confirmed</option>
               </select>
 
-              <!-- Delivery Status Selector -->
+              <!-- Delivery Status Selector WITH ARTO & REFUND OPTIONS -->
               <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
                 <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Status: Pending</option>
                 <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Status: Processing</option>
                 <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Status: Shipped</option>
                 <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Status: Delivered</option>
+                <option value="ARTO Request" ${o.status === 'ARTO Request' ? 'selected' : ''}>🔄 Status: ARTO Request</option>
+                <option value="Refund Processed" ${o.status === 'Refund Processed' ? 'selected' : ''}>💸 Status: Refund Processed (48h)</option>
                 <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Status: Cancelled</option>
               </select>
             </div>
@@ -219,3 +221,4 @@
   </script>
 </body>
 </html>
+                
