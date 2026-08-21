@@ -136,13 +136,13 @@
           </label>
         </div>
 
-        <!-- 📌 YOUR EXACT UPLOADED QR CODE EMBEDDED -->
+        <!-- 📌 YOUR EXACT UPLOADED QR CODE LINK EMBEDDED -->
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-1 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
           <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
           
           <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-44 h-44 flex items-center justify-center">
-            <img src="IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" onerror="this.src='https://i.ibb.co/1Z43p8b/qr-placeholder.png'" />
+            <img src="https://i.ibb.co/Z08gKGB/IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" />
           </div>
           
           <p class="text-[11px] text-gray-500 font-medium">Scan QR code or pay to <b>mgplants@nsdl</b>. Complete payment and you will be redirected to WhatsApp!</p>
@@ -153,7 +153,6 @@
         <input type="text" id="custName" placeholder="Full Name *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
         <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
         
-        <!-- 🆕 DIVIDED PROFESSIONAL ADDRESS FIELDS -->
         <div class="grid grid-cols-2 gap-2">
           <input type="text" id="custHouse" placeholder="House / Flat No. *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
           <input type="text" id="custArea" placeholder="Area / Street / Landmark *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
@@ -281,7 +280,6 @@
       
       document.getElementById('custName').value = currentUser.name;
       
-      // Auto-fill saved address fields if available
       const savedHouse = localStorage.getItem('mgHouse');
       const savedArea = localStorage.getItem('mgArea');
       const savedCity = localStorage.getItem('mgCity');
@@ -314,7 +312,6 @@
         return alert("Please fill out all address and contact fields completely!");
       }
 
-      // Combine structured address into one clean string for the backend/admin
       const fullAddress = `${house}, ${area}, ${city}, ${state} - ${pin}`;
       
       if(document.getElementById('saveAddressCheck').checked) {
@@ -435,3 +432,4 @@
   </script>
 </body>
 </html>
+               
