@@ -1,115 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MG Plants - Admin Panel</title>
-    <style>
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; background: #0f172a; color: #1e293b; }
-        .admin-container { max-width: 1200px; margin: 20px auto; padding: 20px; background: #f8faf9; border-radius: 10px; }
-        h2 { color: #0f172a; margin-top: 0; }
-        
-        /* Table Layout matching screenshot */
-        .order-table { width: 100%; border-collapse: collapse; background: white; margin-top: 15px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        th, td { padding: 14px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
-        th { background: #f1f5f9; color: #475569; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
-        
-        .customer-name { font-weight: bold; color: #0f172a; }
-        .phone-text { color: #64748b; font-size: 12px; }
-        .tracking-badge { display: inline-block; background: #fef3c7; color: #b45309; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-top: 4px; }
-        
-        .status-select { padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 12px; font-weight: bold; background: #fff; margin-bottom: 6px; }
-        .btn-save { background: #15803d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; }
-        .btn-save:hover { background: #16a34a; }
-        
-        .price-text { font-weight: bold; color: #0f172a; font-size: 14px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MG Plants | Secure Admin Control Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f0fdf4', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 900: '#14532d' } } } } }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800 antialiased h-screen overflow-hidden">
 
-<div class="admin-container">
-    <h2>Customer Orders & Status Control</h2>
-    
-    <table class="order-table">
-        <thead>
-            <tr>
-                <th>Customer & Tracking</th>
-                <th>Address</th>
-                <th>Items</th>
-                <th>Payment & Delivery Manager</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody id="ordersTable">
-            <!-- Dynamic rows will load here -->
-        </tbody>
-    </table>
-</div>
+  <div id="passwordGate" class="flex items-center justify-center h-full w-full bg-gray-900 absolute inset-0 z-50">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
+      <div class="w-12 h-12 bg-brand-50 text-brand-700 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-lock"></i></div>
+      <h2 class="text-xl font-extrabold mb-2 text-gray-900">Admin Access</h2>
+      <input type="password" id="adminPass" class="w-full p-3 border-2 border-gray-200 rounded-xl mb-4 text-center text-lg outline-none focus:border-brand-500" placeholder="Password" />
+      <button onclick="checkPassword()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition">Unlock</button>
+    </div>
+  </div>
 
-<script>
-    async function loadOrders() {
-        const res = await fetch('/api/admin/orders');
-        const orders = await res.json();
-        const tbody = document.getElementById('ordersTable');
-        tbody.innerHTML = '';
+  <div id="adminContent" class="hidden h-full flex overflow-hidden">
+    <aside class="w-64 bg-gray-900 text-white flex flex-col h-full hidden md:flex">
+      <div class="p-6 border-b border-gray-800">
+        <span class="text-lg font-extrabold tracking-tight flex items-center gap-2"><i class="fa-solid fa-leaf text-brand-500"></i> MG Plants Owner</span>
+      </div>
+      <nav class="flex-1 p-4 space-y-2 overflow-y-auto text-sm">
+        <button onclick="switchAdminTab('orders')" id="nav-orders" class="admin-nav w-full text-left px-4 py-3 bg-brand-700 text-white font-bold rounded-xl transition flex items-center gap-3"><i class="fa-solid fa-box w-5"></i> Live Orders</button>
+        <button onclick="switchAdminTab('inventory')" id="nav-inventory" class="admin-nav w-full text-left px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 font-bold rounded-xl transition flex items-center gap-3"><i class="fa-solid fa-seedling w-5"></i> Manage Inventory</button>
+      </nav>
+      <div class="p-4 border-t border-gray-800">
+        <a href="index.html" class="w-full block text-center px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold rounded-lg transition">View Live Store <i class="fa-solid fa-external-link-alt ml-1"></i></a>
+      </div>
+    </aside>
 
-        if(orders.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b; padding:20px;">No active orders found.</td></tr>`;
-            return;
-        }
+    <main class="flex-1 flex flex-col h-full overflow-hidden bg-gray-50">
+      <header class="bg-white border-b border-gray-200 p-4 sm:p-6 flex items-center justify-between z-10">
+        <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold text-gray-900">Customer Orders & Status Control</h1>
+      </header>
 
-        orders.forEach(o => {
-            tbody.innerHTML += `
-                <tr>
-                    <td>
-                        <div class="customer-name">${o.customerName || 'Mrinal Gayen'}</div>
-                        <div class="phone-text">📞 ${o.phone || '508685'}</div>
-                        <div class="tracking-badge">📦 ${o.trackingId}</div>
-                    </td>
-                    <td>
-                        <div style="color: #334155; font-size: 12px;">[${o.paymentMethod}] Jejdl, Sjsj, Shhs, Whej - 711316</div>
-                    </td>
-                    <td>
-                        <div style="font-size: 12px;">• ${o.productName} (x1)</div>
-                    </td>
-                    <td>
-                        <div class="price-text">₹${o.totalAmount}</div>
-                        <div style="margin-top: 6px;">
-                            <select class="status-select" id="status-${o.orderId}">
-                                <option value="Payment Pending" ${o.status === 'Payment Pending' ? 'selected' : ''}>⏳ Payment Pending</option>
-                                <option value="Pending (COD)" ${o.status === 'Pending (COD)' ? 'selected' : ''}>💵 Pending (COD)</option>
-                                <option value="Paid / Confirmed" ${o.status === 'Paid / Confirmed' ? 'selected' : ''}>✅ Paid / Confirmed</option>
-                                <option value="ARTO Return Requested" ${o.status.includes('ARTO') ? 'selected' : ''}>🔄 ARTO Request</option>
-                                <option value="Refund Processed" ${o.status === 'Refund Processed' ? 'selected' : ''}>💸 Refund Processed (48h)</option>
-                            </select>
-                            <br>
-                            <button class="btn-save" onclick="updateStatus('${o.orderId}')">Update Status</button>
-                        </div>
-                    </td>
-                    <td style="color: #64748b; font-size: 12px;">
-                        ${o.orderDate}
-                    </td>
-                </tr>
-            `;
-        });
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        <div id="view-orders" class="admin-view space-y-4">
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
+              <span>Customer & Tracking</span><span>Address</span><span>Items</span><span>Payment & Delivery Manager</span><span>Time</span>
+            </div>
+            <div id="adminOrdersList" class="divide-y divide-gray-100"><div class="p-6 text-center text-gray-400">Loading orders...</div></div>
+          </div>
+        </div>
+
+        <div id="view-inventory" class="admin-view space-y-4 hidden">
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
+              <span>Image</span><span>Product Name</span><span>Category</span><span>Price</span><span>Action</span>
+            </div>
+            <div id="adminInventoryList" class="divide-y divide-gray-100"><div class="p-6 text-center text-gray-400">Loading products...</div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="editProductModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
+      <h2 class="text-xl font-extrabold mb-4 text-gray-900 flex justify-between">Edit Product <button onclick="closeEditModal()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark"></i></button></h2>
+      <div class="space-y-4">
+        <input type="hidden" id="editId">
+        <div><label class="text-xs font-bold text-gray-500">Product Name</label><input type="text" id="editName" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm font-bold mt-1 outline-none focus:border-brand-500" /></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="text-xs font-bold text-gray-500">Selling Price (₹)</label><input type="number" id="editPrice" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm font-bold mt-1 outline-none focus:border-brand-500" /></div>
+          <div><label class="text-xs font-bold text-gray-500">Original Price (₹)</label><input type="number" id="editOrigPrice" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm mt-1 outline-none focus:border-brand-500" /></div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-gray-500 flex justify-between">Image URL <a href="https://postimages.org/" target="_blank" class="text-brand-600 hover:underline">Upload an image</a></label>
+          <input type="text" id="editImage" oninput="document.getElementById('previewImg').src=this.value" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm mt-1 outline-none focus:border-brand-500" placeholder="Paste direct image link here" />
+        </div>
+        <div class="flex justify-center mt-2 p-2 border border-dashed rounded-xl bg-gray-50"><img id="previewImg" src="" class="h-32 object-cover rounded-lg shadow-sm" onerror="this.src='https://via.placeholder.com/150?text=Invalid+Link'"/></div>
+        <button onclick="saveProductEdit()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition mt-2">Save Updates</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
+    let allProducts = [];
+
+    function checkPassword() {
+      if (document.getElementById('adminPass').value === "mg555") {
+        document.getElementById('passwordGate').classList.add('hidden');
+        document.getElementById('adminContent').classList.remove('hidden');
+        loadAdminOrders(); loadAdminInventory();
+      } else alert("Incorrect Password!");
     }
 
-    async function updateStatus(orderId) {
-        const newStatus = document.getElementById(`status-${orderId}`).value;
-        const res = await fetch('/api/admin/update-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ orderId, newStatus })
+    function switchAdminTab(tabId) {
+      document.querySelectorAll('.admin-view').forEach(v => v.classList.add('hidden'));
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      document.querySelectorAll('.admin-nav').forEach(btn => { btn.classList.remove('bg-brand-700', 'text-white'); btn.classList.add('text-gray-400'); });
+      document.getElementById(`nav-${tabId}`).classList.remove('text-gray-400');
+      document.getElementById(`nav-${tabId}`).classList.add('bg-brand-700', 'text-white');
+      document.getElementById('pageTitle').innerText = tabId === 'orders' ? 'Customer Orders & Status Control' : 'Manage Inventory & Pricing';
+    }
+
+    async function loadAdminOrders() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/orders`);
+        const orders = await res.json();
+        const container = document.getElementById('adminOrdersList');
+        if (orders.length === 0) return container.innerHTML = `<div class="p-8 text-center text-gray-500 text-sm">No orders yet.</div>`;
+        
+        container.innerHTML = orders.map(o => `
+          <div class="p-4 grid grid-cols-5 gap-4 items-center text-sm border-b border-gray-50">
+            <div>
+              <p class="font-extrabold text-gray-900">${o.customerName}</p>
+              <p class="text-xs text-gray-500 font-bold mb-1"><i class="fa-solid fa-phone"></i> ${o.phone}</p>
+              <span class="inline-block text-[11px] font-extrabold text-brand-800 bg-brand-100 px-2 py-0.5 rounded border border-brand-300">📦 ${o.trackingId || 'N/A'}</span>
+            </div>
+            <div class="text-xs text-gray-600">${o.address}</div>
+            <div>${o.items.map(i => `<span class="block text-xs font-medium text-gray-700">• ${i.name} (x${i.qty})</span>`).join('')}</div>
+            <div class="space-y-2">
+              <span class="font-extrabold text-gray-900 block">₹${o.totalAmount}</span>
+              
+              <!-- Payment Status Selector -->
+              <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
+                <option value="Payment Pending" ${o.paymentStatus === 'Payment Pending' ? 'selected' : ''}>⏳ Payment Pending</option>
+                <option value="Payment Pending (COD)" ${o.paymentStatus === 'Payment Pending (COD)' ? 'selected' : ''}>💵 Pending (COD)</option>
+                <option value="Paid" ${o.paymentStatus === 'Paid' ? 'selected' : ''}>✅ Paid / Confirmed</option>
+              </select>
+
+              <!-- Delivery Status Selector -->
+              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Status: Pending</option>
+                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Status: Processing</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Status: Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Status: Delivered</option>
+                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Status: Cancelled</option>
+              </select>
+            </div>
+            <div class="text-xs text-gray-400">${new Date(o.createdAt).toLocaleDateString()}</div>
+          </div>
+        `).join('');
+      } catch (err) { console.error("Failed to load orders"); }
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/order-status/${orderId}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: newStatus })
         });
         const data = await res.json();
-        if(data.success) {
-            alert('Order status successfully updated!');
-            loadOrders();
-        }
+        if (data.success) { alert(`Delivery status updated to: ${newStatus}`); loadAdminOrders(); } 
+        else alert('Failed to update status.');
+      } catch (err) { alert('Server error.'); }
     }
 
-    loadOrders();
-</script>
+    async function updatePaymentStatus(orderId, newPayStatus) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/payment-status/${orderId}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ paymentStatus: newPayStatus })
+        });
+        const data = await res.json();
+        if (data.success) { alert(`Payment status updated to: ${newPayStatus}`); loadAdminOrders(); } 
+        else alert('Failed to update payment status.');
+      } catch (err) { alert('Server error.'); }
+    }
 
+    async function loadAdminInventory() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/products`);
+        allProducts = await res.json();
+        const container = document.getElementById('adminInventoryList');
+        container.innerHTML = allProducts.map(p => `
+          <div class="p-3 grid grid-cols-5 gap-4 items-center text-sm hover:bg-gray-50 transition border-b border-gray-50">
+            <img src="${p.image}" class="w-12 h-12 rounded object-cover border" onerror="this.src='https://via.placeholder.com/50'"/>
+            <span class="font-bold text-gray-900">${p.name}</span>
+            <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded w-max">${p.category}</span>
+            <span class="font-bold text-brand-700">₹${p.price}</span>
+            <button onclick="openEditModal('${p.id}')" class="px-3 py-1.5 bg-gray-900 hover:bg-gray-700 text-white text-xs font-bold rounded-lg w-max shadow transition"><i class="fa-solid fa-pen-to-square mr-1"></i> Edit</button>
+          </div>
+        `).join('');
+      } catch(err) { console.error("Failed to load inventory"); }
+    }
+
+    function openEditModal(id) {
+      const p = allProducts.find(item => item.id === id);
+      if(!p) return;
+      document.getElementById('editId').value = p.id;
+      document.getElementById('editName').value = p.name;
+      document.getElementById('editPrice').value = p.price;
+      document.getElementById('editOrigPrice').value = p.origPrice || '';
+      document.getElementById('editImage').value = p.image;
+      document.getElementById('previewImg').src = p.image;
+      document.getElementById('editProductModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() { document.getElementById('editProductModal').classList.add('hidden'); }
+
+    async function saveProductEdit() {
+      const id = document.getElementById('editId').value;
+      const data = {
+        name: document.getElementById('editName').value,
+        price: Number(document.getElementById('editPrice').value),
+        origPrice: Number(document.getElementById('editOrigPrice').value),
+        image: document.getElementById('editImage').value
+      };
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/products/${id}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if(result.success) { alert('✅ Product updated successfully!'); closeEditModal(); loadAdminInventory(); } 
+        else alert('Failed to update product.');
+      } catch (err) { alert('Server connection error.'); }
+    }
+  </script>
 </body>
 </html>
