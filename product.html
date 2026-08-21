@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Plant - MG Plants</title>
+    <style>
+        :root {
+            --primary-green: #15803d;
+            --light-green: #f0fdf4;
+            --border-color: #cbd5e1;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: #f8faf9;
+            margin: 0;
+            padding: 20px;
+        }
+        .main-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .product-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+        .product-img {
+            flex: 1;
+            min-width: 280px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            font-weight: bold;
+            color: var(--text-muted);
+            border: 1px solid #e2e8f0;
+        }
+        .product-details {
+            flex: 1.5;
+            min-width: 280px;
+        }
+        h1 { font-size: 24px; margin-top: 0; color: var(--text-dark); }
+        .price { font-size: 20px; font-weight: bold; color: var(--primary-green); margin-bottom: 15px; }
+        .description { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        
+        .delivery-notice {
+            background-color: var(--light-green);
+            border-left: 4px solid var(--primary-green);
+            padding: 12px;
+            font-size: 13px;
+            color: #166534;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .fee-breakdown {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+        .fee-row.total {
+            font-weight: bold;
+            color: var(--text-dark);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+        .btn-order {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-order:hover { background-color: #16a34a; }
+
+        .reviews-section { margin-top: 35px; }
+        .review-card {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 12px 0;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .stars { color: #f59e0b; }
+        
+        #invoice-area {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <!-- PRODUCT DETAIL VIEW -->
+    <div class="product-grid">
+        <div class="product-img">
+            🌿 Money Plant Image
+        </div>
+        <div class="product-details">
+            <h1>Money Plant (Indoor)</h1>
+            <div class="price">₹149 <span style="font-size: 12px; color: var(--text-muted); text-decoration: line-through;">₹193</span></div>
+            <p class="description">
+                A gorgeous, low-maintenance indoor plant known for bringing prosperity and purifying air. Perfect for home desks and living rooms.
+            </p>
+            
+            <div class="delivery-notice">
+                🚚 <strong>Delivery Time:</strong> 3 to 4 days all over West Bengal.<br>
+                🔄 <strong>Return Policy:</strong> Easy 3-day return policy available.
+            </div>
+
+            <!-- CHECKOUT & DETAILED FEE STRUCTURE -->
+            <div class="checkout-box">
+                <h3 style="margin-top:0; font-size:15px;">Secure Checkout</h3>
+                
+                <label style="font-size:12px; font-weight:bold;">Select Payment Method:</label>
+                <select id="paymentMethod">
+                    <option value="Online">Online / UPI (Paid - Instant Digital Invoice)</option>
+                    <option value="COD">Cash on Delivery (COD - Bill Enclosed Inside Box)</option>
+                </select>
+
+                <div class="fee-breakdown">
+                    <div class="fee-row">
+                        <span>Item Price (1x)</span>
+                        <span>₹149</span>
+                    </div>
+                    <div class="fee-row">
+                        <span>Delivery Fee</span>
+                        <span>₹99</span>
+                    </div>
+                    <div class="fee-row">
+                        <span>Platform Fee</span>
+                        <span>₹5</span>
+                    </div>
+                    <div class="fee-row total">
+                        <span>Total Amount</span>
+                        <span>₹253</span>
+                    </div>
+                </div>
+
+                <button class="btn-order" onclick="placeOrder()">Confirm & Place Order (₹253)</button>
+            </div>
+
+            <!-- INVOICE & TRACKING DISPLAY -->
+            <div id="invoice-area">
+                <strong id="invoice-title">Order Placed!</strong>
+                <p id="invoice-msg" style="margin: 5px 0 10px 0;"></p>
+                <div id="invoice-action"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER REVIEW SECTION UNDER PRODUCT DETAILS -->
+    <div class="reviews-section">
+        <h3>Customer Reviews & Ratings</h3>
+        
+        <div style="background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 13px;">
+            <strong>Overall Rating:</strong> <span class="stars">★★★★★</span> 4.8 / 5 (Based on verified West Bengal buyers)
+        </div>
+
+        <div id="reviewsList">
+            <div class="review-card">
+                <div class="review-header">
+                    <span>Subrata M. (Kolkata)</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 5px 0 0 0;">Received in fresh condition within 3 days. Excellent packaging!</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <span>Priya D. (Howrah)</span>
+                    <span class="stars">★★★★★</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 5px 0 0 0;">Very nice plant. Fast delivery across WB as promised.</p>
+            </div>
+        </div>
+
+        <!-- Write Review Form -->
+        <div style="margin-top: 25px; background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="margin-top:0; font-size:14px;">Leave a Review</h4>
+            <input type="text" id="reviewerName" placeholder="Your Name (e.g., Amit K.)">
+            <select id="reviewRating">
+                <option value="5">5 Stars - Excellent</option>
+                <option value="4">4 Stars - Good</option>
+                <option value="3">3 Stars - Average</option>
+            </select>
+            <textarea id="reviewComment" rows="2" placeholder="Write your feedback here..."></textarea>
+            <button class="btn-order" style="padding: 8px; font-size: 13px; margin-top:5px;" onclick="submitReview()">Submit Review</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function placeOrder() {
+        const payment = document.getElementById('paymentMethod').value;
+        const trackingId = 'MG-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        const invoiceArea = document.getElementById('invoice-area');
+        const invoiceMsg = document.getElementById('invoice-msg');
+        const invoiceAction = document.getElementById('invoice-action');
+        
+        invoiceArea.style.display = 'block';
+
+        if(payment === 'Online') {
+            invoiceMsg.innerHTML = `Tracking ID: <strong>${trackingId}</strong>. Payment received online. You can now download your digital bill.`;
+            invoiceAction.innerHTML = `<button style="background:#2563eb; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer;" onclick="alert('Downloading Tax Invoice PDF...')">📥 Download Digital Invoice</button>`;
+        } else {
+            invoiceMsg.innerHTML = `Tracking ID: <strong>${trackingId}</strong>. COD Order confirmed. Your physical printed bill will be safely enclosed <strong>inside the delivery box</strong>.`;
+            invoiceAction.innerHTML = '';
+        }
+    }
+
+    function submitReview() {
+        const name = document.getElementById('reviewerName').value;
+        const rating = document.getElementById('reviewRating').value;
+        const comment = document.getElementById('reviewComment').value;
+
+        if(!name || !comment) {
+            alert('Please fill in both name and review comment.');
+            return;
+        }
+
+        const starsStr = '★'.repeat(rating);
+        const list = document.getElementById('reviewsList');
+        
+        const newCard = document.createElement('div');
+        newCard.className = 'review-card';
+        newCard.innerHTML = `
+            <div class="review-header">
+                <span>${name}</span>
+                <span class="stars">${starsStr}</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 5px 0 0 0;">${comment}</p>
+        `;
+        
+        list.prepend(newCard);
+        document.getElementById('reviewerName').value = '';
+        document.getElementById('reviewComment').value = '';
+        alert('Thank you! Your review has been added.');
+    }
+</script>
+
+</body>
+</html>
