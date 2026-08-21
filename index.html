@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -72,15 +72,19 @@
         <!-- Search & Filter Bar -->
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
           <div class="relative w-full md:w-96">
-            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search products, seeds, plants..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
+            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search 130+ products, seeds, plants..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
             <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
           </div>
           
-          <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar">
-            <button onclick="filterCategory('all')" class="cat-pill active px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white">All Products</button>
-            <button onclick="filterCategory('Indoor Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Indoor Plants</button>
-            <button onclick="filterCategory('Fruit Plants')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Saplings</button>
-            <button onclick="filterCategory('Seeds')" class="cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Seeds</button>
+          <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2" id="categoryFilters">
+            <button onclick="filterCategory('all')" class="cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white">All Products</button>
+            <button onclick="filterCategory('Indoor Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Indoor</button>
+            <button onclick="filterCategory('Outdoor Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Outdoor</button>
+            <button onclick="filterCategory('Flowering Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Flowers</button>
+            <button onclick="filterCategory('Fruit Plants')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Trees</button>
+            <button onclick="filterCategory('Vegetable Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Veg Seeds</button>
+            <button onclick="filterCategory('Flower Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Flower Seeds</button>
+            <button onclick="filterCategory('Fruit Seeds')" class="cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border">Fruit Seeds</button>
           </div>
         </div>
 
@@ -175,7 +179,7 @@
   </div>
 
   <script>
-    // UPDATED WITH YOUR LIVE RENDER BACKEND URL
+    // LIVE BACKEND URL
     const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
     let productsDB = []; let cart = []; let selectedCategory = 'all';
     let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
@@ -212,16 +216,20 @@
       try {
         const response = await fetch(`${API_BASE_URL}/api/products`);
         productsDB = await response.json();
-        renderBestsellers(); renderShopCatalog();
-      } catch (err) { console.warn("Backend offline"); }
+        renderBestsellers(); 
+        renderShopCatalog();
+      } catch (err) { console.warn("Backend offline or still loading..."); }
     }
+    
     function renderBestsellers() {
       document.getElementById('bestsellersGrid').innerHTML = productsDB.filter(p => p.bestSeller).slice(0, 8).map(createProductCardHTML).join('');
     }
+    
     function renderShopCatalog() {
       let filtered = selectedCategory === 'all' ? productsDB : productsDB.filter(p => p.category === selectedCategory);
       document.getElementById('catalogGrid').innerHTML = filtered.map(createProductCardHTML).join('');
     }
+    
     function handleSearch(query) {
       const q = query.toLowerCase();
       const filtered = productsDB.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
@@ -358,13 +366,16 @@
             loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`;
         }
     }
+    
     function handleAccountClick() {
         if (currentUser) { switchTab('account'); loadCustomerOrders(); } 
         else { switchTab('login'); }
     }
+    
     function logoutUser() {
         if(confirm("Sign out?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); }
     }
+    
     async function attemptRegister() {
         const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
         if (!name || !email || !password) return alert("Fill all fields.");
@@ -375,6 +386,7 @@
             else alert(data.message);
         } catch(err) { alert("Server error."); }
     }
+    
     async function attemptLogin() {
         const email = document.getElementById('loginEmail').value, password = document.getElementById('loginPassword').value;
         if (!email || !password) return alert("Enter email and password.");
@@ -385,6 +397,7 @@
             else alert(data.message);
         } catch(err) { alert("Server error."); }
     }
+    
     function toggleAuthMode(mode) {
       document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin');
       document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
@@ -394,15 +407,28 @@
 
     function filterCategory(cat) { 
       selectedCategory = cat; 
-      document.querySelectorAll('.cat-pill').forEach(btn => {
-        if (btn.innerText === cat || (cat === 'all' && btn.innerText === 'All Products')) {
-          btn.className = "cat-pill active px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition";
+      
+      const filterMappings = {
+        'all': 'All Products',
+        'Indoor Plants': 'Indoor',
+        'Outdoor Plants': 'Outdoor',
+        'Flowering Plants': 'Flowers',
+        'Fruit Plants': 'Fruit Trees',
+        'Vegetable Seeds': 'Veg Seeds',
+        'Flower Seeds': 'Flower Seeds',
+        'Fruit Seeds': 'Fruit Seeds'
+      };
+
+      document.querySelectorAll('#categoryFilters .cat-pill').forEach(btn => {
+        if (btn.innerText === filterMappings[cat]) {
+          btn.className = "cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition";
         } else {
-          btn.className = "cat-pill px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition";
+          btn.className = "cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition";
         }
       });
       renderShopCatalog(); 
     }
+
     function switchTab(tabId) {
       document.querySelectorAll('.page-view').forEach(v => v.classList.add('hidden'));
       document.getElementById(`view-${tabId}`).classList.remove('hidden');
@@ -410,4 +436,7 @@
     }
   </script>
 </body>
-</html>
+</html> 
+      
+      
+    
