@@ -124,6 +124,61 @@
     <p>Need help? Email us at <a href="mailto:support@mgplants.in" class="text-brand-700 font-bold hover:underline">support@mgplants.in</a> or message us on WhatsApp!</p>
   </footer>
 
+  <!-- QUICK VIEW & REVIEWS MODAL -->
+  <div id="quickViewModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+    <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative">
+      <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur border flex items-center justify-center text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="overflow-y-auto flex-1 p-0">
+        <div class="h-64 bg-gray-100 relative">
+          <img id="qvImage" src="" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600?text=Plant'"/>
+        </div>
+        <div class="p-6">
+          <span id="qvCategory" class="text-[10px] font-bold text-brand-600 uppercase tracking-wider bg-brand-50 px-2 py-1 rounded">Category</span>
+          <h2 id="qvName" class="text-2xl font-extrabold text-gray-900 mt-2 mb-1">Product Name</h2>
+          <div class="flex items-end gap-2 mb-4">
+            <span id="qvPrice" class="text-2xl font-extrabold text-brand-700">₹0</span>
+            <span id="qvOrigPrice" class="text-sm text-gray-400 line-through mb-1"></span>
+          </div>
+          
+          <!-- Delivery Info -->
+          <div class="bg-brand-50 border border-brand-100 rounded-xl p-4 mb-6">
+            <p class="text-sm font-bold text-brand-800 mb-1"><i class="fa-solid fa-truck-fast mr-2"></i>Delivery Time: 3 to 4 days all over West Bengal</p>
+            <p class="text-xs text-brand-600"><i class="fa-solid fa-rotate-left mr-2"></i>Easy 3-day return policy (Refunds processed within 48 hours).</p>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button id="qvAddToCartBtn" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg flex justify-center gap-2 transition mb-8">
+            Add to Cart <i class="fa-solid fa-cart-plus"></i>
+          </button>
+
+          <!-- Customer Reviews Section -->
+          <hr class="border-gray-200 mb-6">
+          <h3 class="text-lg font-extrabold text-gray-900 mb-4">Customer Reviews</h3>
+          
+          <div id="qvReviewsList" class="space-y-4 mb-6">
+            <!-- Dynamic reviews loaded here -->
+          </div>
+
+          <!-- Add Review Form -->
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+            <h4 class="font-bold text-sm text-gray-900 mb-3">Leave a Review with Photo</h4>
+            <input type="text" id="reviewName" placeholder="Your Name" class="w-full p-2 bg-white border rounded-lg text-sm mb-2 outline-none" />
+            <select id="reviewRating" class="w-full p-2 bg-white border rounded-lg text-sm mb-2 outline-none">
+              <option value="5">★★★★★ Excellent</option>
+              <option value="4">★★★★☆ Good</option>
+              <option value="3">★★★☆☆ Average</option>
+            </select>
+            <textarea id="reviewComment" rows="2" placeholder="Write your feedback..." class="w-full p-2 bg-white border rounded-lg text-sm mb-2 outline-none"></textarea>
+            <label class="text-xs font-bold text-gray-500 block mb-1">Attach Photo (Optional)</label>
+            <input type="file" id="reviewPhoto" accept="image/*" class="w-full text-xs mb-3" />
+            <button onclick="submitReview()" class="w-full py-2 bg-gray-900 text-white font-bold rounded-lg text-sm">Post Review</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
     <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -134,7 +189,14 @@
     <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
     
     <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[65vh]">
-      <div class="flex justify-between text-lg font-extrabold border-b pb-3"><span>Subtotal</span><span id="cartTotal" class="text-brand-700">₹0</span></div>
+      
+      <!-- 🆕 DETAILED FEE STRUCTURE ADDED HERE -->
+      <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 space-y-2 mb-2">
+        <div class="flex justify-between text-sm font-bold text-gray-600"><span>Item Subtotal</span><span id="cartSubtotal">₹0</span></div>
+        <div class="flex justify-between text-sm font-bold text-gray-600"><span>Delivery Fee</span><span id="cartDelivery">₹0</span></div>
+        <div class="flex justify-between text-sm font-bold text-gray-600 border-b border-gray-200 pb-2"><span>Platform Fee</span><span id="cartPlatform">₹0</span></div>
+        <div class="flex justify-between text-lg font-extrabold pt-1"><span>Grand Total</span><span id="cartTotal" class="text-brand-700">₹0</span></div>
+      </div>
       
       <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Payment Method</label>
@@ -165,7 +227,6 @@
             <img src="https://i.ibb.co/Z08gKGB/IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" />
           </div>
           
-          <!-- 🆕 TEXT UPDATED TO REMOVE WHATSAPP REQUIREMENT -->
           <p class="text-[11px] text-gray-500 font-medium">Once you have successfully transferred the amount via the App or QR code, click the Confirm button below to finalize your order.</p>
         </div>
 
@@ -189,7 +250,6 @@
           <span class="text-xs font-medium text-gray-600">Save address & phone for next time</span>
         </label>
 
-        <!-- 🆕 BUTTON ICON UPDATED -->
         <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg mt-3 flex items-center justify-center gap-2 text-base transition">
           Confirm & Place Order <i class="fa-solid fa-check text-lg ml-1"></i>
         </button>
@@ -203,14 +263,18 @@
     const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
     let productsDB = []; let cart = []; let selectedCategory = 'all';
     let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
+    let currentViewingProductId = null;
 
     document.addEventListener('DOMContentLoaded', async () => { updateAuthUI(); await fetchLiveCatalog(); });
 
+    // 🆕 UPDATED: Image click triggers openQuickView
     function createProductCardHTML(product) {
       return `
         <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col relative group">
           ${product.bestSeller ? '<span class="absolute top-4 left-4 z-10 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-extrabold px-2 py-1 rounded shadow-md">POPULAR</span>' : ''}
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3"><img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400?text=Plant'"/></div>
+          <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-3 cursor-pointer" onclick="openQuickView('${product.id}')">
+            <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/400?text=Plant'"/>
+          </div>
           <div class="flex-1"><span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">${product.category}</span><h4 class="font-bold text-gray-900 text-sm leading-snug mt-1">${product.name}</h4></div>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
             <div><span class="text-lg font-extrabold text-gray-900">₹${product.price}</span>${product.origPrice ? `<span class="text-xs text-gray-400 line-through ml-1 block sm:inline">₹${product.origPrice}</span>` : ''}</div>
@@ -237,6 +301,83 @@
       document.getElementById('catalogGrid').innerHTML = productsDB.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).map(createProductCardHTML).join('');
     }
 
+    // 🆕 MODAL FUNCTIONS
+    function openQuickView(id) {
+        const product = productsDB.find(p => p.id === id);
+        if(!product) return;
+        currentViewingProductId = id;
+
+        document.getElementById('qvImage').src = product.image;
+        document.getElementById('qvCategory').innerText = product.category;
+        document.getElementById('qvName').innerText = product.name;
+        document.getElementById('qvPrice').innerText = `₹${product.price}`;
+        document.getElementById('qvOrigPrice').innerText = product.origPrice ? `₹${product.origPrice}` : '';
+        document.getElementById('qvAddToCartBtn').onclick = () => { addToCart(id); closeQuickView(); };
+        
+        renderProductReviews(product);
+        
+        const modal = document.getElementById('quickViewModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closeQuickView() {
+        const modal = document.getElementById('quickViewModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+
+    function renderProductReviews(product) {
+        const list = document.getElementById('qvReviewsList');
+        if(!product.reviews || product.reviews.length === 0) {
+            list.innerHTML = `<p class="text-sm text-gray-500 italic">No reviews yet. Be the first to review!</p>`;
+            return;
+        }
+        
+        list.innerHTML = product.reviews.map(r => {
+            const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+            const imgHtml = r.image ? `<img src="${r.image}" class="mt-2 w-20 h-20 object-cover rounded-lg border border-gray-200 cursor-pointer" onclick="window.open(this.src)"/>` : '';
+            return `
+            <div class="border-b border-gray-100 pb-3">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-bold text-gray-900">${r.user} <i class="fa-solid fa-circle-check text-brand-500 text-xs ml-1" title="Verified Buyer"></i></span>
+                    <span class="text-yellow-400 text-xs">${stars}</span>
+                </div>
+                <p class="text-sm text-gray-600">${r.comment}</p>
+                ${imgHtml}
+            </div>`;
+        }).join('');
+    }
+
+    async function submitReview() {
+        const user = document.getElementById('reviewName').value;
+        const rating = document.getElementById('reviewRating').value;
+        const comment = document.getElementById('reviewComment').value;
+        const fileInput = document.getElementById('reviewPhoto');
+        
+        if (!user || !comment) return alert('Please provide a name and comment.');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = async function(e) { await sendReview(user, rating, comment, e.target.result); }
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            await sendReview(user, rating, comment, null);
+        }
+    }
+
+    async function sendReview(user, rating, comment, image) {
+        try {
+            await fetch(`${API_BASE_URL}/api/review/${currentViewingProductId}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user, rating, comment, image })
+            });
+            alert('Review posted successfully!');
+            await fetchLiveCatalog();
+            openQuickView(currentViewingProductId); // Refresh modal
+        } catch(err) { alert('Failed to post review'); }
+    }
+
     function addToCart(id) {
       const product = productsDB.find(p => p.id === id);
       const existing = cart.find(i => i.id === id);
@@ -251,10 +392,21 @@
       updateCartUI();
     }
     
+    // 🆕 UPDATED: FEE CALCULATION
     function updateCartUI() {
       const count = cart.reduce((s, i) => s + i.qty, 0);
-      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-      document.getElementById('cartCountBadge').innerText = count; document.getElementById('cartTotal').innerText = `₹${total}`;
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      
+      const deliveryFee = count > 0 ? 99 : 0;
+      const platformFee = count > 0 ? 5 : 0;
+      const grandTotal = subtotal + deliveryFee + platformFee;
+
+      document.getElementById('cartCountBadge').innerText = count; 
+      
+      document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
+      document.getElementById('cartDelivery').innerText = `₹${deliveryFee}`;
+      document.getElementById('cartPlatform').innerText = `₹${platformFee}`;
+      document.getElementById('cartTotal').innerText = `₹${grandTotal}`;
       
       const container = document.getElementById('cartDrawerItems');
       if (cart.length === 0) {
@@ -276,6 +428,8 @@
             <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded flex items-center justify-center font-bold text-brand-600">+</button>
           </div>
         </div>`).join('');
+
+      togglePaymentUI(); // Update UPI Link dynamically
     }
     
     function toggleCartDrawer(open) {
@@ -287,16 +441,17 @@
       const isOnline = document.querySelector('input[name="payMethod"]:checked').value === 'Online';
       document.getElementById('onlinePaymentNotice').classList.toggle('hidden', !isOnline);
       
-      if(isOnline) {
-        const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      if(isOnline && cart.length > 0) {
+        const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+        const grandTotal = subtotal + 99 + 5; // Including delivery and platform fee
         const upiID = "mgplants@nsdl";
         const payeeName = "MG Plants";
         const txRef = "MG-" + Math.floor(Math.random() * 1000000);
-        const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&tr=${txRef}&am=${total}&cu=INR`;
+        const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&tr=${txRef}&am=${grandTotal}&cu=INR`;
         
         const deepLinkBtn = document.getElementById('upiDeepLink');
         deepLinkBtn.href = upiLink;
-        deepLinkBtn.innerHTML = `<i class="fa-solid fa-mobile-screen-button"></i> Tap here to Pay ₹${total} via App`;
+        deepLinkBtn.innerHTML = `<i class="fa-solid fa-mobile-screen-button"></i> Tap here to Pay ₹${grandTotal} via App`;
       }
 
       const labels = document.querySelectorAll('input[name="payMethod"]');
@@ -330,7 +485,6 @@
       if (savedPin) document.getElementById('custPin').value = savedPin;
     }
 
-    // 🚀 UPGRADED: PURE TRUST SYSTEM - NO WHATSAPP REDIRECT
     async function submitOrderToBackend() {
       if (!currentUser) { toggleCartDrawer(false); switchTab('login'); return alert("Please sign in first!"); }
 
@@ -359,7 +513,9 @@
         localStorage.setItem('mgPin', pin);
       }
       
-      const totalAmount = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      const totalAmount = subtotal + 99 + 5; // Subtotal + Delivery + Platform
+      
       try {
         const res = await fetch(`${API_BASE_URL}/api/orders`, { 
             method: 'POST', headers: { 'Content-Type': 'application/json' }, 
@@ -371,7 +527,6 @@
           cart = []; updateCartUI(); toggleCartDrawer(false);
           loadCustomerOrders();
           
-          // INSTANT SUCCESS ALERT (No WhatsApp)
           alert(`🎉 Order Successfully Placed!\n\n📦 Tracking ID: ${data.trackingId}\n\nYour order is currently processing. You can check the payment and delivery status directly in your Account Dashboard!`);
           
         } else { alert("Error saving order."); }
@@ -412,9 +567,24 @@
               <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
               <div class="text-xs text-gray-600">Address: ${o.address}</div>
               ${canCancel ? `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-600 text-white font-bold text-xs rounded-lg hover:bg-red-700 mt-2 transition">Cancel Order</button>` : ''}
+              
+              <!-- 🆕 ARTO RETURN BUTTON TRIGGER -->
+              ${o.status === 'Delivered' ? `<button onclick="requestArtoReturn('${o._id}')" class="px-3 py-1.5 bg-brand-700 text-white font-bold text-xs rounded-lg hover:bg-brand-800 mt-2 transition">Request Return (ARTO)</button>` : ''}
             </div>`;
         }).join('');
       } catch (err) { console.error("Error loading orders"); }
+    }
+
+    async function requestArtoReturn(orderId) {
+        if (!confirm("Are you sure you want to request a return for this item?")) return;
+        try { 
+            const res = await fetch(`${API_BASE_URL}/api/orders/return/${orderId}`, { method: 'POST' }); 
+            const data = await res.json(); 
+            if(data.success) {
+                alert("Return requested successfully. Please wait up to 48 hours for refund processing."); 
+                loadCustomerOrders();
+            }
+        } catch (err) { alert("Error requesting return."); }
     }
 
     async function cancelOrder(orderId) {
@@ -471,3 +641,6 @@
   </script>
 </body>
 </html>
+
+    
+          
