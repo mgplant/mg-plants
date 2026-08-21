@@ -143,19 +143,18 @@
           </label>
         </div>
 
-        <!-- 🆕 UPDATED: DIRECT UPI & QR CODE BOX -->
+        <!-- 🆕 LIVE UPI ID & QR CODE BOX -->
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-1 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
           
-          <!-- 🛠️ CHANGE THIS UPI ID TO YOURS -->
-          <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">YOUR_UPI_ID_HERE@upi</p>
+          <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
           
-          <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-32 h-32 flex items-center justify-center">
-            <!-- 🛠️ CHANGE THIS LINK TO YOUR ACTUAL QR CODE IMAGE -->
-            <img src="https://via.placeholder.com/150?text=Your+QR+Code" alt="Scan to Pay" class="w-full h-full object-contain rounded-lg" />
+          <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-40 h-40 flex items-center justify-center">
+            <!-- 📌 Using a placeholder or you can replace with your image URL -->
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" alt="Scan to Pay" class="w-full h-full object-cover rounded-lg" />
           </div>
           
-          <p class="text-[11px] text-gray-500 font-medium">Scan the QR code or copy the UPI ID above. Complete the payment and you will instantly be redirected to WhatsApp to share the screenshot with us!</p>
+          <p class="text-[11px] text-gray-500 font-medium">Scan the QR code or pay to <b>mgplants@nsdl</b>. Complete payment and you will be redirected to WhatsApp to share your screenshot!</p>
         </div>
 
         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping Details</label>
@@ -307,10 +306,10 @@
           cart = []; updateCartUI(); toggleCartDrawer(false);
           if (currentUser) loadCustomerOrders();
           
-          // 📲 YOUR WHATSAPP NUMBER
+          // 📲 YOUR VERIFIED WHATSAPP NUMBER
           const adminWhatsAppNumber = "916289954986"; 
           
-          let paymentStatusMsg = payMethod === 'Online' ? "✅ I have paid via UPI. (I am attaching the screenshot)" : "💵 Cash on Delivery.";
+          let paymentStatusMsg = payMethod === 'Online' ? "✅ I have paid via UPI (mgplants@nsdl). Here is my payment screenshot." : "💵 Cash on Delivery.";
           const waMessage = `🌿 *New Order Placed at MG Plants!*\n\n*Tracking ID:* ${data.trackingId}\n*Name:* ${name}\n*Total:* ₹${totalAmount}\n*Payment Method:* ${payMethod}\n\n${paymentStatusMsg}`;
           
           alert(`Order Successfully Placed!\n\nYour Tracking ID is: ${data.trackingId}\n\nYou will now be redirected to WhatsApp to confirm your order.`);
