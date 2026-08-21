@@ -51,7 +51,7 @@
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
           <div class="relative w-full md:w-96">
-            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search 130+ products..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
+            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search products..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm outline-none focus:border-brand-500 shadow-sm" />
             <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
           </div>
           <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2" id="categoryFilters">
@@ -112,17 +112,11 @@
     </div>
   </main>
 
-  <!-- CUSTOMER SUPPORT WIDGET -->
-  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-    <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants%20Support,%20I%20need%20help%20with%20my%20order." target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110 text-2xl cursor-pointer">
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+    <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants%20Support" target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110 text-2xl cursor-pointer">
       <i class="fa-brands fa-whatsapp"></i>
     </a>
   </div>
-
-  <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500 space-y-2">
-    <p>© 2026 MG Plants. All rights reserved.</p>
-    <p>Need help? Email us at <a href="mailto:support@mgplants.in" class="text-brand-700 font-bold hover:underline">support@mgplants.in</a> or message us on WhatsApp!</p>
-  </footer>
 
   <!-- QUICK VIEW & REVIEWS MODAL -->
   <div id="quickViewModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
@@ -141,26 +135,20 @@
             <span id="qvOrigPrice" class="text-sm text-gray-400 line-through mb-1"></span>
           </div>
           
-          <!-- Delivery Info -->
           <div class="bg-brand-50 border border-brand-100 rounded-xl p-4 mb-6">
             <p class="text-sm font-bold text-brand-800 mb-1"><i class="fa-solid fa-truck-fast mr-2"></i>Delivery Time: 3 to 4 days all over West Bengal</p>
             <p class="text-xs text-brand-600"><i class="fa-solid fa-rotate-left mr-2"></i>Easy 3-day return policy (Refunds processed within 48 hours).</p>
           </div>
 
-          <!-- Add to Cart Button -->
           <button id="qvAddToCartBtn" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg flex justify-center gap-2 transition mb-8">
             Add to Cart <i class="fa-solid fa-cart-plus"></i>
           </button>
 
-          <!-- Customer Reviews Section -->
           <hr class="border-gray-200 mb-6">
           <h3 class="text-lg font-extrabold text-gray-900 mb-4">Customer Reviews</h3>
           
-          <div id="qvReviewsList" class="space-y-4 mb-6">
-            <!-- Dynamic reviews loaded here -->
-          </div>
+          <div id="qvReviewsList" class="space-y-4 mb-6"></div>
 
-          <!-- Add Review Form -->
           <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
             <h4 class="font-bold text-sm text-gray-900 mb-3">Leave a Review with Photo</h4>
             <input type="text" id="reviewName" placeholder="Your Name" class="w-full p-2 bg-white border rounded-lg text-sm mb-2 outline-none" />
@@ -179,6 +167,37 @@
     </div>
   </div>
 
+  <!-- 🆕 RETURN REQUEST MODAL -->
+  <div id="returnModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+      <button onclick="closeReturnModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-red-50 transition"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-lg"><i class="fa-solid fa-box-open"></i></div>
+        <h3 class="text-xl font-extrabold text-gray-900">Request Return</h3>
+      </div>
+      
+      <input type="hidden" id="returnOrderId">
+      
+      <div class="space-y-4">
+        <div>
+          <label class="text-xs font-bold text-gray-500 block mb-1">Describe the Problem *</label>
+          <textarea id="returnReason" rows="3" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 transition" placeholder="E.g., Plant arrived damaged, missing leaves, wrong item..."></textarea>
+        </div>
+        
+        <div>
+          <label class="text-xs font-bold text-gray-500 block mb-1">Upload Product Image *</label>
+          <input type="file" id="returnImage" accept="image/*" class="w-full text-sm mb-1 p-2 bg-gray-50 border border-gray-200 rounded-xl outline-none" />
+          <p class="text-[10px] text-gray-400">Please provide a clear photo of the delivered item.</p>
+        </div>
+        
+        <button onclick="submitReturnRequest()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+          Submit Return Request <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
     <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -189,8 +208,6 @@
     <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
     
     <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[65vh]">
-      
-      <!-- 🆕 DETAILED FEE STRUCTURE ADDED HERE -->
       <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 space-y-2 mb-2">
         <div class="flex justify-between text-sm font-bold text-gray-600"><span>Item Subtotal</span><span id="cartSubtotal">₹0</span></div>
         <div class="flex justify-between text-sm font-bold text-gray-600"><span>Delivery Fee</span><span id="cartDelivery">₹0</span></div>
@@ -213,28 +230,22 @@
 
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-3 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
-          
           <a id="upiDeepLink" href="#" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-md mb-4 flex items-center justify-center gap-2 transition">
             <i class="fa-solid fa-mobile-screen-button"></i> Tap here to Pay via App
           </a>
-
           <div class="flex items-center gap-2 w-full mb-4">
             <hr class="flex-1 border-gray-300"><span class="text-xs text-gray-400 font-bold uppercase">OR SCAN QR</span><hr class="flex-1 border-gray-300">
           </div>
-
           <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
           <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-44 h-44 flex items-center justify-center">
             <img src="https://i.ibb.co/Z08gKGB/IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" />
           </div>
-          
           <p class="text-[11px] text-gray-500 font-medium">Once you have successfully transferred the amount via the App or QR code, click the Confirm button below to finalize your order.</p>
         </div>
 
         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping & Delivery Address</label>
-        
         <input type="text" id="custName" placeholder="Full Name *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
         <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
-        
         <div class="grid grid-cols-2 gap-2">
           <input type="text" id="custHouse" placeholder="House / Flat No. *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
           <input type="text" id="custArea" placeholder="Area / Street / Landmark *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
@@ -244,12 +255,10 @@
           <input type="text" id="custState" placeholder="State *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
           <input type="text" id="custPin" placeholder="PIN Code *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
         </div>
-
         <label class="flex items-center gap-2 cursor-pointer mt-1">
           <input type="checkbox" id="saveAddressCheck" class="w-4 h-4 accent-brand-600" checked>
-          <span class="text-xs font-medium text-gray-600">Save address & phone for next time</span>
+          <span class="text-xs font-medium text-gray-600">Save address & phone</span>
         </label>
-
         <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg mt-3 flex items-center justify-center gap-2 text-base transition">
           Confirm & Place Order <i class="fa-solid fa-check text-lg ml-1"></i>
         </button>
@@ -267,7 +276,6 @@
 
     document.addEventListener('DOMContentLoaded', async () => { updateAuthUI(); await fetchLiveCatalog(); });
 
-    // 🆕 UPDATED: Image click triggers openQuickView
     function createProductCardHTML(product) {
       return `
         <div class="bg-white rounded-2xl border border-gray-200 p-3 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col relative group">
@@ -301,7 +309,6 @@
       document.getElementById('catalogGrid').innerHTML = productsDB.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).map(createProductCardHTML).join('');
     }
 
-    // 🆕 MODAL FUNCTIONS
     function openQuickView(id) {
         const product = productsDB.find(p => p.id === id);
         if(!product) return;
@@ -374,7 +381,7 @@
             });
             alert('Review posted successfully!');
             await fetchLiveCatalog();
-            openQuickView(currentViewingProductId); // Refresh modal
+            openQuickView(currentViewingProductId); 
         } catch(err) { alert('Failed to post review'); }
     }
 
@@ -384,6 +391,7 @@
       if(existing) existing.qty += 1; else cart.push({ ...product, qty: 1 });
       updateCartUI(); toggleCartDrawer(true);
     }
+    
     function updateQuantity(id, delta) {
       const item = cart.find(i => i.id === id);
       if (!item) return;
@@ -392,14 +400,13 @@
       updateCartUI();
     }
     
-    // 🆕 UPDATED: FEE CALCULATION
     function updateCartUI() {
       const count = cart.reduce((s, i) => s + i.qty, 0);
       const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
       
       const deliveryFee = count > 0 ? 99 : 0;
       const platformFee = count > 0 ? 5 : 0;
-      const grandTotal = subtotal + deliveryFee + platformFee;
+      const grandTotal = count > 0 ? (subtotal + deliveryFee + platformFee) : 0;
 
       document.getElementById('cartCountBadge').innerText = count; 
       
@@ -429,7 +436,7 @@
           </div>
         </div>`).join('');
 
-      togglePaymentUI(); // Update UPI Link dynamically
+      togglePaymentUI();
     }
     
     function toggleCartDrawer(open) {
@@ -443,7 +450,7 @@
       
       if(isOnline && cart.length > 0) {
         const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-        const grandTotal = subtotal + 99 + 5; // Including delivery and platform fee
+        const grandTotal = subtotal + 99 + 5; 
         const upiID = "mgplants@nsdl";
         const payeeName = "MG Plants";
         const txRef = "MG-" + Math.floor(Math.random() * 1000000);
@@ -514,7 +521,7 @@
       }
       
       const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-      const totalAmount = subtotal + 99 + 5; // Subtotal + Delivery + Platform
+      const totalAmount = subtotal + 99 + 5; 
       
       try {
         const res = await fetch(`${API_BASE_URL}/api/orders`, { 
@@ -555,8 +562,27 @@
           let payBadgeClass = "bg-amber-100 text-amber-800";
           if(o.paymentStatus === 'Paid') payBadgeClass = "bg-emerald-100 text-emerald-800";
 
+          // ACTION BUTTON LOGIC
+          let actionButtons = '';
+          
+          if (canCancel) {
+              actionButtons += `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 font-bold text-xs rounded-lg hover:bg-red-600 hover:text-white transition">Cancel Order</button>`;
+          }
+          
+          if (o.status === 'Cancelled' && o.paymentStatus === 'Paid') {
+              if(!o.refundRequested) {
+                  actionButtons += `<button onclick="requestRefund('${o._id}')" class="px-3 py-1.5 bg-blue-600 text-white font-bold text-xs rounded-lg hover:bg-blue-700 shadow-sm transition">Request Refund</button>`;
+              } else {
+                  actionButtons += `<span class="px-3 py-1.5 bg-gray-100 text-gray-500 font-bold text-xs rounded-lg border">Refund Processing</span>`;
+              }
+          }
+          
+          if (o.status === 'Delivered') {
+              actionButtons += `<button onclick="openReturnModal('${o._id}')" class="px-3 py-1.5 bg-brand-700 text-white font-bold text-xs rounded-lg hover:bg-brand-800 shadow-sm transition"><i class="fa-solid fa-rotate-left mr-1"></i> Request Return</button>`;
+          }
+
           return `
-            <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 space-y-2 shadow-sm">
+            <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 space-y-3 shadow-sm">
               <div class="flex flex-wrap justify-between items-center gap-2">
                 <span class="text-xs font-extrabold text-brand-800 bg-brand-100 px-2.5 py-1 rounded-md border border-brand-300"><i class="fa-solid fa-truck-fast mr-1"></i> ID: ${o.trackingId || 'Pending'}</span>
                 <div class="flex gap-1.5">
@@ -566,25 +592,66 @@
               </div>
               <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
               <div class="text-xs text-gray-600">Address: ${o.address}</div>
-              ${canCancel ? `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-600 text-white font-bold text-xs rounded-lg hover:bg-red-700 mt-2 transition">Cancel Order</button>` : ''}
-              
-              <!-- 🆕 ARTO RETURN BUTTON TRIGGER -->
-              ${o.status === 'Delivered' ? `<button onclick="requestArtoReturn('${o._id}')" class="px-3 py-1.5 bg-brand-700 text-white font-bold text-xs rounded-lg hover:bg-brand-800 mt-2 transition">Request Return (ARTO)</button>` : ''}
+              <div class="flex gap-2 mt-2 flex-wrap">
+                  ${actionButtons}
+              </div>
             </div>`;
         }).join('');
       } catch (err) { console.error("Error loading orders"); }
     }
 
-    async function requestArtoReturn(orderId) {
-        if (!confirm("Are you sure you want to request a return for this item?")) return;
-        try { 
-            const res = await fetch(`${API_BASE_URL}/api/orders/return/${orderId}`, { method: 'POST' }); 
-            const data = await res.json(); 
+    // 🆕 REFUND & RETURN FUNCTIONS
+    async function requestRefund(orderId) {
+        if(!confirm("Would you like to initiate a refund to your original payment method?")) return;
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/orders/refund/${orderId}`, { method: 'POST' });
+            const data = await res.json();
             if(data.success) {
-                alert("Return requested successfully. Please wait up to 48 hours for refund processing."); 
+                alert("Refund requested successfully. It will be processed within 48 hours.");
                 loadCustomerOrders();
             }
-        } catch (err) { alert("Error requesting return."); }
+        } catch (err) { alert("Error requesting refund."); }
+    }
+
+    function openReturnModal(orderId) {
+        document.getElementById('returnOrderId').value = orderId;
+        document.getElementById('returnModal').classList.remove('hidden');
+        document.getElementById('returnModal').classList.add('flex');
+    }
+
+    function closeReturnModal() {
+        document.getElementById('returnModal').classList.add('hidden');
+        document.getElementById('returnModal').classList.remove('flex');
+        document.getElementById('returnReason').value = '';
+        document.getElementById('returnImage').value = '';
+    }
+
+    async function submitReturnRequest() {
+        const orderId = document.getElementById('returnOrderId').value;
+        const reason = document.getElementById('returnReason').value;
+        const fileInput = document.getElementById('returnImage');
+
+        if (!reason || !fileInput.files || !fileInput.files[0]) {
+            return alert("Please provide both a description of the problem and a photo of the product.");
+        }
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/orders/return/${orderId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reason: reason, image: e.target.result })
+                });
+                const data = await res.json();
+                if(data.success) {
+                    alert("Return requested successfully. Our team will review your photo and process the ARTO.");
+                    closeReturnModal();
+                    loadCustomerOrders();
+                }
+            } catch (err) { alert("Error submitting return request."); }
+        };
+        reader.readAsDataURL(fileInput.files[0]);
     }
 
     async function cancelOrder(orderId) {
@@ -641,6 +708,3 @@
   </script>
 </body>
 </html>
-
-    
-          
