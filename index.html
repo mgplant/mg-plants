@@ -14,6 +14,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen relative">
 
+  <!-- HEADER -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 py-3 gap-4">
       <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
@@ -37,6 +38,7 @@
 
   <main class="flex-1">
     
+    <!-- HOME VIEW -->
     <div id="view-home" class="page-view">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-end justify-between mb-6">
@@ -47,6 +49,7 @@
       </section>
     </div>
 
+    <!-- CATALOG VIEW -->
     <div id="view-shop" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
@@ -69,28 +72,33 @@
       </section>
     </div>
 
+    <!-- OTP LOGIN VIEW -->
     <div id="view-login" class="page-view hidden">
       <section class="max-w-md mx-auto px-4 py-16">
-        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
-          <div class="flex bg-gray-100 rounded-lg p-1 mb-6">
-            <button id="tabSignIn" onclick="toggleAuthMode('signin')" class="flex-1 py-2 text-sm font-bold rounded-md bg-white text-brand-700 shadow-sm">Sign In</button>
-            <button id="tabSignUp" onclick="toggleAuthMode('signup')" class="flex-1 py-2 text-sm font-bold rounded-md text-gray-500">Create Account</button>
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-xl text-center">
+          
+          <div class="w-16 h-16 mx-auto bg-brand-100 text-brand-700 rounded-full flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-leaf"></i>
           </div>
-          <div id="formSignIn" class="space-y-4">
-            <input type="email" id="loginEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
-            <input type="password" id="loginPassword" placeholder="Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
-            <button onclick="attemptLogin()" class="w-full py-3 bg-brand-700 text-white font-bold rounded-xl shadow-lg">Secure Sign In</button>
+          <h2 class="text-2xl font-extrabold text-gray-900 mb-2">Welcome to MG Plants</h2>
+          <p class="text-sm text-gray-500 mb-8">Enter your email to sign in or create an account automatically.</p>
+          
+          <div id="otpEmailSection">
+            <input type="email" id="authEmail" placeholder="Enter your email address" class="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-brand-500 text-center mb-4" />
+            <button onclick="sendOtpCode()" id="btnSendOtp" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg transition">Continue with Email</button>
           </div>
-          <div id="formSignUp" class="space-y-4 hidden">
-            <input type="text" id="regName" placeholder="Full Name" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
-            <input type="email" id="regEmail" placeholder="Email Address" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
-            <input type="password" id="regPassword" placeholder="Create Password" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm" />
-            <button onclick="attemptRegister()" class="w-full py-3 bg-gray-900 text-white font-bold rounded-xl shadow-lg">Create Account</button>
+
+          <div id="otpInputSection" class="hidden mt-6 pt-6 border-t border-gray-100">
+            <p class="text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">Enter 6-Digit Code</p>
+            <input type="text" id="authOtpCode" maxlength="6" placeholder="0 0 0 0 0 0" class="w-full p-3.5 text-center tracking-[0.5em] text-2xl font-extrabold bg-brand-50 border border-brand-300 rounded-xl outline-none focus:border-brand-600 mb-4" />
+            <button onclick="verifyOtpCode()" class="w-full py-3.5 bg-gray-900 hover:bg-black text-white font-extrabold rounded-xl shadow-lg transition">Verify & Sign In</button>
           </div>
+
         </div>
       </section>
     </div>
 
+    <!-- ACCOUNT VIEW -->
     <div id="view-account" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
@@ -112,13 +120,14 @@
     </div>
   </main>
 
+  <!-- WHATSAPP SUPPORT FLOAT -->
   <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
     <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants%20Support" target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110 text-2xl cursor-pointer">
       <i class="fa-brands fa-whatsapp"></i>
     </a>
   </div>
 
-  <!-- QUICK VIEW & REVIEWS MODAL -->
+  <!-- QUICK VIEW & REVIEW MODAL -->
   <div id="quickViewModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
     <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col relative">
       <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur border flex items-center justify-center text-gray-700 hover:bg-gray-100"><i class="fa-solid fa-xmark"></i></button>
@@ -146,7 +155,6 @@
 
           <hr class="border-gray-200 mb-6">
           <h3 class="text-lg font-extrabold text-gray-900 mb-4">Customer Reviews</h3>
-          
           <div id="qvReviewsList" class="space-y-4 mb-6"></div>
 
           <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
@@ -167,7 +175,7 @@
     </div>
   </div>
 
-  <!-- 🆕 RETURN REQUEST MODAL -->
+  <!-- RETURN REQUEST MODAL -->
   <div id="returnModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
     <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
       <button onclick="closeReturnModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-red-50 transition"><i class="fa-solid fa-xmark"></i></button>
@@ -198,6 +206,7 @@
     </div>
   </div>
 
+  <!-- CART DRAWER -->
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
     <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -409,7 +418,6 @@
       const grandTotal = count > 0 ? (subtotal + deliveryFee + platformFee) : 0;
 
       document.getElementById('cartCountBadge').innerText = count; 
-      
       document.getElementById('cartSubtotal').innerText = `₹${subtotal}`;
       document.getElementById('cartDelivery').innerText = `₹${deliveryFee}`;
       document.getElementById('cartPlatform').innerText = `₹${platformFee}`;
@@ -423,7 +431,9 @@
             <p class="text-gray-500 font-medium text-sm mb-6">Your cart is empty.</p>
             <button onclick="handleAccountClick(); toggleCartDrawer(false);" class="px-6 py-2 border border-brand-200 text-brand-700 font-bold text-sm rounded-full hover:bg-brand-50 transition"><i class="fa-solid fa-box-open mr-2"></i> Track Previous Orders</button>
           </div>`;
-        document.getElementById('checkoutFormSection').classList.add('hidden'); document.getElementById('proceedCheckoutBtn').classList.remove('hidden'); return;
+        document.getElementById('checkoutFormSection').classList.add('hidden'); 
+        document.getElementById('proceedCheckoutBtn').classList.remove('hidden'); 
+        return;
       }
       container.innerHTML = cart.map(item => `
         <div class="flex gap-4 p-3 bg-white rounded-xl border items-center shadow-sm">
@@ -473,7 +483,8 @@
         switchTab('login');
         return alert("⚠️ Please sign in or create an account to place an order!");
       }
-      document.getElementById('checkoutFormSection').classList.remove('hidden'); document.getElementById('proceedCheckoutBtn').classList.add('hidden');
+      document.getElementById('checkoutFormSection').classList.remove('hidden'); 
+      document.getElementById('proceedCheckoutBtn').classList.add('hidden');
       
       document.getElementById('custName').value = currentUser.name;
       
@@ -533,9 +544,7 @@
         if (data.success) {
           cart = []; updateCartUI(); toggleCartDrawer(false);
           loadCustomerOrders();
-          
-          alert(`🎉 Order Successfully Placed!\n\n📦 Tracking ID: ${data.trackingId}\n\nYour order is currently processing. You can check the payment and delivery status directly in your Account Dashboard!`);
-          
+          alert(`🎉 Order Successfully Placed!\n\n📦 Tracking ID: ${data.trackingId}\n\nYour order is currently processing.`);
         } else { alert("Error saving order."); }
       } catch (err) { alert("Server connection error."); }
     }
@@ -562,13 +571,10 @@
           let payBadgeClass = "bg-amber-100 text-amber-800";
           if(o.paymentStatus === 'Paid') payBadgeClass = "bg-emerald-100 text-emerald-800";
 
-          // ACTION BUTTON LOGIC
           let actionButtons = '';
-          
           if (canCancel) {
               actionButtons += `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 font-bold text-xs rounded-lg hover:bg-red-600 hover:text-white transition">Cancel Order</button>`;
           }
-          
           if (o.status === 'Cancelled' && o.paymentStatus === 'Paid') {
               if(!o.refundRequested) {
                   actionButtons += `<button onclick="requestRefund('${o._id}')" class="px-3 py-1.5 bg-blue-600 text-white font-bold text-xs rounded-lg hover:bg-blue-700 shadow-sm transition">Request Refund</button>`;
@@ -576,7 +582,6 @@
                   actionButtons += `<span class="px-3 py-1.5 bg-gray-100 text-gray-500 font-bold text-xs rounded-lg border">Refund Processing</span>`;
               }
           }
-          
           if (o.status === 'Delivered') {
               actionButtons += `<button onclick="openReturnModal('${o._id}')" class="px-3 py-1.5 bg-brand-700 text-white font-bold text-xs rounded-lg hover:bg-brand-800 shadow-sm transition"><i class="fa-solid fa-rotate-left mr-1"></i> Request Return</button>`;
           }
@@ -592,17 +597,14 @@
               </div>
               <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
               <div class="text-xs text-gray-600">Address: ${o.address}</div>
-              <div class="flex gap-2 mt-2 flex-wrap">
-                  ${actionButtons}
-              </div>
+              <div class="flex gap-2 mt-2 flex-wrap">${actionButtons}</div>
             </div>`;
         }).join('');
       } catch (err) { console.error("Error loading orders"); }
     }
 
-    // 🆕 REFUND & RETURN FUNCTIONS
     async function requestRefund(orderId) {
-        if(!confirm("Would you like to initiate a refund to your original payment method?")) return;
+        if(!confirm("Initiate refund to your original payment method?")) return;
         try {
             const res = await fetch(`${API_BASE_URL}/api/orders/refund/${orderId}`, { method: 'POST' });
             const data = await res.json();
@@ -659,44 +661,101 @@
       try { const res = await fetch(`${API_BASE_URL}/api/orders/cancel/${orderId}`, { method: 'POST' }); const data = await res.json(); alert(data.message); loadCustomerOrders(); } catch (err) { alert("Error cancelling order."); }
     }
 
+    // --- OTP AUTHENTICATION & REDIRECT FLOW ---
     function updateAuthUI() {
         const loginBtn = document.getElementById('nav-login');
         if (currentUser) {
             loginBtn.innerHTML = `<div class="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm border border-brand-200">${currentUser.name.charAt(0).toUpperCase()}</div><span class="font-bold text-sm hidden sm:inline text-gray-800">Account</span>`;
-            document.getElementById('accName').innerText = currentUser.name; document.getElementById('accEmail').innerText = currentUser.email; document.getElementById('accAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('accName').innerText = currentUser.name; 
+            document.getElementById('accEmail').innerText = currentUser.email; 
+            document.getElementById('accAvatar').innerText = currentUser.name.charAt(0).toUpperCase();
             loadCustomerOrders();
-        } else { loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`; }
+        } else { 
+            loginBtn.innerHTML = `<i class="fa-regular fa-circle-user text-xl"></i><span class="font-bold text-sm hidden sm:inline">Sign In</span>`; 
+        }
     }
     
-    function handleAccountClick() { if (currentUser) { switchTab('account'); loadCustomerOrders(); } else { switchTab('login'); } }
-    function logoutUser() { if(confirm("Sign out?")) { localStorage.removeItem('mgPlantsUser'); currentUser = null; updateAuthUI(); switchTab('home'); } }
-    
-    async function attemptRegister() {
-        const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
-        if (!name || !email || !password) return alert("Fill all fields.");
-        try { const res = await fetch(`${API_BASE_URL}/api/register`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name, email, password}) });
-            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Account created successfully!"); } else alert(data.message);
-        } catch(err) { alert("Server error."); }
+    function handleAccountClick() { 
+      if (currentUser) { switchTab('account'); loadCustomerOrders(); } 
+      else { switchTab('login'); } 
     }
     
-    async function attemptLogin() {
-        const email = document.getElementById('loginEmail').value, password = document.getElementById('loginPassword').value;
-        if (!email || !password) return alert("Enter email and password.");
-        try { const res = await fetch(`${API_BASE_URL}/api/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}) });
-            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Signed in successfully!"); } else alert(data.message);
-        } catch(err) { alert("Server error."); }
+    function logoutUser() { 
+      if(confirm("Sign out?")) { 
+        localStorage.removeItem('mgPlantsUser'); 
+        currentUser = null; 
+        updateAuthUI(); 
+        switchTab('home'); 
+      } 
     }
     
-    function toggleAuthMode(mode) {
-      document.getElementById('formSignIn').classList.toggle('hidden', mode !== 'signin'); document.getElementById('formSignUp').classList.toggle('hidden', mode !== 'signup');
-      document.getElementById('tabSignIn').className = mode === 'signin' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
-      document.getElementById('tabSignUp').className = mode === 'signup' ? "flex-1 py-2 text-sm font-bold bg-white text-brand-700 shadow-sm" : "flex-1 py-2 text-sm font-bold text-gray-500";
+    async function sendOtpCode() {
+      const email = document.getElementById('authEmail').value;
+      if (!email || !email.includes('@')) return alert("Please enter a valid email address.");
+      
+      const btn = document.getElementById('btnSendOtp');
+      btn.innerText = "Sending OTP...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/auth/send-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          document.getElementById('otpEmailSection').classList.add('hidden');
+          document.getElementById('otpInputSection').classList.remove('hidden');
+          alert("✅ A 6-digit verification code has been sent to your email!");
+        } else { alert(data.message); }
+      } catch (err) { alert("Server connection error."); }
+      finally {
+        btn.innerText = "Continue with Email";
+        btn.disabled = false;
+      }
+    }
+
+    async function verifyOtpCode() {
+      const email = document.getElementById('authEmail').value;
+      const otp = document.getElementById('authOtpCode').value;
+      
+      if (!otp || otp.length !== 6) return alert("Please enter the 6-digit OTP.");
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, otp })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          currentUser = data.user;
+          localStorage.setItem('mgPlantsUser', JSON.stringify(data.user));
+          updateAuthUI();
+          
+          // Instant redirect to Home Page
+          switchTab('home');
+          alert("✅ Signed in successfully!");
+          
+          document.getElementById('authEmail').value = '';
+          document.getElementById('authOtpCode').value = '';
+          document.getElementById('otpEmailSection').classList.remove('hidden');
+          document.getElementById('otpInputSection').classList.add('hidden');
+        } else { alert(data.message); }
+      } catch (err) { alert("Server connection error."); }
     }
 
     function filterCategory(cat) { 
       selectedCategory = cat; 
       const filterMappings = { 'all': 'All Products', 'Indoor Plants': 'Indoor', 'Outdoor Plants': 'Outdoor', 'Flowering Plants': 'Flowers', 'Fruit Plants': 'Fruit Trees', 'Vegetable Seeds': 'Veg Seeds', 'Flower Seeds': 'Flower Seeds', 'Fruit Seeds': 'Fruit Seeds' };
-      document.querySelectorAll('#categoryFilters .cat-pill').forEach(btn => { btn.className = (btn.innerText === filterMappings[cat]) ? "cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition" : "cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition"; });
+      document.querySelectorAll('#categoryFilters .cat-pill').forEach(btn => { 
+        btn.className = (btn.innerText === filterMappings[cat]) 
+          ? "cat-pill active whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-brand-700 text-white transition" 
+          : "cat-pill whitespace-nowrap px-4 py-2 rounded-full text-xs font-bold bg-white text-gray-700 border hover:bg-gray-50 transition"; 
+      });
       renderShopCatalog(); 
     }
 
