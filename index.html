@@ -14,7 +14,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
 
-  <!-- HEADER NAVIGATION -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 py-3 gap-4">
       <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
@@ -38,7 +37,6 @@
 
   <main class="flex-1">
     
-    <!-- HOME TAB -->
     <div id="view-home" class="page-view">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-end justify-between mb-6">
@@ -49,7 +47,6 @@
       </section>
     </div>
 
-    <!-- SHOPPING TAB -->
     <div id="view-shop" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
@@ -72,7 +69,6 @@
       </section>
     </div>
 
-    <!-- ACCOUNT/LOGIN TABS -->
     <div id="view-login" class="page-view hidden">
       <section class="max-w-md mx-auto px-4 py-16">
         <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
@@ -104,11 +100,11 @@
               <h3 id="accName" class="font-bold text-gray-900">User Name</h3>
               <p id="accEmail" class="text-xs text-gray-500">user@email.com</p>
             </div>
-            <button class="w-full text-left px-4 py-3 bg-brand-50 text-brand-700 font-bold rounded-xl"><i class="fa-solid fa-box w-6"></i> My Orders</button>
+            <button class="w-full text-left px-4 py-3 bg-brand-50 text-brand-700 font-bold rounded-xl"><i class="fa-solid fa-box w-6"></i> Track Orders & History</button>
             <button onclick="logoutUser()" class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50 font-bold rounded-xl mt-4 transition"><i class="fa-solid fa-right-from-bracket w-6"></i> Sign Out</button>
           </div>
           <div class="flex-1 bg-white border border-gray-200 rounded-2xl p-6">
-            <h3 class="text-xl font-extrabold text-gray-900 mb-4">My Orders & Recent Purchases</h3>
+            <h3 class="text-xl font-extrabold text-gray-900 mb-4">My Orders & Live Tracking</h3>
             <div id="customerOrdersList" class="space-y-4"><p class="text-gray-400 text-sm">Loading your orders...</p></div>
           </div>
         </div>
@@ -116,7 +112,6 @@
     </div>
   </main>
 
-  <!-- CART DRAWER WITH UPI/QR INTEGRATION -->
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
     <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -129,7 +124,6 @@
     <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[60vh]">
       <div class="flex justify-between text-lg font-extrabold border-b pb-3"><span>Subtotal</span><span id="cartTotal" class="text-brand-700">₹0</span></div>
       
-      <!-- CHECKOUT FORM -->
       <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Payment Method</label>
         <div class="flex gap-2 mb-2">
@@ -143,24 +137,19 @@
           </label>
         </div>
 
-        <!-- 🆕 LIVE UPI ID & QR CODE BOX -->
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-1 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
-          
           <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
-          
           <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-40 h-40 flex items-center justify-center">
-            <!-- 📌 Using a placeholder or you can replace with your image URL -->
             <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" alt="Scan to Pay" class="w-full h-full object-cover rounded-lg" />
           </div>
-          
-          <p class="text-[11px] text-gray-500 font-medium">Scan the QR code or pay to <b>mgplants@nsdl</b>. Complete payment and you will be redirected to WhatsApp to share your screenshot!</p>
+          <p class="text-[11px] text-gray-500 font-medium">Scan QR or pay to <b>mgplants@nsdl</b>. You will be redirected to WhatsApp to share your screenshot!</p>
         </div>
 
         <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping Details</label>
-        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white transition" required />
-        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white transition" required />
-        <textarea id="custAddress" placeholder="Full Delivery Address & PIN Code *" rows="2" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500 focus:bg-white transition" required></textarea>
+        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        <textarea id="custAddress" placeholder="Full Delivery Address & PIN Code *" rows="2" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required></textarea>
         
         <label class="flex items-center gap-2 cursor-pointer mt-1">
           <input type="checkbox" id="saveAddressCheck" class="w-4 h-4 accent-brand-600" checked>
@@ -268,11 +257,17 @@
       labels[1].parentElement.className = labels[1].checked ? "flex-1 border-2 border-brand-500 bg-brand-50 p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative" : "flex-1 border-2 border-gray-200 bg-white p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative";
     }
 
+    // 🔒 STRICT RULE: MUST BE LOGGED IN TO CHECKOUT
     function openCheckoutForm() {
       if (cart.length === 0) return alert("Cart is empty!");
+      if (!currentUser) {
+        toggleCartDrawer(false);
+        switchTab('login');
+        return alert("⚠️ Please sign in or create an account to place an order!");
+      }
       document.getElementById('checkoutFormSection').classList.remove('hidden'); document.getElementById('proceedCheckoutBtn').classList.add('hidden');
       
-      if (currentUser) document.getElementById('custName').value = currentUser.name;
+      document.getElementById('custName').value = currentUser.name;
       const savedPhone = localStorage.getItem('mgSavedPhone');
       const savedAddress = localStorage.getItem('mgSavedAddress');
       if (savedPhone) document.getElementById('custPhone').value = savedPhone;
@@ -280,6 +275,8 @@
     }
 
     async function submitOrderToBackend() {
+      if (!currentUser) { toggleCartDrawer(false); switchTab('login'); return alert("Please sign in first!"); }
+
       const name = document.getElementById('custName').value, phone = document.getElementById('custPhone').value, address = document.getElementById('custAddress').value;
       const payMethod = document.querySelector('input[name="payMethod"]:checked').value;
       
@@ -288,33 +285,26 @@
       if(document.getElementById('saveAddressCheck').checked) {
         localStorage.setItem('mgSavedPhone', phone);
         localStorage.setItem('mgSavedAddress', address);
-      } else {
-        localStorage.removeItem('mgSavedPhone');
-        localStorage.removeItem('mgSavedAddress');
       }
       
       const totalAmount = cart.reduce((s, i) => s + (i.price * i.qty), 0);
       try {
         const res = await fetch(`${API_BASE_URL}/api/orders`, { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify({ customerName: name, phone, address: `[${payMethod}] ` + address, items: cart, totalAmount }) 
         });
         const data = await res.json();
         
         if (data.success) {
           cart = []; updateCartUI(); toggleCartDrawer(false);
-          if (currentUser) loadCustomerOrders();
+          loadCustomerOrders();
           
-          // 📲 YOUR VERIFIED WHATSAPP NUMBER
           const adminWhatsAppNumber = "916289954986"; 
-          
           let paymentStatusMsg = payMethod === 'Online' ? "✅ I have paid via UPI (mgplants@nsdl). Here is my payment screenshot." : "💵 Cash on Delivery.";
           const waMessage = `🌿 *New Order Placed at MG Plants!*\n\n*Tracking ID:* ${data.trackingId}\n*Name:* ${name}\n*Total:* ₹${totalAmount}\n*Payment Method:* ${payMethod}\n\n${paymentStatusMsg}`;
           
           alert(`Order Successfully Placed!\n\nYour Tracking ID is: ${data.trackingId}\n\nYou will now be redirected to WhatsApp to confirm your order.`);
           window.open(`https://wa.me/${adminWhatsAppNumber}?text=${encodeURIComponent(waMessage)}`, '_blank');
-          
         } else { alert("Error saving order."); }
       } catch (err) { alert("Server connection error."); }
     }
@@ -331,14 +321,22 @@
         container.innerHTML = myOrders.map(o => {
           const hoursElapsed = (Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60);
           const canCancel = hoursElapsed <= 4 && o.status !== 'Cancelled';
+          
+          // Badge colors matching status
+          let statusBadgeClass = "bg-yellow-100 text-yellow-800";
+          if(o.status === 'Processing') statusBadgeClass = "bg-blue-100 text-blue-800";
+          if(o.status === 'Shipped') statusBadgeClass = "bg-purple-100 text-purple-800";
+          if(o.status === 'Delivered') statusBadgeClass = "bg-green-100 text-green-800";
+          if(o.status === 'Cancelled') statusBadgeClass = "bg-red-100 text-red-800";
+
           return `
             <div class="p-4 border border-gray-200 rounded-xl bg-gray-50 space-y-2 shadow-sm">
               <div class="flex justify-between items-center">
-                <span class="text-xs font-extrabold text-brand-700 bg-brand-100 px-2 py-1 rounded border border-brand-200"><i class="fa-solid fa-truck-fast mr-1"></i> Tracking: ${o.trackingId || 'Pending'}</span>
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${o.status === 'Cancelled' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700'}">${o.status}</span>
+                <span class="text-xs font-extrabold text-brand-800 bg-brand-100 px-2.5 py-1 rounded-md border border-brand-300"><i class="fa-solid fa-truck-fast mr-1"></i> Tracking ID: ${o.trackingId || 'Pending'}</span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold ${statusBadgeClass}">${o.status}</span>
               </div>
               <div class="text-sm font-bold text-gray-900">Total: ₹${o.totalAmount}</div>
-              <div class="text-xs text-gray-600 truncate">Address: ${o.address}</div>
+              <div class="text-xs text-gray-600">Address: ${o.address}</div>
               ${canCancel ? `<button onclick="cancelOrder('${o._id}')" class="px-3 py-1.5 bg-red-600 text-white font-bold text-xs rounded-lg hover:bg-red-700 mt-2 transition">Cancel Order</button>` : ''}
             </div>`;
         }).join('');
@@ -366,7 +364,7 @@
         const name = document.getElementById('regName').value, email = document.getElementById('regEmail').value, password = document.getElementById('regPassword').value;
         if (!name || !email || !password) return alert("Fill all fields.");
         try { const res = await fetch(`${API_BASE_URL}/api/register`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({name, email, password}) });
-            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); } else alert(data.message);
+            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Account created successfully!"); } else alert(data.message);
         } catch(err) { alert("Server error."); }
     }
     
@@ -374,7 +372,7 @@
         const email = document.getElementById('loginEmail').value, password = document.getElementById('loginPassword').value;
         if (!email || !password) return alert("Enter email and password.");
         try { const res = await fetch(`${API_BASE_URL}/api/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email, password}) });
-            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); } else alert(data.message);
+            const data = await res.json(); if (data.success) { currentUser = data.user; localStorage.setItem('mgPlantsUser', JSON.stringify(data.user)); updateAuthUI(); switchTab('account'); alert("Signed in successfully!"); } else alert(data.message);
         } catch(err) { alert("Server error."); }
     }
     
