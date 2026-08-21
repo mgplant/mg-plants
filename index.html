@@ -111,7 +111,7 @@
       </section>
     </div>
 
-    <!-- ACCOUNT DASHBOARD TAB (With Orders & 4-Hour Cancellation) -->
+    <!-- ACCOUNT DASHBOARD TAB -->
     <div id="view-account" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
@@ -175,7 +175,8 @@
   </div>
 
   <script>
-    const API_BASE_URL = 'https://mgplant-mg-plants-backend.onrender.com';
+    // UPDATED WITH YOUR LIVE RENDER BACKEND URL
+    const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
     let productsDB = []; let cart = []; let selectedCategory = 'all';
     let currentUser = JSON.parse(localStorage.getItem('mgPlantsUser'));
 
