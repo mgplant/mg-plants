@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,8 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } .hide-scrollbar::-webkit-scrollbar { display: none; } </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen relative">
 
+  <!-- HEADER NAVIGATION -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-18 py-3 gap-4">
       <a href="#" onclick="switchTab('home')" class="flex items-center gap-2.5">
@@ -37,6 +38,7 @@
 
   <main class="flex-1">
     
+    <!-- HOME TAB -->
     <div id="view-home" class="page-view">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-end justify-between mb-6">
@@ -47,6 +49,7 @@
       </section>
     </div>
 
+    <!-- SHOPPING TAB -->
     <div id="view-shop" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="mb-6 flex flex-col md:flex-row gap-4 justify-between">
@@ -69,6 +72,7 @@
       </section>
     </div>
 
+    <!-- LOGIN TAB -->
     <div id="view-login" class="page-view hidden">
       <section class="max-w-md mx-auto px-4 py-16">
         <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
@@ -91,6 +95,7 @@
       </section>
     </div>
 
+    <!-- ACCOUNT / TRACKING TAB -->
     <div id="view-account" class="page-view hidden">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row gap-8">
@@ -112,6 +117,20 @@
     </div>
   </main>
 
+  <!-- 🆕 FLOATING CUSTOMER SUPPORT WIDGET -->
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <a href="https://wa.me/916289954986?text=Hi%20MG%20Plants%20Support,%20I%20need%20help%20with%20my%20order." target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110 text-2xl cursor-pointer">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <!-- FOOTER WITH SUPPORT EMAIL -->
+  <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500 space-y-2">
+    <p>© 2026 MG Plants. All rights reserved.</p>
+    <p>Need help? Email us at <a href="mailto:support@mgplants.in" class="text-brand-700 font-bold hover:underline">support@mgplants.in</a> or message us on WhatsApp!</p>
+  </footer>
+
+  <!-- CART DRAWER -->
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/50 hidden"></div>
   <div id="cartDrawer" class="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
     <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-gray-50">
@@ -140,11 +159,9 @@
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-1 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
           <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
-          
           <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-44 h-44 flex items-center justify-center">
             <img src="https://i.ibb.co/Z08gKGB/IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" />
           </div>
-          
           <p class="text-[11px] text-gray-500 font-medium">Scan QR code or pay to <b>mgplants@nsdl</b>. Complete payment and you will be redirected to WhatsApp!</p>
         </div>
 
@@ -358,14 +375,12 @@
           const hoursElapsed = (Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60);
           const canCancel = hoursElapsed <= 4 && o.status !== 'Cancelled';
           
-          // Delivery status badge colors
           let statusBadgeClass = "bg-yellow-100 text-yellow-800";
           if(o.status === 'Processing') statusBadgeClass = "bg-blue-100 text-blue-800";
           if(o.status === 'Shipped') statusBadgeClass = "bg-purple-100 text-purple-800";
           if(o.status === 'Delivered') statusBadgeClass = "bg-green-100 text-green-800";
           if(o.status === 'Cancelled') statusBadgeClass = "bg-red-100 text-red-800";
 
-          // 🆕 Payment status badge colors
           let payBadgeClass = "bg-amber-100 text-amber-800";
           if(o.paymentStatus === 'Paid') payBadgeClass = "bg-emerald-100 text-emerald-800";
 
@@ -439,5 +454,6 @@
     }
   </script>
 </body>
-</html>
-    
+</html>         
+        
+      
