@@ -14,7 +14,6 @@
 </head>
 <body class="bg-gray-100 text-gray-800 antialiased h-screen overflow-hidden">
 
-  <!-- PASSWORD GATE -->
   <div id="passwordGate" class="flex items-center justify-center h-full w-full bg-gray-900 absolute inset-0 z-50">
     <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
       <div class="w-12 h-12 bg-brand-50 text-brand-700 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-lock"></i></div>
@@ -40,21 +39,19 @@
 
     <main class="flex-1 flex flex-col h-full overflow-hidden bg-gray-50">
       <header class="bg-white border-b border-gray-200 p-4 sm:p-6 flex items-center justify-between z-10">
-        <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold text-gray-900">Customer Orders & Delivery Status</h1>
+        <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold text-gray-900">Customer Orders & Status Control</h1>
       </header>
 
       <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
-        <!-- ORDERS TAB -->
         <div id="view-orders" class="admin-view space-y-4">
           <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
-              <span>Customer & Tracking</span><span>Address</span><span>Items</span><span>Total & Status Manager</span><span>Time</span>
+              <span>Customer & Tracking</span><span>Address</span><span>Items</span><span>Payment & Delivery Manager</span><span>Time</span>
             </div>
             <div id="adminOrdersList" class="divide-y divide-gray-100"><div class="p-6 text-center text-gray-400">Loading orders...</div></div>
           </div>
         </div>
 
-        <!-- INVENTORY TAB -->
         <div id="view-inventory" class="admin-view space-y-4 hidden">
           <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
@@ -67,7 +64,6 @@
     </main>
   </div>
 
-  <!-- EDIT PRODUCT MODAL -->
   <div id="editProductModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
     <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
       <h2 class="text-xl font-extrabold mb-4 text-gray-900 flex justify-between">Edit Product <button onclick="closeEditModal()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark"></i></button></h2>
@@ -106,7 +102,7 @@
       document.querySelectorAll('.admin-nav').forEach(btn => { btn.classList.remove('bg-brand-700', 'text-white'); btn.classList.add('text-gray-400'); });
       document.getElementById(`nav-${tabId}`).classList.remove('text-gray-400');
       document.getElementById(`nav-${tabId}`).classList.add('bg-brand-700', 'text-white');
-      document.getElementById('pageTitle').innerText = tabId === 'orders' ? 'Customer Orders & Delivery Status' : 'Manage Inventory & Pricing';
+      document.getElementById('pageTitle').innerText = tabId === 'orders' ? 'Customer Orders & Status Control' : 'Manage Inventory & Pricing';
     }
 
     async function loadAdminOrders() {
@@ -125,14 +121,23 @@
             </div>
             <div class="text-xs text-gray-600">${o.address}</div>
             <div>${o.items.map(i => `<span class="block text-xs font-medium text-gray-700">• ${i.name} (x${i.qty})</span>`).join('')}</div>
-            <div>
-              <span class="font-extrabold text-gray-900 block mb-1">₹${o.totalAmount}</span>
-              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1.5 rounded border bg-white outline-none cursor-pointer shadow-sm">
-                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Pending</option>
-                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Processing</option>
-                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Shipped</option>
-                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Delivered</option>
-                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+            <div class="space-y-2">
+              <span class="font-extrabold text-gray-900 block">₹${o.totalAmount}</span>
+              
+              <!-- Payment Status Selector -->
+              <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
+                <option value="Payment Pending" ${o.paymentStatus === 'Payment Pending' ? 'selected' : ''}>⏳ Payment Pending</option>
+                <option value="Payment Pending (COD)" ${o.paymentStatus === 'Payment Pending (COD)' ? 'selected' : ''}>💵 Pending (COD)</option>
+                <option value="Paid" ${o.paymentStatus === 'Paid' ? 'selected' : ''}>✅ Paid / Confirmed</option>
+              </select>
+
+              <!-- Delivery Status Selector -->
+              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Status: Pending</option>
+                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Status: Processing</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Status: Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Status: Delivered</option>
+                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Status: Cancelled</option>
               </select>
             </div>
             <div class="text-xs text-gray-400">${new Date(o.createdAt).toLocaleDateString()}</div>
@@ -141,22 +146,26 @@
       } catch (err) { console.error("Failed to load orders"); }
     }
 
-    // 🆕 NEW: Function to instantly update order status on the server
     async function updateOrderStatus(orderId, newStatus) {
       try {
         const res = await fetch(`${API_BASE_URL}/api/admin/order-status/${orderId}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: newStatus })
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: newStatus })
         });
         const data = await res.json();
-        if (data.success) {
-          alert(`Status updated to: ${newStatus}`);
-          loadAdminOrders();
-        } else {
-          alert('Failed to update status.');
-        }
-      } catch (err) { alert('Server connection error.'); }
+        if (data.success) { alert(`Delivery status updated to: ${newStatus}`); loadAdminOrders(); } 
+        else alert('Failed to update status.');
+      } catch (err) { alert('Server error.'); }
+    }
+
+    async function updatePaymentStatus(orderId, newPayStatus) {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/admin/payment-status/${orderId}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ paymentStatus: newPayStatus })
+        });
+        const data = await res.json();
+        if (data.success) { alert(`Payment status updated to: ${newPayStatus}`); loadAdminOrders(); } 
+        else alert('Failed to update payment status.');
+      } catch (err) { alert('Server error.'); }
     }
 
     async function loadAdminInventory() {
