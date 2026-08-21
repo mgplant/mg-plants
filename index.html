@@ -36,7 +36,6 @@
   </header>
 
   <main class="flex-1">
-    
     <div id="view-home" class="page-view">
       <section class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-end justify-between mb-6">
@@ -121,7 +120,7 @@
     
     <div id="cartDrawerItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
     
-    <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[60vh]">
+    <div class="p-5 border-t border-gray-200 bg-white space-y-4 overflow-y-auto max-h-[65vh]">
       <div class="flex justify-between text-lg font-extrabold border-b pb-3"><span>Subtotal</span><span id="cartTotal" class="text-brand-700">₹0</span></div>
       
       <div id="checkoutFormSection" class="hidden space-y-3 pt-2">
@@ -137,26 +136,40 @@
           </label>
         </div>
 
+        <!-- 📌 YOUR EXACT UPLOADED QR CODE EMBEDDED -->
         <div id="onlinePaymentNotice" class="hidden p-4 bg-gray-50 rounded-xl mb-2 border border-gray-200 flex flex-col items-center text-center">
           <p class="font-bold text-gray-900 mb-1 text-sm"><i class="fa-brands fa-google-pay text-lg mr-1 text-blue-600"></i> Pay securely via UPI</p>
           <p class="font-extrabold text-brand-700 bg-brand-50 px-3 py-1 rounded-lg border border-brand-100 mb-3 tracking-wide">mgplants@nsdl</p>
-          <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-40 h-40 flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" alt="Scan to Pay" class="w-full h-full object-cover rounded-lg" />
+          
+          <div class="bg-white p-2 rounded-xl border shadow-sm mb-3 w-44 h-44 flex items-center justify-center">
+            <img src="IMG-20260821-WA0005.jpg" alt="MG Plants QR Code" class="w-full h-full object-contain rounded-lg" onerror="this.src='https://i.ibb.co/1Z43p8b/qr-placeholder.png'" />
           </div>
-          <p class="text-[11px] text-gray-500 font-medium">Scan QR or pay to <b>mgplants@nsdl</b>. You will be redirected to WhatsApp to share your screenshot!</p>
+          
+          <p class="text-[11px] text-gray-500 font-medium">Scan QR code or pay to <b>mgplants@nsdl</b>. Complete payment and you will be redirected to WhatsApp!</p>
         </div>
 
-        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping Details</label>
-        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
-        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
-        <textarea id="custAddress" placeholder="Full Delivery Address & PIN Code *" rows="2" class="w-full p-3 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required></textarea>
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider block mt-4">Shipping & Delivery Address</label>
         
+        <input type="text" id="custName" placeholder="Full Name *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        <input type="tel" id="custPhone" placeholder="Mobile Number *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        
+        <!-- 🆕 DIVIDED PROFESSIONAL ADDRESS FIELDS -->
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="custHouse" placeholder="House / Flat No. *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custArea" placeholder="Area / Street / Landmark *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <input type="text" id="custCity" placeholder="City *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custState" placeholder="State *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+          <input type="text" id="custPin" placeholder="PIN Code *" class="w-full p-2.5 bg-gray-50 border rounded-xl text-sm outline-none focus:border-brand-500" required />
+        </div>
+
         <label class="flex items-center gap-2 cursor-pointer mt-1">
           <input type="checkbox" id="saveAddressCheck" class="w-4 h-4 accent-brand-600" checked>
           <span class="text-xs font-medium text-gray-600">Save address & phone for next time</span>
         </label>
 
-        <button onclick="submitOrderToBackend()" class="w-full py-4 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg mt-4 flex items-center justify-center gap-2 text-base transition">
+        <button onclick="submitOrderToBackend()" class="w-full py-3.5 bg-brand-700 hover:bg-brand-800 text-white font-extrabold rounded-xl shadow-lg mt-3 flex items-center justify-center gap-2 text-base transition">
           Confirm & Place Order <i class="fa-brands fa-whatsapp text-lg ml-1"></i>
         </button>
       </div>
@@ -257,7 +270,6 @@
       labels[1].parentElement.className = labels[1].checked ? "flex-1 border-2 border-brand-500 bg-brand-50 p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative" : "flex-1 border-2 border-gray-200 bg-white p-2.5 rounded-xl flex items-center gap-2 cursor-pointer transition relative";
     }
 
-    // 🔒 STRICT RULE: MUST BE LOGGED IN TO CHECKOUT
     function openCheckoutForm() {
       if (cart.length === 0) return alert("Cart is empty!");
       if (!currentUser) {
@@ -268,30 +280,57 @@
       document.getElementById('checkoutFormSection').classList.remove('hidden'); document.getElementById('proceedCheckoutBtn').classList.add('hidden');
       
       document.getElementById('custName').value = currentUser.name;
+      
+      // Auto-fill saved address fields if available
+      const savedHouse = localStorage.getItem('mgHouse');
+      const savedArea = localStorage.getItem('mgArea');
+      const savedCity = localStorage.getItem('mgCity');
+      const savedState = localStorage.getItem('mgState');
+      const savedPin = localStorage.getItem('mgPin');
       const savedPhone = localStorage.getItem('mgSavedPhone');
-      const savedAddress = localStorage.getItem('mgSavedAddress');
+
       if (savedPhone) document.getElementById('custPhone').value = savedPhone;
-      if (savedAddress) document.getElementById('custAddress').value = savedAddress;
+      if (savedHouse) document.getElementById('custHouse').value = savedHouse;
+      if (savedArea) document.getElementById('custArea').value = savedArea;
+      if (savedCity) document.getElementById('custCity').value = savedCity;
+      if (savedState) document.getElementById('custState').value = savedState;
+      if (savedPin) document.getElementById('custPin').value = savedPin;
     }
 
     async function submitOrderToBackend() {
       if (!currentUser) { toggleCartDrawer(false); switchTab('login'); return alert("Please sign in first!"); }
 
-      const name = document.getElementById('custName').value, phone = document.getElementById('custPhone').value, address = document.getElementById('custAddress').value;
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const house = document.getElementById('custHouse').value;
+      const area = document.getElementById('custArea').value;
+      const city = document.getElementById('custCity').value;
+      const state = document.getElementById('custState').value;
+      const pin = document.getElementById('custPin').value;
+      
       const payMethod = document.querySelector('input[name="payMethod"]:checked').value;
       
-      if (!name || !phone || !address) return alert("Please fill all fields!");
+      if (!name || !phone || !house || !area || !city || !state || !pin) {
+        return alert("Please fill out all address and contact fields completely!");
+      }
+
+      // Combine structured address into one clean string for the backend/admin
+      const fullAddress = `${house}, ${area}, ${city}, ${state} - ${pin}`;
       
       if(document.getElementById('saveAddressCheck').checked) {
         localStorage.setItem('mgSavedPhone', phone);
-        localStorage.setItem('mgSavedAddress', address);
+        localStorage.setItem('mgHouse', house);
+        localStorage.setItem('mgArea', area);
+        localStorage.setItem('mgCity', city);
+        localStorage.setItem('mgState', state);
+        localStorage.setItem('mgPin', pin);
       }
       
       const totalAmount = cart.reduce((s, i) => s + (i.price * i.qty), 0);
       try {
         const res = await fetch(`${API_BASE_URL}/api/orders`, { 
             method: 'POST', headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ customerName: name, phone, address: `[${payMethod}] ` + address, items: cart, totalAmount }) 
+            body: JSON.stringify({ customerName: name, phone, address: `[${payMethod}] ` + fullAddress, items: cart, totalAmount }) 
         });
         const data = await res.json();
         
@@ -322,7 +361,6 @@
           const hoursElapsed = (Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60);
           const canCancel = hoursElapsed <= 4 && o.status !== 'Cancelled';
           
-          // Badge colors matching status
           let statusBadgeClass = "bg-yellow-100 text-yellow-800";
           if(o.status === 'Processing') statusBadgeClass = "bg-blue-100 text-blue-800";
           if(o.status === 'Shipped') statusBadgeClass = "bg-purple-100 text-purple-800";
