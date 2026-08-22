@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -16,8 +16,8 @@
       <span class="text-lg font-bold ml-2">MG Plants Admin</span>
     </div>
     <nav class="flex-1 px-4 py-6 space-y-2">
-      <a href="#" onclick="switchTab('inventory')" class="flex items-center px-4 py-3 bg-emerald-600 text-white rounded-lg transition"><i class="fa-solid fa-boxes-stacked w-6"></i> Manage Inventory</a>
-      <a href="#" onclick="switchTab('orders')" class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition"><i class="fa-solid fa-truck-fast w-6"></i> Live Orders</a>
+      <a href="#" id="sidebar-inventory" onclick="switchTab('inventory')" class="flex items-center px-4 py-3 bg-emerald-600 text-white rounded-lg transition"><i class="fa-solid fa-boxes-stacked w-6"></i> Manage Inventory</a>
+      <a href="#" id="sidebar-orders" onclick="switchTab('orders')" class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition"><i class="fa-solid fa-truck-fast w-6"></i> Live Orders</a>
       <a href="/index.html" class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition mt-10"><i class="fa-solid fa-store w-6"></i> View Storefront</a>
     </nav>
   </aside>
@@ -51,9 +51,24 @@
         </table>
       </div>
 
-      <!-- ORDERS TAB (Placeholder for your existing orders code) -->
-      <div id="orders-tab" class="hidden">
-        <p class="text-gray-500">Orders management goes here.</p>
+      <!-- LIVE ORDERS TAB (FIXED WITH FULL TABLE) -->
+      <div id="orders-tab" class="hidden space-y-4">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase text-gray-500 font-bold tracking-wider">
+                <th class="p-4">Tracking ID & Date</th>
+                <th class="p-4">Customer Details</th>
+                <th class="p-4">Items Ordered</th>
+                <th class="p-4">Total & Payment</th>
+                <th class="p-4">Order Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-orders-list" class="divide-y divide-gray-100 text-sm">
+              <tr><td colspan="5" class="p-6 text-center text-gray-400">Loading live orders...</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
     </div>
@@ -132,14 +147,24 @@
     const BACKEND_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
     let adminProducts = [];
 
-    document.addEventListener('DOMContentLoaded', fetchAdminProducts);
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchAdminProducts();
+      fetchAdminOrders();
+    });
 
     function switchTab(tab) {
       document.getElementById('inventory-tab').classList.add('hidden');
       document.getElementById('orders-tab').classList.add('hidden');
+      document.getElementById('sidebar-inventory').className = "flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition";
+      document.getElementById('sidebar-orders').className = "flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition";
+
       document.getElementById(tab + '-tab').classList.remove('hidden');
+      document.getElementById('sidebar-' + tab).className = "flex items-center px-4 py-3 bg-emerald-600 text-white rounded-lg transition";
+      
       document.getElementById('page-title').innerText = tab === 'inventory' ? 'Manage Inventory & Pricing' : 'Live Orders Management';
       document.getElementById('add-btn').style.display = tab === 'inventory' ? 'flex' : 'none';
+      
+      if (tab === 'orders') fetchAdminOrders();
     }
 
     async function fetchAdminProducts() {
@@ -173,6 +198,73 @@
           </td>
         </tr>
       `).join('');
+    }
+
+    // --- LIVE ORDERS FETCH & UPDATE ---
+    async function fetchAdminOrders() {
+      const tbody = document.getElementById('admin-orders-list');
+      tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-400">Loading live orders...</td></tr>`;
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/admin/orders`);
+        const orders = await res.json();
+        
+        if (!orders || orders.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500">No live orders found yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = orders.map(o => `
+          <tr class="hover:bg-gray-50 transition">
+            <td class="p-4">
+              <span class="font-bold text-emerald-800">${o.trackingId}</span>
+              <div class="text-xs text-gray-400 mt-0.5">${new Date(o.createdAt).toLocaleString()}</div>
+            </td>
+            <td class="p-4">
+              <div class="font-bold text-gray-900">${o.customerName}</div>
+              <div class="text-xs text-gray-600"><i class="fa-solid fa-phone mr-1"></i>${o.phone}</div>
+              <div class="text-xs text-gray-500 mt-1 max-w-xs">${o.address}</div>
+            </td>
+            <td class="p-4">
+              <div class="text-xs space-y-1">
+                ${(o.items || []).map(i => `<div>&bull; ${i.name} &times; ${i.quantity}</div>`).join('')}
+              </div>
+            </td>
+            <td class="p-4">
+              <div class="font-extrabold text-gray-900">₹${o.totalAmount}</div>
+              <div class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-1">${o.paymentStatus}</div>
+            </td>
+            <td class="p-4">
+              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold px-2.5 py-1.5 rounded-lg border border-gray-300 outline-none bg-white">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-500">Could not load live orders.</td></tr>`;
+      }
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/admin/order-status/${orderId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`✅ Order status updated to "${newStatus}"`);
+        } else {
+          alert('Failed to update status.');
+        }
+      } catch (err) {
+        alert('Server communication error.');
+      }
     }
 
     function openProductModal(id = null) {
@@ -210,7 +302,6 @@
 
     function closeProductModal() { document.getElementById('admin-product-modal').classList.add('hidden'); }
 
-    // Live Image Preview Update
     document.getElementById('prod-image').addEventListener('input', (e) => {
       document.getElementById('image-preview').src = e.target.value || 'https://via.placeholder.com/150';
     });
