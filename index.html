@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+           <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -339,24 +339,38 @@
         const res = await fetch(`${BACKEND_URL}/api/products`);
         let dbProducts = await responseJsonSafe(res);
         
-        // AUTO-INJECTOR: Force these missing categories into the frontend if they aren't in the DB yet!
+        // AUTO-INJECTOR: All 20+ Premium Categorized Plants Injected Instantly
         const autoInjectProducts = [
           { id: 'PRD-OU-01', name: 'Areca Palm Tree', category: 'Outdoor', price: 549, origPrice: 800, bestSeller: true, image: 'https://images.unsplash.com/photo-1605553106316-2d3ea9f6c0eb?w=500', reviews: [] },
           { id: 'PRD-OU-02', name: 'Pink Bougainvillea', category: 'Outdoor', price: 349, origPrice: 500, bestSeller: false, image: 'https://images.unsplash.com/photo-1629853925528-917fc9f627ba?w=500', reviews: [] },
           { id: 'PRD-OU-03', name: 'Ficus Bonsai Plant', category: 'Outdoor', price: 899, origPrice: 1200, bestSeller: true, image: 'https://images.unsplash.com/photo-1599598425947-33001c0ae5e5?w=500', reviews: [] },
+          
+          /* --- NEW FRUITS --- */
           { id: 'PRD-FR-01', name: 'Grafted Mango Plant (Alphonso)', category: 'Fruits', price: 450, origPrice: 650, bestSeller: true, image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=500', reviews: [] },
-          { id: 'PRD-FR-02', name: 'Dwarf Lemon Tree (Nimbu)', category: 'Fruits', price: 299, origPrice: 400, bestSeller: true, image: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=500', reviews: [] },
-          { id: 'PRD-FR-03', name: 'Red Guava Plant', category: 'Fruits', price: 350, origPrice: 499, bestSeller: false, image: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=500', reviews: [] },
-          { id: 'PRD-FL-01', name: 'Classic Red Rose Plant', category: 'Flowers', price: 249, origPrice: 399, bestSeller: true, image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500', reviews: [] },
+          { id: 'PRD-FR-02', name: 'Kagzi Lemon Tree (Nimbu)', category: 'Fruits', price: 299, origPrice: 400, bestSeller: true, image: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=500', reviews: [] },
+          { id: 'PRD-FR-03', name: 'Thai Pink Guava (Amrood)', category: 'Fruits', price: 350, origPrice: 499, bestSeller: false, image: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=500', reviews: [] },
+          { id: 'PRD-FR-04', name: 'Pomegranate (Anar - Bhagwa)', category: 'Fruits', price: 399, origPrice: 550, bestSeller: true, image: 'https://images.unsplash.com/photo-1615486171448-4fd17fb797fa?w=500', reviews: [] },
+          { id: 'PRD-FR-05', name: 'Chikoo (Sapota) Grafted Plant', category: 'Fruits', price: 349, origPrice: 500, bestSeller: true, image: 'https://images.unsplash.com/photo-1628689469838-524a460a8b98?w=500', reviews: [] },
+          { id: 'PRD-FR-06', name: 'Dwarf Papaya (Red Lady)', category: 'Fruits', price: 199, origPrice: 300, bestSeller: false, image: 'https://images.unsplash.com/photo-1614820359754-0648df473855?w=500', reviews: [] },
+          { id: 'PRD-FR-07', name: 'Custard Apple (Sitaphal)', category: 'Fruits', price: 299, origPrice: 450, bestSeller: false, image: 'https://images.unsplash.com/photo-1596489376483-b71569766487?w=500', reviews: [] },
+
+          /* --- NEW FLOWERS --- */
+          { id: 'PRD-FL-01', name: 'Desi Rose (Gulab)', category: 'Flowers', price: 249, origPrice: 399, bestSeller: true, image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500', reviews: [] },
           { id: 'PRD-FL-02', name: 'Fragrant Jasmine (Mogra)', category: 'Flowers', price: 199, origPrice: 300, bestSeller: true, image: 'https://images.unsplash.com/photo-1546842603-519782cc4107?w=500', reviews: [] },
           { id: 'PRD-FL-03', name: 'Purple Lavender Plant', category: 'Flowers', price: 399, origPrice: 550, bestSeller: false, image: 'https://images.unsplash.com/photo-1498805983167-a523078d762c?w=500', reviews: [] },
+          { id: 'PRD-FL-04', name: 'Hibiscus (Gudhal) - Red', category: 'Flowers', price: 199, origPrice: 280, bestSeller: true, image: 'https://images.unsplash.com/photo-1596395819057-cb3bdbe73d09?w=500', reviews: [] },
+          { id: 'PRD-FL-05', name: 'Plumeria (Champa)', category: 'Flowers', price: 299, origPrice: 420, bestSeller: true, image: 'https://images.unsplash.com/photo-1620915668631-fbf2202611e9?w=500', reviews: [] },
+          { id: 'PRD-FL-06', name: 'Night-Blooming Jasmine (Parijat)', category: 'Flowers', price: 249, origPrice: 350, bestSeller: true, image: 'https://images.unsplash.com/photo-1618388836585-783305417ab7?w=500', reviews: [] },
+          { id: 'PRD-FL-07', name: 'Adenium (Desert Rose)', category: 'Flowers', price: 449, origPrice: 600, bestSeller: false, image: 'https://images.unsplash.com/photo-1605386186419-48e0254c7b8e?w=500', reviews: [] },
+
+          /* --- SEEDS --- */
           { id: 'PRD-SD-01', name: 'Organic Tomato Seeds (Pack of 50)', category: 'Seeds', price: 99, origPrice: 150, bestSeller: true, image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=500', reviews: [] },
           { id: 'PRD-SD-02', name: 'Holy Basil (Tulsi) Seeds', category: 'Seeds', price: 79, origPrice: 120, bestSeller: true, image: 'https://images.unsplash.com/photo-1598512140407-7429d3326176?w=500', reviews: [] },
           { id: 'PRD-SD-03', name: 'Sunflower Seeds (Pack of 30)', category: 'Seeds', price: 89, origPrice: 140, bestSeller: false, image: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?w=500', reviews: [] }
         ];
 
         // Check if the DB already has these items so we don't duplicate them
-        const hasNewItems = dbProducts.some(p => p.id === 'PRD-FR-01');
+        const hasNewItems = dbProducts.some(p => p.id === 'PRD-FR-04');
         if (!hasNewItems) {
             dbProducts = [...autoInjectProducts, ...dbProducts];
         }
@@ -663,4 +677,4 @@
     function toBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error); }); }
   </script>
 </body>
-</html>
+</html> 
