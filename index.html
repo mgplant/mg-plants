@@ -124,7 +124,7 @@
     </div>
   </div>
 
-  <!-- 2. PRODUCT DETAIL & REVIEW MODAL (ADDED DESC & STOCK) -->
+  <!-- 2. PRODUCT DETAIL & REVIEW MODAL -->
   <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
       <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
@@ -142,7 +142,6 @@
             </div>
             <div id="pd-rating-summary" class="mt-1 text-sm text-yellow-500 font-bold tracking-widest"></div>
 
-            <!-- NEW: LIVE STOCK STATUS -->
             <div class="mt-3 flex items-center space-x-2">
               <span class="flex h-3 w-3 relative">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -151,7 +150,6 @@
               <p id="pd-stock" class="text-sm font-semibold text-emerald-700">In Stock & Ready to Dispatch</p>
             </div>
 
-            <!-- NEW: PRODUCT DESCRIPTION -->
             <div class="mt-4 border-t pt-3">
               <h4 class="text-[11px] font-bold text-gray-800 uppercase tracking-wide mb-1">Product Description</h4>
               <p id="pd-description" class="text-sm text-gray-600 leading-relaxed"></p>
@@ -168,7 +166,6 @@
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center"><i class="fa-solid fa-star text-yellow-500 mr-2"></i> Customer Reviews</h3>
         <form id="review-form" onsubmit="handleReviewSubmit(event)" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 space-y-3">
           <input type="hidden" id="review-product-id">
-          <h4 class="text-sm font-bold text-gray-800 border-b pb-2 mb-2">Write a Review</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Your Name</label>
@@ -194,7 +191,7 @@
     </div>
   </div>
 
-  <!-- 3. CART MODAL -->
+  <!-- 3. CART MODAL WITH PLUS/MINUS -->
   <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] flex flex-col justify-between">
       <div>
@@ -280,7 +277,22 @@
     </div>
   </div>
 
-  <!-- 6. ARTO / RETURN MODAL -->
+  <!-- 6. REFUND REQUEST MODAL -->
+  <div id="refund-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeRefundModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h3 class="text-base font-bold text-gray-900 mb-3">Request Refund</h3>
+      <p class="text-[11px] text-gray-500 mb-2">Please explain the issue and provide photo proof for admin review.</p>
+      <form onsubmit="handleSubmitRefund(event)" class="space-y-3">
+        <input type="hidden" id="refund-order-id">
+        <div><label class="block text-xs font-semibold text-gray-700 mb-1">Reason / Comment</label><textarea id="refund-reason" required rows="3" class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea></div>
+        <div><label class="block text-xs font-semibold text-gray-700 mb-1">Attach Photo Evidence</label><input type="file" id="refund-image-input" accept="image/*" class="w-full text-xs text-gray-500 file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"></div>
+        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium text-sm transition">Submit Refund Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. ARTO / RETURN MODAL -->
   <div id="return-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
       <button onclick="closeReturnModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -362,7 +374,7 @@
           renderAuthButton(); closeAuthModal();
           alert(currentAuthMode === 'signup' ? '🎉 Account created successfully!' : '✅ Welcome back!');
         } else { alert(data.message || 'Authentication failed.'); }
-      } catch (err) { alert('Server connection error. Please wait 60 seconds and try again (Server might be waking up).'); } 
+      } catch (err) { alert('Server connection error. Please wait 60 seconds and try again.'); } 
       finally { submitBtn.disabled = false; submitBtn.innerText = currentAuthMode === 'signup' ? 'Create Account' : 'Sign In'; }
     }
 
@@ -613,7 +625,25 @@
         let subtotal = 0;
         container.innerHTML = cart.map((item, idx) => {
           subtotal += item.price * item.quantity;
-          return `<div class="flex items-center justify-between border-b pb-2"><div class="flex items-center space-x-3"><img src="${item.image}" class="w-12 h-12 object-cover rounded-md border border-gray-100"><div><h4 class="text-xs font-bold text-gray-900">${item.name}</h4><div class="flex items-center mt-1"><p class="text-xs text-emerald-700 font-semibold mr-3">₹${item.price}</p><div class="flex items-center bg-gray-100 rounded-md border border-gray-200"><button onclick="changeQty(${idx}, -1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">-</button><span class="text-[10px] font-bold w-4 text-center">${item.quantity}</span><button onclick="changeQty(${idx}, 1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">+</button></div></div></div></div><button onclick="removeFromCart(${idx})" class="text-red-400 hover:text-red-600 text-xs p-2"><i class="fa-solid fa-trash"></i></button></div>`;
+          return `
+            <div class="flex items-center justify-between border-b pb-3">
+              <div class="flex items-center space-x-3">
+                <img src="${item.image}" class="w-12 h-12 object-cover rounded-md border border-gray-100">
+                <div>
+                  <h4 class="text-xs font-bold text-gray-900">${item.name}</h4>
+                  <div class="flex items-center mt-1">
+                    <p class="text-xs text-emerald-700 font-semibold mr-3">₹${item.price}</p>
+                    <div class="flex items-center bg-gray-100 rounded-md border border-gray-200">
+                      <button onclick="changeQty(${idx}, -1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">-</button>
+                      <span class="text-[10px] font-bold w-4 text-center">${item.quantity}</span>
+                      <button onclick="changeQty(${idx}, 1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button onclick="removeFromCart(${idx})" class="text-red-400 hover:text-red-600 text-xs p-2"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          `;
         }).join('');
         subtotalEl.innerText = `₹${subtotal}`; totalEl.innerText = `₹${subtotal + 99 + 5}`;
       }
@@ -625,7 +655,7 @@
     function openCheckoutModal() {
       if (cart.length === 0) return alert('Your cart is empty.');
       closeCartModal(); 
-      preloadSavedAddress(); // Ensure saved address fills out when modal opens
+      preloadSavedAddress(); 
       togglePaymentUI(); 
       document.getElementById('checkout-modal').classList.remove('hidden');
     }
@@ -640,7 +670,6 @@
         upiBox.classList.remove('hidden'); 
         const upiString = `upi://pay?pa=mgplants@nsdl&pn=MG%20Plants&am=${totalAmount}&cu=INR`;
         document.getElementById('upi-pay-link').href = upiString;
-        // DYNAMIC QR CODE GENERATION
         document.getElementById('upi-qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiString)}`;
       } else { 
         upiBox.classList.add('hidden'); 
@@ -670,7 +699,6 @@
       const payMethod = document.querySelector('input[name="payment-method"]:checked').value;
       const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + 99 + 5;
 
-      // Save structured address format for future
       localStorage.setItem('mg_saved_address', JSON.stringify({ name, phone, address, city, pin }));
       const fullAddressString = `${address}, ${city} - ${pin} [${payMethod}] - Email: ${currentUser ? currentUser.email : 'Guest'}`;
 
@@ -713,16 +741,19 @@
         container.innerHTML = myOrders.map(o => {
           const isCancellable = ((Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60)) <= 4 && o.status !== 'Cancelled';
           return `
-            <div class="border rounded-xl p-3.5 space-y-2 text-xs">
+            <div class="border rounded-xl p-3.5 space-y-2 text-xs bg-gray-50">
               <div class="flex justify-between items-center font-bold">
                 <span class="text-emerald-800">${o.trackingId}</span>
                 <span class="px-2 py-0.5 rounded-full text-[10px] ${o.status === 'Cancelled' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800'}">${o.status}</span>
               </div>
-              <p class="text-gray-600">Total: <strong>₹${o.totalAmount}</strong> &bull; Payment: ${o.paymentStatus}</p>
+              <p class="text-gray-600">Total: <strong>₹${o.totalAmount}</strong> &bull; Payment Status: <span class="text-emerald-700 font-bold">${o.paymentStatus}</span></p>
               <div class="flex space-x-2 pt-2 border-t">
                 ${isCancellable ? `<button onclick="cancelOrder('${o._id}')" class="bg-red-50 text-red-600 px-3 py-1 rounded font-semibold hover:bg-red-100">Cancel Order (4h window)</button>` : ''}
-                ${o.status === 'Cancelled' && o.paymentStatus.includes('Paid') && !o.refundRequested ? `<button onclick="requestRefund('${o._id}')" class="bg-blue-50 text-blue-600 px-3 py-1 rounded font-semibold">Request Refund</button>` : ''}
-                ${o.status === 'Delivered' ? `<button onclick="openReturnModal('${o._id}')" class="bg-amber-50 text-amber-700 px-3 py-1 rounded font-semibold">Request Return (ARTO)</button>` : ''}
+                ${o.status === 'Cancelled' && o.paymentStatus.includes('Paid') && !o.refundRequested ? `<button onclick="openRefundModal('${o._id}')" class="bg-blue-50 text-blue-600 px-3 py-1 rounded font-semibold">Request Refund</button>` : ''}
+                ${o.status === 'Delivered' ? `
+                  <button onclick="openRefundModal('${o._id}')" class="bg-blue-50 text-blue-600 px-3 py-1 rounded font-semibold">Request Refund</button>
+                  <button onclick="openReturnModal('${o._id}')" class="bg-amber-50 text-amber-700 px-3 py-1 rounded font-semibold">Request Return (ARTO)</button>
+                ` : ''}
               </div>
             </div>
           `;
@@ -735,9 +766,21 @@
       if (!confirm('Are you sure you want to cancel this order?')) return;
       try { const res = await fetch(`${BACKEND_URL}/api/orders/cancel/${id}`, { method: 'POST' }); alert((await responseJsonSafe(res)).message || 'Updated'); openAccountModal(); } catch (e) { alert('Error cancelling order'); }
     }
-    async function requestRefund(id) {
-      try { const res = await fetch(`${BACKEND_URL}/api/orders/refund/${id}`, { method: 'POST' }); alert((await responseJsonSafe(res)).message || 'Refund requested'); openAccountModal(); } catch (e) { alert('Error requesting refund'); }
+
+    function openRefundModal(id) { document.getElementById('refund-order-id').value = id; document.getElementById('refund-modal').classList.remove('hidden'); }
+    function closeRefundModal() { document.getElementById('refund-modal').classList.add('hidden'); }
+    async function handleSubmitRefund(e) {
+      e.preventDefault();
+      const id = document.getElementById('refund-order-id').value;
+      const reason = document.getElementById('refund-reason').value;
+      const fileInput = document.getElementById('refund-image-input');
+      let base64Image = ''; if (fileInput.files && fileInput.files[0]) base64Image = await toBase64(fileInput.files[0]);
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/orders/refund/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ reason, image: base64Image }) });
+        alert((await responseJsonSafe(res)).message || 'Refund request submitted for admin review.'); closeRefundModal(); openAccountModal();
+      } catch (err) { alert('Error submitting refund request'); }
     }
+
     function openReturnModal(orderId) { document.getElementById('return-order-id').value = orderId; document.getElementById('return-modal').classList.remove('hidden'); }
     function closeReturnModal() { document.getElementById('return-modal').classList.add('hidden'); }
     async function handleSubmitReturn(e) {
@@ -748,7 +791,7 @@
       let base64Image = ''; if (fileInput.files && fileInput.files[0]) base64Image = await toBase64(fileInput.files[0]);
       try {
         const res = await fetch(`${BACKEND_URL}/api/orders/return/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ reason, image: base64Image }) });
-        alert((await responseJsonSafe(res)).message || 'Return submitted'); closeReturnModal(); openAccountModal();
+        alert((await responseJsonSafe(res)).message || 'Return request submitted. Admin will review within 48 hours of product receipt.'); closeReturnModal(); openAccountModal();
       } catch (err) { alert('Error submitting return'); }
     }
 
