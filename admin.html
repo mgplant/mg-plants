@@ -193,41 +193,46 @@
       
       if (orders.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500">No live orders found.</td></tr>`; return; }
 
-      tbody.innerHTML = orders.map(o => `
-        <tr class="hover:bg-gray-50 transition align-top">
-          <td class="p-4">
-            <div class="font-bold text-gray-900">${o.customerName}</div>
-            <div class="text-xs text-gray-600"><i class="fa-solid fa-phone mr-1"></i>${o.phone}</div>
-            <div class="text-xs font-bold text-emerald-800 mt-1"><i class="fa-solid fa-box mr-1"></i>${o.trackingId}</div>
-            <div class="text-[10px] text-gray-400 mt-0.5">${new Date(o.createdAt).toLocaleDateString()}</div>
-          </td>
-          <td class="p-4 text-xs text-gray-600 max-w-xs">
-            ${o.address}
-            ${o.returnReason ? `<div class="mt-2 text-amber-700 bg-amber-50 p-2 rounded"><strong>ARTO Return Issue:</strong> ${o.returnReason} ${o.returnImage ? `<br><a href="${o.returnImage}" target="_blank" class="text-blue-600 underline">View Photo Proof</a>` : ''}</div>` : ''}
-            ${o.refundReason ? `<div class="mt-2 text-blue-700 bg-blue-50 p-2 rounded"><strong>Refund Issue:</strong> ${o.refundReason} ${o.refundImage ? `<br><a href="${o.refundImage}" target="_blank" class="text-blue-600 underline">View Photo Proof</a>` : ''}</div>` : ''}
-          </td>
-          <td class="p-4 text-xs">${(o.items || []).map(i => `<div>&bull; ${i.name} (&times;${i.quantity})</div>`).join('')}</td>
-          <td class="p-4">
-            <div class="font-extrabold text-gray-900">₹${o.totalAmount}</div>
-            <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-[11px] font-semibold mt-1 px-2 py-1 rounded border bg-white outline-none">
-              <option value="Payment Under Review" ${o.paymentStatus === 'Payment Under Review' ? 'selected' : ''}>Payment Under Review</option>
-              <option value="Paid / Confirmed" ${o.paymentStatus.includes('Paid') ? 'selected' : ''}>Paid / Confirmed</option>
-              <option value="Payment Pending (COD)" ${o.paymentStatus.includes('COD') ? 'selected' : ''}>COD</option>
-            </select>
-          </td>
-          <td class="p-4">
-            <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold px-2.5 py-1.5 rounded border outline-none bg-white">
-              <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>Processing</option>
-              <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
-              <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
-              <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-              <option value="ARTO Reviewing" ${o.status === 'ARTO Reviewing' ? 'selected' : ''}>ARTO Reviewing</option>
-              <option value="Refund Reviewing" ${o.status === 'Refund Reviewing' ? 'selected' : ''}>Refund Reviewing</option>
-            </select>
-          </td>
-        </tr>
-      `).join('');
+      tbody.innerHTML = orders.map(o => {
+        // Date-only formatting (no time)
+        const orderDateOnly = o.createdAt ? new Date(o.createdAt).toLocaleDateString() : '';
+
+        return `
+          <tr class="hover:bg-gray-50 transition align-top">
+            <td class="p-4">
+              <div class="font-bold text-gray-900">${o.customerName}</div>
+              <div class="text-xs text-gray-600"><i class="fa-solid fa-phone mr-1"></i>${o.phone}</div>
+              <div class="text-xs font-bold text-emerald-800 mt-1"><i class="fa-solid fa-box mr-1"></i>${o.trackingId}</div>
+              <div class="text-[10px] text-gray-400 mt-0.5">Ordered: ${orderDateOnly}</div>
+            </td>
+            <td class="p-4 text-xs text-gray-600 max-w-xs">
+              ${o.address}
+              ${o.returnReason ? `<div class="mt-2 text-amber-700 bg-amber-50 p-2 rounded"><strong>ARTO Return Issue:</strong> ${o.returnReason} ${o.returnImage ? `<br><a href="${o.returnImage}" target="_blank" class="text-blue-600 underline">View Photo Proof</a>` : ''}</div>` : ''}
+              ${o.refundReason ? `<div class="mt-2 text-blue-700 bg-blue-50 p-2 rounded"><strong>Refund Issue:</strong> ${o.refundReason} ${o.refundImage ? `<br><a href="${o.refundImage}" target="_blank" class="text-blue-600 underline">View Photo Proof</a>` : ''}</div>` : ''}
+            </td>
+            <td class="p-4 text-xs">${(o.items || []).map(i => `<div>&bull; ${i.name} (&times;${i.quantity})</div>`).join('')}</td>
+            <td class="p-4">
+              <div class="font-extrabold text-gray-900">₹${o.totalAmount}</div>
+              <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-[11px] font-semibold mt-1 px-2 py-1 rounded border bg-white outline-none">
+                <option value="Payment Under Review" ${o.paymentStatus === 'Payment Under Review' ? 'selected' : ''}>Payment Under Review</option>
+                <option value="Paid / Confirmed" ${o.paymentStatus.includes('Paid') ? 'selected' : ''}>Paid / Confirmed</option>
+                <option value="Payment Pending (COD)" ${o.paymentStatus.includes('COD') ? 'selected' : ''}>COD</option>
+              </select>
+            </td>
+            <td class="p-4">
+              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold px-2.5 py-1.5 rounded border outline-none bg-white">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                <option value="ARTO Reviewing" ${o.status === 'ARTO Reviewing' ? 'selected' : ''}>ARTO Reviewing</option>
+                <option value="Refund Reviewing" ${o.status === 'Refund Reviewing' ? 'selected' : ''}>Refund Reviewing</option>
+              </select>
+            </td>
+          </tr>
+        `;
+      }).join('');
     }
 
     async function updateOrderStatus(id, status) {
