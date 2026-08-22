@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,6 +14,9 @@
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
     }
+    /* Hide scrollbar for category menu */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
@@ -29,8 +32,8 @@
           <span class="text-xl font-bold tracking-tight text-emerald-800">MG Plants</span>
         </div>
 
-        <!-- Category Shortcuts (Desktop) - RESTORED CATEGORIES -->
-        <div class="hidden md:flex space-x-5 text-sm font-medium text-gray-600 overflow-x-auto">
+        <!-- Category Shortcuts (Desktop & Mobile Scroll) -->
+        <div class="hidden md:flex space-x-5 text-sm font-medium text-gray-600 overflow-x-auto no-scrollbar">
           <button onclick="filterCategory('All')" class="hover:text-emerald-700 transition whitespace-nowrap">All Plants</button>
           <button onclick="filterCategory('Best Sellers')" class="hover:text-emerald-700 transition whitespace-nowrap text-emerald-700 font-bold">Best Sellers</button>
           <button onclick="filterCategory('Indoor')" class="hover:text-emerald-700 transition whitespace-nowrap">Indoor</button>
@@ -96,53 +99,36 @@
   <!-- 1. AUTHENTICATION MODAL (SIGN IN & SIGN UP) -->
   <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-      <!-- Close Button -->
-      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
 
-      <!-- Modal Title -->
       <div class="text-center mb-6">
         <div class="text-3xl mb-1">🌿</div>
         <h3 id="auth-modal-title" class="text-xl font-bold text-gray-900">Sign In to MG Plants</h3>
         <p id="auth-modal-sub" class="text-xs text-gray-500 mt-1">Access your account, track orders, and manage returns</p>
       </div>
 
-      <!-- Auth Form -->
       <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
-        <!-- Name Field (Only for Sign Up) -->
         <div id="name-field-container" class="hidden">
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label>
-          <input type="text" id="auth-name" autocomplete="name" placeholder="John Doe" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="text" id="auth-name" autocomplete="name" placeholder="John Doe" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm">
         </div>
-
-        <!-- Email Field -->
         <div>
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Email Address</label>
-          <input type="email" id="auth-email" required autocomplete="username" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="email" id="auth-email" required autocomplete="username" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm">
         </div>
-
-        <!-- Password Field -->
         <div>
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Password</label>
-          <input type="password" id="auth-password" required autocomplete="current-password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="password" id="auth-password" required autocomplete="current-password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm">
         </div>
-
-        <!-- NEW: Save Password Checkbox -->
+        
         <div class="flex items-center pt-1 pb-2">
-          <input type="checkbox" id="remember-me" checked class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer">
-          <label for="remember-me" class="ml-2 block text-xs text-gray-600 cursor-pointer">
-            Save password for future use
-          </label>
+          <input type="checkbox" id="remember-me" checked class="h-4 w-4 text-emerald-600 border-gray-300 rounded cursor-pointer">
+          <label for="remember-me" class="ml-2 block text-xs text-gray-600 cursor-pointer">Save password for future use</label>
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" id="auth-submit-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition shadow-md">
-          Sign In
-        </button>
+        <button type="submit" id="auth-submit-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition shadow-md">Sign In</button>
       </form>
 
-      <!-- Toggle Link -->
       <div class="mt-5 text-center text-xs text-gray-600">
         <span id="auth-toggle-text">Don't have an account?</span>
         <button id="auth-toggle-btn" onclick="toggleAuthMode()" class="text-emerald-700 font-semibold hover:underline ml-1">Create Account</button>
@@ -150,7 +136,79 @@
     </div>
   </div>
 
-  <!-- 2. CART MODAL -->
+  <!-- 2. PRODUCT DETAIL & REVIEW MODAL -->
+  <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+        <!-- Product Image -->
+        <div>
+          <img id="pd-image" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-sm border border-gray-100" src="" alt="Product Image">
+        </div>
+        <!-- Product Info & Add to Cart -->
+        <div class="flex flex-col justify-center space-y-4">
+          <div>
+            <span id="pd-category" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-wider"></span>
+            <h2 id="pd-name" class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2"></h2>
+            <div class="flex items-baseline space-x-2 mt-2">
+              <span id="pd-price" class="text-3xl font-extrabold text-emerald-800"></span>
+              <span id="pd-orig-price" class="text-sm text-gray-400 line-through"></span>
+            </div>
+            <div id="pd-rating-summary" class="mt-2 text-sm text-yellow-500 font-bold tracking-widest"></div>
+          </div>
+          <button id="pd-add-to-cart" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-lg font-bold text-sm transition flex items-center justify-center space-x-2 shadow-md">
+            <i class="fa-solid fa-cart-plus"></i><span>Add to Cart</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Reviews Section -->
+      <div class="bg-gray-50 p-6 border-t border-gray-200">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center"><i class="fa-solid fa-star text-yellow-500 mr-2"></i> Customer Reviews</h3>
+
+        <!-- Write Review Form -->
+        <form id="review-form" onsubmit="handleReviewSubmit(event)" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 space-y-3">
+          <input type="hidden" id="review-product-id">
+          <h4 class="text-sm font-bold text-gray-800 border-b pb-2 mb-2">Write a Review</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Your Name</label>
+              <input type="text" id="review-user" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Rating</label>
+              <select id="review-rating" class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500">
+                <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+                <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+                <option value="3">⭐⭐⭐ (3 Stars)</option>
+                <option value="2">⭐⭐ (2 Stars)</option>
+                <option value="1">⭐ (1 Star)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Review Details</label>
+            <textarea id="review-comment" required rows="2" placeholder="Tell others what you loved about this plant..." class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500"></textarea>
+          </div>
+          <div>
+            <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Attach Photo (Optional)</label>
+            <input type="file" id="review-image" accept="image/*" class="w-full text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+          </div>
+          <div class="pt-2 text-right">
+            <button type="submit" class="bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-lg text-sm font-semibold transition">Post Review</button>
+          </div>
+        </form>
+
+        <!-- Reviews List -->
+        <div id="reviews-list" class="space-y-4">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CART MODAL -->
   <div id="cart-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] flex flex-col justify-between">
       <div>
@@ -158,73 +216,44 @@
           <h3 class="text-lg font-bold text-gray-900 flex items-center"><i class="fa-solid fa-bag-shopping text-emerald-700 mr-2"></i> Your Cart</h3>
           <button onclick="closeCartModal()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
-        <div id="cart-items-container" class="space-y-3 overflow-y-auto max-h-60 pr-1">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="cart-items-container" class="space-y-3 overflow-y-auto max-h-60 pr-1"></div>
       </div>
-
-      <!-- Price Breakdown -->
       <div class="border-t pt-4 mt-4 space-y-2 text-sm text-gray-600">
         <div class="flex justify-between"><span>Items Subtotal</span><span id="cart-subtotal" class="font-semibold text-gray-900">₹0</span></div>
         <div class="flex justify-between"><span>Standard Delivery Fee</span><span class="font-semibold text-gray-900">₹99</span></div>
         <div class="flex justify-between"><span>Platform & Packing Fee</span><span class="font-semibold text-gray-900">₹5</span></div>
         <div class="flex justify-between text-base font-bold text-gray-900 border-t pt-2"><span>Total Amount</span><span id="cart-total" class="text-emerald-700">₹0</span></div>
-        <button onclick="openCheckoutModal()" id="checkout-proceed-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition mt-3 shadow-md">
-          Proceed to Checkout
-        </button>
+        <button onclick="openCheckoutModal()" id="checkout-proceed-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition mt-3 shadow-md">Proceed to Checkout</button>
       </div>
     </div>
   </div>
 
-  <!-- 3. CHECKOUT MODAL (PAYMENT & ADDRESS) -->
+  <!-- 4. CHECKOUT MODAL (PAYMENT & ADDRESS) -->
   <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-      
       <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Delivery & Payment</h3>
-      
       <form onsubmit="handlePlaceOrder(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label>
-          <input type="text" id="order-name" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Phone Number</label>
-          <input type="tel" id="order-phone" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Delivery Address</label>
-          <textarea id="order-address" rows="3" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></textarea>
-        </div>
-
+        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label><input type="text" id="order-name" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></div>
+        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Phone Number</label><input type="tel" id="order-phone" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></div>
+        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Delivery Address</label><textarea id="order-address" rows="3" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></textarea></div>
         <div>
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">Select Payment Method</label>
           <div class="grid grid-cols-2 gap-3">
-            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600">
-              <input type="radio" name="payment-method" value="COD" checked onchange="togglePaymentUI()" class="text-emerald-600">
-              <span class="text-xs font-medium">Cash on Delivery</span>
-            </label>
-            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600">
-              <input type="radio" name="payment-method" value="UPI" onchange="togglePaymentUI()" class="text-emerald-600">
-              <span class="text-xs font-medium">UPI / QR Code</span>
-            </label>
+            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600"><input type="radio" name="payment-method" value="COD" checked onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-medium">Cash on Delivery</span></label>
+            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600"><input type="radio" name="payment-method" value="UPI" onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-medium">UPI / QR Code</span></label>
           </div>
         </div>
-
-        <!-- UPI Details Box -->
         <div id="upi-details-box" class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center space-y-2">
           <p class="text-xs text-gray-700">Scan & Pay to official UPI ID: <strong class="text-emerald-800">mgplants@nsdl</strong></p>
           <a id="upi-pay-link" href="#" class="inline-block bg-emerald-700 text-white text-xs px-4 py-2 rounded-md font-medium">Pay Directly via UPI App</a>
         </div>
-
-        <button type="submit" id="place-order-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition mt-4 shadow-md">
-          Confirm & Place Order
-        </button>
+        <button type="submit" id="place-order-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition mt-4 shadow-md">Confirm & Place Order</button>
       </form>
     </div>
   </div>
 
-  <!-- 4. ACCOUNT & ORDERS DASHBOARD MODAL -->
+  <!-- 5. ACCOUNT DASHBOARD MODAL -->
   <div id="account-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] flex flex-col justify-between">
       <div>
@@ -238,48 +267,34 @@
             <button onclick="closeAccountModal()" class="text-gray-400 hover:text-gray-600 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
           </div>
         </div>
-
         <h4 class="text-sm font-bold text-gray-800 mb-3">Order History & Tracking</h4>
-        <div id="user-orders-container" class="space-y-3 overflow-y-auto max-h-96 pr-1">
-          <!-- Dynamically populated orders -->
-        </div>
+        <div id="user-orders-container" class="space-y-3 overflow-y-auto max-h-96 pr-1"></div>
       </div>
     </div>
   </div>
 
-  <!-- 5. ARTO / RETURN MODAL -->
+  <!-- 6. ARTO / RETURN MODAL -->
   <div id="return-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
       <button onclick="closeReturnModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
       <h3 class="text-base font-bold text-gray-900 mb-3">Request Return / Replacement (ARTO)</h3>
       <form onsubmit="handleSubmitReturn(event)" class="space-y-3">
         <input type="hidden" id="return-order-id">
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">Reason for Return</label>
-          <textarea id="return-reason" required rows="3" placeholder="Describe the issue with the plant or package..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">Attach Photo Evidence</label>
-          <input type="file" id="return-image-input" accept="image/*" class="w-full text-xs text-gray-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-        </div>
-        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium text-sm transition">
-          Submit Return Request
-        </button>
+        <div><label class="block text-xs font-semibold text-gray-700 mb-1">Reason for Return</label><textarea id="return-reason" required rows="3" class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea></div>
+        <div><label class="block text-xs font-semibold text-gray-700 mb-1">Attach Photo Evidence</label><input type="file" id="return-image-input" accept="image/*" class="w-full text-xs text-gray-500 file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"></div>
+        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg font-medium text-sm transition">Submit Return Request</button>
       </form>
     </div>
   </div>
 
   <!-- ================= APPLICATION JAVASCRIPT ================= -->
   <script>
-    // --- 1. CONFIGURATION & STATE ---
     const BACKEND_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
-    
     let allProducts = [];
     let cart = JSON.parse(localStorage.getItem('mg_cart') || '[]');
     let currentUser = JSON.parse(localStorage.getItem('mg_user') || 'null');
-    let currentAuthMode = 'login'; // 'login' or 'signup'
+    let currentAuthMode = 'login'; 
 
-    // --- 2. INITIALIZATION ---
     document.addEventListener('DOMContentLoaded', () => {
       renderAuthButton();
       fetchProducts();
@@ -287,22 +302,13 @@
       preloadSavedAddress();
     });
 
-    // --- 3. AUTHENTICATION LOGIC ---
+    // --- AUTHENTICATION ---
     function renderAuthButton() {
       const container = document.getElementById('auth-button-container');
       if (currentUser) {
-        container.innerHTML = `
-          <button onclick="openAccountModal()" class="flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-3.5 py-1.5 rounded-lg text-sm font-semibold border border-emerald-200 transition">
-            <i class="fa-regular fa-user"></i>
-            <span>${currentUser.name || 'Account'}</span>
-          </button>
-        `;
+        container.innerHTML = `<button onclick="openAccountModal()" class="flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-3.5 py-1.5 rounded-lg text-sm font-semibold border border-emerald-200 transition"><i class="fa-regular fa-user"></i><span>${currentUser.name || 'Account'}</span></button>`;
       } else {
-        container.innerHTML = `
-          <button onclick="openAuthModal('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-            Sign In
-          </button>
-        `;
+        container.innerHTML = `<button onclick="openAuthModal('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">Sign In</button>`;
       }
     }
 
@@ -331,17 +337,10 @@
         toggleBtn.innerText = 'Create Account';
         passwordInput.autocomplete = 'current-password';
       }
-
       modal.classList.remove('hidden');
     }
-
-    function closeAuthModal() {
-      document.getElementById('auth-modal').classList.add('hidden');
-    }
-
-    function toggleAuthMode() {
-      openAuthModal(currentAuthMode === 'login' ? 'signup' : 'login');
-    }
+    function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
+    function toggleAuthMode() { openAuthModal(currentAuthMode === 'login' ? 'signup' : 'login'); }
 
     async function handleAuthSubmit(e) {
       e.preventDefault();
@@ -357,29 +356,17 @@
       const payload = currentAuthMode === 'signup' ? { email, password, name } : { email, password };
 
       try {
-        const res = await fetch(`${BACKEND_URL}${endpoint}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        const res = await fetch(`${BACKEND_URL}${endpoint}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         const data = await responseJsonSafe(res);
-
         if (data.success) {
           currentUser = data.user;
           localStorage.setItem('mg_user', JSON.stringify(currentUser));
           renderAuthButton();
           closeAuthModal();
-          // Added alert for seamless user feedback
           alert(currentAuthMode === 'signup' ? '🎉 Account created successfully!' : '✅ Welcome back!');
-        } else {
-          alert(data.message || 'Authentication failed.');
-        }
-      } catch (err) {
-        alert('Server connection error. Please wait 60 seconds and try again (Server might be waking up).');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerText = currentAuthMode === 'signup' ? 'Create Account' : 'Sign In';
-      }
+        } else { alert(data.message || 'Authentication failed.'); }
+      } catch (err) { alert('Server connection error. Please wait 60 seconds and try again (Server might be waking up).'); } 
+      finally { submitBtn.disabled = false; submitBtn.innerText = currentAuthMode === 'signup' ? 'Create Account' : 'Sign In'; }
     }
 
     function handleLogout() {
@@ -389,15 +376,13 @@
       closeAccountModal();
     }
 
-    // --- 4. PRODUCTS & STORE FRONT ---
+    // --- PRODUCTS & STORE FRONT ---
     async function fetchProducts() {
       try {
         const res = await fetch(`${BACKEND_URL}/api/products`);
         allProducts = await responseJsonSafe(res);
         renderProducts(allProducts);
-      } catch (err) {
-        document.getElementById('product-count').innerText = 'Loading... (Server waking up)';
-      }
+      } catch (err) { document.getElementById('product-count').innerText = 'Loading... (Server waking up)'; }
     }
 
     function renderProducts(products) {
@@ -409,68 +394,156 @@
         return;
       }
 
-      grid.innerHTML = products.map(p => `
+      grid.innerHTML = products.map(p => {
+        // Calculate average rating quickly for the card
+        let avgRatingHtml = '';
+        if (p.reviews && p.reviews.length > 0) {
+          const avg = Math.round(p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length);
+          avgRatingHtml = `<div class="text-[10px] text-yellow-500 mt-1">${'★'.repeat(avg)}${'☆'.repeat(5-avg)} <span class="text-gray-400">(${p.reviews.length})</span></div>`;
+        }
+
+        return `
         <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <img src="${p.image || 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=500'}" alt="${p.name}" class="w-full h-48 object-cover">
-            <div class="p-4">
+          <div class="cursor-pointer group" onclick="openProductModal('${p.id}')">
+            <div class="relative overflow-hidden">
+              <img src="${p.image || 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=500'}" alt="${p.name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-black/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                <span class="bg-white text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">View Details & Reviews</span>
+              </div>
+            </div>
+            <div class="p-4 pb-2">
               <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full uppercase tracking-wider">${p.category || 'Plant'}</span>
               <h3 class="font-bold text-gray-900 mt-1">${p.name}</h3>
+              ${avgRatingHtml}
               <div class="flex items-baseline space-x-2 mt-2">
                 <span class="text-lg font-extrabold text-emerald-800">₹${p.price}</span>
                 ${p.origPrice ? `<span class="text-xs text-gray-400 line-through">₹${p.origPrice}</span>` : ''}
               </div>
             </div>
           </div>
-          <div class="p-4 pt-0">
+          <div class="p-4 pt-0 mt-auto">
             <button onclick="addToCart('${p.id}')" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2 rounded-lg text-xs font-semibold transition flex items-center justify-center space-x-1">
               <i class="fa-solid fa-plus"></i><span>Add to Cart</span>
             </button>
           </div>
         </div>
+      `}).join('');
+    }
+
+    function filterCategory(cat) {
+      document.getElementById('current-category-title').innerText = cat === 'All' ? 'Featured Plants & Seeds' : `${cat} Collection`;
+      if (cat === 'All') renderProducts(allProducts);
+      else if (cat === 'Best Sellers') renderProducts(allProducts.filter(p => p.bestSeller === true));
+      else renderProducts(allProducts.filter(p => (p.category || '').toLowerCase().includes(cat.toLowerCase())));
+    }
+
+    // --- PRODUCT DETAILED REVIEW MODAL ---
+    function openProductModal(id) {
+      const p = allProducts.find(x => x.id === id);
+      if(!p) return;
+
+      document.getElementById('pd-image').src = p.image || '';
+      document.getElementById('pd-category').innerText = p.category || 'Plant';
+      document.getElementById('pd-name').innerText = p.name;
+      document.getElementById('pd-price').innerText = '₹' + p.price;
+      document.getElementById('pd-orig-price').innerText = p.origPrice ? '₹' + p.origPrice : '';
+
+      // Calculate Ratings
+      const revs = p.reviews || [];
+      const ratingDiv = document.getElementById('pd-rating-summary');
+      if(revs.length > 0) {
+        const avg = Math.round(revs.reduce((s, r) => s + r.rating, 0) / revs.length);
+        ratingDiv.innerHTML = `${'★'.repeat(avg)}${'☆'.repeat(5-avg)} <span class="text-xs font-normal text-gray-500 ml-1">(${revs.length} reviews)</span>`;
+      } else {
+        ratingDiv.innerHTML = `<span class="text-xs font-normal text-gray-400">No reviews yet</span>`;
+      }
+
+      document.getElementById('pd-add-to-cart').onclick = () => { addToCart(id); closeProductModal(); };
+      
+      // Setup Review Form
+      document.getElementById('review-product-id').value = id;
+      if (currentUser) document.getElementById('review-user').value = currentUser.name;
+
+      renderReviews(revs);
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
+
+    function renderReviews(reviews) {
+      const container = document.getElementById('reviews-list');
+      if (!reviews || reviews.length === 0) {
+        container.innerHTML = '<p class="text-sm text-gray-500 italic bg-white p-4 rounded-xl border border-gray-100">No reviews yet. Be the first to share your thoughts!</p>';
+        return;
+      }
+      
+      // Sort reviews newest first
+      const sorted = [...reviews].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+      container.innerHTML = sorted.map(r => `
+        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <span class="font-bold text-sm text-gray-900">${r.user}</span>
+              <div class="text-yellow-500 text-[10px] tracking-widest mt-0.5">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+            </div>
+            <span class="text-[10px] text-gray-400 font-medium">${new Date(r.createdAt).toLocaleDateString()}</span>
+          </div>
+          <p class="text-xs text-gray-700 leading-relaxed">${r.comment}</p>
+          ${r.image ? `<img src="${r.image}" class="mt-3 h-20 w-20 object-cover rounded-md border border-gray-200">` : ''}
+        </div>
       `).join('');
     }
 
-    // UPDATE: New Filtering Logic for Best Sellers
-    function filterCategory(cat) {
-      document.getElementById('current-category-title').innerText = cat === 'All' ? 'Featured Plants & Seeds' : `${cat} Collection`;
-      
-      if (cat === 'All') {
-        renderProducts(allProducts);
-      } else if (cat === 'Best Sellers') {
-        renderProducts(allProducts.filter(p => p.bestSeller === true));
-      } else {
-        renderProducts(allProducts.filter(p => (p.category || '').toLowerCase().includes(cat.toLowerCase())));
-      }
+    async function handleReviewSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('review-product-id').value;
+      const user = document.getElementById('review-user').value;
+      const rating = document.getElementById('review-rating').value;
+      const comment = document.getElementById('review-comment').value;
+      const fileInput = document.getElementById('review-image');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+
+      submitBtn.disabled = true; submitBtn.innerText = 'Posting...';
+      let base64Image = '';
+      if (fileInput.files && fileInput.files[0]) base64Image = await toBase64(fileInput.files[0]);
+
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/review/${id}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user, rating: Number(rating), comment, image: base64Image })
+        });
+        const data = await responseJsonSafe(res);
+        if (data.success) {
+          alert('Thank you! Your review has been posted.');
+          // Update UI immediately without reload
+          const p = allProducts.find(x => x.id === id);
+          if (!p.reviews) p.reviews = [];
+          p.reviews.unshift({ user, rating: Number(rating), comment, image: base64Image, createdAt: new Date() });
+          renderReviews(p.reviews);
+          e.target.reset();
+          if (currentUser) document.getElementById('review-user').value = currentUser.name;
+        } else alert('Failed to post review.');
+      } catch(err) { alert('Error posting review.'); } 
+      finally { submitBtn.disabled = false; submitBtn.innerText = 'Post Review'; }
     }
 
-    // --- 5. CART & CHECKOUT ---
+    // --- CART & CHECKOUT ---
     function addToCart(productId) {
       const prod = allProducts.find(p => p.id === productId);
       if (!prod) return;
       const existing = cart.find(item => item.id === productId);
       if (existing) existing.quantity += 1;
       else cart.push({ ...prod, quantity: 1 });
-      saveCart();
-      openCartModal();
+      saveCart(); updateCartBadge(); openCartModal();
     }
-
-    function saveCart() {
-      localStorage.setItem('mg_cart', JSON.stringify(cart));
-      updateCartBadge();
-    }
-
+    function saveCart() { localStorage.setItem('mg_cart', JSON.stringify(cart)); }
     function updateCartBadge() {
       const badge = document.getElementById('cart-count-badge');
-      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-      if (totalCount > 0) {
-        badge.innerText = totalCount;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
+      const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+      if (total > 0) { badge.innerText = total; badge.classList.remove('hidden'); } 
+      else badge.classList.add('hidden');
     }
-
     function openCartModal() {
       const container = document.getElementById('cart-items-container');
       const subtotalEl = document.getElementById('cart-subtotal');
@@ -478,66 +551,31 @@
 
       if (cart.length === 0) {
         container.innerHTML = `<p class="text-center text-gray-400 py-6 text-sm">Your cart is empty.</p>`;
-        subtotalEl.innerText = '₹0';
-        totalEl.innerText = '₹0';
+        subtotalEl.innerText = '₹0'; totalEl.innerText = '₹0';
       } else {
         let subtotal = 0;
         container.innerHTML = cart.map((item, idx) => {
           subtotal += item.price * item.quantity;
-          return `
-            <div class="flex items-center justify-between border-b pb-2">
-              <div class="flex items-center space-x-3">
-                <img src="${item.image}" class="w-12 h-12 object-cover rounded-md">
-                <div>
-                  <h4 class="text-xs font-bold text-gray-900">${item.name}</h4>
-                  <p class="text-xs text-emerald-700 font-semibold">₹${item.price} &times; ${item.quantity}</p>
-                </div>
-              </div>
-              <button onclick="removeFromCart(${idx})" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          `;
+          return `<div class="flex items-center justify-between border-b pb-2"><div class="flex items-center space-x-3"><img src="${item.image}" class="w-12 h-12 object-cover rounded-md"><div><h4 class="text-xs font-bold text-gray-900">${item.name}</h4><p class="text-xs text-emerald-700 font-semibold">₹${item.price} &times; ${item.quantity}</p></div></div><button onclick="removeFromCart(${idx})" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash"></i></button></div>`;
         }).join('');
-
-        subtotalEl.innerText = `₹${subtotal}`;
-        totalEl.innerText = `₹${subtotal + 99 + 5}`;
+        subtotalEl.innerText = `₹${subtotal}`; totalEl.innerText = `₹${subtotal + 99 + 5}`;
       }
-
       document.getElementById('cart-modal').classList.remove('hidden');
     }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      saveCart();
-      openCartModal();
-    }
-
-    function closeCartModal() {
-      document.getElementById('cart-modal').classList.add('hidden');
-    }
-
+    function removeFromCart(index) { cart.splice(index, 1); saveCart(); updateCartBadge(); openCartModal(); }
+    function closeCartModal() { document.getElementById('cart-modal').classList.add('hidden'); }
+    
     function openCheckoutModal() {
       if (cart.length === 0) return alert('Your cart is empty.');
-      closeCartModal();
-      togglePaymentUI();
-      document.getElementById('checkout-modal').classList.remove('hidden');
+      closeCartModal(); togglePaymentUI(); document.getElementById('checkout-modal').classList.remove('hidden');
     }
-
-    function closeCheckoutModal() {
-      document.getElementById('checkout-modal').classList.add('hidden');
-    }
-
+    function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
     function togglePaymentUI() {
       const isUPI = document.querySelector('input[name="payment-method"]:checked').value === 'UPI';
       const upiBox = document.getElementById('upi-details-box');
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const totalAmount = subtotal + 99 + 5;
-
-      if (isUPI) {
-        upiBox.classList.remove('hidden');
-        document.getElementById('upi-pay-link').href = `upi://pay?pa=mgplants@nsdl&pn=MG%20Plants&am=${totalAmount}&cu=INR`;
-      } else {
-        upiBox.classList.add('hidden');
-      }
+      const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + 99 + 5;
+      if (isUPI) { upiBox.classList.remove('hidden'); document.getElementById('upi-pay-link').href = `upi://pay?pa=mgplants@nsdl&pn=MG%20Plants&am=${totalAmount}&cu=INR`; } 
+      else upiBox.classList.add('hidden');
     }
 
     function preloadSavedAddress() {
@@ -549,46 +587,35 @@
 
     async function handlePlaceOrder(e) {
       e.preventDefault();
+      const btn = document.getElementById('place-order-btn');
+      btn.disabled = true; btn.innerText = 'Processing...';
+
       const name = document.getElementById('order-name').value;
       const phone = document.getElementById('order-phone').value;
       const address = document.getElementById('order-address').value;
       const payMethod = document.querySelector('input[name="payment-method"]:checked').value;
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const totalAmount = subtotal + 99 + 5;
+      const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + 99 + 5;
 
-      // Remember address
       localStorage.setItem('mg_saved_address', JSON.stringify({ name, phone, address }));
 
       const orderData = {
-        customerName: name,
-        phone: phone,
+        customerName: name, phone: phone,
         address: `${address} [${payMethod}] - Email: ${currentUser ? currentUser.email : 'Guest'}`,
-        items: cart,
-        totalAmount: totalAmount
+        items: cart, totalAmount: totalAmount
       };
 
       try {
-        const res = await fetch(`${BACKEND_URL}/api/orders`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderData)
-        });
+        const res = await fetch(`${BACKEND_URL}/api/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) });
         const data = await responseJsonSafe(res);
-
         if (data.success) {
-          cart = [];
-          saveCart();
-          closeCheckoutModal();
+          cart = []; saveCart(); updateCartBadge(); closeCheckoutModal();
           alert(`🎉 Order Placed Successfully!\nTracking ID: ${data.trackingId}`);
-        } else {
-          alert('Could not place order. Please try again.');
-        }
-      } catch (err) {
-        alert('Server communication error.');
-      }
+        } else alert('Could not place order. Please try again.');
+      } catch (err) { alert('Server communication error.'); }
+      finally { btn.disabled = false; btn.innerText = 'Confirm & Place Order'; }
     }
 
-    // --- 6. ACCOUNT DASHBOARD & ORDERS ---
+    // --- ACCOUNT DASHBOARD & ARTO RETURNS ---
     async function openAccountModal() {
       if (!currentUser) return openAuthModal('login');
       document.getElementById('account-user-name').innerText = currentUser.name || 'My Account';
@@ -604,8 +631,7 @@
         const myOrders = orders.filter(o => (o.address || '').toLowerCase().includes(currentUser.email.toLowerCase()));
 
         if (!myOrders || myOrders.length === 0) {
-          container.innerHTML = `<p class="text-xs text-gray-400 py-6 text-center">No orders found for this account.</p>`;
-          return;
+          container.innerHTML = `<p class="text-xs text-gray-400 py-6 text-center">No orders found for this account.</p>`; return;
         }
 
         container.innerHTML = myOrders.map(o => {
@@ -625,81 +651,34 @@
             </div>
           `;
         }).join('');
-      } catch (err) {
-        container.innerHTML = `<p class="text-xs text-red-500 py-4 text-center">Could not load orders.</p>`;
-      }
+      } catch (err) { container.innerHTML = `<p class="text-xs text-red-500 py-4 text-center">Could not load orders.</p>`; }
     }
-
-    function closeAccountModal() {
-      document.getElementById('account-modal').classList.add('hidden');
-    }
+    function closeAccountModal() { document.getElementById('account-modal').classList.add('hidden'); }
 
     async function cancelOrder(id) {
       if (!confirm('Are you sure you want to cancel this order?')) return;
-      try {
-        const res = await fetch(`${BACKEND_URL}/api/orders/cancel/${id}`, { method: 'POST' });
-        const data = await responseJsonSafe(res);
-        alert(data.message || 'Updated');
-        openAccountModal();
-      } catch (e) { alert('Error cancelling order'); }
+      try { const res = await fetch(`${BACKEND_URL}/api/orders/cancel/${id}`, { method: 'POST' }); alert((await responseJsonSafe(res)).message || 'Updated'); openAccountModal(); } catch (e) { alert('Error cancelling order'); }
     }
-
     async function requestRefund(id) {
-      try {
-        const res = await fetch(`${BACKEND_URL}/api/orders/refund/${id}`, { method: 'POST' });
-        const data = await responseJsonSafe(res);
-        alert(data.message || 'Refund processing requested');
-        openAccountModal();
-      } catch (e) { alert('Error requesting refund'); }
+      try { const res = await fetch(`${BACKEND_URL}/api/orders/refund/${id}`, { method: 'POST' }); alert((await responseJsonSafe(res)).message || 'Refund requested'); openAccountModal(); } catch (e) { alert('Error requesting refund'); }
     }
-
-    function openReturnModal(orderId) {
-      document.getElementById('return-order-id').value = orderId;
-      document.getElementById('return-modal').classList.remove('hidden');
-    }
-
-    function closeReturnModal() {
-      document.getElementById('return-modal').classList.add('hidden');
-    }
-
+    function openReturnModal(orderId) { document.getElementById('return-order-id').value = orderId; document.getElementById('return-modal').classList.remove('hidden'); }
+    function closeReturnModal() { document.getElementById('return-modal').classList.add('hidden'); }
     async function handleSubmitReturn(e) {
       e.preventDefault();
       const id = document.getElementById('return-order-id').value;
       const reason = document.getElementById('return-reason').value;
       const fileInput = document.getElementById('return-image-input');
-      
-      let base64Image = '';
-      if (fileInput.files && fileInput.files[0]) {
-        base64Image = await toBase64(fileInput.files[0]);
-      }
-
+      let base64Image = ''; if (fileInput.files && fileInput.files[0]) base64Image = await toBase64(fileInput.files[0]);
       try {
-        const res = await fetch(`${BACKEND_URL}/api/orders/return/${id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ reason, image: base64Image })
-        });
-        const data = await responseJsonSafe(res);
-        alert(data.message || 'Return submitted');
-        closeReturnModal();
-        openAccountModal();
+        const res = await fetch(`${BACKEND_URL}/api/orders/return/${id}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ reason, image: base64Image }) });
+        alert((await responseJsonSafe(res)).message || 'Return submitted'); closeReturnModal(); openAccountModal();
       } catch (err) { alert('Error submitting return'); }
     }
 
-    // --- 7. HELPERS ---
-    async function responseJsonSafe(res) {
-      try { return await res.json(); }
-      catch { return { success: false }; }
-    }
-
-    function toBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
-    }
+    // --- HELPERS ---
+    async function responseJsonSafe(res) { try { return await res.json(); } catch { return { success: false }; } }
+    function toBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error); }); }
   </script>
 </body>
 </html>
