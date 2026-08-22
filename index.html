@@ -471,7 +471,6 @@
       document.getElementById('pd-price').innerText = '₹' + p.price;
       document.getElementById('pd-orig-price').innerText = p.origPrice ? '₹' + p.origPrice : '';
       
-      // Load New Description and Stock Data
       document.getElementById('pd-description').innerText = p.description || "A gorgeous, healthy plant carefully nurtured to bring a touch of nature into your home or garden. Packaged securely to arrive in pristine condition.";
       document.getElementById('pd-stock').innerText = p.stockCount ? `In Stock (${p.stockCount} left) - Dispatches Today` : `In Stock & Ready to Dispatch`;
 
@@ -553,11 +552,48 @@
     function addToCart(productId) {
       const prod = allProducts.find(p => p.id === productId);
       if (!prod) return;
+      const maxStock = prod.stockCount !== undefined ? prod.stockCount : 10;
       const existing = cart.find(item => item.id === productId);
-      if (existing) existing.quantity += 1;
-      else cart.push({ ...prod, quantity: 1 });
+      if (existing) {
+        if (existing.quantity < maxStock) {
+          existing.quantity += 1;
+        } else {
+          alert(`Sorry, only ${maxStock} units of ${prod.name} are available in stock.`);
+          return;
+        }
+      } else {
+        if (maxStock > 0) {
+          cart.push({ ...prod, quantity: 1 });
+        } else {
+          alert(`Sorry, ${prod.name} is currently out of stock.`);
+          return;
+        }
+      }
       saveCart(); updateCartBadge(); openCartModal();
     }
+    
+    function changeQty(index, delta) {
+      const item = cart[index];
+      const prod = allProducts.find(p => p.id === item.id);
+      const maxStock = prod && prod.stockCount !== undefined ? prod.stockCount : 10;
+
+      if (delta === 1) {
+        if (item.quantity < maxStock) {
+          item.quantity += 1;
+        } else {
+          alert(`Maximum stock reached. Only ${maxStock} available.`);
+        }
+      } else if (delta === -1) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          removeFromCart(index);
+          return;
+        }
+      }
+      saveCart(); updateCartBadge(); openCartModal();
+    }
+
     function saveCart() { localStorage.setItem('mg_cart', JSON.stringify(cart)); }
     function updateCartBadge() {
       const badge = document.getElementById('cart-count-badge');
@@ -577,7 +613,7 @@
         let subtotal = 0;
         container.innerHTML = cart.map((item, idx) => {
           subtotal += item.price * item.quantity;
-          return `<div class="flex items-center justify-between border-b pb-2"><div class="flex items-center space-x-3"><img src="${item.image}" class="w-12 h-12 object-cover rounded-md"><div><h4 class="text-xs font-bold text-gray-900">${item.name}</h4><p class="text-xs text-emerald-700 font-semibold">₹${item.price} &times; ${item.quantity}</p></div></div><button onclick="removeFromCart(${idx})" class="text-red-500 hover:text-red-700 text-xs"><i class="fa-solid fa-trash"></i></button></div>`;
+          return `<div class="flex items-center justify-between border-b pb-2"><div class="flex items-center space-x-3"><img src="${item.image}" class="w-12 h-12 object-cover rounded-md border border-gray-100"><div><h4 class="text-xs font-bold text-gray-900">${item.name}</h4><div class="flex items-center mt-1"><p class="text-xs text-emerald-700 font-semibold mr-3">₹${item.price}</p><div class="flex items-center bg-gray-100 rounded-md border border-gray-200"><button onclick="changeQty(${idx}, -1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">-</button><span class="text-[10px] font-bold w-4 text-center">${item.quantity}</span><button onclick="changeQty(${idx}, 1)" class="px-2 py-0.5 text-gray-600 hover:text-emerald-700 font-bold transition">+</button></div></div></div></div><button onclick="removeFromCart(${idx})" class="text-red-400 hover:text-red-600 text-xs p-2"><i class="fa-solid fa-trash"></i></button></div>`;
         }).join('');
         subtotalEl.innerText = `₹${subtotal}`; totalEl.innerText = `₹${subtotal + 99 + 5}`;
       }
