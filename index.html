@@ -1,20 +1,15 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Plants | Online Plant Nursery & Garden Store</title>
   
-  <!-- Tailwind CSS & Font Awesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-    }
-    /* Hide scrollbar for category menu */
+    .glass-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -26,13 +21,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
-        <!-- Brand Logo -->
         <div class="flex items-center space-x-2 cursor-pointer" onclick="filterCategory('All')">
           <span class="text-2xl">🌿</span>
           <span class="text-xl font-bold tracking-tight text-emerald-800">MG Plants</span>
         </div>
 
-        <!-- Category Shortcuts (Desktop & Mobile Scroll) -->
         <div class="hidden md:flex space-x-5 text-sm font-medium text-gray-600 overflow-x-auto no-scrollbar">
           <button onclick="filterCategory('All')" class="hover:text-emerald-700 transition whitespace-nowrap">All Plants</button>
           <button onclick="filterCategory('Best Sellers')" class="hover:text-emerald-700 transition whitespace-nowrap text-emerald-700 font-bold">Best Sellers</button>
@@ -43,19 +36,13 @@
           <button onclick="filterCategory('Seeds')" class="hover:text-emerald-700 transition whitespace-nowrap">Seeds</button>
         </div>
 
-        <!-- Right Actions (Cart & Auth) -->
         <div class="flex items-center space-x-4">
-          <!-- Cart Button -->
           <button onclick="openCartModal()" class="relative p-2 text-gray-700 hover:text-emerald-700 focus:outline-none">
             <i class="fa-solid fa-bag-shopping text-xl"></i>
             <span id="cart-count-badge" class="hidden absolute top-0 right-0 bg-emerald-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
           </button>
-
-          <!-- Auth / Account Button -->
           <div id="auth-button-container">
-            <button onclick="openAuthModal('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
-              Sign In
-            </button>
+            <button onclick="openAuthModal('login')" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">Sign In</button>
           </div>
         </div>
       </div>
@@ -79,11 +66,7 @@
       <h2 id="current-category-title" class="text-2xl font-bold text-gray-900">Featured Plants & Seeds</h2>
       <span id="product-count" class="text-sm text-gray-500">Loading products...</span>
     </div>
-
-    <!-- Products Container -->
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Dynamically populated -->
-    </div>
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </main>
 
   <!-- ================= FOOTER ================= -->
@@ -96,17 +79,15 @@
 
   <!-- ================= MODALS ================= -->
 
-  <!-- 1. AUTHENTICATION MODAL (SIGN IN & SIGN UP) -->
+  <!-- 1. AUTHENTICATION MODAL -->
   <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
       <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
-
       <div class="text-center mb-6">
         <div class="text-3xl mb-1">🌿</div>
         <h3 id="auth-modal-title" class="text-xl font-bold text-gray-900">Sign In to MG Plants</h3>
         <p id="auth-modal-sub" class="text-xs text-gray-500 mt-1">Access your account, track orders, and manage returns</p>
       </div>
-
       <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
         <div id="name-field-container" class="hidden">
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label>
@@ -120,15 +101,12 @@
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Password</label>
           <input type="password" id="auth-password" required autocomplete="current-password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 outline-none text-sm">
         </div>
-        
         <div class="flex items-center pt-1 pb-2">
           <input type="checkbox" id="remember-me" checked class="h-4 w-4 text-emerald-600 border-gray-300 rounded cursor-pointer">
           <label for="remember-me" class="ml-2 block text-xs text-gray-600 cursor-pointer">Save password for future use</label>
         </div>
-
         <button type="submit" id="auth-submit-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition shadow-md">Sign In</button>
       </form>
-
       <div class="mt-5 text-center text-xs text-gray-600">
         <span id="auth-toggle-text">Don't have an account?</span>
         <button id="auth-toggle-btn" onclick="toggleAuthMode()" class="text-emerald-700 font-semibold hover:underline ml-1">Create Account</button>
@@ -140,13 +118,8 @@
   <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
       <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-        <!-- Product Image -->
-        <div>
-          <img id="pd-image" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-sm border border-gray-100" src="" alt="Product Image">
-        </div>
-        <!-- Product Info & Add to Cart -->
+        <div><img id="pd-image" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-sm border border-gray-100" src="" alt="Product Image"></div>
         <div class="flex flex-col justify-center space-y-4">
           <div>
             <span id="pd-category" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-wider"></span>
@@ -162,12 +135,8 @@
           </button>
         </div>
       </div>
-
-      <!-- Reviews Section -->
       <div class="bg-gray-50 p-6 border-t border-gray-200">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center"><i class="fa-solid fa-star text-yellow-500 mr-2"></i> Customer Reviews</h3>
-
-        <!-- Write Review Form -->
         <form id="review-form" onsubmit="handleReviewSubmit(event)" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 space-y-3">
           <input type="hidden" id="review-product-id">
           <h4 class="text-sm font-bold text-gray-800 border-b pb-2 mb-2">Write a Review</h4>
@@ -187,23 +156,11 @@
               </select>
             </div>
           </div>
-          <div>
-            <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Review Details</label>
-            <textarea id="review-comment" required rows="2" placeholder="Tell others what you loved about this plant..." class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500"></textarea>
-          </div>
-          <div>
-            <label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Attach Photo (Optional)</label>
-            <input type="file" id="review-image" accept="image/*" class="w-full text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-          </div>
-          <div class="pt-2 text-right">
-            <button type="submit" class="bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-lg text-sm font-semibold transition">Post Review</button>
-          </div>
+          <div><label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Review Details</label><textarea id="review-comment" required rows="2" class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500"></textarea></div>
+          <div><label class="block text-[10px] font-semibold text-gray-500 uppercase mb-1">Attach Photo (Optional)</label><input type="file" id="review-image" accept="image/*" class="w-full text-xs text-gray-500 file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"></div>
+          <div class="pt-2 text-right"><button type="submit" class="bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-lg text-sm font-semibold transition">Post Review</button></div>
         </form>
-
-        <!-- Reviews List -->
-        <div id="reviews-list" class="space-y-4">
-          <!-- Dynamically populated -->
-        </div>
+        <div id="reviews-list" class="space-y-4"></div>
       </div>
     </div>
   </div>
@@ -376,12 +333,44 @@
       closeAccountModal();
     }
 
-    // --- PRODUCTS & STORE FRONT ---
+    // --- PRODUCTS, STORE FRONT, AND AUTO-INJECTOR ---
     async function fetchProducts() {
       try {
         const res = await fetch(`${BACKEND_URL}/api/products`);
-        allProducts = await responseJsonSafe(res);
-        renderProducts(allProducts);
+        let dbProducts = await responseJsonSafe(res);
+        
+        // AUTO-INJECTOR: Force these missing categories into the frontend if they aren't in the DB yet!
+        const autoInjectProducts = [
+          { id: 'PRD-OU-01', name: 'Areca Palm Tree', category: 'Outdoor', price: 549, origPrice: 800, bestSeller: true, image: 'https://images.unsplash.com/photo-1605553106316-2d3ea9f6c0eb?w=500', reviews: [] },
+          { id: 'PRD-OU-02', name: 'Pink Bougainvillea', category: 'Outdoor', price: 349, origPrice: 500, bestSeller: false, image: 'https://images.unsplash.com/photo-1629853925528-917fc9f627ba?w=500', reviews: [] },
+          { id: 'PRD-OU-03', name: 'Ficus Bonsai Plant', category: 'Outdoor', price: 899, origPrice: 1200, bestSeller: true, image: 'https://images.unsplash.com/photo-1599598425947-33001c0ae5e5?w=500', reviews: [] },
+          { id: 'PRD-FR-01', name: 'Grafted Mango Plant (Alphonso)', category: 'Fruits', price: 450, origPrice: 650, bestSeller: true, image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=500', reviews: [] },
+          { id: 'PRD-FR-02', name: 'Dwarf Lemon Tree (Nimbu)', category: 'Fruits', price: 299, origPrice: 400, bestSeller: true, image: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=500', reviews: [] },
+          { id: 'PRD-FR-03', name: 'Red Guava Plant', category: 'Fruits', price: 350, origPrice: 499, bestSeller: false, image: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=500', reviews: [] },
+          { id: 'PRD-FL-01', name: 'Classic Red Rose Plant', category: 'Flowers', price: 249, origPrice: 399, bestSeller: true, image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500', reviews: [] },
+          { id: 'PRD-FL-02', name: 'Fragrant Jasmine (Mogra)', category: 'Flowers', price: 199, origPrice: 300, bestSeller: true, image: 'https://images.unsplash.com/photo-1546842603-519782cc4107?w=500', reviews: [] },
+          { id: 'PRD-FL-03', name: 'Purple Lavender Plant', category: 'Flowers', price: 399, origPrice: 550, bestSeller: false, image: 'https://images.unsplash.com/photo-1498805983167-a523078d762c?w=500', reviews: [] },
+          { id: 'PRD-SD-01', name: 'Organic Tomato Seeds (Pack of 50)', category: 'Seeds', price: 99, origPrice: 150, bestSeller: true, image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=500', reviews: [] },
+          { id: 'PRD-SD-02', name: 'Holy Basil (Tulsi) Seeds', category: 'Seeds', price: 79, origPrice: 120, bestSeller: true, image: 'https://images.unsplash.com/photo-1598512140407-7429d3326176?w=500', reviews: [] },
+          { id: 'PRD-SD-03', name: 'Sunflower Seeds (Pack of 30)', category: 'Seeds', price: 89, origPrice: 140, bestSeller: false, image: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?w=500', reviews: [] }
+        ];
+
+        // Check if the DB already has these items so we don't duplicate them
+        const hasNewItems = dbProducts.some(p => p.id === 'PRD-FR-01');
+        if (!hasNewItems) {
+            dbProducts = [...autoInjectProducts, ...dbProducts];
+        }
+
+        allProducts = dbProducts;
+        
+        // Auto-refresh the current category view
+        const currentTitle = document.getElementById('current-category-title').innerText;
+        let currentCat = 'All';
+        if (currentTitle.includes('Collection')) {
+            currentCat = currentTitle.replace(' Collection', '');
+        }
+        filterCategory(currentCat);
+
       } catch (err) { document.getElementById('product-count').innerText = 'Loading... (Server waking up)'; }
     }
 
@@ -395,7 +384,6 @@
       }
 
       grid.innerHTML = products.map(p => {
-        // Calculate average rating quickly for the card
         let avgRatingHtml = '';
         if (p.reviews && p.reviews.length > 0) {
           const avg = Math.round(p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length);
@@ -448,7 +436,6 @@
       document.getElementById('pd-price').innerText = '₹' + p.price;
       document.getElementById('pd-orig-price').innerText = p.origPrice ? '₹' + p.origPrice : '';
 
-      // Calculate Ratings
       const revs = p.reviews || [];
       const ratingDiv = document.getElementById('pd-rating-summary');
       if(revs.length > 0) {
@@ -460,7 +447,6 @@
 
       document.getElementById('pd-add-to-cart').onclick = () => { addToCart(id); closeProductModal(); };
       
-      // Setup Review Form
       document.getElementById('review-product-id').value = id;
       if (currentUser) document.getElementById('review-user').value = currentUser.name;
 
@@ -476,10 +462,7 @@
         container.innerHTML = '<p class="text-sm text-gray-500 italic bg-white p-4 rounded-xl border border-gray-100">No reviews yet. Be the first to share your thoughts!</p>';
         return;
       }
-      
-      // Sort reviews newest first
       const sorted = [...reviews].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-
       container.innerHTML = sorted.map(r => `
         <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
           <div class="flex justify-between items-start mb-2">
@@ -487,7 +470,7 @@
               <span class="font-bold text-sm text-gray-900">${r.user}</span>
               <div class="text-yellow-500 text-[10px] tracking-widest mt-0.5">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
             </div>
-            <span class="text-[10px] text-gray-400 font-medium">${new Date(r.createdAt).toLocaleDateString()}</span>
+            <span class="text-[10px] text-gray-400 font-medium">${r.createdAt ? new Date(r.createdAt).toLocaleDateString() : 'Just now'}</span>
           </div>
           <p class="text-xs text-gray-700 leading-relaxed">${r.comment}</p>
           ${r.image ? `<img src="${r.image}" class="mt-3 h-20 w-20 object-cover rounded-md border border-gray-200">` : ''}
@@ -516,7 +499,6 @@
         const data = await responseJsonSafe(res);
         if (data.success) {
           alert('Thank you! Your review has been posted.');
-          // Update UI immediately without reload
           const p = allProducts.find(x => x.id === id);
           if (!p.reviews) p.reviews = [];
           p.reviews.unshift({ user, rating: Number(rating), comment, image: base64Image, createdAt: new Date() });
@@ -524,7 +506,7 @@
           e.target.reset();
           if (currentUser) document.getElementById('review-user').value = currentUser.name;
         } else alert('Failed to post review.');
-      } catch(err) { alert('Error posting review.'); } 
+      } catch(err) { alert('Error posting review. Note: Pre-loaded injected items cannot accept real reviews until they exist in the backend DB.'); } 
       finally { submitBtn.disabled = false; submitBtn.innerText = 'Post Review'; }
     }
 
