@@ -750,7 +750,7 @@
       finally { btn.disabled = false; btn.innerText = 'Confirm & Place Order'; }
     }
 
-    // --- ACCOUNT DASHBOARD & ARTO RETURNS ---
+    // --- ACCOUNT DASHBOARD & ARTO RETURNS (WITH EXACT DATE & TIME) ---
     async function openAccountModal() {
       if (!currentUser) return openAuthModal('login');
       document.getElementById('account-user-name').innerText = currentUser.name || 'My Account';
@@ -771,12 +771,12 @@
 
         container.innerHTML = myOrders.map(o => {
           const isCancellable = ((Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60)) <= 4 && o.status !== 'Cancelled';
-          const orderDateOnly = o.createdAt ? new Date(o.createdAt).toLocaleDateString() : '';
+          const orderDateTime = o.createdAt ? new Date(o.createdAt).toLocaleString() : '';
           return `
             <div class="border rounded-xl p-3.5 space-y-2 text-xs bg-gray-50">
               <div class="flex justify-between items-center font-bold">
                 <span class="text-emerald-800">${o.trackingId}</span>
-                <span class="text-gray-500 font-normal text-[11px]">Ordered: ${orderDateOnly}</span>
+                <span class="text-gray-500 font-normal text-[11px]">Ordered: ${orderDateTime}</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-gray-600">Total: <strong>₹${o.totalAmount}</strong> &bull; Payment: <span class="text-emerald-700 font-bold">${o.paymentStatus}</span></span>
