@@ -184,7 +184,7 @@
       `).join('');
     }
 
-    // --- LIVE ORDERS MANAGEMENT ---
+    // --- LIVE ORDERS MANAGEMENT (EXACT DATE & TIME) ---
     async function fetchAdminOrders() {
       const tbody = document.getElementById('admin-orders-list');
       tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-400">Loading live orders...</td></tr>`;
@@ -194,8 +194,8 @@
       if (orders.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500">No live orders found.</td></tr>`; return; }
 
       tbody.innerHTML = orders.map(o => {
-        // Date-only formatting (no time)
-        const orderDateOnly = o.createdAt ? new Date(o.createdAt).toLocaleDateString() : '';
+        // Formats to exact date and time (e.g., 8/22/2026, 4:06 PM)
+        const orderDateTime = o.createdAt ? new Date(o.createdAt).toLocaleString() : '';
 
         return `
           <tr class="hover:bg-gray-50 transition align-top">
@@ -203,7 +203,7 @@
               <div class="font-bold text-gray-900">${o.customerName}</div>
               <div class="text-xs text-gray-600"><i class="fa-solid fa-phone mr-1"></i>${o.phone}</div>
               <div class="text-xs font-bold text-emerald-800 mt-1"><i class="fa-solid fa-box mr-1"></i>${o.trackingId}</div>
-              <div class="text-[10px] text-gray-400 mt-0.5">Ordered: ${orderDateOnly}</div>
+              <div class="text-[10px] text-gray-400 mt-0.5">Ordered: ${orderDateTime}</div>
             </td>
             <td class="p-4 text-xs text-gray-600 max-w-xs">
               ${o.address}
