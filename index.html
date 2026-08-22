@@ -771,13 +771,17 @@
 
         container.innerHTML = myOrders.map(o => {
           const isCancellable = ((Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60)) <= 4 && o.status !== 'Cancelled';
+          const orderDateOnly = o.createdAt ? new Date(o.createdAt).toLocaleDateString() : '';
           return `
             <div class="border rounded-xl p-3.5 space-y-2 text-xs bg-gray-50">
               <div class="flex justify-between items-center font-bold">
                 <span class="text-emerald-800">${o.trackingId}</span>
+                <span class="text-gray-500 font-normal text-[11px]">Ordered: ${orderDateOnly}</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Total: <strong>₹${o.totalAmount}</strong> &bull; Payment: <span class="text-emerald-700 font-bold">${o.paymentStatus}</span></span>
                 <span class="px-2 py-0.5 rounded-full text-[10px] ${o.status === 'Cancelled' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800'}">${o.status}</span>
               </div>
-              <p class="text-gray-600">Total: <strong>₹${o.totalAmount}</strong> &bull; Payment Status: <span class="text-emerald-700 font-bold">${o.paymentStatus}</span></p>
               <div class="flex space-x-2 pt-2 border-t">
                 ${isCancellable ? `<button onclick="cancelOrder('${o._id}')" class="bg-red-50 text-red-600 px-3 py-1 rounded font-semibold hover:bg-red-100">Cancel Order (4h window)</button>` : ''}
                 ${o.status === 'Cancelled' && o.paymentStatus.includes('Paid') && !o.refundRequested ? `<button onclick="openRefundModal('${o._id}')" class="bg-blue-50 text-blue-600 px-3 py-1 rounded font-semibold">Request Refund</button>` : ''}
