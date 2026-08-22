@@ -750,7 +750,7 @@
       finally { btn.disabled = false; btn.innerText = 'Confirm & Place Order'; }
     }
 
-    // --- ACCOUNT DASHBOARD & ARTO RETURNS (WITH EXACT DATE & TIME) ---
+    // --- ACCOUNT DASHBOARD & ARTO RETURNS (WITH 12-HOUR AM/PM FORMAT) ---
     async function openAccountModal() {
       if (!currentUser) return openAuthModal('login');
       document.getElementById('account-user-name').innerText = currentUser.name || 'My Account';
@@ -771,7 +771,14 @@
 
         container.innerHTML = myOrders.map(o => {
           const isCancellable = ((Date.now() - new Date(o.createdAt).getTime()) / (1000 * 60 * 60)) <= 4 && o.status !== 'Cancelled';
-          const orderDateTime = o.createdAt ? new Date(o.createdAt).toLocaleString() : '';
+          
+          // Formats to 12-hour AM/PM time format explicitly
+          const orderDateTime = o.createdAt ? new Date(o.createdAt).toLocaleString('en-US', {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric',
+            hour12: true
+          }) : '';
+
           return `
             <div class="border rounded-xl p-3.5 space-y-2 text-xs bg-gray-50">
               <div class="flex justify-between items-center font-bold">
