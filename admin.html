@@ -1,224 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MG Plants | Secure Admin Control Center</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MG Plants | Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: { colors: { brand: { 50: '#f0fdf4', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 900: '#14532d' } } } } }
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-  <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 text-gray-800 antialiased h-screen overflow-hidden">
+<body class="bg-gray-100 flex h-screen overflow-hidden font-sans text-gray-800">
 
-  <div id="passwordGate" class="flex items-center justify-center h-full w-full bg-gray-900 absolute inset-0 z-50">
-    <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
-      <div class="w-12 h-12 bg-brand-50 text-brand-700 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-lock"></i></div>
-      <h2 class="text-xl font-extrabold mb-2 text-gray-900">Admin Access</h2>
-      <input type="password" id="adminPass" class="w-full p-3 border-2 border-gray-200 rounded-xl mb-4 text-center text-lg outline-none focus:border-brand-500" placeholder="Password" />
-      <button onclick="checkPassword()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition">Unlock</button>
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-[#0f172a] text-white flex flex-col hidden md:flex">
+    <div class="h-16 flex items-center px-6 border-b border-gray-700">
+      <span class="text-xl">🌿</span>
+      <span class="text-lg font-bold ml-2">MG Plants Admin</span>
     </div>
-  </div>
+    <nav class="flex-1 px-4 py-6 space-y-2">
+      <a href="#" onclick="switchTab('inventory')" class="flex items-center px-4 py-3 bg-emerald-600 text-white rounded-lg transition"><i class="fa-solid fa-boxes-stacked w-6"></i> Manage Inventory</a>
+      <a href="#" onclick="switchTab('orders')" class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition"><i class="fa-solid fa-truck-fast w-6"></i> Live Orders</a>
+      <a href="/index.html" class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition mt-10"><i class="fa-solid fa-store w-6"></i> View Storefront</a>
+    </nav>
+  </aside>
 
-  <div id="adminContent" class="hidden h-full flex overflow-hidden">
-    <aside class="w-64 bg-gray-900 text-white flex flex-col h-full hidden md:flex">
-      <div class="p-6 border-b border-gray-800">
-        <span class="text-lg font-extrabold tracking-tight flex items-center gap-2"><i class="fa-solid fa-leaf text-brand-500"></i> MG Plants Owner</span>
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <!-- Header -->
+    <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+      <h2 id="page-title" class="text-xl font-bold text-gray-800">Manage Inventory & Pricing</h2>
+      <button onclick="openProductModal()" id="add-btn" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm transition flex items-center"><i class="fa-solid fa-plus mr-2"></i> Add New Product</button>
+    </header>
+
+    <!-- Content Area -->
+    <div class="flex-1 overflow-y-auto p-6">
+      
+      <!-- INVENTORY TAB -->
+      <div id="inventory-tab" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase text-gray-500 font-bold tracking-wider">
+              <th class="p-4">Image</th>
+              <th class="p-4">Product Name</th>
+              <th class="p-4">Category & Stock</th>
+              <th class="p-4">Price</th>
+              <th class="p-4 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-products-list" class="divide-y divide-gray-100 text-sm">
+            <tr><td colspan="5" class="p-6 text-center text-gray-400">Loading products...</td></tr>
+          </tbody>
+        </table>
       </div>
-      <nav class="flex-1 p-4 space-y-2 overflow-y-auto text-sm">
-        <button onclick="switchAdminTab('orders')" id="nav-orders" class="admin-nav w-full text-left px-4 py-3 bg-brand-700 text-white font-bold rounded-xl transition flex items-center gap-3"><i class="fa-solid fa-box w-5"></i> Live Orders</button>
-        <button onclick="switchAdminTab('inventory')" id="nav-inventory" class="admin-nav w-full text-left px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800 font-bold rounded-xl transition flex items-center gap-3"><i class="fa-solid fa-seedling w-5"></i> Manage Inventory</button>
-      </nav>
-      <div class="p-4 border-t border-gray-800">
-        <a href="index.html" class="w-full block text-center px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold rounded-lg transition">View Live Store <i class="fa-solid fa-external-link-alt ml-1"></i></a>
+
+      <!-- ORDERS TAB (Placeholder for your existing orders code) -->
+      <div id="orders-tab" class="hidden">
+        <p class="text-gray-500">Orders management goes here.</p>
       </div>
-    </aside>
 
-    <main class="flex-1 flex flex-col h-full overflow-hidden bg-gray-50">
-      <header class="bg-white border-b border-gray-200 p-4 sm:p-6 flex items-center justify-between z-10">
-        <h1 id="pageTitle" class="text-xl sm:text-2xl font-extrabold text-gray-900">Customer Orders & Status Control</h1>
-      </header>
+    </div>
+  </main>
 
-      <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
-        <div id="view-orders" class="admin-view space-y-4">
-          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
-              <span>Customer & Tracking</span><span>Address</span><span>Items</span><span>Payment & Delivery Manager</span><span>Time</span>
-            </div>
-            <div id="adminOrdersList" class="divide-y divide-gray-100"><div class="p-6 text-center text-gray-400">Loading orders...</div></div>
-          </div>
-        </div>
-
-        <div id="view-inventory" class="admin-view space-y-4 hidden">
-          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4">
-              <span>Image</span><span>Product Name</span><span>Category</span><span>Price</span><span>Action</span>
-            </div>
-            <div id="adminInventoryList" class="divide-y divide-gray-100"><div class="p-6 text-center text-gray-400">Loading products...</div></div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <div id="editProductModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
-      <h2 class="text-xl font-extrabold mb-4 text-gray-900 flex justify-between">Edit Product <button onclick="closeEditModal()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark"></i></button></h2>
-      <div class="space-y-4">
-        <input type="hidden" id="editId">
-        <div><label class="text-xs font-bold text-gray-500">Product Name</label><input type="text" id="editName" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm font-bold mt-1 outline-none focus:border-brand-500" /></div>
-        <div class="grid grid-cols-2 gap-4">
-          <div><label class="text-xs font-bold text-gray-500">Selling Price (₹)</label><input type="number" id="editPrice" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm font-bold mt-1 outline-none focus:border-brand-500" /></div>
-          <div><label class="text-xs font-bold text-gray-500">Original Price (₹)</label><input type="number" id="editOrigPrice" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm mt-1 outline-none focus:border-brand-500" /></div>
-        </div>
+  <!-- PRODUCT EDIT/ADD MODAL -->
+  <div id="admin-product-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[95vh] overflow-y-auto">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"><i class="fa-solid fa-xmark"></i></button>
+      
+      <h3 id="modal-title" class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Add/Edit Product</h3>
+      
+      <form id="product-form" onsubmit="saveProduct(event)" class="space-y-4">
+        <input type="hidden" id="prod-id">
+        
         <div>
-          <label class="text-xs font-bold text-gray-500 flex justify-between">Image URL <a href="https://postimages.org/" target="_blank" class="text-brand-600 hover:underline">Upload an image</a></label>
-          <input type="text" id="editImage" oninput="document.getElementById('previewImg').src=this.value" class="w-full p-2.5 bg-gray-50 border rounded-lg text-sm mt-1 outline-none focus:border-brand-500" placeholder="Paste direct image link here" />
+          <label class="block text-xs font-bold text-gray-600 mb-1">Product Name</label>
+          <input type="text" id="prod-name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
         </div>
-        <div class="flex justify-center mt-2 p-2 border border-dashed rounded-xl bg-gray-50"><img id="previewImg" src="" class="h-32 object-cover rounded-lg shadow-sm" onerror="this.src='https://via.placeholder.com/150?text=Invalid+Link'"/></div>
-        <button onclick="saveProductEdit()" class="w-full py-3 bg-brand-700 hover:bg-brand-800 text-white font-bold rounded-xl shadow-lg transition mt-2">Save Updates</button>
-      </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Category</label>
+            <select id="prod-category" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
+              <option value="Indoor">Indoor</option>
+              <option value="Outdoor">Outdoor</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Flowers">Flowers</option>
+              <option value="Seeds">Seeds</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Stock Availability</label>
+            <input type="number" id="prod-stock" required min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Selling Price (₹)</label>
+            <input type="number" id="prod-price" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Original Price (₹)</label>
+            <input type="number" id="prod-orig-price" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Product Description</label>
+          <textarea id="prod-desc" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50" placeholder="Enter plant details..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Image URL</label>
+          <input type="url" id="prod-image" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-emerald-600 outline-none text-sm bg-gray-50">
+          <div class="mt-2 text-center">
+            <img id="image-preview" src="https://via.placeholder.com/150" class="h-24 w-24 object-cover mx-auto rounded-lg shadow-sm border border-gray-200">
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <input type="checkbox" id="prod-bestseller" class="h-4 w-4 text-emerald-600 border-gray-300 rounded cursor-pointer">
+          <label for="prod-bestseller" class="ml-2 block text-sm text-gray-700 font-bold cursor-pointer">Mark as Best Seller</label>
+        </div>
+
+        <div class="flex space-x-3 pt-4 border-t border-gray-200">
+          <button type="submit" id="save-btn" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-bold transition shadow-sm">Save Product</button>
+          <button type="button" id="delete-btn" onclick="deleteProduct()" class="hidden flex-1 bg-red-100 hover:bg-red-200 text-red-700 py-2.5 rounded-lg font-bold transition">Delete Product</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <script>
-    const API_BASE_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
-    let allProducts = [];
+    const BACKEND_URL = 'https://mgplant-mg-plants-backend-1.onrender.com';
+    let adminProducts = [];
 
-    function checkPassword() {
-      if (document.getElementById('adminPass').value === "mg555") {
-        document.getElementById('passwordGate').classList.add('hidden');
-        document.getElementById('adminContent').classList.remove('hidden');
-        loadAdminOrders(); loadAdminInventory();
-      } else alert("Incorrect Password!");
+    document.addEventListener('DOMContentLoaded', fetchAdminProducts);
+
+    function switchTab(tab) {
+      document.getElementById('inventory-tab').classList.add('hidden');
+      document.getElementById('orders-tab').classList.add('hidden');
+      document.getElementById(tab + '-tab').classList.remove('hidden');
+      document.getElementById('page-title').innerText = tab === 'inventory' ? 'Manage Inventory & Pricing' : 'Live Orders Management';
+      document.getElementById('add-btn').style.display = tab === 'inventory' ? 'flex' : 'none';
     }
 
-    function switchAdminTab(tabId) {
-      document.querySelectorAll('.admin-view').forEach(v => v.classList.add('hidden'));
-      document.getElementById(`view-${tabId}`).classList.remove('hidden');
-      document.querySelectorAll('.admin-nav').forEach(btn => { btn.classList.remove('bg-brand-700', 'text-white'); btn.classList.add('text-gray-400'); });
-      document.getElementById(`nav-${tabId}`).classList.remove('text-gray-400');
-      document.getElementById(`nav-${tabId}`).classList.add('bg-brand-700', 'text-white');
-      document.getElementById('pageTitle').innerText = tabId === 'orders' ? 'Customer Orders & Status Control' : 'Manage Inventory & Pricing';
-    }
-
-    async function loadAdminOrders() {
+    async function fetchAdminProducts() {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/orders`);
-        const orders = await res.json();
-        const container = document.getElementById('adminOrdersList');
-        if (orders.length === 0) return container.innerHTML = `<div class="p-8 text-center text-gray-500 text-sm">No orders yet.</div>`;
-        
-        container.innerHTML = orders.map(o => `
-          <div class="p-4 grid grid-cols-5 gap-4 items-center text-sm border-b border-gray-50">
-            <div>
-              <p class="font-extrabold text-gray-900">${o.customerName}</p>
-              <p class="text-xs text-gray-500 font-bold mb-1"><i class="fa-solid fa-phone"></i> ${o.phone}</p>
-              <span class="inline-block text-[11px] font-extrabold text-brand-800 bg-brand-100 px-2 py-0.5 rounded border border-brand-300">📦 ${o.trackingId || 'N/A'}</span>
-            </div>
-            <div class="text-xs text-gray-600">${o.address}</div>
-            <div>
-                ${o.items.map(i => `<span class="block text-xs font-medium text-gray-700">• ${i.name} (x${i.qty})</span>`).join('')}
-                ${o.returnReason ? `<div class="mt-2 p-2 bg-red-50 border border-red-200 rounded text-red-800 text-[10px]"><strong>Return Issue:</strong> ${o.returnReason}<br><a href="${o.returnImage}" target="_blank" class="underline font-bold text-red-600">View Photo</a></div>` : ''}
-            </div>
-            <div class="space-y-2">
-              <span class="font-extrabold text-gray-900 block">₹${o.totalAmount}</span>
-              
-              <select onchange="updatePaymentStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
-                <option value="Payment Pending" ${o.paymentStatus === 'Payment Pending' ? 'selected' : ''}>⏳ Payment Pending</option>
-                <option value="Payment Pending (COD)" ${o.paymentStatus === 'Payment Pending (COD)' ? 'selected' : ''}>💵 Pending (COD)</option>
-                <option value="Paid" ${o.paymentStatus === 'Paid' ? 'selected' : ''}>✅ Paid / Confirmed</option>
-              </select>
-
-              <select onchange="updateOrderStatus('${o._id}', this.value)" class="text-xs font-bold p-1 rounded border bg-white outline-none cursor-pointer w-full shadow-sm">
-                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>⏳ Status: Pending</option>
-                <option value="Processing" ${o.status === 'Processing' ? 'selected' : ''}>⚙️ Status: Processing</option>
-                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>🚚 Status: Shipped</option>
-                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>✅ Status: Delivered</option>
-                <option value="ARTO Request" ${o.status === 'ARTO Request' ? 'selected' : ''}>🔄 Status: ARTO Request</option>
-                <option value="Refund Processing" ${o.status === 'Refund Processing' ? 'selected' : ''}>💸 Status: Refund Processing</option>
-                <option value="Refund Processed" ${o.status === 'Refund Processed' ? 'selected' : ''}>✅ Status: Refund Processed (48h)</option>
-                <option value="Cancelled" ${o.status === 'Cancelled' ? 'selected' : ''}>❌ Status: Cancelled</option>
-              </select>
-            </div>
-            <div class="text-xs text-gray-400">${new Date(o.createdAt).toLocaleDateString()}</div>
-          </div>
-        `).join('');
-      } catch (err) { console.error("Failed to load orders"); }
+        const res = await fetch(`${BACKEND_URL}/api/products`);
+        adminProducts = await res.json();
+        renderAdminProducts();
+      } catch (err) {
+        document.getElementById('admin-products-list').innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-500">Error connecting to server.</td></tr>`;
+      }
     }
 
-    async function updateOrderStatus(orderId, newStatus) {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/order-status/${orderId}`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: newStatus })
-        });
-        const data = await res.json();
-        if (data.success) { alert(`Delivery status updated to: ${newStatus}`); loadAdminOrders(); } 
-        else alert('Failed to update status.');
-      } catch (err) { alert('Server error.'); }
+    function renderAdminProducts() {
+      const tbody = document.getElementById('admin-products-list');
+      if (adminProducts.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500">No products found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = adminProducts.map(p => `
+        <tr class="hover:bg-gray-50 transition">
+          <td class="p-4"><img src="${p.image}" class="w-12 h-12 rounded object-cover border border-gray-200"></td>
+          <td class="p-4 font-bold text-gray-800">${p.name} ${p.bestSeller ? '<span class="ml-2 text-[10px] bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">Best Seller</span>' : ''}</td>
+          <td class="p-4">
+            <div class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-md inline-block uppercase">${p.category}</div>
+            <div class="text-xs text-gray-500 mt-1 font-medium">Stock: ${p.stockCount !== undefined ? p.stockCount : 10} units</div>
+          </td>
+          <td class="p-4 font-bold text-gray-900">₹${p.price}</td>
+          <td class="p-4 text-right">
+            <button onclick="openProductModal('${p.id}')" class="bg-gray-800 hover:bg-black text-white px-4 py-1.5 rounded text-xs font-bold transition">Edit</button>
+          </td>
+        </tr>
+      `).join('');
     }
 
-    async function updatePaymentStatus(orderId, newPayStatus) {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/payment-status/${orderId}`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ paymentStatus: newPayStatus })
-        });
-        const data = await res.json();
-        if (data.success) { alert(`Payment status updated to: ${newPayStatus}`); loadAdminOrders(); } 
-        else alert('Failed to update payment status.');
-      } catch (err) { alert('Server error.'); }
+    function openProductModal(id = null) {
+      const modal = document.getElementById('admin-product-modal');
+      const form = document.getElementById('product-form');
+      const title = document.getElementById('modal-title');
+      const deleteBtn = document.getElementById('delete-btn');
+      
+      form.reset();
+      document.getElementById('prod-id').value = '';
+      document.getElementById('image-preview').src = 'https://via.placeholder.com/150';
+
+      if (id) {
+        const p = adminProducts.find(x => x.id === id);
+        title.innerText = 'Edit Product';
+        document.getElementById('prod-id').value = p.id;
+        document.getElementById('prod-name').value = p.name;
+        document.getElementById('prod-category').value = p.category || 'Indoor';
+        document.getElementById('prod-price').value = p.price;
+        document.getElementById('prod-orig-price').value = p.origPrice || '';
+        document.getElementById('prod-stock').value = p.stockCount !== undefined ? p.stockCount : 10;
+        document.getElementById('prod-desc').value = p.description || '';
+        document.getElementById('prod-image').value = p.image;
+        document.getElementById('image-preview').src = p.image;
+        document.getElementById('prod-bestseller').checked = p.bestSeller || false;
+        deleteBtn.classList.remove('hidden');
+      } else {
+        title.innerText = 'Add New Product';
+        document.getElementById('prod-stock').value = 10;
+        deleteBtn.classList.add('hidden');
+      }
+
+      modal.classList.remove('hidden');
     }
 
-    async function loadAdminInventory() {
-      try {
-        const res = await fetch(`${API_BASE_URL}/api/products`);
-        allProducts = await res.json();
-        const container = document.getElementById('adminInventoryList');
-        container.innerHTML = allProducts.map(p => `
-          <div class="p-3 grid grid-cols-5 gap-4 items-center text-sm hover:bg-gray-50 transition border-b border-gray-50">
-            <img src="${p.image}" class="w-12 h-12 rounded object-cover border" onerror="this.src='https://via.placeholder.com/50'"/>
-            <span class="font-bold text-gray-900">${p.name}</span>
-            <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded w-max">${p.category}</span>
-            <span class="font-bold text-brand-700">₹${p.price}</span>
-            <button onclick="openEditModal('${p.id}')" class="px-3 py-1.5 bg-gray-900 hover:bg-gray-700 text-white text-xs font-bold rounded-lg w-max shadow transition"><i class="fa-solid fa-pen-to-square mr-1"></i> Edit</button>
-          </div>
-        `).join('');
-      } catch(err) { console.error("Failed to load inventory"); }
-    }
+    function closeProductModal() { document.getElementById('admin-product-modal').classList.add('hidden'); }
 
-    function openEditModal(id) {
-      const p = allProducts.find(item => item.id === id);
-      if(!p) return;
-      document.getElementById('editId').value = p.id;
-      document.getElementById('editName').value = p.name;
-      document.getElementById('editPrice').value = p.price;
-      document.getElementById('editOrigPrice').value = p.origPrice || '';
-      document.getElementById('editImage').value = p.image;
-      document.getElementById('previewImg').src = p.image;
-      document.getElementById('editProductModal').classList.remove('hidden');
-    }
+    // Live Image Preview Update
+    document.getElementById('prod-image').addEventListener('input', (e) => {
+      document.getElementById('image-preview').src = e.target.value || 'https://via.placeholder.com/150';
+    });
 
-    function closeEditModal() { document.getElementById('editProductModal').classList.add('hidden'); }
+    async function saveProduct(e) {
+      e.preventDefault();
+      const btn = document.getElementById('save-btn');
+      btn.innerText = 'Saving...'; btn.disabled = true;
 
-    async function saveProductEdit() {
-      const id = document.getElementById('editId').value;
-      const data = {
-        name: document.getElementById('editName').value,
-        price: Number(document.getElementById('editPrice').value),
-        origPrice: Number(document.getElementById('editOrigPrice').value),
-        image: document.getElementById('editImage').value
+      const id = document.getElementById('prod-id').value;
+      const productData = {
+        name: document.getElementById('prod-name').value,
+        category: document.getElementById('prod-category').value,
+        price: Number(document.getElementById('prod-price').value),
+        origPrice: Number(document.getElementById('prod-orig-price').value),
+        stockCount: Number(document.getElementById('prod-stock').value),
+        description: document.getElementById('prod-desc').value,
+        image: document.getElementById('prod-image').value,
+        bestSeller: document.getElementById('prod-bestseller').checked
       };
+
+      const url = id ? `${BACKEND_URL}/api/admin/products/${id}` : `${BACKEND_URL}/api/admin/products`;
+
       try {
-        const res = await fetch(`${API_BASE_URL}/api/admin/products/${id}`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if(result.success) { alert('✅ Product updated successfully!'); closeEditModal(); loadAdminInventory(); } 
-        else alert('Failed to update product.');
-      } catch (err) { alert('Server connection error.'); }
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(productData) });
+        const data = await res.json();
+        if (data.success) {
+          alert(id ? 'Product updated successfully!' : 'New product created successfully!');
+          closeProductModal();
+          fetchAdminProducts();
+        } else alert('Failed to save product.');
+      } catch (err) { alert('Server error while saving.'); }
+      finally { btn.innerText = 'Save Product'; btn.disabled = false; }
+    }
+
+    async function deleteProduct() {
+      const id = document.getElementById('prod-id').value;
+      if (!id) return;
+      if (!confirm('Are you ABSOLUTELY sure you want to permanently delete this product?')) return;
+
+      const btn = document.getElementById('delete-btn');
+      btn.innerText = 'Deleting...'; btn.disabled = true;
+
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/admin/products/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          alert('Product deleted forever.');
+          closeProductModal();
+          fetchAdminProducts();
+        } else alert('Failed to delete product.');
+      } catch (err) { alert('Server error while deleting.'); }
+      finally { btn.innerText = 'Delete Product'; btn.disabled = false; }
     }
   </script>
 </body>
