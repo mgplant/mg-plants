@@ -29,13 +29,15 @@
           <span class="text-xl font-bold tracking-tight text-emerald-800">MG Plants</span>
         </div>
 
-        <!-- Category Shortcuts (Desktop) -->
-        <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
-          <button onclick="filterCategory('All')" class="hover:text-emerald-700 transition">All Plants</button>
-          <button onclick="filterCategory('Indoor')" class="hover:text-emerald-700 transition">Indoor</button>
-          <button onclick="filterCategory('Outdoor')" class="hover:text-emerald-700 transition">Outdoor</button>
-          <button onclick="filterCategory('Succulents')" class="hover:text-emerald-700 transition">Succulents</button>
-          <button onclick="filterCategory('Seeds')" class="hover:text-emerald-700 transition">Seeds</button>
+        <!-- Category Shortcuts (Desktop) - RESTORED CATEGORIES -->
+        <div class="hidden md:flex space-x-5 text-sm font-medium text-gray-600 overflow-x-auto">
+          <button onclick="filterCategory('All')" class="hover:text-emerald-700 transition whitespace-nowrap">All Plants</button>
+          <button onclick="filterCategory('Best Sellers')" class="hover:text-emerald-700 transition whitespace-nowrap text-emerald-700 font-bold">Best Sellers</button>
+          <button onclick="filterCategory('Indoor')" class="hover:text-emerald-700 transition whitespace-nowrap">Indoor</button>
+          <button onclick="filterCategory('Outdoor')" class="hover:text-emerald-700 transition whitespace-nowrap">Outdoor</button>
+          <button onclick="filterCategory('Fruits')" class="hover:text-emerald-700 transition whitespace-nowrap">Fruits</button>
+          <button onclick="filterCategory('Flowers')" class="hover:text-emerald-700 transition whitespace-nowrap">Flowers</button>
+          <button onclick="filterCategory('Seeds')" class="hover:text-emerald-700 transition whitespace-nowrap">Seeds</button>
         </div>
 
         <!-- Right Actions (Cart & Auth) -->
@@ -111,19 +113,27 @@
         <!-- Name Field (Only for Sign Up) -->
         <div id="name-field-container" class="hidden">
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label>
-          <input type="text" id="auth-name" placeholder="John Doe" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="text" id="auth-name" autocomplete="name" placeholder="John Doe" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
         </div>
 
         <!-- Email Field -->
         <div>
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Email Address</label>
-          <input type="email" id="auth-email" required placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="email" id="auth-email" required autocomplete="username" placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
         </div>
 
         <!-- Password Field -->
         <div>
           <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Password</label>
-          <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+          <input type="password" id="auth-password" required autocomplete="current-password" placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 outline-none text-sm">
+        </div>
+
+        <!-- NEW: Save Password Checkbox -->
+        <div class="flex items-center pt-1 pb-2">
+          <input type="checkbox" id="remember-me" checked class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded cursor-pointer">
+          <label for="remember-me" class="ml-2 block text-xs text-gray-600 cursor-pointer">
+            Save password for future use
+          </label>
         </div>
 
         <!-- Submit Button -->
@@ -304,6 +314,7 @@
       const submitBtn = document.getElementById('auth-submit-btn');
       const toggleText = document.getElementById('auth-toggle-text');
       const toggleBtn = document.getElementById('auth-toggle-btn');
+      const passwordInput = document.getElementById('auth-password');
 
       if (mode === 'signup') {
         title.innerText = 'Create an Account';
@@ -311,12 +322,14 @@
         submitBtn.innerText = 'Create Account';
         toggleText.innerText = 'Already have an account?';
         toggleBtn.innerText = 'Sign In';
+        passwordInput.autocomplete = 'new-password';
       } else {
         title.innerText = 'Sign In to MG Plants';
         nameField.classList.add('hidden');
         submitBtn.innerText = 'Sign In';
         toggleText.innerText = "Don't have an account?";
         toggleBtn.innerText = 'Create Account';
+        passwordInput.autocomplete = 'current-password';
       }
 
       modal.classList.remove('hidden');
@@ -356,12 +369,13 @@
           localStorage.setItem('mg_user', JSON.stringify(currentUser));
           renderAuthButton();
           closeAuthModal();
+          // Added alert for seamless user feedback
           alert(currentAuthMode === 'signup' ? '🎉 Account created successfully!' : '✅ Welcome back!');
         } else {
           alert(data.message || 'Authentication failed.');
         }
       } catch (err) {
-        alert('Server connection error. Please try again.');
+        alert('Server connection error. Please wait 60 seconds and try again (Server might be waking up).');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = currentAuthMode === 'signup' ? 'Create Account' : 'Sign In';
@@ -382,7 +396,7 @@
         allProducts = await responseJsonSafe(res);
         renderProducts(allProducts);
       } catch (err) {
-        document.getElementById('product-count').innerText = 'Could not load products.';
+        document.getElementById('product-count').innerText = 'Loading... (Server waking up)';
       }
     }
 
@@ -417,10 +431,17 @@
       `).join('');
     }
 
+    // UPDATE: New Filtering Logic for Best Sellers
     function filterCategory(cat) {
       document.getElementById('current-category-title').innerText = cat === 'All' ? 'Featured Plants & Seeds' : `${cat} Collection`;
-      if (cat === 'All') renderProducts(allProducts);
-      else renderProducts(allProducts.filter(p => (p.category || '').toLowerCase() === cat.toLowerCase()));
+      
+      if (cat === 'All') {
+        renderProducts(allProducts);
+      } else if (cat === 'Best Sellers') {
+        renderProducts(allProducts.filter(p => p.bestSeller === true));
+      } else {
+        renderProducts(allProducts.filter(p => (p.category || '').toLowerCase().includes(cat.toLowerCase())));
+      }
     }
 
     // --- 5. CART & CHECKOUT ---
