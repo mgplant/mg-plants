@@ -1,4 +1,4 @@
-           <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between relative">
 
   <!-- ================= TOP NAVIGATION ================= -->
   <nav class="sticky top-0 z-40 glass-nav border-b border-gray-200 shadow-sm">
@@ -69,13 +69,23 @@
     <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 text-center text-sm space-y-2">
-      <p class="text-gray-300 font-semibold">MG Plants &copy; 2026. All Rights Reserved.</p>
-      <p class="text-xs text-gray-500">Secure Payments via UPI & Cash on Delivery | Fast Dispatch</p>
+  <!-- ================= FOOTER & SUPPORT ================= -->
+  <footer class="bg-gray-900 text-gray-400 py-10 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+      <p class="text-gray-200 font-semibold text-lg">MG Plants</p>
+      <div class="flex justify-center space-x-6 text-sm">
+        <a href="mailto:mgplants@zohomail.in" class="hover:text-emerald-400 transition"><i class="fa-regular fa-envelope mr-1"></i> mgplants@zohomail.in</a>
+        <a href="https://wa.me/916289954986" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-whatsapp mr-1"></i> +91 6289954986</a>
+      </div>
+      <p class="text-xs text-gray-500 pt-4">Secure Payments via UPI & Cash on Delivery | Fast Dispatch Nationwide</p>
+      <p class="text-xs text-gray-600">&copy; 2026 MG Plants. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/916289954986" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-3.5 rounded-full shadow-2xl transition-transform hover:scale-110 z-40 flex items-center justify-center border-2 border-white">
+    <i class="fa-brands fa-whatsapp text-3xl"></i>
+  </a>
 
   <!-- ================= MODALS ================= -->
 
@@ -114,27 +124,46 @@
     </div>
   </div>
 
-  <!-- 2. PRODUCT DETAIL & REVIEW MODAL -->
+  <!-- 2. PRODUCT DETAIL & REVIEW MODAL (ADDED DESC & STOCK) -->
   <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl">
       <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow"><i class="fa-solid fa-xmark"></i></button>
+      
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
         <div><img id="pd-image" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-sm border border-gray-100" src="" alt="Product Image"></div>
-        <div class="flex flex-col justify-center space-y-4">
+        <div class="flex flex-col justify-center space-y-3">
           <div>
             <span id="pd-category" class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full uppercase tracking-wider"></span>
             <h2 id="pd-name" class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2"></h2>
-            <div class="flex items-baseline space-x-2 mt-2">
+            
+            <div class="flex items-baseline space-x-2 mt-1">
               <span id="pd-price" class="text-3xl font-extrabold text-emerald-800"></span>
               <span id="pd-orig-price" class="text-sm text-gray-400 line-through"></span>
             </div>
-            <div id="pd-rating-summary" class="mt-2 text-sm text-yellow-500 font-bold tracking-widest"></div>
+            <div id="pd-rating-summary" class="mt-1 text-sm text-yellow-500 font-bold tracking-widest"></div>
+
+            <!-- NEW: LIVE STOCK STATUS -->
+            <div class="mt-3 flex items-center space-x-2">
+              <span class="flex h-3 w-3 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+              </span>
+              <p id="pd-stock" class="text-sm font-semibold text-emerald-700">In Stock & Ready to Dispatch</p>
+            </div>
+
+            <!-- NEW: PRODUCT DESCRIPTION -->
+            <div class="mt-4 border-t pt-3">
+              <h4 class="text-[11px] font-bold text-gray-800 uppercase tracking-wide mb-1">Product Description</h4>
+              <p id="pd-description" class="text-sm text-gray-600 leading-relaxed"></p>
+            </div>
           </div>
-          <button id="pd-add-to-cart" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-lg font-bold text-sm transition flex items-center justify-center space-x-2 shadow-md">
+          
+          <button id="pd-add-to-cart" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3.5 rounded-lg font-bold text-sm transition flex items-center justify-center space-x-2 shadow-md mt-2">
             <i class="fa-solid fa-cart-plus"></i><span>Add to Cart</span>
           </button>
         </div>
       </div>
+
       <div class="bg-gray-50 p-6 border-t border-gray-200">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center"><i class="fa-solid fa-star text-yellow-500 mr-2"></i> Customer Reviews</h3>
         <form id="review-form" onsubmit="handleReviewSubmit(event)" class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm mb-6 space-y-3">
@@ -185,27 +214,48 @@
     </div>
   </div>
 
-  <!-- 4. CHECKOUT MODAL (PAYMENT & ADDRESS) -->
+  <!-- 4. CHECKOUT MODAL (UPDATED ADDRESS & QR CODE) -->
   <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      
       <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Delivery & Payment</h3>
+      
       <form onsubmit="handlePlaceOrder(event)" class="space-y-4">
-        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Name</label><input type="text" id="order-name" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></div>
-        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Phone Number</label><input type="tel" id="order-phone" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></div>
-        <div><label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Full Delivery Address</label><textarea id="order-address" rows="3" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-1 focus:ring-emerald-600"></textarea></div>
-        <div>
-          <label class="block text-xs font-semibold text-gray-700 uppercase mb-2">Select Payment Method</label>
+        <!-- Contact Details -->
+        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Full Name</label><input type="text" id="order-name" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500 bg-gray-50"></div>
+        <div><label class="block text-[10px] font-bold text-gray-500 uppercase mb-1">Phone Number</label><input type="tel" id="order-phone" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500 bg-gray-50"></div>
+        
+        <!-- COMPLETED ADDRESS SECTION -->
+        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-3">
+          <label class="block text-[10px] font-bold text-emerald-700 uppercase">Delivery Address</label>
+          <div>
+            <textarea id="order-address" rows="2" placeholder="House/Flat No, Street Name" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500"></textarea>
+          </div>
           <div class="grid grid-cols-2 gap-3">
-            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600"><input type="radio" name="payment-method" value="COD" checked onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-medium">Cash on Delivery</span></label>
-            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600"><input type="radio" name="payment-method" value="UPI" onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-medium">UPI / QR Code</span></label>
+            <input type="text" id="order-city" placeholder="City" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500">
+            <input type="text" id="order-pin" placeholder="PIN Code" required class="w-full px-3 py-2 border rounded-md text-sm outline-none focus:border-emerald-500">
           </div>
         </div>
-        <div id="upi-details-box" class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center space-y-2">
-          <p class="text-xs text-gray-700">Scan & Pay to official UPI ID: <strong class="text-emerald-800">mgplants@nsdl</strong></p>
-          <a id="upi-pay-link" href="#" class="inline-block bg-emerald-700 text-white text-xs px-4 py-2 rounded-md font-medium">Pay Directly via UPI App</a>
+
+        <!-- Payment Selection -->
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 uppercase mb-2">Select Payment Method</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600 bg-gray-50"><input type="radio" name="payment-method" value="COD" checked onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-bold">Cash on Delivery</span></label>
+            <label class="border p-3 rounded-lg flex items-center space-x-2 cursor-pointer hover:border-emerald-600 bg-gray-50"><input type="radio" name="payment-method" value="UPI" onchange="togglePaymentUI()" class="text-emerald-600"><span class="text-xs font-bold">UPI / QR Code</span></label>
+          </div>
         </div>
-        <button type="submit" id="place-order-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-2.5 rounded-lg font-medium text-sm transition mt-4 shadow-md">Confirm & Place Order</button>
+        
+        <!-- DYNAMIC QR CODE BOX -->
+        <div id="upi-details-box" class="hidden bg-white border-2 border-emerald-500 rounded-lg p-4 text-center space-y-3 shadow-sm">
+          <p class="text-xs text-gray-700 font-bold">Scan to Pay via PhonePe, GPay, or Paytm</p>
+          <img id="upi-qr-image" src="" alt="UPI QR Code" class="mx-auto w-36 h-36 rounded-md shadow-sm border border-gray-100">
+          <p class="text-[10px] text-gray-500">Official UPI ID: <strong class="text-emerald-800">mgplants@nsdl</strong></p>
+          <a id="upi-pay-link" href="#" class="inline-block bg-emerald-700 text-white text-xs px-5 py-2.5 rounded-md font-bold shadow-sm w-full">Pay Directly via UPI App</a>
+        </div>
+        
+        <button type="submit" id="place-order-btn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-3 rounded-lg font-bold text-sm transition mt-4 shadow-md">Confirm & Place Order</button>
       </form>
     </div>
   </div>
@@ -256,7 +306,6 @@
       renderAuthButton();
       fetchProducts();
       updateCartBadge();
-      preloadSavedAddress();
     });
 
     // --- AUTHENTICATION ---
@@ -280,19 +329,13 @@
       const passwordInput = document.getElementById('auth-password');
 
       if (mode === 'signup') {
-        title.innerText = 'Create an Account';
-        nameField.classList.remove('hidden');
-        submitBtn.innerText = 'Create Account';
-        toggleText.innerText = 'Already have an account?';
-        toggleBtn.innerText = 'Sign In';
-        passwordInput.autocomplete = 'new-password';
+        title.innerText = 'Create an Account'; nameField.classList.remove('hidden');
+        submitBtn.innerText = 'Create Account'; toggleText.innerText = 'Already have an account?';
+        toggleBtn.innerText = 'Sign In'; passwordInput.autocomplete = 'new-password';
       } else {
-        title.innerText = 'Sign In to MG Plants';
-        nameField.classList.add('hidden');
-        submitBtn.innerText = 'Sign In';
-        toggleText.innerText = "Don't have an account?";
-        toggleBtn.innerText = 'Create Account';
-        passwordInput.autocomplete = 'current-password';
+        title.innerText = 'Sign In to MG Plants'; nameField.classList.add('hidden');
+        submitBtn.innerText = 'Sign In'; toggleText.innerText = "Don't have an account?";
+        toggleBtn.innerText = 'Create Account'; passwordInput.autocomplete = 'current-password';
       }
       modal.classList.remove('hidden');
     }
@@ -306,8 +349,7 @@
       const name = document.getElementById('auth-name').value;
       const submitBtn = document.getElementById('auth-submit-btn');
 
-      submitBtn.disabled = true;
-      submitBtn.innerText = 'Processing...';
+      submitBtn.disabled = true; submitBtn.innerText = 'Processing...';
 
       const endpoint = currentAuthMode === 'signup' ? '/api/auth/signup' : '/api/auth/login';
       const payload = currentAuthMode === 'signup' ? { email, password, name } : { email, password };
@@ -316,73 +358,53 @@
         const res = await fetch(`${BACKEND_URL}${endpoint}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         const data = await responseJsonSafe(res);
         if (data.success) {
-          currentUser = data.user;
-          localStorage.setItem('mg_user', JSON.stringify(currentUser));
-          renderAuthButton();
-          closeAuthModal();
+          currentUser = data.user; localStorage.setItem('mg_user', JSON.stringify(currentUser));
+          renderAuthButton(); closeAuthModal();
           alert(currentAuthMode === 'signup' ? '🎉 Account created successfully!' : '✅ Welcome back!');
         } else { alert(data.message || 'Authentication failed.'); }
       } catch (err) { alert('Server connection error. Please wait 60 seconds and try again (Server might be waking up).'); } 
       finally { submitBtn.disabled = false; submitBtn.innerText = currentAuthMode === 'signup' ? 'Create Account' : 'Sign In'; }
     }
 
-    function handleLogout() {
-      localStorage.removeItem('mg_user');
-      currentUser = null;
-      renderAuthButton();
-      closeAccountModal();
-    }
+    function handleLogout() { localStorage.removeItem('mg_user'); currentUser = null; renderAuthButton(); closeAccountModal(); }
 
-    // --- PRODUCTS, STORE FRONT, AND AUTO-INJECTOR ---
+    // --- PRODUCTS & STORE FRONT ---
     async function fetchProducts() {
       try {
         const res = await fetch(`${BACKEND_URL}/api/products`);
         let dbProducts = await responseJsonSafe(res);
         
-        // AUTO-INJECTOR: All 20+ Premium Categorized Plants Injected Instantly
         const autoInjectProducts = [
-          { id: 'PRD-OU-01', name: 'Areca Palm Tree', category: 'Outdoor', price: 549, origPrice: 800, bestSeller: true, image: 'https://images.unsplash.com/photo-1605553106316-2d3ea9f6c0eb?w=500', reviews: [] },
-          { id: 'PRD-OU-02', name: 'Pink Bougainvillea', category: 'Outdoor', price: 349, origPrice: 500, bestSeller: false, image: 'https://images.unsplash.com/photo-1629853925528-917fc9f627ba?w=500', reviews: [] },
-          { id: 'PRD-OU-03', name: 'Ficus Bonsai Plant', category: 'Outdoor', price: 899, origPrice: 1200, bestSeller: true, image: 'https://images.unsplash.com/photo-1599598425947-33001c0ae5e5?w=500', reviews: [] },
-          
-          /* --- NEW FRUITS --- */
-          { id: 'PRD-FR-01', name: 'Grafted Mango Plant (Alphonso)', category: 'Fruits', price: 450, origPrice: 650, bestSeller: true, image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=500', reviews: [] },
-          { id: 'PRD-FR-02', name: 'Kagzi Lemon Tree (Nimbu)', category: 'Fruits', price: 299, origPrice: 400, bestSeller: true, image: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=500', reviews: [] },
-          { id: 'PRD-FR-03', name: 'Thai Pink Guava (Amrood)', category: 'Fruits', price: 350, origPrice: 499, bestSeller: false, image: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=500', reviews: [] },
-          { id: 'PRD-FR-04', name: 'Pomegranate (Anar - Bhagwa)', category: 'Fruits', price: 399, origPrice: 550, bestSeller: true, image: 'https://images.unsplash.com/photo-1615486171448-4fd17fb797fa?w=500', reviews: [] },
-          { id: 'PRD-FR-05', name: 'Chikoo (Sapota) Grafted Plant', category: 'Fruits', price: 349, origPrice: 500, bestSeller: true, image: 'https://images.unsplash.com/photo-1628689469838-524a460a8b98?w=500', reviews: [] },
-          { id: 'PRD-FR-06', name: 'Dwarf Papaya (Red Lady)', category: 'Fruits', price: 199, origPrice: 300, bestSeller: false, image: 'https://images.unsplash.com/photo-1614820359754-0648df473855?w=500', reviews: [] },
-          { id: 'PRD-FR-07', name: 'Custard Apple (Sitaphal)', category: 'Fruits', price: 299, origPrice: 450, bestSeller: false, image: 'https://images.unsplash.com/photo-1596489376483-b71569766487?w=500', reviews: [] },
-
-          /* --- NEW FLOWERS --- */
-          { id: 'PRD-FL-01', name: 'Desi Rose (Gulab)', category: 'Flowers', price: 249, origPrice: 399, bestSeller: true, image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500', reviews: [] },
-          { id: 'PRD-FL-02', name: 'Fragrant Jasmine (Mogra)', category: 'Flowers', price: 199, origPrice: 300, bestSeller: true, image: 'https://images.unsplash.com/photo-1546842603-519782cc4107?w=500', reviews: [] },
-          { id: 'PRD-FL-03', name: 'Purple Lavender Plant', category: 'Flowers', price: 399, origPrice: 550, bestSeller: false, image: 'https://images.unsplash.com/photo-1498805983167-a523078d762c?w=500', reviews: [] },
-          { id: 'PRD-FL-04', name: 'Hibiscus (Gudhal) - Red', category: 'Flowers', price: 199, origPrice: 280, bestSeller: true, image: 'https://images.unsplash.com/photo-1596395819057-cb3bdbe73d09?w=500', reviews: [] },
-          { id: 'PRD-FL-05', name: 'Plumeria (Champa)', category: 'Flowers', price: 299, origPrice: 420, bestSeller: true, image: 'https://images.unsplash.com/photo-1620915668631-fbf2202611e9?w=500', reviews: [] },
-          { id: 'PRD-FL-06', name: 'Night-Blooming Jasmine (Parijat)', category: 'Flowers', price: 249, origPrice: 350, bestSeller: true, image: 'https://images.unsplash.com/photo-1618388836585-783305417ab7?w=500', reviews: [] },
-          { id: 'PRD-FL-07', name: 'Adenium (Desert Rose)', category: 'Flowers', price: 449, origPrice: 600, bestSeller: false, image: 'https://images.unsplash.com/photo-1605386186419-48e0254c7b8e?w=500', reviews: [] },
-
-          /* --- SEEDS --- */
-          { id: 'PRD-SD-01', name: 'Organic Tomato Seeds (Pack of 50)', category: 'Seeds', price: 99, origPrice: 150, bestSeller: true, image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=500', reviews: [] },
-          { id: 'PRD-SD-02', name: 'Holy Basil (Tulsi) Seeds', category: 'Seeds', price: 79, origPrice: 120, bestSeller: true, image: 'https://images.unsplash.com/photo-1598512140407-7429d3326176?w=500', reviews: [] },
-          { id: 'PRD-SD-03', name: 'Sunflower Seeds (Pack of 30)', category: 'Seeds', price: 89, origPrice: 140, bestSeller: false, image: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?w=500', reviews: [] }
+          { id: 'PRD-OU-01', name: 'Areca Palm Tree', category: 'Outdoor', price: 549, origPrice: 800, bestSeller: true, image: 'https://images.unsplash.com/photo-1605553106316-2d3ea9f6c0eb?w=500', reviews: [], description: 'A beautiful, large palm tree perfect for adding a tropical vibe to your outdoor space. Very hardy and low maintenance.', stockCount: 15 },
+          { id: 'PRD-OU-02', name: 'Pink Bougainvillea', category: 'Outdoor', price: 349, origPrice: 500, bestSeller: false, image: 'https://images.unsplash.com/photo-1629853925528-917fc9f627ba?w=500', reviews: [], description: 'Vibrant pink, paper-like flowers that bloom heavily throughout the year. Loves full sun and requires minimal watering.', stockCount: 8 },
+          { id: 'PRD-OU-03', name: 'Ficus Bonsai Plant', category: 'Outdoor', price: 899, origPrice: 1200, bestSeller: true, image: 'https://images.unsplash.com/photo-1599598425947-33001c0ae5e5?w=500', reviews: [], description: 'A premium, expertly shaped Ficus Bonsai tree. Brings a sense of peace and artistic elegance to any garden or patio.', stockCount: 4 },
+          { id: 'PRD-FR-01', name: 'Grafted Mango Plant (Alphonso)', category: 'Fruits', price: 450, origPrice: 650, bestSeller: true, image: 'https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=500', reviews: [], description: 'Grow your own King of Fruits! This grafted Alphonso mango plant guarantees fast growth and sweet, premium quality yields.', stockCount: 12 },
+          { id: 'PRD-FR-02', name: 'Kagzi Lemon Tree (Nimbu)', category: 'Fruits', price: 299, origPrice: 400, bestSeller: true, image: 'https://images.unsplash.com/photo-1590682680695-43b964a3ae17?w=500', reviews: [], description: 'Fast-growing Kagzi lemon tree. Perfect for home gardens and large pots, providing fresh, juicy lemons almost year-round.', stockCount: 22 },
+          { id: 'PRD-FR-03', name: 'Thai Pink Guava (Amrood)', category: 'Fruits', price: 350, origPrice: 499, bestSeller: false, image: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?w=500', reviews: [], description: 'Known for its beautiful pink center and incredible sweetness. This plant is highly resistant and bears fruit quickly.', stockCount: 10 },
+          { id: 'PRD-FR-04', name: 'Pomegranate (Anar - Bhagwa)', category: 'Fruits', price: 399, origPrice: 550, bestSeller: true, image: 'https://images.unsplash.com/photo-1615486171448-4fd17fb797fa?w=500', reviews: [], description: 'The famous Bhagwa variety, known for large, deep red, and extra sweet arils. Highly drought tolerant.', stockCount: 14 },
+          { id: 'PRD-FR-05', name: 'Chikoo (Sapota) Grafted Plant', category: 'Fruits', price: 349, origPrice: 500, bestSeller: true, image: 'https://images.unsplash.com/photo-1628689469838-524a460a8b98?w=500', reviews: [], description: 'Evergreen tree yielding rich, sweet, brown fruits. Our grafted variety ensures it fruits at a manageable height.', stockCount: 9 },
+          { id: 'PRD-FR-06', name: 'Dwarf Papaya (Red Lady)', category: 'Fruits', price: 199, origPrice: 300, bestSeller: false, image: 'https://images.unsplash.com/photo-1614820359754-0648df473855?w=500', reviews: [], description: 'Excellent for small spaces and pots! The Red Lady variety produces sweet, large papayas at a very low plant height.', stockCount: 30 },
+          { id: 'PRD-FR-07', name: 'Custard Apple (Sitaphal)', category: 'Fruits', price: 299, origPrice: 450, bestSeller: false, image: 'https://images.unsplash.com/photo-1596489376483-b71569766487?w=500', reviews: [], description: 'A hardy, low-maintenance plant that loves the sun. Produces creamy, delicious sitaphal right in your backyard.', stockCount: 11 },
+          { id: 'PRD-FL-01', name: 'Desi Rose (Gulab)', category: 'Flowers', price: 249, origPrice: 399, bestSeller: true, image: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?w=500', reviews: [], description: 'The classic Indian Desi Rose. Features a mesmerizing, traditional fragrance perfect for morning rituals and garden aesthetics.', stockCount: 18 },
+          { id: 'PRD-FL-02', name: 'Fragrant Jasmine (Mogra)', category: 'Flowers', price: 199, origPrice: 300, bestSeller: true, image: 'https://images.unsplash.com/photo-1546842603-519782cc4107?w=500', reviews: [], description: 'Famous for its sweet evening fragrance. This fast-growing creeper is an absolute must-have for every flower lover.', stockCount: 25 },
+          { id: 'PRD-FL-03', name: 'Purple Lavender Plant', category: 'Flowers', price: 399, origPrice: 550, bestSeller: false, image: 'https://images.unsplash.com/photo-1498805983167-a523078d762c?w=500', reviews: [], description: 'A highly aromatic herb that produces beautiful purple blooms. Requires well-draining soil and plenty of sunlight.', stockCount: 6 },
+          { id: 'PRD-FL-04', name: 'Hibiscus (Gudhal) - Red', category: 'Flowers', price: 199, origPrice: 280, bestSeller: true, image: 'https://images.unsplash.com/photo-1596395819057-cb3bdbe73d09?w=500', reviews: [], description: 'Vibrant, large red flowers that bloom nearly year-round. Perfect for adding a bold splash of color to your entrance.', stockCount: 12 },
+          { id: 'PRD-FL-05', name: 'Plumeria (Champa)', category: 'Flowers', price: 299, origPrice: 420, bestSeller: true, image: 'https://images.unsplash.com/photo-1620915668631-fbf2202611e9?w=500', reviews: [], description: 'Features thick branches and gorgeous white/yellow flowers with a deeply intoxicating tropical fragrance.', stockCount: 9 },
+          { id: 'PRD-FL-06', name: 'Night-Blooming Jasmine (Parijat)', category: 'Flowers', price: 249, origPrice: 350, bestSeller: true, image: 'https://images.unsplash.com/photo-1618388836585-783305417ab7?w=500', reviews: [], description: 'The culturally significant Shiuli flower. Drops delicate, sweet-smelling orange and white flowers at dawn.', stockCount: 15 },
+          { id: 'PRD-FL-07', name: 'Adenium (Desert Rose)', category: 'Flowers', price: 449, origPrice: 600, bestSeller: false, image: 'https://images.unsplash.com/photo-1605386186419-48e0254c7b8e?w=500', reviews: [], description: 'The perfect plant for busy owners. Acts like a succulent, requires very little water, and blooms bright pink flowers.', stockCount: 5 },
+          { id: 'PRD-SD-01', name: 'Organic Tomato Seeds (Pack of 50)', category: 'Seeds', price: 99, origPrice: 150, bestSeller: true, image: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=500', reviews: [], description: 'High germination rate organic tomato seeds. Perfect for starting your own kitchen garden on a balcony or terrace.', stockCount: 100 },
+          { id: 'PRD-SD-02', name: 'Holy Basil (Tulsi) Seeds', category: 'Seeds', price: 79, origPrice: 120, bestSeller: true, image: 'https://images.unsplash.com/photo-1598512140407-7429d3326176?w=500', reviews: [], description: 'Sacred Tulsi seeds. Easy to grow and deeply beneficial for health and spiritual home environments.', stockCount: 80 },
+          { id: 'PRD-SD-03', name: 'Sunflower Seeds (Pack of 30)', category: 'Seeds', price: 89, origPrice: 140, bestSeller: false, image: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?w=500', reviews: [], description: 'Grow giant, beautiful yellow sunflowers! A fun gardening project that brightens up any outdoor space.', stockCount: 65 }
         ];
 
-        // Check if the DB already has these items so we don't duplicate them
         const hasNewItems = dbProducts.some(p => p.id === 'PRD-FR-04');
-        if (!hasNewItems) {
-            dbProducts = [...autoInjectProducts, ...dbProducts];
-        }
+        if (!hasNewItems) { dbProducts = [...autoInjectProducts, ...dbProducts]; }
 
         allProducts = dbProducts;
         
-        // Auto-refresh the current category view
         const currentTitle = document.getElementById('current-category-title').innerText;
         let currentCat = 'All';
-        if (currentTitle.includes('Collection')) {
-            currentCat = currentTitle.replace(' Collection', '');
-        }
+        if (currentTitle.includes('Collection')) currentCat = currentTitle.replace(' Collection', '');
         filterCategory(currentCat);
 
       } catch (err) { document.getElementById('product-count').innerText = 'Loading... (Server waking up)'; }
@@ -393,8 +415,7 @@
       document.getElementById('product-count').innerText = `Showing ${products.length} items`;
       
       if (!products || products.length === 0) {
-        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">No plants found in this category.</p>`;
-        return;
+        grid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">No plants found in this category.</p>`; return;
       }
 
       grid.innerHTML = products.map(p => {
@@ -449,6 +470,10 @@
       document.getElementById('pd-name').innerText = p.name;
       document.getElementById('pd-price').innerText = '₹' + p.price;
       document.getElementById('pd-orig-price').innerText = p.origPrice ? '₹' + p.origPrice : '';
+      
+      // Load New Description and Stock Data
+      document.getElementById('pd-description').innerText = p.description || "A gorgeous, healthy plant carefully nurtured to bring a touch of nature into your home or garden. Packaged securely to arrive in pristine condition.";
+      document.getElementById('pd-stock').innerText = p.stockCount ? `In Stock (${p.stockCount} left) - Dispatches Today` : `In Stock & Ready to Dispatch`;
 
       const revs = p.reviews || [];
       const ratingDiv = document.getElementById('pd-rating-summary');
@@ -563,15 +588,27 @@
     
     function openCheckoutModal() {
       if (cart.length === 0) return alert('Your cart is empty.');
-      closeCartModal(); togglePaymentUI(); document.getElementById('checkout-modal').classList.remove('hidden');
+      closeCartModal(); 
+      preloadSavedAddress(); // Ensure saved address fills out when modal opens
+      togglePaymentUI(); 
+      document.getElementById('checkout-modal').classList.remove('hidden');
     }
     function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
+    
     function togglePaymentUI() {
       const isUPI = document.querySelector('input[name="payment-method"]:checked').value === 'UPI';
       const upiBox = document.getElementById('upi-details-box');
       const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + 99 + 5;
-      if (isUPI) { upiBox.classList.remove('hidden'); document.getElementById('upi-pay-link').href = `upi://pay?pa=mgplants@nsdl&pn=MG%20Plants&am=${totalAmount}&cu=INR`; } 
-      else upiBox.classList.add('hidden');
+      
+      if (isUPI) { 
+        upiBox.classList.remove('hidden'); 
+        const upiString = `upi://pay?pa=mgplants@nsdl&pn=MG%20Plants&am=${totalAmount}&cu=INR`;
+        document.getElementById('upi-pay-link').href = upiString;
+        // DYNAMIC QR CODE GENERATION
+        document.getElementById('upi-qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiString)}`;
+      } else { 
+        upiBox.classList.add('hidden'); 
+      }
     }
 
     function preloadSavedAddress() {
@@ -579,6 +616,8 @@
       if (saved.name) document.getElementById('order-name').value = saved.name;
       if (saved.phone) document.getElementById('order-phone').value = saved.phone;
       if (saved.address) document.getElementById('order-address').value = saved.address;
+      if (saved.city) document.getElementById('order-city').value = saved.city;
+      if (saved.pin) document.getElementById('order-pin').value = saved.pin;
     }
 
     async function handlePlaceOrder(e) {
@@ -589,14 +628,19 @@
       const name = document.getElementById('order-name').value;
       const phone = document.getElementById('order-phone').value;
       const address = document.getElementById('order-address').value;
+      const city = document.getElementById('order-city').value;
+      const pin = document.getElementById('order-pin').value;
+      
       const payMethod = document.querySelector('input[name="payment-method"]:checked').value;
       const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) + 99 + 5;
 
-      localStorage.setItem('mg_saved_address', JSON.stringify({ name, phone, address }));
+      // Save structured address format for future
+      localStorage.setItem('mg_saved_address', JSON.stringify({ name, phone, address, city, pin }));
+      const fullAddressString = `${address}, ${city} - ${pin} [${payMethod}] - Email: ${currentUser ? currentUser.email : 'Guest'}`;
 
       const orderData = {
         customerName: name, phone: phone,
-        address: `${address} [${payMethod}] - Email: ${currentUser ? currentUser.email : 'Guest'}`,
+        address: fullAddressString,
         items: cart, totalAmount: totalAmount
       };
 
@@ -677,4 +721,4 @@
     function toBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error); }); }
   </script>
 </body>
-</html> 
+</html>
